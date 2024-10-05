@@ -1,0 +1,1 @@
+<?php Route::get('categories', 'CategoryController@index');

@@ -1,0 +1,106 @@
+@extends('layouts.index')
+
+@section('content')
+    <main class="page">
+        <nav class="breadcrumbs">
+            <div class="breadcrumbs__container _container">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a class="breadcrumbs__link"
+                                                     href="{{ url('/') }}"><span>Главная</span>
+                            <svg>
+                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                            </svg>
+                        </a></li>
+                    <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active"
+                                                     href="#"><span>Калькуляторы</span></a></li>
+                </ul>
+            </div>
+        </nav>
+        <section class="cooperation">
+            <div class="cooperation__container _container">
+                <div class="cooperation__content">
+                    <h2 class="cooperation__title t">Калькуляторы</h2>
+                    <div class="cooperation__body sideDashContainer">
+                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
+                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a
+                                        href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
+                                        покрытий</a></div>
+                            </div>
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
+                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a
+                                        href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
+                                        решения</a></div>
+                            </div>
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
+                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
+                            </div>
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
+                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
+                            </div>
+                        </div>
+                    <div class="calculatorsContainer">
+                    @foreach($calculators as $calculator)
+
+                        <a href="{{route('index.posts.kalkulyator',['slug' => $calculator->slug])}}" class="calculatorItem" style="background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url({{$calculator->mainPhotoPath()}}) center no-repeat;background-size: cover" >
+                           <div class="calculatorTitle">{{$calculator->title}} </div>
+
+                        </a>
+
+                    @endforeach  </div>
+                </div>
+            </div>
+        </section>
+    <style>
+        .calculatorsContainer{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+
+        .calculatorItem{
+            width: 45%;
+            height: 250px;
+            margin: 12px;
+        }
+        .calculatorTitle{
+            color: white;
+            margin-top: 40px;
+            margin-left: 20px;
+            font-size: 40px;
+            width: 380px;
+            transition: 0.3s; /* Время эффекта */
+        }
+        .calculatorTitle:hover{
+            transform: scale(1.05);
+            text-decoration: underline white;
+        }
+         .calculatorItem:hover{
+
+             cursor: pointer;
+
+
+         }
+    </style>
+@endsection

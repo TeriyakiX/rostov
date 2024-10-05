@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    # Redirect requests to public
+    RewriteRule  ^$ public/    [L]
+    RewriteRule  (.*) public/$1 [L]
+	
+</IfModule>
+
+
+<FilesMatch ".(jpg|jpeg|png|ico|swf|js|css|pdf|ttf|webp|otf|svg)$">
+Header set Cache-Control "max-age=2678400"
+</FilesMatch>

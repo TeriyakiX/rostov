@@ -1,0 +1,8 @@
+cta__img {
+    -o-object-fit: cover;
+    object-fit: cover;
+    margin: 0;
+    flex: 0 0 auto;
+    width: 53%;
+    max-height: 404px;
+}

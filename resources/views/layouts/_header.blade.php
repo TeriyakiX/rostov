@@ -353,6 +353,19 @@ print_r($headerCategories);
 
             </div>
         </div>
+        <div class="catalogControl__wrapper">
+            <form class="catalogControl__searchform-mobile" style="margin-block-end: 0;"
+                  action="{{ route('index.products.search') }}">
+                <input class="catalogControl__searchInput-mobile" autocomplete="off" type="text" name="query"
+                       data-value="{{ request()->get('query') ?: 'Поиск по товарам' }}"
+                       value="{{ request()->get('query') }}">
+                <button class="catalogControl__searchBtn-mobile" type="submit">
+                    <svg>
+                        <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#search') }}"></use>
+                    </svg>
+                </button>
+            </form>
+        </div>
         <div class="menu header__menu">
             <div class="menu__wrapper">
                 <div class="menu__body">

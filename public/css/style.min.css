@@ -476,6 +476,9 @@ strong {
 .btn--md {
   width: 241px;
   height: 40px;
+  @media screen and (max-width: 991.98px) {
+     width: 100%;
+  }
 }
 
 .btn:not(._touch):hover {
@@ -1370,7 +1373,7 @@ strong {
 
 .header__container {
   padding-top: 8px;
-  padding-bottom: 10px;
+  padding-bottom: 16px;
 }
 
 .header__content {
@@ -6418,7 +6421,7 @@ strong {
   }
 
   .menu__body {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     width: 100%;
@@ -6428,64 +6431,6 @@ strong {
     transition: transform 0.6s ease;
     height: 100vh;
   }
-
-    .menu__nav {
-        display: flex;
-        justify-content: center; /* Центрируем навигацию */
-        flex-wrap: wrap; /* Позволяем элементам переноситься на следующую строку */
-        margin-bottom: 32px;
-        padding: 0; /* Убираем внутренние отступы */
-    }
-
-    .menu__list {
-        width: 100%;
-        display: flex !important;
-        flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
-        justify-content: space-between; /* Распределение между элементами */
-        margin: 0; /* Убираем внешние отступы */
-        padding: 0; /* Убираем внутренние отступы */
-    }
-    .menu__logoBoxMobile{
-        margin-top: 16px; /* Отступ сверху от меню */
-        text-align: center; /* Выравнивание логотипа по центру (если нужно) */
-    }
-    .menu__logoLinkMobile img {
-        max-width: 100%; /* Ограничиваем ширину изображения */
-        height: auto; /* Сохраняем пропорции изображения */
-        width: 47px;
-        height: 50px;
-        margin-bottom: 24px;
-    }
-    .menu__item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calc(50% - 8px); /* Ширина двух объектов в ряд с учетом отступа */
-        height: 50px; /* Фиксированная высота блока */
-        margin-bottom: 16px; /* Отступ между рядами */
-        border-radius: 5px; /* Закругление углов */
-        border: 1px solid #006BDE; /* Цвет бордюра */
-        box-sizing: border-box; /* Включаем отступы в ширину */
-    }
-
-    .menu__link {
-        font-family: Sansation; /* Шрифт текста */
-        font-size: 13px; /* Размер шрифта по умолчанию */
-        font-weight: 400; /* Жирность текста */
-        line-height: 17.91px; /* Высота строки */
-        text-align: center; /* Выравнивание текста по центру */
-        color: #006BDE; /* Цвет текста */
-        text-decoration: none; /* Убираем подчеркивание */
-        padding: 16px; /* Внутренние отступы */
-        white-space: nowrap; /* Запрещаем перенос текста */
-        text-overflow: ellipsis; /* Добавляем троеточие для обрезанного текста */
-        width: 100%; /* Ширина ссылки 100% от родительского элемента */
-    }
-
-    .menu__item:hover {
-        background-color: #0056a3; /* Цвет фона при наведении */
-        color: white; /* Цвет текста при наведении */
-    }
 
   .menu__link:active {
     color: #505050;
@@ -6525,6 +6470,63 @@ strong {
   .cooperation__content {
     overflow-x: auto;
   }
+    .menu__body {
+    display: flex;
+    }
+    .menu__nav {
+        display: flex;
+        justify-content: center; /* Центрируем навигацию */
+        flex-wrap: wrap; /* Позволяем элементам переноситься на следующую строку */
+        margin-bottom: 32px;
+        padding: 0; /* Убираем внутренние отступы */
+    }
+
+    .menu__list {
+        width: 100%;
+        display: flex !important;
+        flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+        justify-content: space-between; /* Распределение между элементами */
+        margin: 0; /* Убираем внешние отступы */
+        padding: 0; /* Убираем внутренние отступы */
+    }
+    .menu__logoBoxMobile{
+        margin-top: 16px; /* Отступ сверху от меню */
+        text-align: center; /* Выравнивание логотипа по центру (если нужно) */
+    }
+    .menu__logoLinkMobile img {
+        max-width: 100%; /* Ограничиваем ширину изображения */
+        height: auto; /* Сохраняем пропорции изображения */
+        width: 47px;
+        height: 50px;
+        margin-bottom: 24px;
+    }
+    .menu__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(50% - 8px); /* Ширина двух объектов в ряд с учетом отступа */
+        margin-bottom: 16px; /* Отступ между рядами */
+        border-radius: 5px; /* Закругление углов */
+        border: 1px solid #006BDE; /* Цвет бордюра */
+        box-sizing: border-box; /* Включаем отступы в ширину */
+    }
+    .menu__link {
+        transition: background-color 0.2s ease; /* Плавный переход фона при наведении */
+        padding: 16px;
+        font-size: 13px; /* Размер шрифта по умолчанию */
+        font-weight: 400; /* Жирность текста */
+        text-align: center; /* Выравнивание текста по центру */
+        align-content: center;
+        color: #006BDE; /* Цвет текста */
+        text-decoration: none; /* Убираем подчеркивание */
+        width: 100%; /* Ширина ссылки 100% от родительского элемента */
+        height: 100%;
+    }
+
+    .menu__item:hover .menu__link {
+        color: white !important;
+        background: #006BDE !important;
+    }
 }
 
 @media (min-width: 1px) and (min-width: 991.98px) {
@@ -6891,6 +6893,10 @@ strong {
   }
 }
 
+.catalogControl__searchform-mobile {
+    display: none;
+}
+
 @media (max-width: 1220px) {
   ._container {
     max-width: 970px;
@@ -6926,7 +6932,7 @@ strong {
         padding-right: 40px;
         overflow: auto;
         margin-right: 30px;
-        
+
     }
 
     .newItems__sliderBtns {
@@ -6952,11 +6958,11 @@ strong {
     }
 
     .catalogControl {
-        position: absolute;
-        display: flex;
-        width: 358px;
+        display: none;
+        width: 100%;
         margin: 16px;
     }
+
     .catalogControl__btn {
         display: none;
         align-items: center;
@@ -6969,36 +6975,35 @@ strong {
         transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    .catalogControl__searchform {
+    .catalogControl__searchform-mobile {
+        margin-top: 20px;
         display: flex; /* Flexbox для размещения элементов */
         align-items: center; /* Центрируем по вертикали */
         width: 100%;
         height: 40px; /* Высота формы поиска */
-        margin: 0 auto; /* Центрируем по горизонтали */
         border-radius: 6px; /* Закругление углов */
         border: 1px solid #E7E9EC;
         padding: 0 10px; /* Отступы по горизонтали */
-        top: 35px;
+        background-color: white;
     }
 
-    .catalogControl__searchInput {
+    .catalogControl__searchInput-mobile {
         flex: 1; /* Заполняем доступное пространство */
         height: 100%; /* Высота ввода */
         border: none; /* Убираем границы */
         outline: none; /* Убираем обводку при фокусировке */
         font-size: 14px; /* Размер шрифта */
         padding: 0 10px; /* Отступы по горизонтали */
-        border-radius: 20px; /* Закругление углов (по желанию) */
     }
 
-    .catalogControl__searchBtn {
+    .catalogControl__searchBtn-mobile {
         background: none; /* Убираем фон */
         border: none; /* Убираем границы */
         cursor: pointer; /* Курсор в виде указателя */
         padding: 0 10px; /* Отступы по горизонтали */
     }
 
-    .catalogControl__searchBtn svg {
+    .catalogControl__searchBtn-mobile svg {
         width: 20px; /* Ширина иконки */
         height: 20px; /* Высота иконки */
     }
@@ -7036,31 +7041,37 @@ strong {
     }
 
     .authorization__link {
-        display: flex; /* Используем flexbox для выравнивания */
-        justify-content: center; /* Центрируем текст по горизонтали */
-        align-items: center; /* Центрируем текст по вертикали */
-
-        background-color: #006BDE; /* Цвет фона */
-        color: white; /* Цвет текста */
         text-decoration: none; /* Убираем подчеркивание */
-        height: 50px; /* Высота кнопки */
         border-radius: 6px; /* Закругление углов */
-
-        font-family: Sansation, sans-serif; /* Шрифт текста */
         font-size: 14px; /* Размер текста */
         font-weight: 400; /* Толщина текста */
         text-align: center; /* Выравнивание текста по центру */
-
-        margin-top: 32px; /* Отступ сверху */
-        margin-left: auto; /* Центрирование */
-        margin-right: auto; /* Центрирование */
-        margin-bottom: 42px;
-
-        transition: background-color 0.3s ease; /* Плавный переход фона при наведении */
+        align-content: center;
+        width: 100%;
+        height: 100%;
     }
-
-    .authorization__link:hover {
-        background-color: #005bb5; /* Темный фон при наведении */
+    .authorization__link:hover,
+    .authorization__link:active {
+        text-decoration: none;
+    }
+    .authorization__item_mobile {
+        align-items: center;
+        height: 50px; /* Высота кнопки */
+        text-decoration: none; /* Убираем подчеркивание */
+        transition: background-color 0.2s ease; /* Плавный переход фона при наведении */
+        color: white; /* Цвет текста */
+        background-color: #006BDE; /* Цвет фона */
+        border: none;
+        display: flex; /* Используем flexbox для выравнивания */
+        justify-content: center; /* Центрируем текст по горизонтали */
+        align-items: center; /* Центрируем текст по вертикали */
+        margin-bottom: 42px;
+        cursor: pointer;
+    }
+    .authorization__item_mobile:hover {
+        background-color: white;
+        color: #005bb5;
+        border: 2px solid #006BDE;
     }
     .header__infoPanels {
         width: 100%;
@@ -7213,7 +7224,6 @@ strong {
     left: 0;
     right: 0;
     background-color: #fff;
-    border-bottom: 2px solid rgba(154, 243, 239, 0.2);
   }
 
   .header__col .authorization {
@@ -7343,8 +7353,6 @@ strong {
   }
 
   .infoPanel__btn {
-    width: unset;
-    height: unset;
     order: 1;
     display: none;
     margin-right: 5px;
@@ -7352,10 +7360,6 @@ strong {
 
   .infoPanel__btn--basket {
     display: block;
-  }
-
-  .breadcrumbs {
-    padding: 54px 0 28px;
   }
 
   .filters__filterGroup {
@@ -7381,7 +7385,6 @@ strong {
   }
   .swiper-container .swiper-wrapper {
         width: 100%;
-        height: 377px;
         box-sizing: content-box;
         display: flex;
         position: relative;
@@ -8545,6 +8548,9 @@ strong {
 }
 
 @media (max-width: 479.98px) {
+  .catalogControl__wrapper {
+    padding: 0 11px;
+  }
   .popup__box {
     padding: 24px 16px;
   }
@@ -8642,6 +8648,10 @@ strong {
   }
   .brands__head {
     padding-bottom: 35px;
+  }
+
+  .breadcrumbs {
+     padding: 0 0 28px;
   }
 
   .brands__cardWrp {
@@ -8846,11 +8856,10 @@ strong {
 }
 
 @media (min-width: 1px) and (max-width: 991.98px) {
-  .menu__body {
-    border-bottom: 10px solid #006bde;
-    margin-top: 54px;
+  .card__price {
+      display: flex;
+      gap: 8px;
   }
-
   .menu__contentWrp {
     width: 100%;
   }
@@ -8863,14 +8872,6 @@ strong {
     display: block;
     max-width: 100%;
     margin: 0px auto;
-  }
-
-  .menu__item {
-    padding: 10px 0;
-  }
-
-  .menu__link {
-    padding: 16px;
   }
 
   .menu__logoBox {

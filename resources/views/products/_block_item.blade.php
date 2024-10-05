@@ -27,8 +27,8 @@
 {{--        </ul>--}}
         <div class="card__price">
             @if($sliderProduct->is_promo)
-                <div style="text-decoration: line-through;">{{ $sliderProduct->price }} ₽@if($sliderProduct->show_calculator)/м²@endif </div>
                 <div>{{ $sliderProduct->promo_price }} ₽@if($sliderProduct->show_calculator)/м²@endif</div>
+                <div style="text-decoration: line-through; font-size: 12px">{{ $sliderProduct->price }} ₽@if($sliderProduct->show_calculator)/м²@endif </div>
             @else
                 {{ $sliderProduct->price }} ₽@if($sliderProduct->show_calculator)
                     /м²

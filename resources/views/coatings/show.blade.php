@@ -82,47 +82,93 @@
                                 <div class="prodCard__selBox">
                                     @if($coating->protective_layer)
                                         <div class="prodCard__stockParameter">
-                                            <div>Защитный слой Zn</div>
-                                            <div
-                                                class="prodCard__parameterData"
-                                                style="border-bottom: 2px dashed grey;">{{ $coating->protective_layer }}
-                                            </div>
+                                            <div class="prodCard__parameterData-wrapper">
+                                                  <div>Защитный слой Zn</div>
+                                                  <div
+                                                      class="prodCard__parameterData"
+                                                      style="border-bottom: 2px dashed grey;">{{ $coating->protective_layer }}
+                                                  </div>
+                                              </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                                                        <svg class="description_popup"
+                                                                             id="protective_layer_description_popup">
+                                                                            <use
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                        </svg>
+                                                                    </span>
                                         </div>
                                     @endif
                                     @if($coating->metal_thickness)
                                         <div class="prodCard__stockParameter">
-                                            <div>Толщина металла</div>
-                                            <div
-                                                class="prodCard__parameterData"
-                                                style="border-bottom: 2px dashed grey;">{{ $coating->metal_thickness }}
+                                            <div class="prodCard__parameterData-wrapper">
+                                                <div>Толщина металла</div>
+                                                <div
+                                                    class="prodCard__parameterData"
+                                                    style="border-bottom: 2px dashed grey;">{{ $coating->metal_thickness }}
+                                                </div>
                                             </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                                                        <svg class="description_popup"
+                                                                             id="metal_thickness_description_popup">
+                                                                            <use
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                        </svg>
+                                                                    </span>
                                         </div>
                                     @endif
                                     @if($coating->polymer_coating_thickness)
                                         <div class="prodCard__stockParameter">
-                                            <div>Толщина полимерного покрытия</div>
-                                            <div
-                                                class="prodCard__parameterData"
-                                                style="border-bottom: 2px dashed grey;">{{ $coating->polymer_coating_thickness }}
-                                            </div>
+                                            <div class="prodCard__parameterData-wrapper">
+                                                  <div>Толщина полимерного покрытия</div>
+                                                  <div
+                                                      class="prodCard__parameterData"
+                                                      style="border-bottom: 2px dashed grey;">{{ $coating->polymer_coating_thickness }}
+                                                  </div>
+                                              </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                                                        <svg class="description_popup"
+                                                                             id="polymer_coating_thickness_description_popup">
+                                                                            <use
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                        </svg>
+                                                                    </span>
                                         </div>
                                     @endif
                                     @if($coating->guarantee)
                                         <div class="prodCard__stockParameter">
-                                            <div>Гарантия</div>
-                                            <div
-                                                class="prodCard__parameterData"
-                                                style="border-bottom: 2px dashed grey;">{{ $coating->guarantee }}
-                                            </div>
+                                               <div class="prodCard__parameterData-wrapper">
+                                                   <div>Гарантия</div>
+                                                   <div
+                                                       class="prodCard__parameterData"
+                                                       style="border-bottom: 2px dashed grey;">{{ $coating->guarantee }}
+                                                   </div>
+                                               </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание"
+                                                  style="margin-top: 10px">
+                                                                        <svg class="description_popup"
+                                                                             id="guarantee_description_popup">
+                                                                            <use
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                        </svg>
+                                                                    </span>
                                         </div>
                                     @endif
                                     @if($coating->light_fastness)
                                         <div class="prodCard__stockParameter">
-                                            <div>Цветостойкость</div>
-                                            <div
-                                                class="prodCard__parameterData"
-                                                style="border-bottom: 2px dashed grey;">{{ $coating->light_fastness }}
+                                            <div class="prodCard__parameterData-wrapper">
+                                                <div>Цветостойкость</div>
+                                                <div
+                                                    class="prodCard__parameterData"
+                                                    style="border-bottom: 2px dashed grey;">{{ $coating->light_fastness }}
+                                                </div>
                                             </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                                                        <svg class="description_popup"
+                                                                             id="light_fastness_description_popup">
+                                                                            <use
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                        </svg>
+                                                                    </span>
                                         </div>
                                     @endif
                                     <div class="prodCard__desc">
@@ -145,64 +191,6 @@
                                             добавить в список сравнения
                                         </div>
                                     </div>
-                                </div>
-                                <div>
-                                    @if($coating->protective_layer)
-                                        <div class="prodCard__stockParameter">
-                                    <span class="prodCard__tippy tippy" data-tippy="Просто описание">
-                                                                        <svg class="description_popup"
-                                                                             id="protective_layer_description_popup">
-                                                                            <use
-                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
-                                                                        </svg>
-                                                                    </span>
-                                        </div>
-                                    @endif
-                                    @if($coating->metal_thickness)
-                                        <div class="prodCard__stockParameter">
-                                    <span class="prodCard__tippy tippy" data-tippy="Просто описание">
-                                                                        <svg class="description_popup"
-                                                                             id="metal_thickness_description_popup">
-                                                                            <use
-                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
-                                                                        </svg>
-                                                                    </span>
-                                        </div>
-                                    @endif
-                                    @if($coating->polymer_coating_thickness)
-                                        <div class="prodCard__stockParameter">
-                                    <span class="prodCard__tippy tippy" data-tippy="Просто описание">
-                                                                        <svg class="description_popup"
-                                                                             id="polymer_coating_thickness_description_popup">
-                                                                            <use
-                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
-                                                                        </svg>
-                                                                    </span>
-                                        </div>
-                                    @endif
-                                    @if($coating->guarantee)
-                                        <div class="prodCard__stockParameter">
-                                    <span class="prodCard__tippy tippy" data-tippy="Просто описание"
-                                          style="margin-top: 10px">
-                                                                        <svg class="description_popup"
-                                                                             id="guarantee_description_popup">
-                                                                            <use
-                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
-                                                                        </svg>
-                                                                    </span>
-                                        </div>
-                                    @endif
-                                    @if($coating->light_fastness)
-                                        <div class="prodCard__stockParameter">
-                                    <span class="prodCard__tippy tippy" data-tippy="Просто описание">
-                                                                        <svg class="description_popup"
-                                                                             id="light_fastness_description_popup">
-                                                                            <use
-                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
-                                                                        </svg>
-                                                                    </span>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>

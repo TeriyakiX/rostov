@@ -15,7 +15,7 @@
 
 
                     @foreach($slider as $item)
-                        <div class="swiper-slide slide_1 heroSlider__slide swiper-lazy firstSlide" data-url="{{$item->url}}" 
+                        <div class="swiper-slide slide_1 heroSlider__slide swiper-lazy firstSlide" data-url="{{$item->url}}"
                              data-background="{{ asset('upload_images/' . $item->photo_desktop) }}"
                              style="height: 300px">
                             <div class="heroSlider__content _container">

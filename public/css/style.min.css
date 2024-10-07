@@ -6678,7 +6678,7 @@ strong {
     flex: 0 1 100%;
   }
 
-  .productsTmp__body--line .card {
+  .productsTmp__body--line .productsTmp__card {
     flex-direction: row;
   }
 
@@ -7512,9 +7512,7 @@ strong {
   .right__side {
       width: 100%;
   }
-  .productsTmp__card {
-      flex-direction: row;
-  }
+
     .productsTmp__body--line .card__imgWrp {
         flex: 0 0 24%;
         margin: 0 20px 0 0;
@@ -7525,12 +7523,14 @@ strong {
         padding: 0;
     }
 
-    .productsTmp__body--line .card {
+    .productsTmp__body--line .productsTmp__card {
         flex-direction: row;
+    }
+    .productsTmp__body--line {
+        display: block;
     }
   .productsTmp__body {
       width: 100%;
-      display: block;
   }
   .productsTmp__itemWrp {
       flex: 0 !important;
@@ -7877,6 +7877,13 @@ strong {
 }
 
 @media (max-width: 767.98px) {
+    .basket__grid {
+        display: block !important;
+    }
+
+    .brands__imgBox:after, .brands__imgBox:before {
+        display: none;
+    }
   ._container {
     max-width: none;
     padding: 0 16px;
@@ -8234,9 +8241,6 @@ strong {
     display: none;
   }
 
-  .basket__card {
-    display: flex;
-  }
 
   .basket__card:not(:last-child) {
     padding-bottom: 45px;
@@ -8614,7 +8618,7 @@ strong {
 
   .footer__menu {
     display: block;
-    order: 1;
+    order: 2;
     width: 100%;
     padding: 0;
   }
@@ -8665,7 +8669,7 @@ strong {
 
   .footer__formBox {
     padding: 0;
-    order: 2;
+    order: 1;
     text-align: center;
   }
 
@@ -8715,6 +8719,9 @@ strong {
 }
 
 @media (max-width: 479.98px) {
+    .footer__formBox .formBox__formTitle {
+        text-align: start;
+    }
   .catalogControl__wrapper {
     padding: 0 11px;
   }
@@ -9019,6 +9026,12 @@ strong {
 }
 
 @media (min-width: 1px) and (max-width: 991.98px) {
+    .cooperation--cta_item-bg {
+        max-width: 120px !important;
+    }
+    .cooperation--cta {
+        gap: 4px;
+    }
   .card__price {
       display: flex;
       gap: 8px;

@@ -7014,6 +7014,12 @@ strong {
 }
 
 @media (max-width: 991.98px) {
+    .products__itemImgBox {
+        height: 100%;
+    }
+    .products__itemBox--left .products__itemContent {
+        padding: 16px;
+    }
   ._container {
     max-width: 750px;
     margin: 0 auto; /* Выравнивание по центру */
@@ -7042,7 +7048,6 @@ strong {
 
     .newItems {
         background-color: #fff;
-        height: 452px;
     }
 
     .products__content {
@@ -7051,7 +7056,6 @@ strong {
 
     .products {
         background-color: #fff;
-        height: 558px;
     }
 
     .catalogControl {
@@ -7106,8 +7110,6 @@ strong {
     }
     .hero {
         background-color: #fff;
-        width: 390px;
-        height: 749px;
         position: relative;
         overflow: hidden;
     }
@@ -7522,9 +7524,7 @@ strong {
         box-shadow: none;
         padding: 0;
     }
-    .card__imgBox {
-        position: static;
-    }
+
     .productsTmp__body--line .card {
         flex-direction: row;
     }
@@ -7579,6 +7579,8 @@ strong {
   .process__content {
     justify-content: center;
     flex-wrap: wrap;
+    padding-top: 0;
+    padding-bottom: 76px;
   }
 
   .process__videoBox {

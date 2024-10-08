@@ -34,12 +34,12 @@
             </ul>
         </div>
         <div class="card__footer">
-            <div class="card__price">
+            <div class="card__price" style="display:flex; gap: 12px;">
                 @if($product->is_promo)
-                    <div style="text-decoration: line-through; color: #2d3033ab; font-size: 16px">{{ $product->price }}
-                        ₽/{{\App\Models\UnitsOfProducts::where('id',$product->unit_id)->first()->title??'шт.'}} </div>
-                    <div style="color: #006BDE; font-size: 26px">{{ $product->promo_price }}
+                    <div style="font-size: 18px">{{ $product->promo_price }}
                         ₽/{{\App\Models\UnitsOfProducts::where('id',$product->unit_id)->first()->title??'шт.'}}</div>
+                    <div style="text-decoration: line-through; color: #2d3033ab; font-size: 12px">{{ $product->price }}
+                        ₽/{{\App\Models\UnitsOfProducts::where('id',$product->unit_id)->first()->title??'шт.'}} </div>
                 @else
                     {{ $product->price }} ₽/{{\App\Models\UnitsOfProducts::where('id',$product->unit_id)->first()->title??'шт.'}}
                 @endif

@@ -421,7 +421,7 @@
                                                     </div>
                                                 </div>
 
-                                               
+
 
                                             </div>
                                             <div class="prodCard__price">
@@ -814,6 +814,13 @@
                 max-width: 100%;
                 padding: 0px 0px 0px 10px;
             }
+        }
+        .lengthSelect {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #f2f2f2;
+            border-radius: 4px;
+            padding: 0 10px;
         }
 
     </style>

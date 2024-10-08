@@ -148,15 +148,15 @@
                                                                             </ul>
                                                                             <div class="card__price">
                                                                                 @if($product->is_promo)
-                                                                                    <div
-                                                                                            style="text-decoration: line-through;">{{ $product->price }}
-                                                                                        ₽@if($product->show_calculator)
-                                                                                            /м²
-                                                                                        @endif </div>
                                                                                     <div>{{ $product->promo_price }}
                                                                                         ₽@if($product->show_calculator)
                                                                                             /м²
                                                                                         @endif</div>
+                                                                                    <div
+                                                                                        style="text-decoration: line-through; font-size: 12px">{{ $product->price }}
+                                                                                        ₽@if($product->show_calculator)
+                                                                                            /м²
+                                                                                        @endif </div>
                                                                                 @else
                                                                                     {{ $product->price }}
                                                                                     ₽@if($product->show_calculator)

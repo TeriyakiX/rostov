@@ -7162,8 +7162,6 @@ strong {
   .wrp-heroSliderPreview {
     top: unset;
     bottom: 0;
-    transform-origin: bottom left;
-    transform: translateX(50%) skewX(0deg) rotate(0);
     width: 300px;
     min-width: unset;
   }

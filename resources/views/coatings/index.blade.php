@@ -257,6 +257,7 @@
                                             Толщина полимерного покрытия
                                         </h2>
                                     </div>
+                                </div>
                                     <div class="coatings_option_filter">
                                         <div class="row" style="margin-top: 10px">
                                             <div class="col-md-6">
@@ -344,7 +345,6 @@
                                         </div>
 
                                     </div>
-                                </div>
                             </div>
                             <div class="row" style="margin-top: 20px">
                                 <div class="col-md-6">

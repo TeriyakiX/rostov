@@ -21,9 +21,9 @@
                 <form action="{{route('index.cart.pay')}}" method="post" style="margin-top: 20px">
                     @csrf
                     <div class="ctaForm">
-                        <div style="display: flex;justify-content: space-between;">
+                        <div class="ctaForm__inputs">
                             <div class="formRow" style="width: 45%;margin-right: 2%;">
-                                <div class="inpBox" style="display: flex">
+                                <div class="inpBox inpBox__oplata" style="display: flex">
                                     <label for="certificate" style="margin:auto;">Номер счета-спецификации</label>
                                     <input class="input input_coop" id="certificate" autocomplete="off" type="number"
                                            placeholder="XXXXXXX" name="certificate" style="border-radius: 10px;"
@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             <div class="formRow" style="width: 45%;">
-                                <div class="inpBox" style="display: flex">
+                                <div class="inpBox inpBox__oplata" style="display: flex">
                                     <label for="price" style="width: 40%;margin:auto;">Сумма к оплате</label>
                                     <input class="input input_coop" id="price" autocomplete="off"
                                            type="number" style="-moz-appearance: textfield;border-radius: 10px;"
@@ -40,14 +40,14 @@
                             </div>
                         </div>
                         <div class="formRow" style="width: 45%;margin-right: 2%;">
-                            <div class="inpBox" style="display: flex">
+                            <div class="inpBox inpBox__oplata" style="display: flex">
                                 <label for="email" style="margin:auto;">E-mail для отправки чека</label>
                                 <input class="input input_coop" id="email" autocomplete="off" type="text"
                                        placeholder="Ваш E-mail" name="email" style="border-radius: 10px;width: 90%"
                                        required>
                             </div>
                         </div>
-                        <div style="display:flex;margin-top: 20px">
+                        <div class="oplata__info">
                             <button class="ordering__submit btn" type="submit"
                                     style="font-size: 16px;margin-left: 2px; margin-right: 10px; max-height: 43px;">
                                 Оплатить заказ картой
@@ -136,7 +136,7 @@
 <style>
     @media screen and (max-width: 900px) {
         .contentContainer {
-           
+
         }
     }
 

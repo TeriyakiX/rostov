@@ -24,7 +24,12 @@
         <section class="gallery">
             <div class="gallery__container _container">
                 <div class="gallery__content">
-                    <h1 class="gallery__title t">Фото галерея</h1>
+                      <div style="display:flex; text-align: center; justify-content: space-between">
+                          <h1 class="gallery__title t">Фото галерея</h1>
+                          <svg class="gallery__filters-icon-mobile">
+                              <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
+                          </svg>
+                      </div>
                     <div class="cooperation__body sideDashContainer">
                         <div class="sideDash sideDash--sticky" style="z-index: 9999">
                             <div class="sideDash__item sideDash__item--gap">
@@ -65,7 +70,7 @@
                             </div>
                         </div>
                     <div class="filters gallery__filters">
-                        <svg>
+                        <svg class="gallery__filters-icon">
                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
                         </svg>
                         <form class="filters__form" action="#" method="GET">

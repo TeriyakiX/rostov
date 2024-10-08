@@ -8,7 +8,7 @@
     <div class="production__slider text"> {{$item->text??''}}</div>
     {{--                        <section class="hero swiper">--}}
 
-    <div class="swiper" style=" color: #0dcaf0;position: relative">
+    <div class="swiper" style=" color: #0dcaf0;position: relative; margin-top: 20px; margin-bottom: 20px;">
 
         <div class="hero__container _container">
             <div class="wrp-heroSlider">

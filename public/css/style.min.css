@@ -7078,23 +7078,23 @@ strong {
 
     .catalogControl__searchform-mobile {
         margin-top: 20px;
-        display: flex; /* Flexbox для размещения элементов */
-        align-items: center; /* Центрируем по вертикали */
+        display: flex;
+        align-items: center;
         width: 100%;
-        height: 40px; /* Высота формы поиска */
-        border-radius: 6px; /* Закругление углов */
+        height: 40px;
+        border-radius: 6px;
         border: 1px solid #E7E9EC;
-        padding: 0 10px; /* Отступы по горизонтали */
+        padding: 0 10px;
         background-color: white;
     }
 
     .catalogControl__searchInput-mobile {
-        flex: 1; /* Заполняем доступное пространство */
-        height: 100%; /* Высота ввода */
-        border: none; /* Убираем границы */
-        outline: none; /* Убираем обводку при фокусировке */
-        font-size: 14px; /* Размер шрифта */
-        padding: 0 10px; /* Отступы по горизонтали */
+        flex: 1;
+        height: 100%;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        padding: 0 10px;
     }
 
     .catalogControl__searchBtn-mobile {
@@ -8005,7 +8005,6 @@ strong {
 
   .heroSlider__txtBox {
     padding: 10px 70px 20px 20px;
-    top: 360px;
   }
 
   .heroSliderPreview__previewTitle {

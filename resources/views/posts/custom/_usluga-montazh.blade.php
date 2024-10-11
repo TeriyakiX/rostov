@@ -78,9 +78,24 @@
                  loading="lazy" decoding="async" referrerPolicy="no-referrer"
                  style="transform: translate(0, 0) skewX(-20deg)">
         </div>
+        <div class="cooperation--cta_item cooperation--cta_item-bg">
+            <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"
+                 alt="img"
+                 loading="lazy" decoding="async" referrerPolicy="no-referrer"
+                 style="transform: translate(0, 0) skewX(-20deg)">
+        </div>
     </div>
-    <div>
-        <button class="btn service_montazh_btn" type="button" style="margin-bottom: 20px;">
+        <div class="service__usluga-wrapper">
+        <label class="formBox__fileLabel formBox__fileLabel-mobile" name="file" for="file" style="color: #595959; margin-bottom: 0;">
+            <input class="formBox__input" autocomplete="off" type="file" name="file" id="file" style="display: none">
+
+            <svg>
+                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#scr') }}"
+                     style="fill: #595959;"></use>
+            </svg>
+            Прикрепить файл
+        </label>
+        <button class="btn service_montazh_btn" type="button">
             Получить консультацию
         </button>
     </div>

@@ -89,16 +89,16 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 32px;
 }
 .cooperation--cta_item {
   height: 293px;
   position: relative;
-  margin-bottom: 30px;
-  max-width: 190px;
+  margin-bottom: 20px;
+  max-width: 210px;
   width: 100%;
   z-index: 1;
-  left: -51px;
+  left: -54px;
 }
 .cooperation--cta_item:nth-child(1) {
   max-width: 801px;
@@ -111,8 +111,8 @@
   display: block;
   position: absolute;
   top: 0;
-  right: 0;
-  width: 59px;
+  right: -155px;
+  width: 232px;
   height: 100%;
   background-color: white;
   background-size: 100% 100%;
@@ -152,17 +152,6 @@
 @media (max-width: 600px) {
   .cooperation--cta_item:nth-child(1) {
     width: 100% !important;
-  }
-
-  .cooperation--cta_item:nth-child(1):before {
-    right: -50px;
-    width: 100px;
-    transform: translate(10%, 0) skewX(-15deg);
-  }
-
-  .cooperation--cta_item:nth-child(2),
-  .cooperation--cta_item:nth-child(3) {
-    display: none;
   }
 }
 

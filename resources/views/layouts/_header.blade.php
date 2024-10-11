@@ -213,6 +213,7 @@ print_r($headerCategories);
                           action="{{ route('index.products.search') }}">
                         <input class="catalogControl__searchInput" autocomplete="off" type="text" name="query"
                                data-value="{{ request()->get('query') ?: 'Поиск по товарам' }}"
+                               placeholder="{{ request()->get('query') ?: 'Поиск по товарам' }}"
                                value="{{ request()->get('query') }}">
                         <button class="catalogControl__searchBtn" type="submit">
                             <svg>
@@ -221,18 +222,13 @@ print_r($headerCategories);
                         </button>
                     </form>
                 </div>
-                <div class="social header__social" id="socialLink3" style="display: none;margin: auto">
+                <div class="social header__social" id="socialLink3" style="display: none;">
                     <a class="social__link header__navLink " href="https://wa.me/+79885109783">
-                        <svg>
-                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#wapp') }}"></use>
-                        </svg>
+                        <img src="{{asset('img/sprites/whatsapp.svg')}}" alt="whatsapp" class="social__link-whatsapp">
                     </a>
                     <a class="social__link header__navLink" href="https://t.me/+79885109783">
-                        <img src="{{asset('img/sprites/telegram.png')}}" alt="tg" style="  margin-left: auto;
-  margin-right: auto; width: 80%;height: 75%; margin-top: 5px">
-
+                        <img src="{{asset('img/sprites/telegram.svg')}}" alt="telegram" class="social__link-telegram">
                     </a>
-
                 </div>
             </div>
             <div class="header__col header__col--center">
@@ -263,11 +259,9 @@ print_r($headerCategories);
                         </svg>
                     </a>
                 </div>
-                <div class="social header__social" id="socialLink4" style="display: none;margin: auto">
+                <div class="social header__social" id="socialLink4" style="display: none;">
                     <a class="social__link header__navLink " href="tel:+78633114660" style="background: #016BDE">
-                        <img src="{{asset('img/sprites/phone.png')}}" alt="phone"
-                             style=" margin-left: 2px;width: 90%;height: 90%;">
-
+                        <img src="{{asset('img/sprites/phone.svg')}}" alt="phone">
                     </a>
 
                     <div class="header__iconMenu iconMenu" role="button" tabindex="0" style="margin-left: 30px">
@@ -358,6 +352,7 @@ print_r($headerCategories);
                   action="{{ route('index.products.search') }}">
                 <input class="catalogControl__searchInput-mobile" autocomplete="off" type="text" name="query"
                        data-value="{{ request()->get('query') ?: 'Поиск по товарам' }}"
+                       placeholder="{{ request()->get('query') ?: 'Поиск по товарам' }}"
                        value="{{ request()->get('query') }}">
                 <button class="catalogControl__searchBtn-mobile" type="submit">
                     <svg>

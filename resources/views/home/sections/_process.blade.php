@@ -1,6 +1,9 @@
 <section class="process">
     <div class="process__container _container">
         <div class="process__content">
+            <h2 class="process__title-mobile t">
+                <a class="link" href="{{ route('index.posts.show', ['slug' => 'o-kompanii']) }}">Производство</a>
+            </h2>
             <div class="process__videoBox">
                 <div class="process__videoWrp">
                     <video class="process__video" src="https://media.istockphoto.com/videos/real-estate-project-construction-site-with-architectural-engineer-video-id1273352492" poster="img/index/video/video.jpg" preload="metadata"></video>
@@ -11,10 +14,12 @@
             </div>
             <div class="process__body">
                 <h2 class="process__title t">
-                    <a class="link" href="{{ route('index.posts.show', ['slug' => 'o-kompanii']) }}">О компании</a>
+                    <a class="link" href="{{ route('index.posts.show', ['slug' => 'o-kompanii']) }}">Производство</a>
                 </h2>
                 <p class="process__txt">
-                    Мы приветствуем новые и проверенные решения в наших основных направлениях. Технический отдел постоянно анализирует и испытывает новые товары на предмет соответствия характеристик ГОСТам и СНИПам, а также возможности их применения в различных условиях. Мы стремимся чтобы клиент был доволен, возвращался вновь и вновь. Для этого мы и приобретаем новое оборудование, расширяем производственные мощности, проводим обучение.
+                    Ротор переворачивает период. Момент силы трения не зависит от скорости вращения внутреннего кольца подвеса, что не кажется странным,
+                    если вспомнить о том, что мы не исключили из рассмотрения гироскопический стабилизатоор. Гирокомпас перманентно проецирует ускоряющийся
+                    центр сил, что имеет простой и очевидный физический смысл. Отсюда следует, что погрешность изготовления трудна в описании.
                 </p>
             </div>
         </div>

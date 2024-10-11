@@ -31,6 +31,9 @@
                                 <a class="breadcrumbs__link"
                                    href="{{ route('index.products.categoryList', ['category' => $parentParent->slug]) }}">
                                     <span>{{ $parentParent->title }}</span>
+                                    <svg>
+                                        <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                    </svg>
                                 </a>
                             </li>
                         @endif
@@ -39,6 +42,9 @@
                                 <a class="breadcrumbs__link"
                                    href="{{ route('index.products.categoryList', ['category' => $parent->slug]) }}">
                                     <span>{{ $parent->title }}</span>
+                                    <svg>
+                                        <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                    </svg>
                                 </a>
                             </li>
                         @else
@@ -46,6 +52,9 @@
                                 <a class="breadcrumbs__link"
                                    href="{{ route('index.products.categoryList', ['category' => $parent->slug]) }}">
                                     <span>{{ $parent->title }}</span>
+                                    <svg>
+                                        <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                    </svg>
                                 </a>
                             </li>
                         @endif
@@ -53,6 +62,9 @@
                     <li class="breadcrumbs__item">
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                             <span>{{ $category->title }}</span>
+                            <svg>
+                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>
@@ -61,48 +73,15 @@
         <section class="productsTmp">
             <div class="productsTmp__container _container">
                 <div class="productsTmp__content">
-                    <h1 class="productsTmp__title t">
-                        {{ $category->title }}
-                    </h1>
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px">
+                          <h1 class="productsTmp__title t">
+                              {{ $category->title }}
+                          </h1>
+                          <svg class="productsTmp__filters-icon-mobile">
+                              <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
+                          </svg>
+                      </div>
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
-                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                            href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
-                                        покрытий</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                            href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
-                                        решения</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
-                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
-                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
-                            </div>
-                        </div>
                         <form id="form_filters" action="{{ \Illuminate\Support\Facades\URL::current() }}"
                               method="GET">
                         @if(count($tags) > 0)
@@ -119,7 +98,7 @@
                         @endif
 
                         <div class="filters productsTmp__filters">
-                            <svg>
+                            <svg class="productsTmp__filters-icon">
                                 <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
                             </svg>
                             <div class="filters__form"
@@ -186,7 +165,7 @@
                                     </div>
                                 </form>
 
-                                <div class="productsTmp__sortItem" role="button" tabindex="0">
+                                <div class="productsTmp__sortItem productsTmp__sortItem--btn" role="button" tabindex="0">
                                     <a href="{{ route('index.products.category', array_merge(['category' => $category->slug, 'isPromo' => true], request()->all())) }}">
                                         <span>Скидки и акции
                                             <svg>
@@ -196,7 +175,7 @@
                                     </a>
                                 </div>
 
-                                <div class="productsTmp__sortItem" role="button" tabindex="0">
+                                <div class="productsTmp__sortItem productsTmp__sortItem--btn" role="button" tabindex="0">
                                     <a href="{{ route('index.products.category', array_merge(['category' => $category->slug, 'isNovelty' => true], request()->all())) }}">
                                         <span>Новинки
                                             <svg>
@@ -248,9 +227,77 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="filter__menu">
+                    <div class="filter__menu-wrapper">
+                        <div class="filter__menu-header">
+                            <div class="filter__menu-filter-icon">
+                                <svg>
+                                    <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
+                                </svg>
+                            </div>
+                            <div class="filter__menu-close-button">
+                                <svg class="filter__menu-close-icon">
+                                    <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cancel') }}"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="filter__menu-body">
+                            <ul class="filter__menu-list">
+                                <li>
+                                    <select class="filter__menu-select">
+                                        <option class="filters__op" value="">Цена</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <select class="filter__menu-select">
+                                        <option class="filters__op" value="">Тип профиля</option>
+                                    </select>
+                                </li>   <li>
+                                    <select class="filter__menu-select">
+                                        <option class="filters__op" value="">Цвет</option>
+                                    </select>
+                                </li>   <li>
+                                    <select class="filter__menu-select">
+                                        <option class="filters__op" value="">Покрытие</option>
+                                    </select>
+                                </li>   <li>
+                                    <select class="filter__menu-select">
+                                        <option class="filters__op" value="">Толщина стали</option>
+                                    </select>
+                                </li>   <li>
+                                    <select class="filter__menu-select">
+                                        <option class="filters__op" value="">Гарантия</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="filter__menu-footer">
+                            <button class="filters__btn btn" style="width: 100%" type="submit">Показать</button>
+                            <a href="{{ \Illuminate\Support\Facades\URL::current() }}">
+                                <button class="filters__btn filters__btn--clear btn" style="width: 100%" type="button">Сбросить
+                                    фильтры
+                                    <svg>
+                                        <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#cloze') }}"></use>
+                                    </svg>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
     <style>
+        @media (max-width: 767.98px) {
+           .productsTmp .filters__form {
+                display: none;
+           }
+           .productsTmp__sortItem--drop .filters__select {
+               border: none;
+               padding: 0;
+           }
+       }
 
         body:not(._touch) .newItems__tabsEl.-active:after {
             border-left: none;
@@ -273,6 +320,17 @@
 
     </style>
     <script>
+        // Обработчик для открытия меню
+        document.querySelector('.productsTmp__filters-icon-mobile').addEventListener('click', function () {
+            document.querySelector('.filter__menu').classList.add('filter__menu--active');
+        });
+
+        // Обработчик для закрытия меню
+        document.querySelector('.filter__menu-close-button').addEventListener('click', function () {
+            document.querySelector('.filter__menu').classList.remove('filter__menu--active');
+        });
+
+
         checkTags();
         function selectTag(elem) {
             $(elem).toggleClass('-active');

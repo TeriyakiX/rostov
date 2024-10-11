@@ -129,25 +129,22 @@
                     </div>
                 @endforeach
 
-                <!--div class="footer__spollerBox ac"><a class="footer__spoller" href="#">Товары
-                        <div class="footer__spollerTrigger ac-trigger on"></div>
-                    </a>
-                    <div class="footer__spollerPanel ac-panel">
-                        <ul class="footer__menuList">
-                            @foreach(\App\Models\ProductCategory::whereNull('parent_id')->get() as $productCategory)
-                                <li class="footer__menuItem">
-                                    <a class="footer__menuLink"
-                                       href="{{ route('index.products.category', ['category' => $productCategory->slug]) }}">
-                                        {{ $productCategory->title }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div-->
-
-
-
+{{--                <div class="footer__spollerBox ac"><a class="footer__spoller" href="#">Товары--}}
+{{--                        <div class="footer__spollerTrigger ac-trigger on"></div>--}}
+{{--                    </a>--}}
+{{--                    <div class="footer__spollerPanel ac-panel">--}}
+{{--                        <ul class="footer__menuList">--}}
+{{--                            @foreach(\App\Models\ProductCategory::whereNull('parent_id')->get() as $productCategory)--}}
+{{--                                <li class="footer__menuItem">--}}
+{{--                                    <a class="footer__menuLink"--}}
+{{--                                       href="{{ route('index.products.category', ['category' => $productCategory->slug]) }}">--}}
+{{--                                        {{ $productCategory->title }}--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            @endforeach--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
                 <div class="footer__spollerBox ac"><a class="footer__spoller" href="/posts/katalog">Каталог
                         <div class="footer__spollerTrigger ac-trigger off"></div>
@@ -217,3 +214,13 @@
         </div>
     </div>
 </footer>
+
+<style>
+    .formBox__form {
+        display: flex;
+        flex-direction: column;
+    }
+    .footer__spollerPanel {
+        height: auto !important;
+    }
+</style>

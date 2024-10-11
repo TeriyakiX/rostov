@@ -2,7 +2,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 @section('content')
 
-    <main class="page" style="padding: 20px">
+    <main class="page">
         <nav class="breadcrumbs">
             <div class="breadcrumbs__container _container">
                 <ul class="breadcrumbs__list">
@@ -17,52 +17,16 @@
             </div>
         </nav>
 
-
 {{--        <!-- Project Gallery-->--}}
         <section class="gallery">
             <div class="gallery__container _container">
+                <h1 class="gallery__title t">
+                    Услуги
+                </h1>
                 <div class="gallery__content">
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
-                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                        href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
-                                        покрытий</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                        href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
-                                        решения</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
-                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
-                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
-                            </div>
-                        </div>
-                    <div class="gallery__body sideDashContainer">
-                        @foreach($posts as $key=>$post)
+                        <div class="gallery__body sideDashContainer">
+                            @foreach($posts as $key=>$post)
 
                                                             <div class="gallery__itemWrp" style="padding: 0">
                                                                 <div class="gallery__itemBox">
@@ -77,9 +41,9 @@
                                 @include('posts.custom._'.$post->slug)
 
 
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
 
@@ -99,7 +63,7 @@
         height: 293px;
         position: relative;
         margin-bottom: 30px;
-        max-width: 190px;
+        max-width: 210px;
         width: 100%;
         z-index: 1;
         left: -51px;

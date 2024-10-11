@@ -7351,11 +7351,6 @@ strong {
     width: 478px;
   }
 
-  .compareSlider .card,
-  .compareParametersSlider .card {
-    padding: 10px;
-  }
-
   .ordering__grid {
     flex-wrap: wrap;
   }
@@ -8294,29 +8289,6 @@ strong {
   .compareSlider,
   .compareParametersSlider {
     width: 100%;
-  }
-}
-
-@media (max-width: 600px) {
-  .comparison .card {
-    padding: 5px;
-  }
-
-  .comparison .card__title {
-    font-size: 13px;
-  }
-
-  .comparison .card__char {
-    font-size: 11px;
-  }
-
-  .comparison .card__price {
-    font-size: 14px;
-  }
-
-  .comparison .card__btn {
-    padding-left: 10px;
-    padding-right: 10px;
   }
 }
 

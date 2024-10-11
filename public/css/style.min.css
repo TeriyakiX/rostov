@@ -2784,8 +2784,8 @@ strong {
   background-color: #006bde;
   border: 2px solid #006bde;
   border-radius: 50%;
-  top: -10px;
-  right: -10px;
+  top: -30px;
+  right: -30px;
   transition: 0.2s ease;
 }
 
@@ -3349,19 +3349,14 @@ body:not(._touch) .card__icon--basket:hover svg {
   height: 109px;
 }
 
-.gallery__content {
-  padding-bottom: 80px;
-}
-
 .gallery__title {
-  margin-bottom: 27px;
+  margin-bottom: 30px;
 }
 
 .gallery__body {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 0 -10px;
 }
 
 .gallery__itemWrp {
@@ -3382,9 +3377,10 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 .gallery__itemTitle {
+  color: #595959;
   font-size: 2.4rem;
   line-height: 140.62%;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .gallery__params {
@@ -4771,19 +4767,16 @@ body:not(._touch) .card__icon--basket:hover svg {
 
 .comparison__tabs {
   position: relative;
+  flex-wrap: wrap;
+  gap: 18px;
   display: flex;
   line-height: 150%;
   padding: 20px 0 10px;
-  overflow-x: auto;
 }
 
 .comparison__tab {
   white-space: nowrap;
   cursor: pointer;
-}
-
-.comparison__tab:not(:first-child) {
-  margin-left: 30px;
 }
 
 .comparison__tab[data-active] {
@@ -5290,6 +5283,13 @@ body:not(._touch) .card__icon--basket:hover svg {
   height: 16px;
   margin-right: 14px;
   transition: 0.2s ease;
+}
+
+.service__usluga-wrapper {
+    gap: 30px;
+    align-items: center;
+    display: flex;
+    margin-bottom: 80px;
 }
 
 #map > ymaps,
@@ -6732,6 +6732,12 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 991.98px) {
+    .card__delete {
+        width: 24px;
+        height: 24px;
+        top: -18px;
+        right: -18px;
+    }
     .productsTmp__filters-icon {
         display: none;
     }
@@ -7705,10 +7711,6 @@ body:not(._touch) .card__icon--basket:hover svg {
       display: none;
   }
 
-    .gallery__title {
-        margin-bottom: 0;
-    }
-
     .gallery__filters-icon-mobile {
         display: block;
     }
@@ -7846,6 +7848,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 
   .gallery__itemTitle {
     font-size: 18px;
+      margin-bottom: 16px;
   }
 
   .productsTmp__sortDropBox > div {
@@ -7930,7 +7933,6 @@ body:not(._touch) .card__icon--basket:hover svg {
 
   .comparison__categoryName {
     font-size: 18px;
-    margin-bottom: 15px;
   }
 
   .comparison__parameterRow {
@@ -7950,11 +7952,6 @@ body:not(._touch) .card__icon--basket:hover svg {
   .compareSlider,
   .compareParametersSlider {
     width: 478px;
-  }
-
-  .compareSlider .card,
-  .compareParametersSlider .card {
-    padding: 10px;
   }
 
   .ordering__grid {
@@ -8093,7 +8090,41 @@ body:not(._touch) .card__icon--basket:hover svg {
   }
 }
 
+.cooperation--cta_item-bg:nth-child(3) {
+    display: none;
+}
+.cooperation--cta {
+    gap: 8px;
+}
+
 @media (max-width: 767.98px) {
+    .comparison__tabs {
+        flex-wrap: nowrap;
+        overflow: auto;
+        padding-bottom: 32px;
+    }
+    .comparison__tabs::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+        background-color: #F6F6F6;
+    }
+    .comparison__tabs::-webkit-scrollbar-thumb {
+        background-color: #B5B5B5;
+    }
+
+    .cooperation--cta {
+        margin-left: -16px;
+        width: 170% !important;
+    }
+    .cooperation--cta_item-bg:nth-child(3) {
+        display: block;
+    }
+    .service_montazh_btn, .service_usluga_btn, .service_oplata_btn, .service_raschet_btn {
+        width: 100%;
+    }
+    .formBox__fileLabel-mobile {
+        display: none;
+    }
     .cooperation__body ol, .cooperation__body ul {
         margin: 0;
     }
@@ -8188,8 +8219,8 @@ body:not(._touch) .card__icon--basket:hover svg {
         display: flex;
     }
     .card__mini-icon svg {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
     }
     .heroSlider__content {
         display: none;
@@ -8409,10 +8440,6 @@ body:not(._touch) .card__icon--basket:hover svg {
     transform: translate(-30%, -30%) scale(0.8);
   }
 
-  .gallery__content {
-    padding-bottom: 40px;
-  }
-
   .gallery__itemWrp {
     flex: 0 1 50%;
     padding-bottom: 30px;
@@ -8627,37 +8654,22 @@ body:not(._touch) .card__icon--basket:hover svg {
     padding-bottom: 70px;
   }
 
-  .comparison__infoCompare {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-
-  .comparison__categoryName {
-    padding: 0;
-    margin: 0;
-  }
-
-  .comparison__delAll {
-    margin-left: 15px;
-  }
-
-  .comparison__parameterName {
-    display: block;
-    position: absolute;
-    top: 3px;
-    left: 20px;
-    font-size: 12px;
-    font-weight: 700;
-  }
-
   .comparison__parameterRow {
-    padding: 20px 20px 10px;
+    padding: 0 16px;
+  }
+
+  .comparison__backBtn {
+      width: 100%;
+  }
+
+  .comparison__parameters {
+      margin-left: -16px;
+      padding-bottom: 24px;
   }
 
   .comparison__settings {
-    padding: 20px 0 15px;
+        padding: 20px 0 15px;
+        margin-left: 16px;
   }
 
   .comparison .card__controllers {
@@ -8670,14 +8682,6 @@ body:not(._touch) .card__icon--basket:hover svg {
 
   .comparison .card__icon:not(:first-child) {
     margin: 10px 0 0 0;
-  }
-
-  .comparisonGrid:nth-child(1) {
-    display: block;
-  }
-
-  .comparisonGrid:nth-child(2) .comparisonGrid__col--left {
-    display: none;
   }
 
   .wrp-compareSlider,
@@ -9011,6 +9015,9 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 600px) {
+    .cooperation--cta_item-bg {
+        max-width: 90px !important;
+    }
     .productsTmp__itemWrp .card__new-label {
         font-size: 10px;
         height: 18px;
@@ -9024,29 +9031,22 @@ body:not(._touch) .card__icon--basket:hover svg {
     .services__content {
         padding: 50px 0 30px;
     }
-  .comparison .card {
-    padding: 5px;
-  }
-
-  .comparison .card__title {
-    font-size: 13px;
-  }
-
-  .comparison .card__char {
-    font-size: 11px;
-  }
-
-  .comparison .card__price {
-    font-size: 14px;
-  }
-
-  .comparison .card__btn {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 }
 
 @media (max-width: 479.98px) {
+    .card__delete {
+        right: -12px;
+        top: -12px;
+    }
+    .itemsSlider__slide {
+        padding: 4px;
+    }
+    .card__new-label {
+        width: 48px;
+        height: 18px;
+        font-size: 10px;
+        clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+    }
     .benefitCard__count {
         left: 40%;
         white-space: nowrap;
@@ -9263,6 +9263,10 @@ body:not(._touch) .card__icon--basket:hover svg {
     display: block;
   }
 
+    .comparisonGrid__col--left {
+        flex: 0 0 152px;
+    }
+
   .comparison__delAll {
     margin: 10px 0 0;
   }
@@ -9272,13 +9276,7 @@ body:not(._touch) .card__icon--basket:hover svg {
   }
 
   .comparison__parameterRow {
-    font-size: 13px;
-    padding: 20px 10px 10px;
-  }
-
-  .compareSlider .swiper-slide,
-  .compareParametersSlider .swiper-slide {
-    padding: 5px;
+    font-size: 14px;
   }
 
   .compareParametersSlider .swiper-slide {
@@ -9363,11 +9361,9 @@ body:not(._touch) .card__icon--basket:hover svg {
     .process__title-mobile {
         display: block;
     }
-    .cooperation--cta_item-bg {
-        max-width: 120px !important;
-    }
     .cooperation--cta {
         gap: 4px;
+        margin-top: 16px !important;
     }
   .card__price {
       display: flex;

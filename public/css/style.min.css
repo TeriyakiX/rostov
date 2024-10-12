@@ -2869,9 +2869,19 @@ strong {
   font-weight: 700;
 }
 
+.card__title .link {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .card__chars {
   margin-bottom: 10px;
   line-height: 150%;
+  position: relative;
+  overflow: hidden;
 }
 
 .card__chars li {
@@ -2957,8 +2967,8 @@ strong {
 }
 
 .card__mini-icon svg {
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
     transition: transform 0.1s;
 }
 
@@ -3730,7 +3740,11 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 .brands__cardTitle {
-  display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   font-size: 2.4rem;
   line-height: 140.62%;
   margin-bottom: 12px;
@@ -5445,6 +5459,7 @@ body:not(._touch) .card__icon--basket:hover svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .prodCard__selRow:not(:last-child) {
@@ -5452,8 +5467,60 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 .prodCard__selWrp {
-  flex: 0 1 100%;
-  display: flex;
+    flex: 0 1 100%;
+    position: relative;
+    display: inline-block;
+    background-color: #F6F6F6;
+    height: 40px;
+    border-radius: 8px 0 0 8px;
+    overflow: hidden;
+    clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.prodCard__select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #F6F6F6;
+    height: 100%;
+    width: 100%;
+    padding-left: 48px;
+    padding-right: 40px;
+    border: none;
+    outline: none;
+    border-radius: 8px 0 0 8px;
+    color: #757575;
+    cursor: pointer;
+}
+
+.prodCard__selWrp::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background-color: #006BDE;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.prodCard__selWrp::before {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #fff;
+    pointer-events: none;
+    z-index: 2;
 }
 
 .prodCard__selWrp .choices {
@@ -5509,10 +5576,6 @@ body:not(._touch) .card__icon--basket:hover svg {
   flex: 0 0 130px;
   margin-right: 10px;
   line-height: 150%;
-}
-
-.prodCard__select {
-  visibility: hidden;
 }
 
 .prodCard__tippy {
@@ -5585,7 +5648,6 @@ body:not(._touch) .card__icon--basket:hover svg {
   padding-top: 5px;
   padding-bottom: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 16px;
 }
@@ -5595,6 +5657,7 @@ body:not(._touch) .card__icon--basket:hover svg {
     justify-content: space-between
 }
 .prodCard__parameterData {
+  padding-left: 48px;
   flex: 0 1 100%;
   max-width: 375px;
 }
@@ -8098,6 +8161,9 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 767.98px) {
+    .newItems__tabBlocks {
+        margin-top: 16px;
+    }
     .comparison__tabs {
         flex-wrap: nowrap;
         overflow: auto;
@@ -8148,14 +8214,22 @@ body:not(._touch) .card__icon--basket:hover svg {
         height: 23px;
         fill: #006bde;
     }
+    .newItems__controlPanel {
+        margin-bottom: 0;
+    }
+    .brands__imgBox {
+        padding-bottom: 122%;
+    }
     .newItems__content {
         padding-bottom: 64px;
+        padding-top: 0;
     }
     .brands__cardCategory {
         max-width: 135px;
     }
     .breadcrumbs__link {
-        padding: 8px 25px 8px 10px;
+        padding: 5px 25px 5px 10px;
+        font-size: 12px;
     }
     .catalogControl__wrapper {
         padding-bottom: 16px;
@@ -8168,6 +8242,7 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
     .card {
         padding: 8px;
+        padding-top: 16px;
     }
     .formBox {
         max-width: none;
@@ -8388,7 +8463,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 
   .wrp-itemsSlider {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0;
   }
 
   .card--simple {
@@ -9038,8 +9113,12 @@ body:not(._touch) .card__icon--basket:hover svg {
         right: -12px;
         top: -12px;
     }
+    .swiper-container-initialized .swiper-slide {
+        flex-shrink: 1;
+    }
     .itemsSlider__slide {
         padding: 4px;
+        width: auto !important;
     }
     .card__new-label {
         width: 48px;
@@ -9126,10 +9205,6 @@ body:not(._touch) .card__icon--basket:hover svg {
 
   .heroSlider__btn {
     min-width: 338px;
-  }
-
-  .wrp-itemsSlider {
-    max-width: 380px;
   }
 
   .benefits__card {

@@ -44,14 +44,33 @@
         <div class="card__footer">
             <div class="card__price">
                 @if($sliderProduct->is_promo)
-                    <div>{{ $sliderProduct->promo_price }} ₽@if($sliderProduct->show_calculator)/м²@endif</div>
-                    <div style="text-decoration: line-through; font-size: 12px">{{ $sliderProduct->price }} ₽@if($sliderProduct->show_calculator)/м²@endif </div>
+                    <div>
+                        @if(intval($sliderProduct->promo_price) == $sliderProduct->promo_price)
+                            {{ number_format($sliderProduct->promo_price, 0, ',', ' ') }} ₽
+                        @else
+                            {{ number_format($sliderProduct->promo_price, 2, ',', ' ') }} ₽
+                        @endif
+                        @if($sliderProduct->show_calculator)/м²@endif
+                    </div>
+                    <div style="text-decoration: line-through; font-size: 12px">
+                        @if(intval($sliderProduct->price) == $sliderProduct->price)
+                            {{ number_format($sliderProduct->price, 0, ',', ' ') }} ₽
+                        @else
+                            {{ number_format($sliderProduct->price, 2, ',', ' ') }} ₽
+                        @endif
+                        @if($sliderProduct->show_calculator)/м²@endif
+                    </div>
                 @else
-                    {{ $sliderProduct->price }} ₽@if($sliderProduct->show_calculator)
-                        /м²
+                    @if(intval($sliderProduct->price) == $sliderProduct->price)
+                        {{ number_format($sliderProduct->price, 0, ',', ' ') }} ₽
+                    @else
+                        {{ number_format($sliderProduct->price, 2, ',', ' ') }} ₽
                     @endif
+                    @if($sliderProduct->show_calculator)/м²@endif
                 @endif
             </div>
+
+
             <div class="card__controllers">
                 <a href="{{ route('index.products.show',
                     ['product' => $sliderProduct->slug??'', 'category' => $sliderProduct->categories->first()->slug??'empty']) }}">

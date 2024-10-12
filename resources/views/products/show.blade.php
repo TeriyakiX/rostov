@@ -79,44 +79,6 @@
             <section class="prodCard">
                 <div class="prodCard__container _container">
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
-                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                            href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
-                                        покрытий</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                            href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
-                                        решения</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
-                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
-                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
-                            </div>
-                        </div>
                         <div class="prodCard__content">
                             <div class="prodCard__side">
                                 <div class="prodCard__sideBody">
@@ -242,6 +204,12 @@
                                                     <script>
                                                         attributePrice({{ $attribute['model']->id }}, '#prodCard__select{{ $attribute['model']->id }}', false);
                                                     </script>
+                                                    <span class="prodCard__tippy tippy" style="visibility: hidden">
+                                                                        <svg class="description_popup">
+                                                                            <use
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                        </svg>
+                                                </span>
                                                 </div>
                                             @endif
                                         @endforeach
@@ -257,14 +225,14 @@
                                                         <option class="prodCard__op" value="">Пусто</option>
                                                     @endif
                                                 </select>
-                                                <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                            </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="profile_type_popup">
                                                                             <use
-                                                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
                                                                         </svg>
                                                                     </span>
-                                            </div>
                                         </div>
                                         <div class="prodCard__selRow"><span
                                                     class="prodCard__selName">Производитель</span>
@@ -278,12 +246,12 @@
                                                         <option class="prodCard__op" value="">Пусто</option>
                                                     @endif
                                                 </select>
-                                                <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                            </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="manufacturer_popup"><use
-                                                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use></svg>
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use></svg>
                                                                     </span>
-                                            </div>
                                         </div>
 
                                         <div class="prodCard__selRow">
@@ -298,15 +266,14 @@
                                                         <option class="prodCard__op" value="">Пусто</option>
                                                     @endif
                                                 </select>
-                                                <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                            </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="thickness_popup">
                                                                             <use
-                                                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
                                                                         </svg>
                                                 </span>
-                                            </div>
-
                                         </div>
                                         <div class="prodCard__selRow">
                                             <span class="prodCard__selName">Покрытие</span>
@@ -319,14 +286,14 @@
                                                         <option class="prodCard__op" value="">Пусто</option>
                                                     @endif
                                                 </select>
-                                                <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                            </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="coating_popup">
                                                                             <use
-                                                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
                                                                         </svg>
                                                                     </span>
-                                            </div>
                                         </div>
                                         @if($colorsArray = $product->colorsArray())
                                             <div class="prodCard__colorBox">

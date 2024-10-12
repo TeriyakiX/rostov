@@ -85,15 +85,29 @@
                                                         </ul>
                                                         <div class="card__price">
                                                             @if($product->is_promo)
-                                                                <div
-                                                                    style="text-decoration: line-through;">{{ $product->price }}
-                                                                    ₽@if($product->show_calculator)/м²@endif </div>
-                                                                <div>{{ $product->promo_price }}
-                                                                    ₽@if($product->show_calculator)/м²@endif</div>
+                                                                <div>
+                                                                    @if(intval($product->promo_price) == $product->promo_price)
+                                                                        {{ number_format($product->promo_price, 0, ',', ' ') }} ₽
+                                                                    @else
+                                                                        {{ number_format($product->promo_price, 2, ',', ' ') }} ₽
+                                                                    @endif
+                                                                    @if($product->show_calculator)/м²@endif
+                                                                </div>
+                                                                <div style="text-decoration: line-through; font-size: 12px">
+                                                                    @if(intval($product->price) == $product->price)
+                                                                        {{ number_format($product->price, 0, ',', ' ') }} ₽
+                                                                    @else
+                                                                        {{ number_format($product->price, 2, ',', ' ') }} ₽
+                                                                    @endif
+                                                                    @if($product->show_calculator)/м²@endif
+                                                                </div>
                                                             @else
-                                                                {{ $product->price }} ₽@if($product->show_calculator)
-                                                                    /м²
+                                                                @if(intval($product->price) == $product->price)
+                                                                    {{ number_format($product->price, 0, ',', ' ') }} ₽
+                                                                @else
+                                                                    {{ number_format($product->price, 2, ',', ' ') }} ₽
                                                                 @endif
+                                                                @if($product->show_calculator)/м²@endif
                                                             @endif
                                                         </div>
                                                         <div class="card__controllers">

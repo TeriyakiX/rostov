@@ -34,6 +34,9 @@
                                     <a class="breadcrumbs__link"
                                        href="{{ route('index.products.categoryList', ['category' => $parentParentParent->slug]) }}">
                                         <span>{{ $parentParentParent->title }}</span>
+                                        <svg>
+                                            <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                        </svg>
                                     </a>
                                 </li>
                             @endif
@@ -42,6 +45,9 @@
                                     <a class="breadcrumbs__link"
                                        href="{{ route('index.products.categoryList', ['category' => $parentParent->slug]) }}">
                                         <span>{{ $parentParent->title }}</span>
+                                        <svg>
+                                            <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                        </svg>
                                     </a>
                                 </li>
                             @endif
@@ -50,6 +56,9 @@
                                     <a class="breadcrumbs__link"
                                        href="{{ route('index.products.categoryList', ['category' => $parent->slug]) }}">
                                         <span>{{ $parent->title }}</span>
+                                        <svg>
+                                            <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                        </svg>
                                     </a>
                                 </li>
                             @else
@@ -57,6 +66,9 @@
                                     <a class="breadcrumbs__link"
                                        href="{{ route('index.products.categoryList', ['category' => $parent->slug]) }}">
                                         <span>{{ $parent->title }}</span>
+                                        <svg>
+                                            <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                        </svg>
                                     </a>
                                 </li>
                             @endif
@@ -65,11 +77,17 @@
                             <a class="breadcrumbs__link"
                                href="{{ route('index.products.category', ['category' => $category->slug]) }}">
                                 <span>{{ $category->title }}</span>
+                                <svg>
+                                    <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                </svg>
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
                             <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                                 <span>{{ $product->title }}</span>
+                                <svg>
+                                    <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                </svg>
                             </a>
                         </li>
                     </ul>
@@ -79,48 +97,11 @@
             <section class="prodCard">
                 <div class="prodCard__container _container">
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
-                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                            href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
-                                        покрытий</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                            href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
-                                        решения</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
-                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
-                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
-                            </div>
-                        </div>
                         <div class="prodCard__content">
                             <div class="prodCard__side">
                                 <div class="prodCard__sideBody">
-                                    <div class="prodCard__gallery" id="lightgallery">
+
+                                    <div class="prodCard__gallery prodCard__gallery--desktop" id="lightgallery">
                                         @if($firstPhoto)
                                             <div class="prodCard__galleryHero">
                                                 <a class="prodCard__heroBox ibg"
@@ -158,6 +139,48 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="prodCard__gallery--mobile" id="lightgallery-mobile">
+                                        <div class="prodCard__arrow prodCard__arrow--left" >
+                                            <svg>
+                                                <use
+                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="prodCard__arrow prodCard__arrow--right">
+                                            <svg>
+                                                <use
+                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                            </svg>
+                                        </div>
+
+                                        @foreach($photos as $photo)
+                                            <div class="prodCard__galleryItem">
+                                                <a class="prodCard__heroBox ibg"
+                                                   href="{{ asset('upload_images/' . $photo->path) }}"
+                                                   data-fslightbox>
+                                                    <picture>
+                                                        <source type="image/webp"
+                                                                srcset="{{ asset('upload_images/' . $photo->path) }}">
+                                                        <img src="{{ asset('upload_images/' . $photo->path) }}"
+                                                             alt="img{{ $loop->iteration }}">
+                                                    </picture>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                    <h2 class="prodCard__title prodCard__title--mobile" data-da=".prodCard__content, 992, 0">
+                                        {{ $product->title }}
+                                        <script src="https://yastatic.net/share2/share.js"></script>
+                                        <div class="ya-share2 share-icon" data-curtain data-limit="0"
+                                             data-more-button-type="short"
+                                             style="background:transparent;display: inline-flex;position: absolute;"
+                                             data-services="vkontakte,facebook,odnoklassniki,telegram,twitter,viber,whatsapp">
+                                        </div>
+                                    </h2>
+                                    <div class="prodCard__art prodCard__art--mobile">Код товара: {{ $product->vendor_code }}</div>
+
                                     <div class="prodCard__anchors">
                                         <a class="prodCard__anchor _goto-block" href="#char">
                                             Характеристики
@@ -207,16 +230,16 @@
                                 <input type="hidden" onchange="changePriceOut()" name="price"
                                        value="{{ $product->is_promo ?  $product->promo_price :  $product->price }}">
                                 <div class="prodCard__body">
-                                    <h2 class="prodCard__title" data-da=".prodCard__content, 992, 0">
+                                    <h2 class="prodCard__title prodCard__title--desktop" data-da=".prodCard__content, 992, 0">
                                         {{ $product->title }}
                                         <script src="https://yastatic.net/share2/share.js"></script>
-                                        <div class="ya-share2" data-curtain data-limit="0"
+                                        <div class="ya-share2 share-icon" data-curtain data-limit="0"
                                             data-more-button-type="short"
                                             style="background:transparent;display: inline-flex;position: absolute;"
                                             data-services="vkontakte,facebook,odnoklassniki,telegram,twitter,viber,whatsapp">
                                         </div>
                                     </h2>
-                                    <div class="prodCard__art">Код товара: {{ $product->vendor_code }}</div>
+                                    <div class="prodCard__art prodCard__art--desktop">Код товара: {{ $product->vendor_code }}</div>
                                     <div class="prodCard__selBox">
 
                                         @foreach($productAttributes as $attribute)
@@ -242,6 +265,12 @@
                                                     <script>
                                                         attributePrice({{ $attribute['model']->id }}, '#prodCard__select{{ $attribute['model']->id }}', false);
                                                     </script>
+                                                    <span class="prodCard__tippy tippy" style="visibility: hidden">
+                                                                        <svg class="description_popup">
+                                                                            <use
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                        </svg>
+                                                </span>
                                                 </div>
                                             @endif
                                         @endforeach
@@ -257,14 +286,14 @@
                                                         <option class="prodCard__op" value="">Пусто</option>
                                                     @endif
                                                 </select>
-                                                <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                            </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="profile_type_popup">
                                                                             <use
-                                                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
                                                                         </svg>
                                                                     </span>
-                                            </div>
                                         </div>
                                         <div class="prodCard__selRow"><span
                                                     class="prodCard__selName">Производитель</span>
@@ -278,12 +307,12 @@
                                                         <option class="prodCard__op" value="">Пусто</option>
                                                     @endif
                                                 </select>
-                                                <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                            </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="manufacturer_popup"><use
-                                                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use></svg>
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use></svg>
                                                                     </span>
-                                            </div>
                                         </div>
 
                                         <div class="prodCard__selRow">
@@ -298,15 +327,14 @@
                                                         <option class="prodCard__op" value="">Пусто</option>
                                                     @endif
                                                 </select>
-                                                <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                            </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="thickness_popup">
                                                                             <use
-                                                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
                                                                         </svg>
                                                 </span>
-                                            </div>
-
                                         </div>
                                         <div class="prodCard__selRow">
                                             <span class="prodCard__selName">Покрытие</span>
@@ -319,20 +347,20 @@
                                                         <option class="prodCard__op" value="">Пусто</option>
                                                     @endif
                                                 </select>
-                                                <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                            </div>
+                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="coating_popup">
                                                                             <use
-                                                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
+                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
                                                                         </svg>
                                                                     </span>
-                                            </div>
                                         </div>
                                         @if($colorsArray = $product->colorsArray())
                                             <div class="prodCard__colorBox">
                                                 <div class="prodCard__name">Цвет</div>
-                                                <div class="leftPointer" style="cursor: pointer;margin:auto">
-                                                    <img src="{{ asset('img/icons/left-arrow.png') }}"/>
+                                                <div class="leftPointer" style="cursor: pointer;margin:auto; transform: rotate(180deg)">
+                                                    <img src="{{ asset('img/icons/right-arrow.png') }}"/>
                                                 </div>
                                                 <div class="wrp-colorsSlider">
                                                     <div class="swiper-container colorsSlider _swiper" id="content">
@@ -402,9 +430,17 @@
                                         <div class="prodCard__controlsBox">
                                             <div class="prodCard__controls">
 
-                                                <div class="card__icons" style="margin-right:30px;">
+                                                <div class="prodCard__icons" style="margin-right:30px;">
                                                     <div
-                                                            class="card__icon card__icon--like addTo {{ product_id_in_list($product->id, 'favorites') ? 'active' : '' }}"
+                                                        class="prodCard__icon prodCard__icon--stat addTo {{ product_id_in_list($product->id, 'compare') ? 'active' : '' }}"
+                                                        data-destination="Compare" role="button" tabindex="0">
+                                                        <svg>
+                                                            <use
+                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#stat') }}"></use>
+                                                        </svg>
+                                                    </div>
+                                                    <div
+                                                            class="prodCard__icon prodCard__icon--like addTo {{ product_id_in_list($product->id, 'favorites') ? 'active' : '' }}"
                                                             data-destination="Favorites" role="button" tabindex="0">
                                                         <svg>
                                                             <use
@@ -412,11 +448,11 @@
                                                         </svg>
                                                     </div>
                                                     <div
-                                                            class="card__icon card__icon--stat addTo {{ product_id_in_list($product->id, 'compare') ? 'active' : '' }}"
-                                                            data-destination="Compare" role="button" tabindex="0">
+                                                        class="prodCard__icon prodCard__icon--share"
+                                                        role="button" tabindex="0">
                                                         <svg>
                                                             <use
-                                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#stat') }}"></use>
+                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#share') }}"></use>
                                                         </svg>
                                                     </div>
                                                 </div>
@@ -466,25 +502,27 @@
                                                                         <div
                                                                                 class="productCalc__col productCalc__col--long">
                                                                             <div class="productCalc__named">Выберите
-                                                                                длину
+                                                                                длину листа
                                                                             </div>
-                                                                            <select data-num="{{$loop->iteration}}"
-                                                                                    class="productCalc__select lengthSelect"
-                                                                                    name="length[]"
-                                                                                    id="length__{{$loop->iteration}}">
-                                                                                @foreach($product->getLengthList() as $length)
-                                                                                    <option class="productCalc__op"
-                                                                                            value="{{ $length }}">{{ $length }}
-                                                                                        мм
-                                                                                    </option>
-                                                                                @endforeach
+                                                                             <div class="productCalc__selWrp">
+                                                                                 <select data-num="{{$loop->iteration}}"
+                                                                                         class="productCalc__select lengthSelect"
+                                                                                         name="length[]"
+                                                                                         id="length__{{$loop->iteration}}">
+                                                                                     @foreach($product->getLengthList() as $length)
+                                                                                         <option class="productCalc__op"
+                                                                                                 value="{{ $length }}">{{ $length }}
+                                                                                             мм
+                                                                                         </option>
+                                                                                     @endforeach
 
-                                                                            </select>
+                                                                                 </select>
+                                                                             </div>
 
                                                                         </div>
                                                                     @endif
                                                                     <div class="productCalc__col productCalc__col--count">
-                                                                        <div class="productCalc__named">Количество</div>
+                                                                        <div class="productCalc__named">Количество листов</div>
                                                                         <div class="productCalc__counter">
                                                                             <div data-num="{{$loop->iteration}}"
                                                                                  class="productCalc__counterBtn productCalc__counterBtn--minus">
@@ -495,7 +533,8 @@
                                                                                    id="countToAdd_{{$loop->iteration}}"
                                                                                    autocomplete="off" type="text"
                                                                                    name="quantity[]"
-                                                                                   data-value="1">
+                                                                                   data-value="1"
+                                                                                    value="1">
                                                                             <div data-num="{{$loop->iteration}}"
                                                                                  class="productCalc__counterBtn productCalc__counterBtn--plus">
                                                                                 +
@@ -520,16 +559,22 @@
                                                                     </div>
                                                                 </div>
                                                             @endforeach
-                                                            @if($product->show_calculator)
-                                                                <div class="add__list" id="addList">
-                                                                    <div style="color: rgba(0, 107, 222, 1); margin-right: 5px;font-weight: bold;">
-                                                                        +
-                                                                    </div>
-                                                                    <div> Добавить лист другой длины</div>
-                                                                </div>
-                                                            @endif
-                                                        @else
+                                                              <div class="productCalc__party">
+                                                                  @if($product->show_calculator)
+                                                                      <div class="add__list" id="addList">
+                                                                          <div style="color: rgba(0, 107, 222, 1); margin-right: 5px;font-weight: bold;">
+                                                                              +
+                                                                          </div>
+                                                                          <div> Добавить лист другой длины</div>
+                                                                      </div>
+                                                                  @endif
 
+                                                                      <div class="productCalc__warn">
+                                                                          <img src="{{ asset('img/icons/info.svg') }}"/>
+                                                                          <span>Минимальная партия 5 кв. м</span>
+                                                                      </div>
+                                                              </div>
+                                                        @else
                                                             <div class="productCalc__body">
                                                                 <div class="productCalc__col productCalc__col--count">
                                                                     <div class="productCalc__named">Количество</div>
@@ -563,7 +608,6 @@
                                                             </div>
 
                                                         @endif
-
 
                                                         <div class="productCalc__info">
                                                             Этот расчёт предварительный. Для точного расчёта рекомендуем
@@ -607,7 +651,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="prodCard__chars">
-                                                        <h3 class="prodCard__subtitle char">Характеристики</h3>
+                                                        <h3 class="prodCard__subtitle char">Характеристики товаров</h3>
                                                         <div class="prodCard__charsBody">
                                                             @foreach($productAttributes as $productAttribute)
                                                                 @if(count($productAttribute['options']) == 1)
@@ -627,30 +671,55 @@
                                                         <h3 class="prodCard__subtitle desc">Описание</h3>
                                                         <div class="prodCard__descBody">
                                                             <div class="prodCard__descBenefits">
+                                                                <div class="prodCard__descBenefit">
+                                                                    <img src="{{ asset('img/icons/pantone.png') }}" class="prodCard__descImg"/>
 
+                                                                    <h3 class="prodCard__descTitle">Ассортимент цветов</h3>
+
+                                                                    <p>Разъяснение заголовка делает блок информативным и полезным.</p>
+                                                                </div>
+                                                                <div class="prodCard__descBenefit">
+                                                                    <img src="{{ asset('img/icons/link.png') }}" class="prodCard__descImg"/>
+
+                                                                    <h3 class="prodCard__descTitle">Преимущетво</h3>
+
+                                                                    <p>Разъяснение заголовка делает блок информативным и полезным.</p>
+                                                                </div>
+                                                                <div class="prodCard__descBenefit">
+                                                                    <img src="{{ asset('img/icons/guaranteed.png') }}" class="prodCard__descImg"/>
+
+                                                                    <h3 class="prodCard__descTitle">Преимущество</h3>
+
+                                                                    <p>Разъяснение заголовка делает блок информативным и полезным.</p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="prodCard__descText">
                                                                 {!! $product->description !!}
                                                             </div>
                                                         </div>
                                                         @if(count($product->files))
                                                             <div class="prodCard__docs">
                                                                 <h3 class="prodCard__subtitle docs">Документация</h3>
-                                                                <div class="prodCard__docsBody">
-                                                                    @foreach($product->files as $index=>$file)
-                                                                        <div class="prodCard__docsItemWrp">
-                                                                            <div class="prodCard__docsItem">
-                                                                                <div class="prodCard__docsSvgBox">
-                                                                                    <svg
-                                                                                            @if($index==0) style="position:relative;right:3px;" @endif>
-                                                                                        <use
-                                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#doc1') }}"></use>
-                                                                                    </svg>
-                                                                                </div>
-                                                                                <a class="prodCard__docsName link"
-                                                                                   href="{{ asset('upload_files/' . $file->filepath) }}">{{ $file->title }}</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    @endforeach
-                                                                </div>
+                                                                  <div class="prodCard__docsBody--wrp">
+                                                                      <div class="prodCard__docsBody">
+                                                                          @foreach($product->files as $index=>$file)
+                                                                              <div class="prodCard__docsItemWrp">
+                                                                                  <div class="prodCard__docsItem">
+                                                                                      <div class="prodCard__docsSvgBox">
+                                                                                          <svg
+                                                                                              @if($index==0) style="position:relative;right:3px;" @endif>
+                                                                                              <use
+                                                                                                  xlink:href="{{ asset('img/sprites/sprite-mono.svg#doc2') }}"></use>
+                                                                                          </svg>
+                                                                                      </div>
+                                                                                      <a class="prodCard__docsName link"
+                                                                                         href="{{ asset('upload_files/' . $file->filepath) }}">{{ $file->title }}</a>
+                                                                                  </div>
+                                                                              </div>
+                                                                          @endforeach
+                                                                      </div>
+                                                                  </div>
                                                             </div>
                                                         @endif
                                                     </div>
@@ -670,7 +739,7 @@
                     <div class="newItems__container _container">
                         <div class="newItems__content">
                             <div class="newItems__body">
-                                <div class="newItems__controlPanel">
+                                <div class="newItems__controlPanel" style="align-items: start">
                                     <h2 class="newItems__title t">Недавно посмотренные </h2>
                                     <div class="newItems__sliderBtns">
                                         <div class="newItems__sliderBtn newItems__sliderBtn--prev" role="button"
@@ -708,8 +777,24 @@
                 <div class="newItems__container _container">
                     <div class="newItems__content">
                         <div class="newItems__body">
-                            <div class="newItems__controlPanel">
+                            <div class="newItems__controlPanel" style="align-items: start">
                                 <h2 class="newItems__title t">Аналогичные товары</h2>
+                                <div class="newItems__sliderBtns">
+                                    <div class="newItems__sliderBtn newItems__sliderBtn--prev" role="button"
+                                         tabindex="0">
+                                        <svg>
+                                            <use
+                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="newItems__sliderBtn newItems__sliderBtn--next" role="button"
+                                         tabindex="0">
+                                        <svg>
+                                            <use
+                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
                             <div class="wrp-itemsSlider">
                                 <div class="swiper-container owl-carousel itemsSlider">
@@ -731,8 +816,24 @@
                     <div class="newItems__container _container">
                         <div class="newItems__content">
                             <div class="newItems__body">
-                                <div class="newItems__controlPanel">
+                                <div class="newItems__controlPanel" style="align-items: start">
                                     <h2 class="newItems__title t">Сопутствующие товары</h2>
+                                    <div class="newItems__sliderBtns">
+                                        <div class="newItems__sliderBtn newItems__sliderBtn--prev" role="button"
+                                             tabindex="0">
+                                            <svg>
+                                                <use
+                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="newItems__sliderBtn newItems__sliderBtn--next" role="button"
+                                             tabindex="0">
+                                            <svg>
+                                                <use
+                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="wrp-itemsSlider">
                                     <div class="swiper-container owl-carousel itemsSlider">
@@ -767,8 +868,8 @@
             flex-direction: row;
             cursor: pointer;
             font-size: 16px;
-            margin-top: 10px;
             text-align: center;
+            gap: 10px;
         }
 
         .add__list:hover {
@@ -777,7 +878,6 @@
 
         @media screen and (max-width: 900px) {
             .productContent {
-                padding: 20px;
                 max-width: 100% !important;
             }
 
@@ -815,13 +915,6 @@
                 padding: 0px 0px 0px 10px;
             }
         }
-        .lengthSelect {
-            width: 100%;
-            height: 45px;
-            border: 1px solid #f2f2f2;
-            border-radius: 4px;
-            padding: 0 10px;
-        }
 
     </style>
 @endsection
@@ -830,14 +923,18 @@
 
 
     function changePriceOut() {
-
         let price = parseFloat($('input[name=startprice]').val()) + parseFloat($('input[name=attribute_prices]').val());
-        let price_promo = parseFloat($('input[name=startpricepromo]').val()) + parseFloat($('input[name=attribute_prices]').val())
+        let price_promo = parseFloat($('input[name=startpricepromo]').val()) + parseFloat($('input[name=attribute_prices]').val());
+
+        let formattedPrice = (price % 1 === 0) ? price.toFixed(0) : price.toFixed(2);
+        let formattedPricePromo = (price_promo % 1 === 0) ? price_promo.toFixed(0) : price_promo.toFixed(2);
+
         $('.prodCard__price_promo').each(function () {
-            $(this).text(price_promo.toFixed(2) + ' ₽/{{\App\Models\UnitsOfProducts::where('id',$product->unit_id)->first()->title??'шт.'}}');
+            $(this).text(formattedPricePromo + ' ₽/{{\App\Models\UnitsOfProducts::where('id',$product->unit_id)->first()->title??'шт.'}}');
         });
+
         $('.prodCard__price_price').each(function () {
-            $(this).text(price.toFixed(2) + ' ₽/{{\App\Models\UnitsOfProducts::where('id',$product->unit_id)->first()->title??'шт.'}}');
+            $(this).text(formattedPrice + ' ₽/{{\App\Models\UnitsOfProducts::where('id',$product->unit_id)->first()->title??'шт.'}}');
         });
     }
 
@@ -982,6 +1079,81 @@
     //     console.log(  $('#length').val())
     // };
 
+    function countersInit() {
+        const counters = document.querySelectorAll('.productCalc__counter');
+
+        if (counters.length === 0) {
+            console.error("Не удалось найти элементы с классом '.productCalc__counter'");
+            return;
+        }
+
+        for (const counter of counters) {
+            const minus = counter.querySelector('.productCalc__counterBtn--minus');
+            const plus = counter.querySelector('.productCalc__counterBtn--plus');
+            const input = counter.querySelector('.productCalc__inpCount');
+
+            if (!minus || !plus || !input) {
+                console.error("Не удалось найти кнопки или поле ввода в одном из счетчиков");
+                continue;
+            }
+
+            plus.addEventListener('click', () => {
+                const currentValue = parseInt(input.value) || 0;
+                input.value = currentValue + 1;
+            });
+
+            minus.addEventListener('click', () => {
+                const currentValue = parseInt(input.value) || 0;
+                if (currentValue > 1) {
+                    input.value = currentValue - 1;
+                }
+            });
+
+            input.addEventListener('blur', () => {
+                const currentValue = parseInt(input.value) || 0;
+                input.value = currentValue < 1 ? 1 : currentValue;
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', countersInit);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const galleryItems = document.querySelectorAll('#lightgallery-mobile .prodCard__galleryItem');
+        const leftArrow = document.querySelector('.prodCard__arrow--left');
+        const rightArrow = document.querySelector('.prodCard__arrow--right');
+        let currentIndex = 0;
+
+        if (!galleryItems.length || !leftArrow || !rightArrow) {
+            console.error('Галерея или стрелки не найдены. Проверьте селекторы.');
+            return;
+        }
+
+        function updateGallery() {
+            galleryItems.forEach((item, index) => {
+                item.style.display = index === currentIndex ? 'block' : 'none';
+            });
+
+            leftArrow.style.display = currentIndex === 0 ? 'none' : 'block';
+            rightArrow.style.display = currentIndex === galleryItems.length - 1 ? 'none' : 'block';
+        }
+
+        rightArrow.addEventListener('click', () => {
+            if (currentIndex < galleryItems.length - 1) {
+                currentIndex++;
+                updateGallery();
+            }
+        });
+
+        leftArrow.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateGallery();
+            }
+        });
+
+        updateGallery();
+    });
 </script>
 {{--<style>--}}
 {{--    .hidden {--}}

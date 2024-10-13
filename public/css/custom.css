@@ -85,6 +85,20 @@
 .infoPanel__btn.active svg {
   fill: #006bde;
 }
+
+.prodCard__icon--share.active svg {
+    fill: #006bde;
+}
+
+.prodCard__icon--like.active svg {
+    stroke: #006bde;
+    fill: #006bde;
+}
+
+.prodCard__icon--stat.active svg {
+    fill: #006bde;
+}
+
 .cooperation--cta {
   width: 100%;
   display: flex;

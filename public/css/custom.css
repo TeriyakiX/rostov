@@ -173,13 +173,16 @@
   .container__div_one {
     flex-direction: column;
   }
-  .container__div_one > div {
-    max-width: 100%;
-  }
   .second {
     order: 3;
   }
   .third {
     order: 2;
   }
+}
+
+@media (max-width: 900px) {
+    .container__div_one > div {
+        max-width: 100%;
+    }
 }

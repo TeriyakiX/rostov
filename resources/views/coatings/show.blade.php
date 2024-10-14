@@ -31,6 +31,9 @@
                     <li class="breadcrumbs__item">
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                             <span>{{ $coating->title }}</span>
+                            <svg>
+                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>
@@ -40,6 +43,9 @@
             <div class="prodCard__container _container">
                 <div class="prodCard__content">
                     <div class="prodCard__side">
+                        <h2 class="prodCard__title prodCard__title--mobile" data-da=".prodCard__content, 992, 0">
+                            {{ $coating->title }}
+                        </h2>
                         <div class="prodCard__sideBody">
                             <div class="prodCard__gallery" id="lightgallery">
                                 @if($firstPhoto)
@@ -75,7 +81,7 @@
                     </div>
                     <div class="addToCartForm">
                         <div class="prodCard__body">
-                            <h2 class="prodCard__title" data-da=".prodCard__content, 992, 0">
+                            <h2 class="prodCard__title prodCard__title--desktop" data-da=".prodCard__content, 992, 0">
                                 {{ $coating->title }}
                             </h2>
                             <div style="display: flex">
@@ -83,11 +89,13 @@
                                     @if($coating->protective_layer)
                                         <div class="prodCard__stockParameter">
                                             <div class="prodCard__parameterData-wrapper">
-                                                  <div>Защитный слой Zn</div>
-                                                  <div
-                                                      class="prodCard__parameterData"
-                                                      style="border-bottom: 2px dashed grey;">{{ $coating->protective_layer }}
-                                                  </div>
+                                                  <div class="prodCard__parameterData-title" style="flex: 1;">Защитный слой Zn</div>
+                                                    <div style="display: flex; align-items: end; gap: 10px; width: 100%;flex: 0 1 63%;white-space: nowrap">
+                                                        <div
+                                                            class="prodCard__parameterData">{{ $coating->protective_layer }}
+                                                        </div>
+                                                        <div class="prodCard__line" style="border-bottom: 2px dashed #D6D6D6;flex: 1 1 100%;"></div>
+                                                    </div>
                                               </div>
                                             <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
@@ -101,10 +109,12 @@
                                     @if($coating->metal_thickness)
                                         <div class="prodCard__stockParameter">
                                             <div class="prodCard__parameterData-wrapper">
-                                                <div>Толщина металла</div>
-                                                <div
-                                                    class="prodCard__parameterData"
-                                                    style="border-bottom: 2px dashed grey;">{{ $coating->metal_thickness }}
+                                                <div class="prodCard__parameterData-title" style="flex: 1;">Толщина металла</div>
+                                                <div style="display: flex; align-items: end; gap: 10px; width: 100%;flex: 0 1 63%;white-space: nowrap">
+                                                    <div
+                                                        class="prodCard__parameterData">{{ $coating->metal_thickness }}
+                                                    </div>
+                                                    <div class="prodCard__line" style="border-bottom: 2px dashed #D6D6D6;flex: 1 1 100%;"></div>
                                                 </div>
                                             </div>
                                             <span class="prodCard__tippy tippy" data-tippy="Просто описание">
@@ -119,11 +129,13 @@
                                     @if($coating->polymer_coating_thickness)
                                         <div class="prodCard__stockParameter">
                                             <div class="prodCard__parameterData-wrapper">
-                                                  <div>Толщина полимерного покрытия</div>
-                                                  <div
-                                                      class="prodCard__parameterData"
-                                                      style="border-bottom: 2px dashed grey;">{{ $coating->polymer_coating_thickness }}
-                                                  </div>
+                                                <div class="prodCard__parameterData-title" style="flex: 1;">Толщина полимерного покрытия</div>
+                                                <div style="display: flex; align-items: end; gap: 10px; width: 100%;flex: 0 1 63%;white-space: nowrap">
+                                                        <div
+                                                            class="prodCard__parameterData">{{ $coating->polymer_coating_thickness }}
+                                                        </div>
+                                                    <div class="prodCard__line" style="border-bottom: 2px dashed #D6D6D6;flex: 1 1 100%;"></div>
+                                                    </div>
                                               </div>
                                             <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
@@ -137,11 +149,13 @@
                                     @if($coating->guarantee)
                                         <div class="prodCard__stockParameter">
                                                <div class="prodCard__parameterData-wrapper">
-                                                   <div>Гарантия</div>
-                                                   <div
-                                                       class="prodCard__parameterData"
-                                                       style="border-bottom: 2px dashed grey;">{{ $coating->guarantee }}
-                                                   </div>
+                                                   <div class="prodCard__parameterData-title" style="flex: 1;">Гарантия</div>
+                                                   <div style="display: flex; align-items: end; gap: 10px; width: 100%;flex: 0 1 63%;white-space: nowrap">
+                                                        <div
+                                                            class="prodCard__parameterData">{{ $coating->guarantee }}
+                                                        </div>
+                                                       <div class="prodCard__line" style="border-bottom: 2px dashed #D6D6D6;flex: 1 1 100%;"></div>
+                                                    </div>
                                                </div>
                                             <span class="prodCard__tippy tippy" data-tippy="Просто описание"
                                                   style="margin-top: 10px">
@@ -156,10 +170,12 @@
                                     @if($coating->light_fastness)
                                         <div class="prodCard__stockParameter">
                                             <div class="prodCard__parameterData-wrapper">
-                                                <div>Цветостойкость</div>
-                                                <div
-                                                    class="prodCard__parameterData"
-                                                    style="border-bottom: 2px dashed grey;">{{ $coating->light_fastness }}
+                                                <div class="prodCard__parameterData-title" style="flex: 1;">Цветостойкость</div>
+                                                <div style="display: flex; align-items: end; gap: 10px; width: 100%;flex: 0 1 63%;white-space: nowrap">
+                                                    <div
+                                                        class="prodCard__parameterData">{{ $coating->light_fastness }}
+                                                    </div>
+                                                    <div class="prodCard__line" style="border-bottom: 2px dashed #D6D6D6;flex: 1 1 100%;"></div>
                                                 </div>
                                             </div>
                                             <span class="prodCard__tippy tippy" data-tippy="Просто описание">
@@ -172,12 +188,12 @@
                                         </div>
                                     @endif
                                     <div class="prodCard__desc">
-                                        <h3 class="prodCard__subtitle desc">Описание покрытия</h3>
+                                        <h3 class="prodCard__subtitle desc" style="font-size: 18px">Описание покрытия</h3>
                                         <div class="prodCard__descBody">
                                             {{$coating->description}}
                                         </div>
                                     </div>
-                                    <div style="display: flex; margin-top: 50px">
+                                    <div class="card__icon--statWrp" style="display: flex; margin-top: 50px">
                                         <div class="card__icon coatings card__icon--stat addTo " data-destination="Compare"
                                              role="button" id="{{$coating->id}}"
                                              tabindex="0">
@@ -187,7 +203,7 @@
                                             </svg>
                                         </div>
                                         <div
-                                            style="margin-top: 1px; margin-left: 10px; color: #036cdf; cursor: pointer">
+                                            style="margin-top: 1px; margin-left: 10px; color: #006BDE; cursor: pointer; font-weight: 700">
                                             добавить в список сравнения
                                         </div>
                                     </div>
@@ -198,15 +214,16 @@
                 </div>
         </section>
 
+        @if(count($products) > 0)
         <section class="productsTmp">
             <div class="productsTmp__container _container">
                 <div class="productsTmp__content">
-                    <h1 class="productsTmp__title t">
+                    <h1 class="productsTmp__title t" style="margin-bottom: 32px;">
                         Товары, которые могут вам подойти
                     </h1>
-                    @if(count($products) == 0)
-                        <h2>Пусто</h2>
-                    @endif
+{{--                    @if(count($products) == 0)--}}
+{{--                        <h2>Пусто</h2>--}}
+{{--                    @endif--}}
                     <div class="productsTmp__body" id="data-wrapper">
                         @foreach($products as $product)
                             @include('products._product_item')
@@ -222,6 +239,7 @@
                 </div>
             </div>
         </section>
+        @endif
     </main>
 
 
@@ -244,3 +262,43 @@
         })
     });
 </script>
+
+<style>
+    .prodCard__descBody {
+        line-height: 150%;
+    }
+    .prodCard__heroBox {
+        padding-bottom: 70% !important;
+    }
+
+    .prodCard__title--mobile {
+        display: none;
+    }
+    @media (max-width: 900px) {
+        .owl-stage {
+            display: flex;
+            flex-direction: column;
+        }
+        .prodCard__title--desktop {
+            display: none;
+        }
+        .prodCard__title--mobile {
+            display: flex;
+        }
+        .card__icon--statWrp {
+            margin-top: 0 !important;
+        }
+        .prodCard__line {
+            display: none !important;
+        }
+        .prodCard__stockParameter {
+            border-bottom: 1px dashed #CFCFCF;
+        }
+        .prodCard__parameterData-title {
+            flex: auto !important;
+        }
+        .prodCard__desc {
+            padding-top: 32px !important;
+        }
+    }
+</style>

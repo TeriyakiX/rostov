@@ -34,13 +34,17 @@
 h2 {
     font-weight: bold;
 }
+
 @media (max-width: 900px) {
     .menuPoleznoe{
         width: 100% !important;
     }
+    .poleznoeContent {
+        font-size: 14px !important;
+        padding: 20px 0 !important;
+    }
 }
     .menuPoleznoe {
-        margin-top: 20px;
         width: 25%;
         height: auto;
         background: #F6F6F6;
@@ -51,11 +55,11 @@ h2 {
     }
 
     .poleznoeContent {
-
-        padding: 20px;
+        line-height: 26px;
+        font-size: 16px !important;
+        padding: 0 20px;
         min-width: 75%;
         display: inline-block;
-        font-size: 16px !important;
     }
 
     .categoryMenu {
@@ -99,4 +103,5 @@ h2 {
         justify-content: flex-start;
         align-items: flex-start;
     }
+
 </style>

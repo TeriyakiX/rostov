@@ -12,25 +12,26 @@
             @if($post->slug === 'dokumenty')
 
                 <div class="breadcrumbs__container _container">
-                    <div style="display: flex;align-items:center">
-                        <ul class="breadcrumbs__list" style="overflow: hidden;">
-                            <li class="breadcrumbs__item"><a class="breadcrumbs__link"
-                                                             href="{{ url('/') }}"><span>Главная</span>
-                                    <svg>
-                                        <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
-                                    </svg>
-                                </a></li>
-                            <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active"
-                                                             href="#"><span>{{ $post->title }}</span></a></li>
-                        </ul>
+                    <ul class="breadcrumbs__list" style="overflow: hidden;">
+                        <li class="breadcrumbs__item"><a class="breadcrumbs__link"
+                                                         href="{{ url('/') }}"><span>Главная</span>
+                                <svg>
+                                    <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                </svg>
+                            </a></li>
+                        <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active"
+                                                         href="#"><span>{{ $post->title }}</span>
+                                <svg>
+                                    <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                </svg></a></li>
+                    </ul>
+                 <div class="docs__title-wrp">
+                     <h2 class="docs__title t">{{$post->title}}</h2>
 
-                        <a class="btn show__getDocs" style="margin-left: 50%" id="buttonDocsBig">
-                            Запросить документацию
-                        </a>
-                    </div>
-                    <a class="btn show__getDocs" style="display: none; margin-top: 20px" id="buttonDocsPhone">
-                        Запросить документацию
-                    </a>
+                     <a class="btn show__getDocs" style="margin-top: 20px">
+                         Запросить документацию
+                     </a>
+                 </div>
                 </div>
                 <script>
                     $(document).on("click", ".show__getDocs", function () {
@@ -50,7 +51,9 @@
                                 </svg>
                             </a></li>
                         <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active"
-                                                         href="#"><span>{{ $post->title }}</span></a></li>
+                                                         href="#"><span>{{ $post->title }}</span>       <svg>
+                                    <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                </svg></a></li>
                     </ul>
                 </div>
             @endif
@@ -64,40 +67,6 @@
                     @endif
 
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
-                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды покрытий</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые решения</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
-                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
-                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
-                            </div>
-                        </div>
 
                         @if($post->slug == 'sotrudnichestvo')
                             @include('posts.custom._sotrudnichestvo')
@@ -141,7 +110,9 @@
                             @include('posts.custom._spravochnik')
                         @else
 
-                            {!! $post->body !!}
+                            <div class="post-content__body-container" style="padding: 0;">
+                                {!! $post->body !!}
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -150,6 +121,11 @@
     </main>
 @endsection
 <style>
+    .docs__title-wrp {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -240,9 +216,6 @@
         .second {
             order: 3;
         }
-        .threid__type{
-            margin-left: -10%;
-        }
 
         .third {
             order: 2
@@ -265,6 +238,48 @@
             padding-left: 16px;
             padding-right: 16px;
             padding-bottom: 20px;
+        }
+        .docs__title {
+            display: none !important;
+        }
+        .docs__title-wrp {
+            flex-direction: column;
+        }
+        .show__getDocs {
+            margin-top: 0 !important;
+        }
+        .doc_type-wrp {
+            justify-content: space-between;
+            text-align: center;
+        }
+        .doc_type {
+            width: 33% !important;
+        }
+        .first__type__color, .second__type__color, .threid__type__color {
+            width: 33% !important;
+        }
+        .fifth__type__color, .fourth__type__color{
+            display: none !important;
+        }
+        .catalogControl__searchform {
+            width: 100% !important;
+            padding: 0 16px;
+        }
+        .prodCard__docsItemWrp {
+            flex: 1 0 45% !important;
+        }
+        .prodCard__docsItem {
+            margin: 0 !important;
+            flex: 1 0 50% !important;
+        }
+        .catalogControl__searchBtn {
+            right: 16px !important;
+        }
+        .prodCard__docsName {
+            text-align: center;
+        }
+        .catalogControl__searchInput {
+            padding: 10px !important;
         }
     }
 </style>

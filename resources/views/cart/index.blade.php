@@ -26,64 +26,26 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor"
                                  class="bi bi-check" viewBox="0 0 16 16" style="margin-left: 39px">
                                 <path
-                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
                             </svg>
                         </div>
                     </div>
                 </div>
             @endif
             @if(session()->has('error'))
-                    <div id="myModal2" class="modal fade" role="dialog"
-                         style="width: 350px;height: 207px;border-radius: 5px">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <h3>{{ session('error') }}</h3>
-                            </div>
+                <div id="myModal2" class="modal fade" role="dialog"
+                     style="width: 350px;height: 207px;border-radius: 5px">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <h3>{{ session('error') }}</h3>
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif
             <div class="basket__container _container">
                 <div class="basket__content">
                     <h2 class="basket__title t">Корзина</h2>
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
-                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                            href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
-                                        покрытий</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                            href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
-                                        решения</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
-                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
-                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
-                            </div>
-                        </div>
                         <form class="basket__grid" action="#" method="post" onsubmit="return false">
                             <div class="basket__body">
 
@@ -97,23 +59,23 @@
                                               $link=  route('index.products.show', ['product' => $item->product->slug, 'category' => $category->slug]);
     //                                        @endphp
                                             <div id="backet_card_{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
-                                                 data-price="{{$item->options['price']}}"data-total="{{ $item->total_price }}"
+                                                 data-price="{{$item->options['price']}}"
+                                                 data-total="{{ $item->total_price }}"
                                                  data-qtty="{{ $item->quantity }}"
                                                  data-length="{{ $item->options['length'] }}"
                                                  data-width="{{ $item->options['width'] }}"
                                                  data-square="{{ $item->options['square'] }}"
                                                  data-id="{{$item->product_id}}"
                                                  class="basket__card "
-                                                 style="{{$index===0? 'background-color: #f6f6f6; padding: 15px;margin-bottom: 15px ':' '}}"
-                                                    {{--                                                     style=" background-color: #f6f6f6; padding: 15px;margin-bottom: 15px"--}}
-                                                    {{--                                                @endif--}}
+                                                 style="{{$index===0? 'margin-bottom: 25px ':' '}}"
+                                                {{--                                                     style=" background-color: #f6f6f6; padding: 15px;margin-bottom: 15px"--}}
+                                                {{--                                                @endif--}}
                                             >
                                                 <div class="basket__cardBody">
                                                     @if ($index===0)
                                                         <div class="basket__cardImgBox">
                                                             <a class="basket__cardImgWrp ibg"
                                                                href="{{ $link}}">
-
                                                                 <picture>
                                                                     {{--                                                                <source type="image/webp" srcset="./img/history/h.webp">--}}
                                                                     <img src="{{ $item->product->mainPhotoPath() }}"
@@ -121,14 +83,16 @@
                                                                 </picture>
                                                             </a>
                                                         </div>
+                                                    @endif
+                                                    <div class="basket__combinedContainer">
+                                                    @if ($index===0)
                                                         <div class="basket__cardDesc">
                                                             <div class="basket__cardTitle link">
                                                                 <a href="{{ $link }}" style="margin: auto;">
                                                                     {{ $item->product->title }}
                                                                 </a>
                                                             </div>
-                                                            @endif
-
+                                                    @endif
                                                             @php
                                                                 $cartService=new \App\Services\Shop\CartFormattedService();
                                                                 $totalInfo=  $cartService->getFormattedOptionsText($item->options,true,$position);
@@ -136,7 +100,7 @@
                                                             @endphp
                                                         </div>
                                                         @if($index===0)
-                                                            <div id="total_square_{{$item->product_id}}"
+                                                            <div id="total_square_{{$item->product_id}}" class="total__square"
                                                                  style="margin: auto;"></div>
                                                             <div class="basket__cardPrice"
                                                                  style="align-content: center">
@@ -147,19 +111,11 @@
                                                                 @endif
                                                             </div>
                                                         @endif
-                                                </div>
-                                                <div style="display:flex;align-items: center;text-align: center">
-
-                                                    <div>{{ $attributes}}</div>
-                                                    <div class="basket__cardPrice" style="padding: 4px">
-
-
-                                                            {{ $item->options['price'] }}
-                                                            ₽ @if($item->product->show_calculator)
-                                                                /м2
-                                                            @endif
-
                                                     </div>
+                                                </div>
+                                                <div class="productCalc__col--wrp">
+
+                                                    <div class="productCalc__col productCalc__col--desc">{{ $attributes }}</div>
 
                                                     <div class="productCalc__col productCalc__col--count">
                                                         <div class="productCalc__named">Количество</div>
@@ -173,7 +129,8 @@
                                                                    class="productCalc__inpCount" autocomplete="off"
                                                                    type="text"
                                                                    name="form[]"
-                                                                   data-value="{{ $item->quantity }}">
+                                                                   data-value="{{ $item->quantity }}"
+                                                            value="{{ $item->quantity }}">
                                                             <div data-prod="{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
                                                                  class="productCalc__counterBtn productCalc__counterBtn--plus">
                                                                 +
@@ -188,7 +145,7 @@
                                                             = {{ number_format($item->total_price,2) }}₽
                                                         </div>
                                                     </div>
-                                                    <div class="deleteBut" id="deleteButtonId"
+                                                    <div class="deleteBut deleteBut__moreOne" id="deleteButtonId"
                                                          onclick="deleteFromCart()"
                                                          data-product-id="{{ $index}}" role="button"
                                                          tabindex="0">
@@ -196,7 +153,7 @@
                                                                value="{{$item->productSessionId}}">
                                                         <svg>
                                                             <use
-                                                                    xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cloze') }}"></use>
+                                                                xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cloze') }}"></use>
                                                         </svg>
                                                     </div>
 
@@ -219,7 +176,6 @@
                                                              data-square="{{ $item->options['square'] ?? 0 }}"
                                                              data-id="{{$item->product_id}}"
                                                              class="basket__card"
-                                                             style=" padding: 15px;margin-bottom: 15px;margin-bottom: 15px"
                                                         >
                                                             <div class="basket__cardBody">
 
@@ -229,38 +185,40 @@
                                                                         <picture>
 
                                                                             <img
-                                                                                    src="{{ $item->product->mainPhotoPath() }}"
-                                                                                    alt="h">
+                                                                                src="{{ $item->product->mainPhotoPath() }}"
+                                                                                alt="h">
                                                                         </picture>
                                                                     </a>
                                                                 </div>
-                                                                <div class="basket__cardDesc">
-                                                                    <div class="basket__cardTitle link">
-                                                                        <a href="{{ $link }}" style="margin: auto;">
-                                                                            {{ $item->product->title }}
-                                                                        </a>
+                                                                <div class="basket__combinedContainer">
+                                                                    <div class="basket__cardDesc">
+                                                                        <div class="basket__cardTitle link">
+                                                                            <a href="{{ $link }}" style="margin: auto;">
+                                                                                {{ $item->product->title }}
+                                                                            </a>
+                                                                        </div>
+
+
+                                                                        @php
+                                                                            $cartService=new \App\Services\Shop\CartFormattedService();
+                                                                            $attributes=  $cartService->getFormattedOptionsText($item->options,false,$position);
+                                                                        @endphp
+                                                                        <div style="margin: auto;">{{ $attributes}}</div>
                                                                     </div>
 
 
-                                                                    @php
-                                                                        $cartService=new \App\Services\Shop\CartFormattedService();
-                                                                        $attributes=  $cartService->getFormattedOptionsText($item->options,false,$position);
-                                                                    @endphp
-                                                                    <div style="margin: auto;">{{ $attributes}}</div>
-                                                                </div>
+                                                                    <div class="basket__cardPrice"
+                                                                         style="align-content: center">
 
-
-                                                                <div class="basket__cardPrice"
-                                                                     style="align-content: center">
-
-                                                                    {{ $item->options['price'] }}
-                                                                    ₽ @if($item->product->show_calculator)
-                                                                        /м2
-                                                                    @endif
+                                                                        {{ $item->options['price'] }}
+                                                                        ₽ @if($item->product->show_calculator)
+                                                                            /м2
+                                                                        @endif
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    style="display:flex;align-items: center;text-align: center;background-color: #f6f6f6;padding: 15px">
+                                                                class="productCalc__col--wrp">
 
 
                                                                 <div class="productCalc__col productCalc__col--count">
@@ -276,7 +234,8 @@
                                                                                autocomplete="off"
                                                                                type="text"
                                                                                name="form[]"
-                                                                               data-value="{{ $item->quantity }}">
+                                                                               data-value="{{ $item->quantity }}"
+                                                                               value="{{ $item->quantity }}">
                                                                         <div data-prod="{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
                                                                              class="productCalc__counterBtn productCalc__counterBtn--plus">
                                                                             +
@@ -292,10 +251,6 @@
                                                                         = {{ number_format($item->total_price,2) }}₽
                                                                     </div>
                                                                 </div>
-                                                                <div class="basket__cardPrice" style="padding: 4px">
-
-
-                                                                </div>
                                                                 <div class="deleteBut" id="deleteButtonId"
                                                                      data-product-id="{{ $index }}" role="button"
                                                                      tabindex="0">
@@ -303,7 +258,7 @@
                                                                            value="{{$item->productSessionId}}">
                                                                     <svg>
                                                                         <use
-                                                                                xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cloze') }}"></use>
+                                                                            xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cloze') }}"></use>
                                                                     </svg>
                                                                 </div>
                                                             </div>
@@ -319,12 +274,12 @@
                                                     <div class="basket__sideRow">
                                                         <div class="basket__sideTitle">Всего товаров</div>
                                                         <div
-                                                                class="basket__sideData basket__sideData--prod">{{ $cart->getTotalQuantity() }}</div>
+                                                            class="basket__sideData basket__sideData--prod">{{ $cart->getTotalQuantity() }}</div>
                                                     </div>
                                                     <div class="basket__sideRow">
                                                         <div class="basket__sideTitle">Общая стоимость</div>
                                                         <div
-                                                                class="basket__sideData basket__sideData--price">{{ number_format($cart->getTotalPrice(),2) }}
+                                                            class="basket__sideData basket__sideData--price">{{ number_format($cart->getTotalPrice(),2) }}
                                                             ₽
                                                         </div>
                                                     </div>
@@ -370,7 +325,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -436,7 +391,7 @@
             });
             if(square){
                 $.each( square, function( key, value ) {
-                       $('#total_square_'+key).text(parseFloat(value).toFixed(2)+'/м2');
+                    $('#total_square_'+key).text(parseFloat(value).toFixed(2)+'/м2');
                 });
             }
         }
@@ -483,27 +438,105 @@
         });
     };
 
+    function countersInit() {
+        const counters = document.querySelectorAll('.productCalc__counter');
+
+        if (counters.length === 0) {
+            console.error("Не удалось найти элементы с классом '.productCalc__counter'");
+            return;
+        }
+
+        for (const counter of counters) {
+            const minus = counter.querySelector('.productCalc__counterBtn--minus');
+            const plus = counter.querySelector('.productCalc__counterBtn--plus');
+            const input = counter.querySelector('.productCalc__inpCount');
+
+            if (!minus || !plus || !input) {
+                console.error("Не удалось найти кнопки или поле ввода в одном из счетчиков");
+                continue;
+            }
+
+            plus.addEventListener('click', () => {
+                const currentValue = parseInt(input.value) || 0;
+                input.value = currentValue + 1;
+            });
+
+            minus.addEventListener('click', () => {
+                const currentValue = parseInt(input.value) || 0;
+                if (currentValue > 1) {
+                    input.value = currentValue - 1;
+                }
+            });
+
+            input.addEventListener('blur', () => {
+                const currentValue = parseInt(input.value) || 0;
+                input.value = currentValue < 1 ? 1 : currentValue;
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', countersInit);
+
 </script>
 <style>
 
     .deleteBut {
         top: 0;
         right: 20px;
-        width: 20px;
-        height: 20px;
         transform: translateY(-50%);
         -webkit-user-select: none;
         -moz-user-select: none;
-        user-select: none
+        user-select: none;
+
+        flex: 1;
+        display: flex;
+        justify-content: end;
     }
 
     .deleteBut svg {
-        width: 100%;
-        height: 100%;
+        width: 20px;
+        height: 20px;
         fill: none;
         stroke: #e0e0e0;
         stroke-width: 1px;
         transition: .2s ease
     }
-</style>
 
+    .productCalc__result {
+        top: 0 !important;
+    }
+
+    .productCalc__col--count {
+        text-align: start;
+    }
+    .productCalc__col--desc {
+        flex: 0 1 40%;
+    }
+    @media screen and (max-width: 767.98px) {
+        .productCalc__col--desc {
+            flex: 0 1 90%;
+            order: 1;
+        }
+        .deleteBut__moreOne {
+            order: 2;
+        }
+        .deleteBut {
+            transform: none;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        .productCalc__col--count {
+            order: 3;
+            flex: 1;
+        }
+        .productCalc__col--total {
+            order: 4;
+            margin-left: 20px !important;
+        }
+
+        .total__square {
+            margin: 0 !important;
+        }
+    }
+</style>

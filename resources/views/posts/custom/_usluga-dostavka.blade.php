@@ -1,7 +1,9 @@
 @if(!Str::contains(url()->current(), '/category/servis'))
     <div class="cta cooperation__cta">
-        <img class="cta__img" src="{{ asset('img/cooperation/young-man-delivering-order 2.png') }}" alt="img"
-             loading="lazy" decoding="async" referrerPolicy="no-referrer" style="max-height: 502px">
+        <img class="cta__img cta__img-desktop" src="{{ asset('img/cooperation/young-man-delivering-order 2.png') }}" alt="img"
+             loading="lazy" decoding="async" referrerPolicy="no-referrer" style="max-height: 521.8px">
+        <img class="cta__img cta__img-mobile" src="{{ asset('img/cooperation/cooperation.png') }}" alt="img"
+             loading="lazy" decoding="async" referrerPolicy="no-referrer" style="max-height: 521.8px">
         <!-- Call to action-->
 
         <form class="cta__form" action="{{route('index.send_mail')}}" method="post" enctype="multipart/form-data">
@@ -100,15 +102,31 @@
             </button>
         </div>
     </div>
-    <style>
-        @media screen and (max-width: 900px) {
-
-        }
-
-    </style>
 @endif
 
+<style>
+    .cta__img-desktop {
+        display: block;
+    }
+    .cta__img-mobile {
+        display: none;
+    }
+    @media screen and (max-width: 767.98px) {
+        .cooperation__container {
+            padding: 0;
+        }
+        .cooperation__title, .pay_title, .pay_desc, .pay_info-title, .pay_info-text {
+            padding: 0 16px;
+        }
+        .cta__img-desktop {
+            display: none;
+        }
+        .cta__img-mobile {
+            display: block;
+        }
+        .cta__form {
+            margin-bottom: 64px;
+        }
+    }
 
-
-
-
+</style>

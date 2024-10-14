@@ -106,18 +106,20 @@
                                 @if(count($attributesArray) > 0)
                                     <div class="filters__filterGroup">
                                         @foreach($attributesArray as $attributeCode => $attributeData)
-                                            <select class="filters__select" name="{{ $attributeCode }}">
-                                                <option class="filters__op"
-                                                        value="">{{ $attributeData['attribute']['attribute_title'] }}</option>
-                                                @foreach($attributeData['options'] as $option)
-                                                    <option class="filters__op" value="{{ $option['option_code'] }}"
-                                                            @if(request()->get($attributeCode) == $option['option_code']) selected
+                                            <div class="filters__select-wrp">
+                                                <select class="filters__select" name="{{ $attributeCode }}">
+                                                    <option class="filters__op"
+                                                            value="">{{ $attributeData['attribute']['attribute_title'] }}</option>
+                                                    @foreach($attributeData['options'] as $option)
+                                                        <option class="filters__op" value="{{ $option['option_code'] }}"
+                                                                @if(request()->get($attributeCode) == $option['option_code']) selected
                                                             @endif
-                                                    >
-                                                        {{ $option['option_title'] }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                                        >
+                                                            {{ $option['option_title'] }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         @endforeach
                                     </div>
                                 @endif
@@ -143,25 +145,27 @@
                                     @endforeach
                                     <div class="productsTmp__sortItem productsTmp__sortItem--drop" role="button"
                                          tabindex="0">
-                                        <select class="filters__select" name="orderBy"
-                                                onchange="$(this).closest('form').submit()">
-                                            <option class="filters__op" value="">По популярности прибывания</option>
+                                          <div class="filters__select-wrp">
+                                              <select class="filters__select" name="orderBy"
+                                                      onchange="$(this).closest('form').submit()">
+                                                  <option class="filters__op" value="">По популярности прибывания</option>
 
-                                            <option class="filters__op" value="priceAsc"
-                                                    @if(request()->get('orderBy') == 'priceAsc') selected @endif >
-                                                Сначала дешевле
-                                            </option>
+                                                  <option class="filters__op" value="priceAsc"
+                                                          @if(request()->get('orderBy') == 'priceAsc') selected @endif >
+                                                      Сначала дешевле
+                                                  </option>
 
-                                            <option class="filters__op" value="priceDesc"
-                                                    @if(request()->get('orderBy') == 'priceDesc') selected @endif >
-                                                Сначала дороже
-                                            </option>
+                                                  <option class="filters__op" value="priceDesc"
+                                                          @if(request()->get('orderBy') == 'priceDesc') selected @endif >
+                                                      Сначала дороже
+                                                  </option>
 
-                                            <option class="filters__op" value="title"
-                                                    @if(request()->get('orderBy') == 'title') selected @endif >
-                                                По названию (А-Я)
-                                            </option>
-                                        </select>
+                                                  <option class="filters__op" value="title"
+                                                          @if(request()->get('orderBy') == 'title') selected @endif >
+                                                      По названию (А-Я)
+                                                  </option>
+                                              </select>
+                                          </div>
                                     </div>
                                 </form>
 
@@ -245,30 +249,46 @@
                         <div class="filter__menu-body">
                             <ul class="filter__menu-list">
                                 <li>
-                                    <select class="filter__menu-select">
-                                        <option class="filters__op" value="">Цена</option>
-                                    </select>
+                                    <div class="filter__menu-select-wrp">
+                                        <select class="filter__menu-select">
+                                            <option class="filters__op" value="">Цена</option>
+                                        </select>
+                                    </div>
                                 </li>
                                 <li>
-                                    <select class="filter__menu-select">
-                                        <option class="filters__op" value="">Тип профиля</option>
-                                    </select>
-                                </li>   <li>
-                                    <select class="filter__menu-select">
-                                        <option class="filters__op" value="">Цвет</option>
-                                    </select>
-                                </li>   <li>
-                                    <select class="filter__menu-select">
-                                        <option class="filters__op" value="">Покрытие</option>
-                                    </select>
-                                </li>   <li>
-                                    <select class="filter__menu-select">
-                                        <option class="filters__op" value="">Толщина стали</option>
-                                    </select>
-                                </li>   <li>
-                                    <select class="filter__menu-select">
-                                        <option class="filters__op" value="">Гарантия</option>
-                                    </select>
+                                    <div class="filter__menu-select-wrp">
+                                         <select class="filter__menu-select">
+                                             <option class="filters__op" value="">Тип профиля</option>
+                                         </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="filter__menu-select-wrp">
+                                        <select class="filter__menu-select">
+                                            <option class="filters__op" value="">Цвет</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="filter__menu-select-wrp">
+                                         <select class="filter__menu-select">
+                                             <option class="filters__op" value="">Покрытие</option>
+                                         </select>
+                                     </div>
+                                </li>
+                                <li>
+                                    <div class="filter__menu-select-wrp">
+                                        <select class="filter__menu-select">
+                                            <option class="filters__op" value="">Толщина стали</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="filter__menu-select-wrp">
+                                        <select class="filter__menu-select">
+                                            <option class="filters__op" value="">Гарантия</option>
+                                        </select>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -295,7 +315,7 @@
            }
            .productsTmp__sortItem--drop .filters__select {
                border: none;
-               padding: 0;
+               padding-left: 0;
            }
        }
 
@@ -316,6 +336,12 @@
 
         body:not(._touch) .productsTmp .newItems__tabsEl.-active:after {
             border-left: none;
+        }
+
+        @media screen and (max-width: 479.98px) {
+            .filters__btn {
+                flex: 0 0 auto !important;
+            }
         }
 
     </style>

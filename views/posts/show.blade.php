@@ -146,7 +146,6 @@
     .pay_icon{
         width: 60px;
         height: 22px;
-        margin-right: 20px;
     }
 
     .pay_card{

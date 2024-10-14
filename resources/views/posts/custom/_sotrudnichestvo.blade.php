@@ -21,11 +21,24 @@
                     </div>
                 </div>
                 <button class="ctaForm__btn ctaForm__btn--gap btn btn--md" type="submit">Отправить</button>
-                <div class="ctaForm__info">Нажав кнопку «Отправить», я даю согласие на обработку моих персональных данных</div>
+                <div class="ctaForm__info">Нажав кнопку «Отправить», я даю согласие на <span>обработку моих персональных данных</span></div>
             </div>
         </div>
     </form>
-    {!! $post->body !!}
+    <div class="cta__description">
+        {!! $post->body !!}
+    </div>
 </div>
+
+<style>
+@media (max-width: 767.98px) {
+    .cooperation__container {
+        padding: 0;
+    }
+    .cooperation__title {
+        padding: 0 16px;
+    }
+}
+</style>
 
 

@@ -245,147 +245,161 @@
                                         @foreach($productAttributes as $attribute)
                                             @if(count($attribute['options']) > 1)
                                                 <div class="prodCard__selRow">
-                                            <span class="prodCard__selName">
-                                                {{ $attribute['model']->title }}
-                                            </span>
-                                                    <div class="prodCard__selWrp">
-                                                        <select id="prodCard__select{{ $attribute['model']->id }}"
-                                                                onchange="attributePrice({{ $attribute['model']->id }},this)"
-                                                                class="prodCard__select"
-                                                                name="attribute[{{ $attribute['model']->id }}]">
+                                                    <span class="prodCard__selName">
+                                                        {{ $attribute['model']->title }}
+                                                    </span>
+                                                  <div class="prodCard__wrapper">
+                                                      <div class="prodCard__selWrp">
+                                                          <select id="prodCard__select{{ $attribute['model']->id }}"
+                                                                  onchange="attributePrice({{ $attribute['model']->id }},this)"
+                                                                  class="prodCard__select"
+                                                                  name="attribute[{{ $attribute['model']->id }}]">
 
-                                                            @foreach($attribute['options'] as $option)
+                                                              @foreach($attribute['options'] as $option)
 
-                                                                <option class="prodCard__op"
-                                                                        value="{{ $option['id'] }}">{{ $option->title }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                                  <option class="prodCard__op"
+                                                                          value="{{ $option['id'] }}">{{ $option->title }}</option>
+                                                              @endforeach
+                                                          </select>
 
-                                                    </div>
-                                                    <script>
-                                                        attributePrice({{ $attribute['model']->id }}, '#prodCard__select{{ $attribute['model']->id }}', false);
-                                                    </script>
-                                                    <span class="prodCard__tippy tippy" style="visibility: hidden">
-                                                                        <svg class="description_popup">
-                                                                            <use
-                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
-                                                                        </svg>
-                                                </span>
+                                                      </div>
+                                                      <script>
+                                                          attributePrice({{ $attribute['model']->id }}, '#prodCard__select{{ $attribute['model']->id }}', false);
+                                                      </script>
+                                                      <span class="prodCard__tippy tippy" style="visibility: hidden">
+                                                                              <svg class="description_popup">
+                                                                                        <use
+                                                                                            xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}">
+
+                                                                                        </use>
+                                                                              </svg>
+                                                            </span>
+                                                  </div>
                                                 </div>
                                             @endif
                                         @endforeach
                                         <div class="prodCard__selRow">
                                             <span class="prodCard__selName">Тип профиля</span>
-                                            <div class="prodCard__selWrp">
-                                                <select class="prodCard__select" name="select">
-                                                    @if($profile_type[0] != '')
-                                                        @foreach($profile_type as $el)
-                                                            <option class="prodCard__op" value="{{$el}}">{{$el}}</option>
-                                                        @endforeach
-                                                    @else
-                                                        <option class="prodCard__op" value="">Пусто</option>
-                                                    @endif
-                                                </select>
-                                            </div>
-                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                      <div class="prodCard__wrapper">
+                                          <div class="prodCard__selWrp">
+                                              <select class="prodCard__select" name="select">
+                                                  @if($profile_type[0] != '')
+                                                      @foreach($profile_type as $el)
+                                                          <option class="prodCard__op" value="{{$el}}">{{$el}}</option>
+                                                      @endforeach
+                                                  @else
+                                                      <option class="prodCard__op" value="">Пусто</option>
+                                                  @endif
+                                              </select>
+                                          </div>
+                                          <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="profile_type_popup">
                                                                             <use
                                                                                 xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
                                                                         </svg>
                                                                     </span>
+                                      </div>
                                         </div>
                                         <div class="prodCard__selRow"><span
                                                     class="prodCard__selName">Производитель</span>
-                                            <div class="prodCard__selWrp">
-                                                <select class="prodCard__select" name="select">
-                                                    @if($manufacturer[0] != '')
-                                                        @foreach($manufacturer as $el)
-                                                            <option class="prodCard__op" value="{{$el}}">{{$el}}</option>
-                                                        @endforeach
-                                                    @else
-                                                        <option class="prodCard__op" value="">Пусто</option>
-                                                    @endif
-                                                </select>
-                                            </div>
-                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                     <div class="prodCard__wrapper">
+                                         <div class="prodCard__selWrp">
+                                             <select class="prodCard__select" name="select">
+                                                 @if($manufacturer[0] != '')
+                                                     @foreach($manufacturer as $el)
+                                                         <option class="prodCard__op" value="{{$el}}">{{$el}}</option>
+                                                     @endforeach
+                                                 @else
+                                                     <option class="prodCard__op" value="">Пусто</option>
+                                                 @endif
+                                             </select>
+                                         </div>
+                                         <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="manufacturer_popup"><use
                                                                                 xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use></svg>
                                                                     </span>
+                                     </div>
                                         </div>
 
                                         <div class="prodCard__selRow">
                                             <span class="prodCard__selName">Толщина листа</span>
-                                            <div class="prodCard__selWrp">
-                                                <select class="prodCard__select" name="select">
-                                                    @if($thickness[0] != '')
-                                                        @foreach($thickness as $el)
-                                                            <option class="prodCard__op" value="{{$el}}">{{$el}}</option>
-                                                        @endforeach
-                                                    @else
-                                                        <option class="prodCard__op" value="">Пусто</option>
-                                                    @endif
-                                                </select>
-                                            </div>
-                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                  <div class="prodCard__wrapper">
+                                      <div class="prodCard__selWrp">
+                                          <select class="prodCard__select" name="select">
+                                              @if($thickness[0] != '')
+                                                  @foreach($thickness as $el)
+                                                      <option class="prodCard__op" value="{{$el}}">{{$el}}</option>
+                                                  @endforeach
+                                              @else
+                                                  <option class="prodCard__op" value="">Пусто</option>
+                                              @endif
+                                          </select>
+                                      </div>
+                                      <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="thickness_popup">
                                                                             <use
                                                                                 xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
                                                                         </svg>
                                                 </span>
+                                  </div>
                                         </div>
                                         <div class="prodCard__selRow">
                                             <span class="prodCard__selName">Покрытие</span>
-                                            <div class="prodCard__selWrp">
-                                                <select class="prodCard__select" name="select">
-                                                    @if(\App\Models\Coatings::find($product->coatings_id) != null)
-                                                        <option class="prodCard__op"
-                                                                value="{{\App\Models\Coatings::find($product->coatings_id)['title']}}">{{\App\Models\Coatings::find($product->coatings_id)['title']}}</option>
-                                                    @else
-                                                        <option class="prodCard__op" value="">Пусто</option>
-                                                    @endif
-                                                </select>
-                                            </div>
-                                            <span class="prodCard__tippy tippy" data-tippy="Просто описание">
+                                    <div class="prodCard__wrapper">
+                                        <div class="prodCard__selWrp">
+                                            <select class="prodCard__select" name="select">
+                                                @if(\App\Models\Coatings::find($product->coatings_id) != null)
+                                                    <option class="prodCard__op"
+                                                            value="{{\App\Models\Coatings::find($product->coatings_id)['title']}}">{{\App\Models\Coatings::find($product->coatings_id)['title']}}</option>
+                                                @else
+                                                    <option class="prodCard__op" value="">Пусто</option>
+                                                @endif
+                                            </select>
+                                        </div>
+                                        <span class="prodCard__tippy tippy" data-tippy="Просто описание">
                                                                         <svg class="description_popup"
                                                                              id="coating_popup">
                                                                             <use
                                                                                 xlink:href="{{ asset('img/sprites/sprite-mono.svg#vpr') }}"></use>
                                                                         </svg>
                                                                     </span>
+                                    </div>
                                         </div>
                                         @if($colorsArray = $product->colorsArray())
                                             <div class="prodCard__colorBox">
                                                 <div class="prodCard__name">Цвет</div>
-                                                <div class="leftPointer" style="cursor: pointer;margin:auto; transform: rotate(180deg)">
-                                                    <img src="{{ asset('img/icons/right-arrow.png') }}"/>
-                                                </div>
-                                                <div class="wrp-colorsSlider">
-                                                    <div class="swiper-container colorsSlider _swiper" id="content">
-                                                        <div class="swiper-wrapper colorsSlider__wrapper">
-                                                            <input type="hidden" name="color"
-                                                                   @if($colorsArray && $colorsArray[0]) value="{{ $colorsArray[0]['ral'] }}" @endif>
-                                                            @foreach($colorsArray as $index => $item)
-                                                                <div class="swiper-slide colorsSlider__slide">
-                                                                    <div class="prodCard__colorWrp">
-                                                                        <div
-                                                                                class="prodCard__color @if($index ==0) selected @endif "
-                                                                                data-color="{{$item['ral']}}"
-                                                                                style="background-color: {{ $item['rgb'] }} ">
-                                                                            <span>RAL {{ $item['ral'] }}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
+                                                  <div class="prodCard__wrapper">
+                                                      <div class="leftPointer" style="cursor: pointer;margin:auto; transform: rotate(180deg)">
+                                                          <img src="{{ asset('img/icons/right-arrow.png') }}"/>
+                                                      </div>
+                                                      <div class="wrp-colorsSlider">
+                                                          <div class="swiper-container colorsSlider _swiper" id="content">
+                                                              <div class="swiper-wrapper colorsSlider__wrapper">
+                                                                  <input type="hidden" name="color"
+                                                                         @if($colorsArray && $colorsArray[0]) value="{{ $colorsArray[0]['ral'] }}" @endif>
+                                                                  @foreach($colorsArray as $index => $item)
+                                                                      <div class="swiper-slide colorsSlider__slide">
+                                                                          <div class="prodCard__colorWrp">
+                                                                              <div
+                                                                                  class="prodCard__color @if($index ==0) selected @endif "
+                                                                                  data-color="{{$item['ral']}}"
+                                                                                  style="background-color: {{ $item['rgb'] }} ">
+                                                                                  <span>RAL {{ $item['ral'] }}</span>
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+                                                                  @endforeach
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="rightPointer" style="cursor: pointer;margin:auto">
-                                                    <img src="{{ asset('img/icons/right-arrow.png') }}"/>
-                                                </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="rightPointer" style="cursor: pointer;margin:auto">
+                                                          <img src="{{ asset('img/icons/right-arrow.png') }}"/>
+                                                      </div>
+                                                  </div>
                                             </div>
                                         @endif
 
@@ -521,6 +535,7 @@
 
                                                                         </div>
                                                                     @endif
+                                                                <div class="productCalc__col--wrapper">
                                                                     <div class="productCalc__col productCalc__col--count">
                                                                         <div class="productCalc__named">Количество листов</div>
                                                                         <div class="productCalc__counter">
@@ -534,7 +549,7 @@
                                                                                    autocomplete="off" type="text"
                                                                                    name="quantity[]"
                                                                                    data-value="1"
-                                                                                    value="1">
+                                                                                   value="1">
                                                                             <div data-num="{{$loop->iteration}}"
                                                                                  class="productCalc__counterBtn productCalc__counterBtn--plus">
                                                                                 +
@@ -544,13 +559,13 @@
                                                                     <div class="productCalc__col productCalc__col--total">
                                                                         <div class="productCalc__named">
                                                                             Итого:<span>за <b
-                                                                                        id="totalSquare_{{$loop->iteration}}">0</b> м²</span>
+                                                                                    id="totalSquare_{{$loop->iteration}}">0</b> м²</span>
                                                                         </div>
                                                                         <input type="hidden" name="totalSquare[]"
                                                                                id="totalSquareInput_{{$loop->iteration}}"
                                                                                value="">
                                                                         <div class="productCalc__result">= <b
-                                                                                    id="totalPrice_{{$loop->iteration}}">0</b>
+                                                                                id="totalPrice_{{$loop->iteration}}">0</b>
                                                                             ₽
                                                                         </div>
                                                                         <input type="hidden" name="totalPrice[]"
@@ -558,6 +573,7 @@
                                                                                value="">
                                                                     </div>
                                                                 </div>
+                                                            </div>
                                                             @endforeach
                                                               <div class="productCalc__party">
                                                                   @if($product->show_calculator)
@@ -674,23 +690,29 @@
                                                                 <div class="prodCard__descBenefit">
                                                                     <img src="{{ asset('img/icons/pantone.png') }}" class="prodCard__descImg"/>
 
-                                                                    <h3 class="prodCard__descTitle">Ассортимент цветов</h3>
+                                                                 <div>
+                                                                     <h3 class="prodCard__descTitle">Ассортимент цветов</h3>
 
-                                                                    <p>Разъяснение заголовка делает блок информативным и полезным.</p>
+                                                                     <p>Разъяснение заголовка делает блок информативным и полезным.</p>
+                                                                 </div>
                                                                 </div>
                                                                 <div class="prodCard__descBenefit">
                                                                     <img src="{{ asset('img/icons/link.png') }}" class="prodCard__descImg"/>
 
+                                                                <div>
                                                                     <h3 class="prodCard__descTitle">Преимущетво</h3>
 
                                                                     <p>Разъяснение заголовка делает блок информативным и полезным.</p>
                                                                 </div>
+                                                                </div>
                                                                 <div class="prodCard__descBenefit">
                                                                     <img src="{{ asset('img/icons/guaranteed.png') }}" class="prodCard__descImg"/>
 
-                                                                    <h3 class="prodCard__descTitle">Преимущество</h3>
+                                                                 <div>
+                                                                     <h3 class="prodCard__descTitle">Преимущество</h3>
 
-                                                                    <p>Разъяснение заголовка делает блок информативным и полезным.</p>
+                                                                     <p>Разъяснение заголовка делает блок информативным и полезным.</p>
+                                                                 </div>
                                                                 </div>
                                                             </div>
 
@@ -814,7 +836,7 @@
             @if(count($product->relatedProducts))
                 <section class="newItems crossale">
                     <div class="newItems__container _container">
-                        <div class="newItems__content">
+                        <div class="newItems__content" style="padding-bottom: 0;">
                             <div class="newItems__body">
                                 <div class="newItems__controlPanel" style="align-items: start">
                                     <h2 class="newItems__title t">Сопутствующие товары</h2>
@@ -912,7 +934,6 @@
 
             .prodCard__descBenefits {
                 max-width: 100%;
-                padding: 0px 0px 0px 10px;
             }
         }
 

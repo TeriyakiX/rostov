@@ -346,12 +346,10 @@
 
     </style>
     <script>
-        // Обработчик для открытия меню
         document.querySelector('.productsTmp__filters-icon-mobile').addEventListener('click', function () {
             document.querySelector('.filter__menu').classList.add('filter__menu--active');
         });
 
-        // Обработчик для закрытия меню
         document.querySelector('.filter__menu-close-button').addEventListener('click', function () {
             document.querySelector('.filter__menu').classList.remove('filter__menu--active');
         });

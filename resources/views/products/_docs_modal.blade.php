@@ -9,7 +9,7 @@
             <div class="popup__box">
                 <div class="popup__title t t--center">Запросить документацию</div>
                 <form class="_form">
-                    
+
                     <div class="formRow">
                         <div class="inpBox">
                             <input class="input" id="name" autocomplete="off" placeholder="Ваше имя" type="text" name="form[]" required>

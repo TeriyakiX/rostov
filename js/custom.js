@@ -244,6 +244,7 @@ $(document).on('click', '.first__type', function () {
     $('.first__type__color').css({"background-color": "#006BDE"})
     $('.threid__type__color').css({"background-color": "#F6F6F6"})
     $('.second__type__color').css({"background-color": "#F6F6F6"})
+    $('.first__type').css({"font-weight": "bold"})
 })
 
 $(document).on('click', '.second__type', function () {
@@ -252,6 +253,7 @@ $(document).on('click', '.second__type', function () {
     $('.first__type__color').css({"background-color": "#F6F6F6"})
     $('.threid__type__color').css({"background-color": "#F6F6F6"})
     $('.second__type__color').css({"background-color": "#006BDE"})
+    $('.second__type').css({"font-weight": "bold"})
 })
 
 $(document).on('click', '.threid__type', function () {
@@ -260,6 +262,7 @@ $(document).on('click', '.threid__type', function () {
     $('.first__type__color').css({"background-color": "#F6F6F6"})
     $('.threid__type__color').css({"background-color": "#006BDE"})
     $('.second__type__color').css({"background-color": "#F6F6F6"})
+    $('.threid__type').css({"font-weight": "bold"})
 })
 
 $(document).on('click', '.doc_type', function () {

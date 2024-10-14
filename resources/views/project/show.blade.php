@@ -35,6 +35,9 @@
                     <li class="breadcrumbs__item">
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="{{ \Illuminate\Support\Facades\URL::current() }}">
                             <span>{{ $project->title }}</span>
+                            <svg>
+                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>
@@ -443,3 +446,13 @@
 {{--        </section>--}}
     </main>
 @endsection
+
+<style>
+.newItems__container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.newItems__content {
+        padding-top: 64px !important;
+    }
+</style>

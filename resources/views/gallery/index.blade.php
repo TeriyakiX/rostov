@@ -16,6 +16,9 @@
                     <li class="breadcrumbs__item">
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                             <span>Фото галерея</span>
+                            <svg>
+                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>
@@ -24,51 +27,33 @@
         <section class="gallery">
             <div class="gallery__container _container">
                 <div class="gallery__content">
-                      <div style="display:flex; text-align: center; justify-content: space-between">
+                      <div style="display:flex; text-align: center; justify-content: space-between; align-items: center">
                           <h1 class="gallery__title t">Фото галерея</h1>
                           <svg class="gallery__filters-icon-mobile">
                               <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
                           </svg>
                       </div>
-                    <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
-                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
-                                    </use>
+
+                    <div class="productsTmp--wrp">
+                        <p style="margin-right: 30px;cursor: pointer; display: flex; gap: 8px; align-items: center">Популярные <span style="font-size: 25px">&#11139;</span>
+                        </p>
+                        <div class="productsTmp__layoutControl">
+                            <div class="productsTmp__layoutBtn productsTmp__layoutBtn--col" role="button"
+                                 tabindex="0">
+                                <svg>
+                                    <use xlink:href="/img/sprites/sprite-mono.svg#mcol"></use>
                                 </svg>
-                                <div class="sideDash__mark"><a
-                                        href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
-                                        покрытий</a></div>
                             </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
-                                    </use>
+                            <div class="productsTmp__layoutBtn productsTmp__layoutBtn--line _active" role="button"
+                                 tabindex="0">
+                                <svg>
+                                    <use xlink:href="/img/sprites/sprite-mono.svg#mline"></use>
                                 </svg>
-                                <div class="sideDash__mark"><a
-                                        href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
-                                        решения</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
-                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
-                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="cooperation__body sideDashContainer">
                     <div class="filters gallery__filters">
                         <svg class="gallery__filters-icon">
                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
@@ -101,7 +86,7 @@
                                 <div class="filters__searchBox">
                                     <input class="filters__searchInput" id="searchInput" autocomplete="off" type="text"
                                            name="filter_search"
-                                           data-value="Поиск проекта" value="">
+                                           data-value="Поиск проекта" value="" placeholder="Поиск проекта">
                                     <button class="filters__searchBtn" type="submit">
                                         <svg>
                                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#search') }}"></use>
@@ -123,6 +108,7 @@
 {{--                        </div>--}}
                     </div>
                 </div>
+            </div>
             </div>
         </section>
         <div style="margin: 20px">
@@ -157,3 +143,30 @@
         })
     })
 </script>
+
+<style>
+    .productsTmp--wrp {
+        display: none;
+    }
+
+    @media (max-width: 767.98px) {
+        .gallery__title {
+            margin-bottom: 0 !important;
+        }
+        .filters__btn--clear, .filters__searchBox {
+            font-size: 12px !important;
+        }
+        .productsTmp--wrp {
+            display: flex;
+            padding: 16px 0;
+            justify-content: space-between;
+        }
+    }
+    @media (max-width: 479.98px) {
+        .filters__form {
+            padding-top: 15px !important;
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+    }
+</style>

@@ -1,7 +1,7 @@
 @if(!Str::contains(url()->current(), '/category/servis'))
-    <div class="container">
-        <h3 class="pay_title">Платежные системи</h3>
-        <p>
+    <div class="pay__content">
+        <h3 class="pay_title">Платежные системы</h3>
+        <p class="pay_desc" style="line-height: 150%">
             Оплата происходит через авторизационный центр Процессингового центра Банка с использованием Банковских
             кредитных
             карт следующих
@@ -10,9 +10,9 @@
         <div class="pay_icons_div">
             <img src="{{asset('/img/payment/Mir-01.png')}}" class="pay_icon" alt="pay icon">
             <img src="{{asset('/img/payment/Visa_Logo.png')}}" class="pay_icon" alt="pay icon">
-            <img src="{{asset('/img/payment/maestro_png.png')}}" style="width: 50px; height: 26px; margin-right: 15px;"
+            <img src="{{asset('/img/payment/maestro_png.png')}}"
                  alt="pay icon">
-            <img src="{{asset('/img/payment/master.png')}}" style="width: 50px; height: 26px" alt="pay icon">
+            <img src="{{asset('/img/payment/master.png')}}" class="pay_icon" alt="pay icon">
         </div>
         <div class="pay_card">
             <div class="pay_card_body">
@@ -22,37 +22,37 @@
                     @csrf
                     <div class="ctaForm">
                         <div class="ctaForm__inputs">
-                            <div class="formRow" style="width: 45%;margin-right: 2%;">
+                            <div class="formRow" style="width: 45%;">
                                 <div class="inpBox inpBox__oplata" style="display: flex">
                                     <label for="certificate" style="margin:auto;">Номер счета-спецификации</label>
-                                    <input class="input input_coop" id="certificate" autocomplete="off" type="number"
-                                           placeholder="XXXXXXX" name="certificate" style="border-radius: 10px;"
+                                    <input class="input_pay" id="certificate" autocomplete="off" type="number"
+                                           placeholder="XXXXXXX" name="certificate"
                                            required>
                                 </div>
                             </div>
                             <div class="formRow" style="width: 45%;">
                                 <div class="inpBox inpBox__oplata" style="display: flex">
                                     <label for="price" style="width: 40%;margin:auto;">Сумма к оплате</label>
-                                    <input class="input input_coop" id="price" autocomplete="off"
-                                           type="number" style="-moz-appearance: textfield;border-radius: 10px;"
+                                    <input class="input_pay" id="price" autocomplete="off"
+                                           type="number" style="-moz-appearance: textfield"
                                            placeholder="00,000" name="price" required>
                                 </div>
                             </div>
                         </div>
-                        <div class="formRow" style="width: 45%;margin-right: 2%;">
+                        <div class="formRow" style="width: 45%;">
                             <div class="inpBox inpBox__oplata" style="display: flex">
                                 <label for="email" style="margin:auto;">E-mail для отправки чека</label>
-                                <input class="input input_coop" id="email" autocomplete="off" type="text"
-                                       placeholder="Ваш E-mail" name="email" style="border-radius: 10px;width: 90%"
+                                <input class="input_pay" id="email" autocomplete="off" type="text"
+                                       placeholder="Ваш E-mail" name="email" style="width: 90%"
                                        required>
                             </div>
                         </div>
                         <div class="oplata__info">
                             <button class="ordering__submit btn" type="submit"
-                                    style="font-size: 16px;margin-left: 2px; margin-right: 10px; max-height: 43px;">
+                                    style="font-size: 14px;height: 36px;margin-right: 8px; margin-left: 0;padding: 5px 18px">
                                 Оплатить заказ картой
                             </button>
-                            <p style="line-height: 1.5;color: #bebebe;margin: 0">
+                            <p style="line-height: 1.5;color: #A8A8A8;margin: 0;font-size: 16px">
                                 Нажимая кнопку «Оплатить банковской картой, вы соглашаетесь с количеством,
                                 ассортиментом,
                                 его наименованием и стоимостью товара, входящего в состав счет-спецификации, а так же с
@@ -63,9 +63,9 @@
                 </form>
             </div>
         </div>
-        <p style="margin-top: 3%">Информация об оплате банковской картой</p>
-        <div style="margin-top: 3%">
-            <ul class="b" style="line-height: 1.5;">
+        <p class="pay_info-title" style="margin-top: 3%">Информация об оплате банковской картой</p>
+        <div class="pay_info-text">
+            <ul class="b" style="line-height: 26px;">
                 <li>
                     Для оплаты (ввода реквизитов Вашей карты) покупки Вы будете перенаправлены на платежный шлюз ПАО
                     «Сбербанк России» для ввода реквизитов Вашей карты. Пожалуйста, приготовьте Вашу пластиковую карту
@@ -148,11 +148,20 @@
 
 
 @endif
-<style>
-    @media screen and (max-width: 900px) {
-        .contentContainer {
 
+<style>
+    @media (max-width: 767.98px) {
+        .cooperation__container {
+            padding: 0;
+        }
+        .cooperation__title, .pay_title, .pay_desc, .pay_info-title, .pay_info-text {
+            padding: 0 16px;
+        }
+        .formRow {
+            margin: 0;
+        }
+        .inpBox {
+            padding: 0;
         }
     }
-
 </style>

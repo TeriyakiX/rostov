@@ -5,7 +5,7 @@
 @section('seo_keywords', $post->seo_keywords)
 
 @section('content')
-    
+
     <main class="page">
         <nav class="breadcrumbs">
 
@@ -185,37 +185,46 @@
 
     .pay_icons_div {
         display: flex;
-        margin: 15px 0;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        gap: 15px;
     }
 
     .pay_icon {
-        width: 60px;
+        width: 80px;
         height: 22px;
-        margin-right: 20px;
     }
 
     .pay_card {
         width: 100%;
-        height: 400px;
         background-color: #f6f6f6;
         border: 15px;
         border-top-style: solid;
-        border-top-color: blue;
+        border-top-color: #006BDE;
     }
 
     .pay_card_body {
-        padding: 3%;
+        padding: 30px;
+    }
+    .input_pay {
+        border-radius: 5px;
+        border: none;
+        background: #ECECEC;
+        height: 35px;
+        width: 100%;
+        padding: 0 20px;
     }
 
     .pay_card_title {
         font-weight: 700;
-        font-size: 30px;
+        font-size: 24px;
         color: #006bde;
         margin-bottom: 1%;
     }
 
     .pay_title {
-        font-size: 20px;
+        font-size: 16px;
+        font-weight: bold;
         margin-bottom: 15px
     }
 
@@ -234,13 +243,28 @@
         .threid__type{
             margin-left: -10%;
         }
-      
+
         .third {
             order: 2
         }
 
         .find_error_btn {
             margin-top: 5px;
+        }
+    }
+
+    @media screen and (max-width: 767.98px) {
+        .pay_icons_div {
+            padding: 0 16px;
+        }
+        .pay_card_title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .pay_card_body {
+            padding-left: 16px;
+            padding-right: 16px;
+            padding-bottom: 20px;
         }
     }
 </style>

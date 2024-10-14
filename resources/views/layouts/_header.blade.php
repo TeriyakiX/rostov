@@ -487,6 +487,7 @@ print_r($headerCategories);
         background: #d6d6d6;
         width: 20px;
         height: 20px;
+        white-space: nowrap;
     }
 </style>
 <script>

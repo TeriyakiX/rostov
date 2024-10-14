@@ -239,30 +239,33 @@ if ($('#doc_type_id').length > 0) {
 }
 
 $(document).on('click', '.first__type', function () {
+    $('.doc_type').removeClass('active_doc_type-font')
     $('.doc_type').removeClass('active_doc_type')
     $(this).addClass('active_doc_type')
+    $(this).addClass('active_doc_type-font')
     $('.first__type__color').css({"background-color": "#006BDE"})
     $('.threid__type__color').css({"background-color": "#F6F6F6"})
     $('.second__type__color').css({"background-color": "#F6F6F6"})
-    $('.first__type').css({"font-weight": "bold"})
 })
 
 $(document).on('click', '.second__type', function () {
+    $('.doc_type').removeClass('active_doc_type-font')
     $('.doc_type').removeClass('active_doc_type')
     $(this).addClass('active_doc_type')
+    $(this).addClass('active_doc_type-font')
     $('.first__type__color').css({"background-color": "#F6F6F6"})
     $('.threid__type__color').css({"background-color": "#F6F6F6"})
     $('.second__type__color').css({"background-color": "#006BDE"})
-    $('.second__type').css({"font-weight": "bold"})
 })
 
 $(document).on('click', '.threid__type', function () {
+    $('.doc_type').removeClass('active_doc_type-font')
     $('.doc_type').removeClass('active_doc_type')
     $(this).addClass('active_doc_type')
+    $(this).addClass('active_doc_type-font')
     $('.first__type__color').css({"background-color": "#F6F6F6"})
     $('.threid__type__color').css({"background-color": "#006BDE"})
     $('.second__type__color').css({"background-color": "#F6F6F6"})
-    $('.threid__type').css({"font-weight": "bold"})
 })
 
 $(document).on('click', '.doc_type', function () {

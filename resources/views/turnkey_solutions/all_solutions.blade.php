@@ -1,26 +1,23 @@
 <main class="page">
         <section class="brands">
-        <div class="brands__container _container">
+        <div class="brands__container">
             <div class="brands__content">
-                @include('posts.custom._tags')
-                <div class="brands__body">
+                <div class="brands__content__tags">@include('posts.custom._tags')</div>
+                <div class="catalogContainer">
+                    @forelse($solutions as $index => $solution)
+                        <div class="catalogItemBoxWrp">
+                            <a href="{{route('index.solutions.index', $solution['id'])}}"
+                               class="catalogItemBox {{ $index % 2 == 0 ? 'catalogItemBox--left' : 'catalogItemBox--right' }}">
 
-                    @forelse($solutions as $solution)
-                        <div class="brands__cardWrp">
-                            <div class="brands__card">
-                                <div class="brands__imgBox ibg"><a class="brands__imgLink"
-                                                                   href="{{route('index.solutions.index', $solution['id'])}}">
-                                        <picture>
-                                            <source type="image/webp"
-                                                    srcset="{{ asset('upload_images/' . $solution->photos[0]->path) }}">
-                                            <img src="{{ asset('upload_images/' . $solution->photos[0]->path) }}"
-                                                 alt="#image">
-                                        </picture>
-                                    </a></div>
-                                <div class="brands__cardBody"><a class="brands__cardTitle link"
-                                href="{{route('index.solutions.index', $solution['id'])}}">{{$solution['title']}}</a>
+                                <div class="catalogItemContent">
+                                    <div class="catalogTitle">{{$solution['title']}}</div>
                                 </div>
-                            </div>
+
+                                <div class="catalogItemImgBox block-{{$loop->index}}">
+                                    <div class="catalogItemImg" style="background-image: url({{ asset('upload_images/' . $solution->photos[0]->path) }})">
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     @empty
                         <div>Empty</div>
@@ -34,3 +31,11 @@
     </section>
 </main>
 @include('layouts.pagination')
+
+<style>
+    @media (max-width: 767.98px) {
+        .brands__content__tags {
+            display: none;
+        }
+    }
+</style>

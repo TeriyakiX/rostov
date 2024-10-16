@@ -278,6 +278,7 @@
         .owl-stage {
             display: flex;
             flex-direction: column;
+            flex-wrap: wrap;
         }
         .prodCard__title--desktop {
             display: none;

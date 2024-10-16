@@ -151,6 +151,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                                    <div class="addBox">
+                                                                        <div class="add gallery__add" role="button" tabindex="0">Показать ещё</div>
+                                                                    </div>
                                         </div>
                                     </section>
                                 @endif
@@ -455,4 +458,10 @@
 .newItems__content {
         padding-top: 64px !important;
     }
+
+@media (max-width: 767.98px) {
+    .addBox {
+        display: none !important;
+    }
+}
 </style>

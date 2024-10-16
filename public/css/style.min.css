@@ -256,6 +256,15 @@ body:not(._touch) .brands__cardBrand:hover:before {
   border-color: #006bde;
 }
 
+body:not(._touch) .calculatorItemImg:hover {
+    transform: translate(-50%, -50%) skewX(18deg) scale(1.1);
+}
+
+body:not(._touch) .calculatorItemImg {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
 body:not(._touch) .productsTmp__sortItem > span:hover,
 body:not(._touch) .productsTmp__sortItem > span:active {
   color: #006bde;
@@ -2031,6 +2040,7 @@ strong {
   overflow: auto;
   flex-wrap: wrap;
   row-gap: 8px;
+  max-width: 97%;
 }
 
 .breadcrumbs__item {
@@ -2541,7 +2551,7 @@ strong {
 .products__body {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -11px;
+  margin: 0 -16px;
 }
 
 .products__itemWrp {
@@ -2603,7 +2613,7 @@ strong {
 .products__itemImgBox {
   position: relative;
   flex: 0 1 310px;
-  height: 85%;
+  height: 100%;
   transform: skew(-18deg);
   overflow: hidden;
 }
@@ -2612,7 +2622,7 @@ strong {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 125%;
+  width: 135%;
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -2841,13 +2851,31 @@ strong {
     height: 30px;
     background-color: #006BDE;
     color: #fff;
-    font-size: 14px;
+    font-size: 1.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
     clip-path: polygon(0 0, 100% 0, calc(100% - 30px) 100%, 0 100%);
     z-index: 1;
     padding-right: 20px;
+}
+
+.card__promo-label {
+    position: absolute;
+    bottom: 0;
+    left: -20px;
+    width: 90%;
+    height: 30px;
+    background-color: #25A141;
+    color: #fff;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 30px) 100%, 0 100%);
+    z-index: 1;
+    padding-right: 20px;
+    padding-left: 4px;
 }
 
 .card--simple {
@@ -2928,8 +2956,20 @@ strong {
   padding-bottom: 69%;
 }
 
+.presentation-slider__item, .presentation-thumbnails__item {
+    flex-shrink: 0 !important;
+}
+
 .cropped-img {
     clip-path: polygon(12% 0, 100% 0, 100% 81%, 86% 100%, 0 100%, 0 15%);
+}
+
+.info__txt ul {
+    padding-left: 0 !important;
+}
+
+.info__txt {
+    padding-top: 16px;
 }
 
 .card__imgBox picture,
@@ -2972,6 +3012,11 @@ strong {
   line-height: 150%;
   position: relative;
   overflow: hidden;
+
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card__chars li {
@@ -5127,6 +5172,83 @@ body:not(._touch) .card__icon--basket:hover svg {
 .compareParametersSlider .swiper-slide-active + div + div {
   pointer-events: all;
   color: #505050;
+}
+
+.catalogContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+.catalogItemBoxWrp{
+    flex: 0 1 50%;
+    min-height: 244px;
+    padding: 0 11px;
+    margin-bottom: 20px;
+}
+.catalogItemBox{
+    position: relative;
+    display: flex;
+    height: 100%;
+}
+.catalogDesc {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.catalogItemContent {
+    position: relative;
+    z-index: 5;
+    flex: 0 0 238px;
+}
+.catalogItemBox--left:before {
+    left: 0;
+}
+.catalogItemBox--right:before {
+    right: 0;
+}
+.catalogItemBox--right {
+    flex-direction: row-reverse;
+}
+.catalogItemBox:before {
+    content: '';
+    position: absolute;
+    width: 75%;
+    height: 100%;
+    top: 0;
+    border: 1px solid #f6f6f6;
+}
+.catalogTitle{
+    font-size: 24px;
+    line-height: 140.6%;
+}
+.catalogItemBox--right .catalogItemContent {
+    padding: 20px 5px 20px 10px;
+}
+.catalogItemBox--left .catalogItemContent {
+    padding: 20px 5px 20px 20px;
+}
+.catalogItemImgBox {
+    position: relative;
+    flex: 0 1 310px;
+    height: 100%;
+    transform: skew(-18deg);
+    overflow: hidden;
+}
+.catalogItemBox--left .catalogItemImgBox {
+    transform-origin: bottom left;
+}
+.catalogItemBox--right .catalogItemImgBox {
+    transform-origin: top right;
+}
+.catalogItemImg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 135%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate(-50%, -50%) skew(18deg);
 }
 
 .ordering__confirmBox {
@@ -7399,6 +7521,33 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 1220px) {
+    .catalogItemBoxWrp {
+        flex: 0 1 100%;
+        max-width: 768px;
+        margin: 0 auto 16px;
+    }
+    .catalogItemBox {
+        overflow: hidden;
+    }
+    .catalogItemBox:before {
+        width: 100%;
+        overflow: hidden;
+    }
+    .catalogItemContent {
+        flex: 0 1 50%;
+    }
+    .catalogItemImgBox {
+        flex: 0 0 50%;
+    }
+    .catalogItemBox--left .catalogItemImg {
+        left: 0;
+        transform: translate(-25%, -50%) skew(18deg);
+    }
+    .catalogItemBox--right .catalogItemImg {
+        left: unset;
+        right: 0;
+        transform: translate(25%, -50%) skew(18deg);
+    }
   html {
     font-size: 9px;
   }
@@ -7630,10 +7779,22 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 991.98px) {
+    .catalogItemBox--left .catalogItemContent {
+        padding: 16px;
+    }
+    .catalogItemBox--right .catalogItemContent {
+        padding: 16px;
+    }
+    .cooperation__content {
+        overflow: hidden;
+    }
     .products__itemImgBox {
         height: 100%;
     }
     .products__itemBox--left .products__itemContent {
+        padding: 16px;
+    }
+    .products__itemBox--right .products__itemContent {
         padding: 16px;
     }
   ._container {
@@ -8494,6 +8655,15 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 767.98px) {
+    .card__promo-label {
+        left: -8px;
+        width: 100%;
+        height: 21px;
+        font-size: 1.1rem;
+    }
+    .catalogTitle {
+        font-size: 16px;
+    }
     .production__slider {
         margin-bottom: 12px;
     }
@@ -8720,7 +8890,6 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
     .card {
         padding: 8px;
-        padding-top: 16px;
     }
     .formBox {
         max-width: none;
@@ -9517,7 +9686,7 @@ body:not(._touch) .card__icon--basket:hover svg {
   }
 
   .project__presentation {
-    margin-bottom: 40px;
+    margin-bottom: 0;
   }
 
   .aside__item {
@@ -9666,9 +9835,9 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
     .itemsSlider__slide {
         padding: 4px;
-        width: auto !important;
     }
     .card__new-label {
+        top: 15px;
         width: 48px;
         height: 18px;
         font-size: 10px;

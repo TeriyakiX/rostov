@@ -23,10 +23,10 @@
                                         </h3>
                                                     <ul class="products__list">
                                                         @foreach($productCategory->subcategories()->limit(3)->get() as $subcategory)
-														
-														
-														
-														
+
+
+
+
                                                             <li class="products__listItem">
                                                                 <a class="products__link"
                                                                    href="{{ route('index.products.categoryList', ['category' => $subcategory->slug]) }}">
@@ -46,9 +46,7 @@
                                     <a class="products__itemImgBox block-{{$loop->index}}"
                                     href="{{ route('index.products.categoryList', ['category' => $productCategory->slug]) }}">
                                         <div class="products__img"
-                                             style="
-
-                                             background-image: url({{asset($productCategory->mainPhotoPath())}})"></div>
+                                             style="background-image: url({{asset($productCategory->mainPhotoPath())}})"></div>
                                     </a>
                                 </div>
                             </div>
@@ -60,39 +58,46 @@
         @php
             $category=   \App\Models\ProductCategory::query()->whereNull('parent_id')->limit(8)->paginate(8)
         @endphp
-        <div class="container">
+        <div class="catalogContainer">
 
             @foreach($category as $index => $productCategory )
 
-                <div class="container_item"
+                <div class="catalogItemBoxWrp">
+                    <div class="catalogItemBox {{ $index % 2 == 0 ? 'catalogItemBox--left' : 'catalogItemBox--right' }}">
 
-                     style="background-image: linear-gradient( rgba(0,0,0,0.4), rgba(0,0,0,0.4) ),  url({{asset($productCategory->mainPhotoPath())}})">
-
-                    <h3 class="products_title " style="    padding-left: 40px;margin-top: 12px;z-index: 1  ">
-                        <a class="link"
-                           href="{{ route('index.products.categoryList', ['category' => $productCategory->slug]) }}">
-                            {{$productCategory->title }}</a>
-
-                    </h3>
-                    <ul class="products__list groupContainer">
-
-                        @foreach($productCategory->subcategories()->limit(17)->get() as $index=> $subcategory)
-                            {{--                        <li class="product_list" >  white-space: nowrap;overflow: hidden;   text-overflow: ellipsis; --}}
-                            <a class="products__link title product_list"
-                               style=""
-                               href="{{ route('index.products.categoryList', ['category' => $subcategory->slug]) }}">
-                                {{ $subcategory->title }}
-                            </a>
-                        @if($index>16)
-                                <a class="products__link product_list "
+                        <div class="catalogItemContent">
+                            <div class="catalogTitle">
+                                <a class="link"
                                    href="{{ route('index.products.categoryList', ['category' => $productCategory->slug]) }}">
-                                    Ещё...
-                                </a>
-                        @endif
+                                    {{$productCategory->title }}</a>
 
-                        @endforeach
+                            </div>
 
-                    </ul>
+                            <div class="catalogList">
+
+                                @foreach($productCategory->subcategories()->limit(5)->get() as $index=> $subcategory)
+                                    {{--                        <li class="product_list" >  white-space: nowrap;overflow: hidden;   text-overflow: ellipsis; --}}
+                                    <a class="products__link title"
+                                       style=""
+                                       href="{{ route('index.products.categoryList', ['category' => $subcategory->slug]) }}">
+                                        {{ $subcategory->title }}
+                                    </a>
+                                @endforeach
+
+                                    @if($productCategory->subcategories()->count() > 4)
+                                        <a class="products__link" href="{{ route('index.products.categoryList', ['category' => $productCategory->slug]) }}">
+                                            Ещё...
+                                        </a>
+                                    @endif
+
+                            </div>
+                        </div>
+                        <div class="catalogItemImgBox block-{{$loop->index}}">
+                            <div class="catalogItemImg"
+                                 style="background-image: url({{asset($productCategory->mainPhotoPath())}})">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -240,5 +245,13 @@
         }
     }
 
+    .catalogList {
+        display: flex;
+        flex-direction: column;
+        margin: 0 !important;
+        padding: 0 !important;
+        padding-top: 10px !important;
+        gap: 8px;
+    }
 
 </style>

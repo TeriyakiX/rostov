@@ -560,10 +560,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     item.style.display = 'none';
                 }
             });
-
-            const ellipsis = document.createElement('li');
-            ellipsis.textContent = '...';
-            list.appendChild(ellipsis);
         }
     });
 });

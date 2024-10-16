@@ -3,6 +3,7 @@
     <div class="card-filter__wrap">
         @if(isset($tags))
         <div class="card-filter__title">Категории:</div>
+        <div class="card-filter__item--wrapper">
             @foreach($tags as $tag)
                 <div class="{{ $_SERVER['REQUEST_URI']==='/posts/stati'.'?tagId='.$tag->id ||$_SERVER['REQUEST_URI']==='/posts/stati'.'?tagId='.$tag->id.'&page='.request()->get('page')  ? 'card-filter__holder__active' : 'card-filter__holder' }}">
                     <a class="card-filter__item" id="{{$tag->id}}"> <span
@@ -10,11 +11,38 @@
 
                 </div>
             @endforeach
+        </div>
         @endif
     </div>
 </div>
 
 <style>
+    .card-filter__item--wrapper {
+        display: flex;
+        white-space: nowrap;
+        position: relative;
+        gap: 10px;
+    }
+    .card-filter__item--wrapper:before {
+        content: '';
+        position: absolute;
+        z-index: 10;
+        width: 15px;
+        height: 30px;
+        left: -10px;
+        background: #fff;
+    }
+
+    .card-filter__item--wrapper:after {
+        content: '';
+        position: absolute;
+        z-index: 10;
+        width: 15px;
+        height: 30px;
+        right: -5px;
+        background: #fff;
+    }
+
     .card-filter__holder__active{
         color: white;
         background: #006bde;
@@ -23,15 +51,21 @@
         min-width: 4%;
         margin-bottom: 1%;
         text-align: center;
+        transform: skew(-20deg);
     }
     .card-filter__holder{
         position: relative;
         margin-right: 1%;
         background: #2424240f;
         min-width: 5%;
+        padding: 0 1rem;
         cursor: pointer;
         margin-bottom: 1%;
         text-align: center;
+        transform: skew(-20deg);
+    }
+    .card-filter__holder:last-child {
+        padding-right: 1.5rem;
     }
     .card-filter__holder:hover{
         background-color: rgba(0, 107, 222, 0.7);
@@ -65,14 +99,12 @@
         font-size: 16px;
     }
 
-
-
     .card-filter__item {
-        margin: 0.6rem 0.6rem 0.6rem 0.6rem;
         display: inline-block;
-        vertical-align: middle;
-        position: relative;
+        transform: skew(20deg);
+        margin: 0.6rem 1rem;
         text-align: center;
+        vertical-align: middle;
     }
 
 </style>

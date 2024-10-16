@@ -4,9 +4,13 @@
 {{--                <div class="productsTmp__header" style="background-color: #006BDE;z-index: 3;font-size: 16px;  color: white;height: 33px;padding-top: 4%;padding-left: 1%;"--}}
 {{--                >{{$product->getFormattedEndPromoDate()}}</div>--}}
 {{--            @endif--}}
-            <div class="card__new-label">New</div>
-
+            @if($product->is_novelty)
+                <div class="card__new-label">New</div>
+            @endif
             <div class="card__imgBox-wrapper">
+                @if($product->is_promo)
+                    <div class="card__promo-label">{{$product->getFormattedEndPromoDate()}}</div>
+                @endif
                 <a class="card__imgBox"
                    href="{{ route('index.products.show', ['product' => $product->slug??'empty', 'category' => $product->categories->first() ? $product->categories->first()->slug : 'empty']) }}">
                     <picture>
@@ -29,6 +33,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="card__title">
                 <a class="link"
                    href="{{ route('index.products.show', ['product' => $product->slug, 'category' => $product->categories->first() ? $product->categories->first()->slug : 'empty']) }}">

@@ -12,7 +12,10 @@
                             </svg>
                         </a></li>
                     <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active"
-                                                     href="#"><span>Калькуляторы</span></a></li>
+                                                     href="#"><span>Калькуляторы</span>
+                            <svg>
+                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                            </svg></a></li>
                 </ul>
             </div>
         </nav>
@@ -59,48 +62,25 @@
                                 <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
                             </div>
                         </div>
-                    <div class="calculatorsContainer">
-                    @foreach($calculators as $calculator)
-
-                        <a href="{{route('index.posts.kalkulyator',['slug' => $calculator->slug])}}" class="calculatorItem" style="background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url({{$calculator->mainPhotoPath()}}) center no-repeat;background-size: cover" >
-                           <div class="calculatorTitle">{{$calculator->title}} </div>
-
-                        </a>
-
-                    @endforeach  </div>
+                    <div class="catalogContainer">
+                        @foreach($calculators as $index => $calculator)
+                             <div class="catalogItemBoxWrp">
+                                 <a href="{{route('index.posts.kalkulyator',['slug' => $calculator->slug])}}"
+                                    class="catalogItemBox {{ $index % 2 == 0 ? 'catalogItemBox--left' : 'catalogItemBox--right' }}">
+                                     <div class="catalogItemContent">
+                                         <div class="catalogTitle">{{ $calculator->title }}</div>
+                                     </div>
+                                     <div class="catalogItemImgBox block-{{$loop->index}}">
+                                         <div class="catalogItemImg"
+                                              style="background-image: url({{ $calculator->mainPhotoPath() }})">
+                                         </div>
+                                     </div>
+                                 </a>
+                             </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        </section>
-    <style>
-        .calculatorsContainer{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-
-        .calculatorItem{
-            width: 45%;
-            height: 250px;
-            margin: 12px;
-        }
-        .calculatorTitle{
-            color: white;
-            margin-top: 40px;
-            margin-left: 20px;
-            font-size: 40px;
-            width: 380px;
-            transition: 0.3s; /* Время эффекта */
-        }
-        .calculatorTitle:hover{
-            transform: scale(1.05);
-            text-decoration: underline white;
-        }
-         .calculatorItem:hover{
-
-             cursor: pointer;
-
-
-         }
-    </style>
+        </div>
+    </section>
 @endsection

@@ -17,6 +17,9 @@
                     <li class="breadcrumbs__item">
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                             <span>Акции</span>
+                            <svg>
+                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>
@@ -84,74 +87,99 @@
             </div>
         </section>
     </main>
-@endsection
-<style>
-    .title {
+    <style>
+        .productsTmp__body {
+            margin: 0 -8px;
+        }
+        .heroSliderPreview__previewBox:before {
+            background-color: rgba(37, 161, 65, 0.7);
+        }
+        .hero__container {
+            min-height: 517px;
+            margin-bottom: 32px;
+        }
+        .heroSlider__txtBox:after {
+            background-color: rgba(37, 161, 65, 0.7);
+        }
+        .heroSlider__count {
+           color: rgba(37, 161, 65, 0.3);
+        }
+        .productsTmp__title {
+            margin-bottom: 32px;
+        }
+        .title {
 
-        font-style: normal;
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 140.62%;
-        /* or 34px */
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 140.62%;
+            /* or 34px */
 
-        display: flex;
-        align-items: center;
+            display: flex;
+            align-items: center;
 
-        color: #595959;
-    }
+            color: #595959;
+        }
 
-    .text {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 26px;
-        /* or 162% */
+        .text {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 26px;
+            /* or 162% */
 
-        display: flex;
-        align-items: center;
+            display: flex;
+            align-items: center;
 
-        /* 3 */
+            /* 3 */
 
-        color: #505050;
-    }
+            color: #505050;
+        }
 
-    .swiper {
-        height: 300px;
-    }
-
-    .wrp-heroSlider {
-        width: 300px;
-        min-width: 966px;
-        margin-right: 210px;
-    }
-
-    .heroSliderPreview {
-        position: relative !important;
-        height: 100%;
-        margin-left: -230px;
-        width: 414px;
-    }
-
-    .heroSliderPreview__slide {
-        width: 300px;
-    }
-
-    .heroSliderPreview__previewBox {
-        cursor: pointer;
-        position: relative !important;
-        height: 100%;
-        overflow: hidden !important;
-    }
-
-    @media screen and (max-width: 500px) {
-        .wrp-heroSliderPreview {
-            display: none;
+        .swiper {
+            height: auto !important;
         }
 
         .wrp-heroSlider {
-
-            margin-right: 0px;
+            width: 300px;
+            min-width: 966px;
+            margin-right: 210px;
         }
-    }
 
-</style>
+        .heroSliderPreview {
+            position: relative !important;
+            height: 100%;
+            margin-left: -230px;
+            width: auto;
+        }
+
+        .heroSliderPreview__slide {
+            width: 300px;
+        }
+
+        .heroSliderPreview__previewBox {
+            cursor: pointer;
+            position: relative !important;
+            height: 100%;
+            overflow: hidden !important;
+        }
+
+        @media screen and (max-width: 500px) {
+            .wrp-heroSliderPreview {
+                display: none;
+            }
+
+            .wrp-heroSlider {
+
+                margin-right: 0px;
+            }
+        }
+        @media screen and (max-width: 767.98px) {
+            .productsTmp__body {
+                margin: 0 -4px;
+            }
+        }
+
+    </style>
+@endsection
+

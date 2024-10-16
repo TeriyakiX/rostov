@@ -16,6 +16,9 @@
                     <li class="breadcrumbs__item">
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="{{ \Illuminate\Support\Facades\URL::current() }}">
                             <span>{{ $ourService->title }}</span>
+                            <svg>
+                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>

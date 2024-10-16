@@ -18,7 +18,7 @@
                         <div class="swiper-slide slide_1 heroSlider__slide swiper-lazy firstSlide" data-url="{{$item->url}}"
                              data-background="{{ asset('upload_images/' . $item->photo_desktop) }}"
                              style="height: 517px">
-                            <div class="heroSlider__content _container">
+                            <div class="heroSlider__content _container heroSlider__content--desktop">
                                 <div class="heroSlider__txtBox">
                                     <h2 class="heroSlider__title">Акция выходного дня</h2>
                                     <div class="heroSlider__count"></div>
@@ -68,6 +68,40 @@
 {{--         id="0"><--}}
 {{--    </div>--}}
 </div>
+
+<div style="width: 100%">
+    <div class="wrp-heroSlider wrp-heroSlider--mobile" style="position: static;">
+        <div class="swiper-container heroSlider
+                                     slider_0
+                                _swiper" data-id="0">
+            <div class="swiper-wrapper heroSlider__wrapper"
+                 style="height: auto;">
+
+
+                @foreach($slider as $item)
+                    <div class="swiper-slide slide_1 heroSlider__slide swiper-lazy firstSlide" data-url="{{$item->url}}"
+                         style="height: auto">
+                        <div class="heroSlider__content _container">
+                            <div class="heroSlider__txtBox">
+                                <h2 class="heroSlider__title">Акция выходного дня</h2>
+                                <div class="heroSlider__count"></div>
+                                <p class="heroSlider__txt">
+                                    Ротор переворачивает период. Момент силы трения не зависит от скорости
+                                    вращения внутреннего кольца подвеса, что не кажется странным, если
+                                    вспомнить о том, что мы не исключили из рассмотрения гироскопический
+                                    стабилизатоор.
+                                </p>
+                                <div class="heroSlider__promo">
+                                    Акция действует до 19.06.21
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(".swiper-slide").click(function () {
         let currentUrl = ($(this).data('url'));
@@ -77,6 +111,9 @@
 <style>
     .heroSliderPreview__previewTitle {
         white-space: nowrap;
+    }
+    .wrp-heroSlider--mobile {
+        display: none;
     }
     .heroSlider__promo {
         position: absolute;
@@ -136,10 +173,14 @@
         min-width: 966px;
         margin-right: 210px;
     }
+    .heroSlider__content {
+        padding-right: 0;
+        padding-left: 172px;
+    }
     .heroSlider__slide {
         display: flex;
         align-items: flex-end;
-        padding: 30px 0;
+        padding: 0;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -161,16 +202,12 @@
         height: 100%;
         overflow: hidden;
     }
-
     @media screen and (max-width: 500px) {
         .wrp-heroSliderPreview {
             display: none;
         }
-
         .wrp-heroSlider {
-
             margin-right: 0px;
         }
     }
-
 </style>

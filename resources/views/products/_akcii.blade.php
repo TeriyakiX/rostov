@@ -98,6 +98,9 @@
             min-height: 517px;
             margin-bottom: 32px;
         }
+        .heroSlider__txt {
+            padding-right: 140px !important;
+        }
         .heroSlider__txtBox:after {
             background-color: rgba(37, 161, 65, 0.7);
         }
@@ -153,10 +156,6 @@
             width: auto;
         }
 
-        .heroSliderPreview__slide {
-            width: 300px;
-        }
-
         .heroSliderPreview__previewBox {
             cursor: pointer;
             position: relative !important;
@@ -179,7 +178,71 @@
                 margin: 0 -4px;
             }
         }
+        @media (max-width: 1220px) {
+            .heroSlider__txtBox {
+                 padding: 20px 70px 30px 30px;
+            }
+            .heroSlider__content {
+                padding-left: 236px;
+            }
+        }
 
+        @media (max-width: 991.98px) {
+            .wrp-heroSlider--mobile .wrp-heroSlider {
+                margin-right: 0 !important;
+            }
+            .wrp-heroSlider--mobile .heroSliderPreview {
+                margin-left: 0 !important;
+            }
+            .wrp-heroSlider--mobile {
+                display: flex;
+            }
+            .heroSlider__content--desktop {
+                display: none;
+            }
+            .wrp-heroSlider--mobile .heroSlider__content {
+                padding-left: 0;
+                margin-left: 0;
+            }
+            .wrp-heroSlider--mobile .heroSlider__txtBox {
+                padding-right: 0 !important;
+            }
+            .wrp-heroSlider--mobile .heroSlider__txt {
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+            .wrp-heroSlider--mobile .heroSlider__count {
+                top: 0;
+            }
+            .wrp-heroSlider--mobile {
+                margin-bottom: 32px;
+            }
+
+        }
+
+        @media (max-width: 767.98px) {
+            .wrp-heroSlider--mobile {
+                width: 100% !important;
+            }
+            .heroSlider__promo {
+                width: 30%;
+            }
+            .heroSlider__txtBox {
+                padding-left: 19px;
+            }
+        }
+
+        @media (max-width: 479.98px) {
+            .swiper-container-initialized .swiper-slide {
+                 flex-shrink: 0;
+            }
+            .heroSlider__promo {
+                width: 25%;
+            }
+            .heroSlider__title {
+                font-size: 30px;
+            }
+        }
     </style>
 @endsection
 

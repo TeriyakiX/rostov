@@ -12,7 +12,10 @@
                             </svg>
                         </a></li>
                     <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active"
-                                                     href="#"><span>Статьи</span></a></li>
+                                                     href="#"><span>Статьи</span>
+                            <svg>
+                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                            </svg></a></li>
                 </ul>
             </div>
         </nav>
@@ -20,7 +23,7 @@
             <div class="cooperation__container _container">
                 <div class="cooperation__content">
                     <h2 class="cooperation__title t">Статьи</h2>
-                    @include('posts.custom.stati_tags')
+                    <div class="stati__content__tags">@include('posts.custom.stati_tags')</div>
                     <div class="cooperation__body sideDashContainer">
                         <div class="sideDash sideDash--sticky" style="z-index: 9999">
                             <div class="sideDash__item sideDash__item--gap">
@@ -60,46 +63,27 @@
                                 <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
                             </div>
                         </div>
-                        <div class="postContainer">
-                            @foreach($posts as $post)
-
-                                <div class="post_itemWrp">
-                                    <div class="card post_card">
-                                        <div class="card__title" style="z-index: 3;font-size: 20px; ">
-                                            <a class="link"
-                                               href="{{route('index.posts.by_id',['slug' => $post->slug])}}">
+                        <div class="catalogContainer">
+                            @foreach($posts as $index => $post)
+                                <div class="catalogItemBoxWrp">
+                                    <a href="{{route('index.posts.by_id',['slug' => $post->slug])}}"
+                                       class="catalogItemBox {{ $index % 2 == 0 ? 'catalogItemBox--left' : 'catalogItemBox--right' }}">
+                                        <div class="catalogItemContent">
+                                            <div class="catalogTitle">
                                                 {{ $post->title ?? ''}}
-                                            </a>
+                                            </div>
+                                            <div class="catalogDesc">
+                                                {{ $post->preview ?? ''}}
+                                            </div>
                                         </div>
 
-                                        <a href="{{route('index.posts.by_id',['slug' => $post->slug])}}"
-                                           class="linkClass">
-                                            <div class="card__imgWrp">
-                                                <a class="card__imgBox"
-                                                   href="{{route('index.posts.by_id',['slug' => $post->slug])}}">
-                                                    <picture style="z-index: 2;">
-                                                        <source type="image/webp"
-                                                                srcset="{{ $post->mainPhotoPath() }}">
-                                                        <img src="{{ $post->mainPhotoPath() }}" alt="p1">
-                                                    </picture>
-                                                </a>
+                                        <div class="catalogItemImgBox block-{{$loop->index}}">
+                                            <div class="catalogItemImg"
+                                                 style="background-image: url({{ $post->mainPhotoPath() }})">
                                             </div>
-
-                                            <div class="card__body">
-                                                <div class="card__title" style="z-index: 3; font-size: 16px; ">
-                                                    <a class="link"
-                                                       href="{{route('index.posts.by_id',['slug' => $post->slug])}}">
-                                                        {{ $post->preview ?? ''}}
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </a>
-
-
-                                    </div>
-
+                                        </div>
+                                    </a>
                                 </div>
-
                             @endforeach
                         </div>
                     </div> {{ $posts->links('pagination::bootstrap-4') }}
@@ -142,5 +126,10 @@
             margin: 0 auto
         }
 
+        @media (max-width: 767.98px) {
+            .stati__content__tags {
+                display: none;
+            }
+        }
     </style>
 @endsection

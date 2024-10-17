@@ -72,10 +72,13 @@
                                                                          data-product="{{ $product->id }}">
                                                                         <div class="card comparison__card"
                                                                              data-product="{{ $product->id }}">
-
-                                                                            <div class="card__new-label">New</div>
-
+                                                                            @if($product->is_novelty)
+                                                                                <div class="card__new-label">New</div>
+                                                                            @endif
                                                                             <div class="card__imgBox-wrapper">
+                                                                                @if($product->is_promo)
+                                                                                    <div class="card__promo-label">{{$product->getFormattedEndPromoDate()}}</div>
+                                                                                @endif
                                                                                 <a class="card__imgBox ibg"
                                                                                    href="{{ $product->showLink() }}">
                                                                                     <picture>

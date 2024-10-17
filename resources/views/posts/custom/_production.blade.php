@@ -118,10 +118,6 @@
             width: 414px;
         }
 
-        .heroSliderPreview__slide {
-            width: 300px;
-        }
-
         .heroSliderPreview__previewBox {
             cursor: pointer;
             position: relative;

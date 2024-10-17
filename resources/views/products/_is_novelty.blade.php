@@ -16,6 +16,9 @@
                     <li class="breadcrumbs__item">
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                             <span>Новинки</span>
+                            <svg>
+                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>
@@ -81,4 +84,18 @@
             </div>
         </section>
     </main>
+
+    <style>
+        .productsTmp__title {
+            margin-bottom: 32px;
+        }
+        .productsTmp__body {
+            margin: 0 -8px;
+        }
+        @media (max-width: 767.98px) {
+            .productsTmp__body {
+                margin: 0 -4px;
+            }
+        }
+    </style>
 @endsection

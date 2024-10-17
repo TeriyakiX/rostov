@@ -372,16 +372,16 @@
                                             <div class="prodCard__colorBox">
                                                 <div class="prodCard__name">Цвет</div>
                                                   <div class="prodCard__wrapper">
-                                                      <div class="leftPointer" style="cursor: pointer;margin:auto; transform: rotate(180deg)">
-                                                          <img src="{{ asset('img/icons/right-arrow.png') }}"/>
-                                                      </div>
+{{--                                                      <div class="leftPointer" style="cursor: pointer;margin:auto; transform: rotate(180deg)">--}}
+{{--                                                          <img src="{{ asset('img/icons/right-arrow.png') }}"/>--}}
+{{--                                                      </div>--}}
                                                       <div class="wrp-colorsSlider">
-                                                          <div class="swiper-container colorsSlider _swiper" id="content">
-                                                              <div class="swiper-wrapper colorsSlider__wrapper">
+                                                          <div class="colorsSlider">
+                                                              <div class="colorsSlider__wrapper">
                                                                   <input type="hidden" name="color"
                                                                          @if($colorsArray && $colorsArray[0]) value="{{ $colorsArray[0]['ral'] }}" @endif>
                                                                   @foreach($colorsArray as $index => $item)
-                                                                      <div class="swiper-slide colorsSlider__slide">
+                                                                      <div class="colorsSlider__slide">
                                                                           <div class="prodCard__colorWrp">
                                                                               <div
                                                                                   class="prodCard__color @if($index ==0) selected @endif "
@@ -396,9 +396,9 @@
                                                               </div>
                                                           </div>
                                                       </div>
-                                                      <div class="rightPointer" style="cursor: pointer;margin:auto">
-                                                          <img src="{{ asset('img/icons/right-arrow.png') }}"/>
-                                                      </div>
+{{--                                                      <div class="rightPointer" style="cursor: pointer;margin:auto">--}}
+{{--                                                          <img src="{{ asset('img/icons/right-arrow.png') }}"/>--}}
+{{--                                                      </div>--}}
                                                   </div>
                                             </div>
                                         @endif

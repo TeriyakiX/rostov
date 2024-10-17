@@ -12,19 +12,60 @@
                             </svg>
                         </a></li>
                     <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active"
-                                                     href="#"><span>{{ $postCategory->title }}</span></a></li>
+                                                     href="#"><span>{{ $postCategory->title }}</span>
+                            <svg>
+                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                            </svg></a></li>
                 </ul>
             </div>
         </nav>
 
 {{--        <!-- Project Gallery-->--}}
         <section class="gallery">
-            <div class="gallery__container _container">
+            <div class="gallery__container _container sideDashContainer">
+                <div class="sideDash sideDash--sticky" style="z-index: 9999">
+                    <div class="sideDash__item sideDash__item--gap">
+                        <svg class="sideDash__icon">
+                            <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
+                                <img src="{{asset('img/sprites/3.png')}}" alt="">
+                            </use>
+                        </svg>
+                        <div class="sideDash__mark"><a
+                                href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
+                                покрытий</a></div>
+                    </div>
+                    <div class="sideDash__item sideDash__item--gap">
+                        <svg class="sideDash__icon">
+                            <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
+                                <img src="{{asset('img/sprites/4.png')}}" alt="">
+                            </use>
+                        </svg>
+                        <div class="sideDash__mark"><a
+                                href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
+                                решения</a></div>
+                    </div>
+                    <div class="sideDash__item sideDash__item--gap">
+                        <svg class="sideDash__icon">
+                            <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
+                                <img src="{{asset('img/sprites/2.png')}}" alt="">
+                            </use>
+                        </svg>
+                        <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
+                    </div>
+                    <div class="sideDash__item sideDash__item--gap">
+                        <svg class="sideDash__icon">
+                            <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
+                                <img src="{{asset('img/sprites/1.png')}}" alt="">
+                            </use>
+                        </svg>
+                        <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
+                    </div>
+                </div>
                 <h1 class="gallery__title t">
                     Услуги
                 </h1>
                 <div class="gallery__content">
-                    <div class="cooperation__body sideDashContainer">
+                    <div class="cooperation__body">
                         <div class="gallery__body sideDashContainer">
                             @foreach($posts as $key=>$post)
 
@@ -33,7 +74,7 @@
                                                                     <div class="gallery__itemTitle">
                                                                         <a class="link"
                                                                            href="{{ route('index.posts.show', ['slug' => $post->slug]) }}">
-                                                                            {{ $post->title }}
+                                                                            {{ $post->seo_title }}
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -52,7 +93,12 @@
     @include('posts.custom.modals.service_modals')
 @endsection
 <style>
-
+    .gallery__content {
+        margin-top: 5px;
+    }
+    .gallery__itemTitle {
+        font-weight: 700;
+    }
     .cooperation--cta {
         width: 100%;
         display: flex;

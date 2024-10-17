@@ -6,7 +6,7 @@
                 <div class="newItems__controlPanel">
                     <div class="newItems__tabs">
                         <div class="newItems__tabsEl all_categories newItems__tabsEl--active" role="button" tabindex="0"
-                             data-tab="all" data-active>Все
+                             data-tab="all" data-active><div class="newItems__tabsEl--first">Все</div>
                         </div>
                         <div class="newItems__tabsEl sort_button" role="button" type="submit" tabindex="0"
                              data-tab="roof">

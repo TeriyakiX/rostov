@@ -77,13 +77,17 @@
 
 .card__icon--like.active svg,
 .infoPanel__btn.active svg.infoPanel__svg--heart {
-  stroke: #006bde;
-  fill: #006bde;
+  stroke: #E8E8E8;
+  fill: #E8E8E8;
+}
+
+.card__mini-icon.active {
+    background: #006bde;
 }
 
 .card__icon--stat.active svg,
 .infoPanel__btn.active svg {
-  fill: #006bde;
+  fill: #E8E8E8;
 }
 
 .prodCard__icon--share.active svg {

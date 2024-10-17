@@ -182,7 +182,7 @@
                                     <iframe frameborder="0" src="//www.youtube.com/embed/-2niZLoZ4uM?start=33" width="100%" height="100%"></iframe>
                                 </div>
 
-                                <div class="video__info--warning">
+                                <div class="video__info--warning video__info--warning--desktop">
                                     <p class="video__text">
                                         <span style="color: #006BDE; font-weight: 700">Внимание! </span>
                                         Категорически запрещено использование
@@ -223,6 +223,16 @@
                                          Мы не рекомендуем работать с листами длиннее 4м. Длинные листы
                                          сложнее перевозить, разгружать и поднимать на кровлю. Чем длиннее
                                          лист, тем выше вероятность его деформации.
+                                     </p>
+                                 </div>
+
+                                 <div class="video__info--warning video__info--warning--mobile">
+                                     <p class="video__text">
+                                         <span style="color: #006BDE; font-weight: 700">Внимание! </span>
+                                         Категорически запрещено использование
+                                         углошлифовальной машины с абразивным кругом, «болгарки».
+                                         Это одно из главных условий действия гарантии на внешний вид
+                                         и технические характеристики металлочерепицы.
                                      </p>
                                  </div>
                              </div>

@@ -216,7 +216,7 @@ try {
         },
         breakpoints: {
             320: {
-                slidesPerView: 2
+                slidesPerView: 3
             },
             768: {
                 slidesPerView: 4

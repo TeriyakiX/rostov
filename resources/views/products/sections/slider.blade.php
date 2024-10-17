@@ -10,14 +10,12 @@
             <div class="swiper-container heroSlider
                                      slider_0
                                 _swiper" data-id="0">
-                <div class="swiper-wrapper heroSlider__wrapper"
-                     style="height: 517px;">
+                <div class="swiper-wrapper heroSlider__wrapper">
 
 
                     @foreach($slider as $item)
                         <div class="swiper-slide slide_1 heroSlider__slide swiper-lazy firstSlide" data-url="{{$item->url}}"
-                             data-background="{{ asset('upload_images/' . $item->photo_desktop) }}"
-                             style="height: 517px">
+                             data-background="{{ asset('upload_images/' . $item->photo_desktop) }}">
                             <div class="heroSlider__content _container heroSlider__content--desktop">
                                 <div class="heroSlider__txtBox">
                                     <h2 class="heroSlider__title">Акция выходного дня</h2>
@@ -45,7 +43,7 @@
                                       _swiper" data-id="0">
                 <div class="swiper-wrapper heroSliderPreview__wrapper">
                     @foreach($slider as $item)
-                        <div class="swiper-slide heroSliderPreview__slide" data-url="{{$item->url}}" style="height: 517px;">
+                        <div class="swiper-slide heroSliderPreview__slide" data-url="{{$item->url}}">
                             <div class="heroSliderPreview__previewBox">
                                 <div class="heroSliderPreview__previewImgBox swiper-lazy"
                                      data-background="{{ asset('upload_images/' .$item->photo_desktop) }}">
@@ -69,7 +67,7 @@
 {{--    </div>--}}
 </div>
 
-<div style="width: 100%">
+<div style="width: 100%; margin-top: 32px">
     <div class="wrp-heroSlider wrp-heroSlider--mobile" style="position: static;">
         <div class="swiper-container heroSlider
                                      slider_0
@@ -163,11 +161,6 @@
 
         color: #505050;
     }
-
-    .swiper {
-        height: 300px;
-    }
-
     .wrp-heroSlider {
         width: 300px;
         min-width: 966px;
@@ -191,23 +184,10 @@
         height: 100%;
         margin-left: -230px;
     }
-
-    .heroSliderPreview__slide {
-        width: 300px;
-    }
-
     .heroSliderPreview__previewBox {
         cursor: pointer;
         position: relative;
         height: 100%;
         overflow: hidden;
-    }
-    @media screen and (max-width: 500px) {
-        .wrp-heroSliderPreview {
-            display: none;
-        }
-        .wrp-heroSlider {
-            margin-right: 0px;
-        }
     }
 </style>

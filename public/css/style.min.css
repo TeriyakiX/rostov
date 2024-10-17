@@ -4953,6 +4953,10 @@ body:not(._touch) .card__icon--basket:hover svg {
   display: block;
 }
 
+.video__info--warning--mobile {
+    display: none;
+}
+
 .comparison__content {
   padding-bottom: 80px;
 }
@@ -6609,6 +6613,9 @@ body:not(._touch) .card__icon--basket:hover svg {
 .video__spec--card img {
     width: 100%;
 }
+.video__rec--card img {
+    width: 100%;
+}
 
 .video__fourth-block {
     display: flex;
@@ -7455,6 +7462,9 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 991.98px) {
+    .video__comp--list p {
+        width: 85%;
+    }
     .card__delete {
         width: 24px;
         height: 24px;
@@ -7539,23 +7549,23 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
     .menu__nav {
         display: flex;
-        justify-content: center; /* Центрируем навигацию */
-        flex-wrap: wrap; /* Позволяем элементам переноситься на следующую строку */
+        justify-content: center;
+        flex-wrap: wrap;
         margin-bottom: 32px;
-        padding: 0; /* Убираем внутренние отступы */
+        padding: 0;
     }
 
     .menu__list {
         width: 100%;
         display: flex !important;
-        flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
-        justify-content: space-between; /* Распределение между элементами */
-        margin: 0; /* Убираем внешние отступы */
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0;
         padding: 0;
     }
     .menu__logoBoxMobile{
-        margin-top: 16px; /* Отступ сверху от меню */
-        text-align: center; /* Выравнивание логотипа по центру (если нужно) */
+        margin-top: 16px;
+        text-align: center;
     }
     .menu__logoLinkMobile img {
         max-width: 100%;
@@ -8091,15 +8101,15 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
 
     .catalogControl__searchBtn-mobile {
-        background: none; /* Убираем фон */
-        border: none; /* Убираем границы */
-        cursor: pointer; /* Курсор в виде указателя */
-        padding: 0 10px; /* Отступы по горизонтали */
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0 10px;
     }
 
     .catalogControl__searchBtn-mobile svg {
-        width: 20px; /* Ширина иконки */
-        height: 20px; /* Высота иконки */
+        width: 20px;
+        height: 20px;
     }
     .hero {
         background-color: #fff;
@@ -8117,27 +8127,27 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
 
     .close-button {
-        position: absolute; /* Позиционирование относительно родителя */
-        top: 35px; /* Отступ сверху (можно настроить) */
-        right: 16px; /* Отступ справа (можно настроить) */
-        width: 24px; /* Размер кнопки (по необходимости можно изменить) */
-        height: 24px; /* Размер кнопки */
-        cursor: pointer; /* Указывает, что это кликабельный элемент */
-        z-index: 1000; /* Увеличиваем z-index, чтобы иконка всегда была поверх */
+        position: absolute;
+        top: 35px;
+        right: 16px;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        z-index: 1000;
     }
 
     .close-icon {
-        width: 100%; /* Занимает всю ширину родительского блока */
-        height: 100%; /* Занимает всю высоту родительского блока */
-        fill: #000; /* Цвет иконки можно изменить на нужный */
+        width: 100%;
+        height: 100%;
+        fill: #000;
     }
 
     .authorization__link {
-        text-decoration: none; /* Убираем подчеркивание */
-        border-radius: 6px; /* Закругление углов */
-        font-size: 14px; /* Размер текста */
-        font-weight: 400; /* Толщина текста */
-        text-align: center; /* Выравнивание текста по центру */
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
         align-content: center;
         width: 100%;
         height: 100%;
@@ -8148,15 +8158,15 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
     .authorization__item_mobile {
         align-items: center;
-        height: 50px; /* Высота кнопки */
-        text-decoration: none; /* Убираем подчеркивание */
-        transition: background-color 0.2s ease; /* Плавный переход фона при наведении */
-        color: white; /* Цвет текста */
-        background-color: #006BDE; /* Цвет фона */
+        height: 50px;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+        color: white;
+        background-color: #006BDE;
         border: none;
-        display: flex; /* Используем flexbox для выравнивания */
-        justify-content: center; /* Центрируем текст по горизонтали */
-        align-items: center; /* Центрируем текст по вертикали */
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-bottom: 42px;
         cursor: pointer;
     }
@@ -8184,22 +8194,22 @@ body:not(._touch) .card__icon--basket:hover svg {
 
     .infoPanel__btn {
         display: flex !important;
-        justify-content: center; /* Центрируем по горизонтали */
-        align-items: center; /* Центрируем по вертикали */
+        justify-content: center;
+        align-items: center;
         margin-right: 16px;
-        width: 50px; /* Одинаковая ширина и высота для круга */
+        width: 50px;
         height: 50px;
-        background-color: #03D3D4; /* Цвет фона */
-        border-radius: 50%; /* Закругляем до круга */
+        background-color: #03D3D4;
+        border-radius: 50%;
     }
 
     .infoPanel__svg {
-        width: 24px; /* Размер иконки SVG */
+        width: 24px;
         height: 24px;
         margin: 0;
         padding: 0;
         vertical-align: middle;
-        fill: white; /* Цвет иконки */
+        fill: white;
     }
 
     .infoPanel__btn:not(:first-child) {
@@ -8541,10 +8551,9 @@ body:not(._touch) .card__icon--basket:hover svg {
   }
 
   .heroSliderPreview__previewTitle {
-    left: 50%;
+    left: 10%;
     padding: 0;
     font-size: 3.6rem;
-    transform: skewX(0) rotateZ(-90deg) translateY(-50%);
   }
 
   .heroSliderPreview__count {
@@ -8853,6 +8862,80 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 767.98px) {
+    .video__info--warning--desktop {
+        display: none;
+    }
+    .video__info--warning--mobile {
+        display: block;
+    }
+    .video__info--warning {
+        padding: 32px;
+    }
+    .cooperation__subTitle {
+        font-size: 18px;
+    }
+    .video__text {
+        font-size: 14px;
+    }
+    .video__first-block {
+        flex-direction: column;
+        margin-bottom: 64px;
+    }
+    .video__second-block {
+        flex-direction: column;
+        margin-bottom: 64px;
+    }
+    .video__third-block {
+        flex-direction: column;
+        margin-bottom: 64px;
+        gap: 32px;
+    }
+    .video__rec--title {
+        width: 100%;
+    }
+    .video__rec {
+        flex-direction: column;
+        gap: 32px;
+    }
+    .video__rec--card {
+        width: 99%;
+        margin: 0 auto;
+    }
+    .video__rec--message {
+        padding: 32px;
+    }
+    .video__comp--list {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .video__rec--message input {
+        width: 100%;
+    }
+    .video__fourth-block {
+        margin-bottom: 64px;
+        padding: 32px 16px;
+    }
+    .video__spec--card {
+        width: 99%;
+        margin: 0 auto;
+    }
+    .video__info--video {
+        height: 242px;
+    }
+    .video__info--right {
+        gap: 32px;
+    }
+    .video__desc--left p:nth-child(1) {
+        margin-bottom: 16px;
+    }
+    .video__desc--line {
+        border-left: none;
+        border-bottom: 2px solid #ECECEC;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 32px;
+        margin-bottom: 32px;
+    }
     .card__promo-label {
         left: -8px;
         width: 100%;
@@ -9288,13 +9371,9 @@ body:not(._touch) .card__icon--basket:hover svg {
     padding: 10px 70px 20px 20px;
   }
 
-  .heroSliderPreview__previewTitle {
-    font-size: 2.6rem;
-  }
-
   .heroSliderPreview__count {
     font-size: 5.6rem;
-    transform: translate(-25%, -16%) skewX(0);
+    transform: translate(0%, 0%) skewX(20deg);
   }
 
   .t {

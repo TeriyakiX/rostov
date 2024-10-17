@@ -90,13 +90,13 @@
     <style>
         .productsTmp__body {
             margin: 0 -8px;
+            margin-top: 32px;
         }
         .heroSliderPreview__previewBox:before {
             background-color: rgba(37, 161, 65, 0.7);
         }
         .hero__container {
             min-height: 517px;
-            margin-bottom: 32px;
         }
         .heroSlider__txt {
             padding-right: 140px !important;
@@ -139,23 +139,6 @@
             color: #505050;
         }
 
-        .swiper {
-            height: auto !important;
-        }
-
-        .wrp-heroSlider {
-            width: 300px;
-            min-width: 966px;
-            margin-right: 210px;
-        }
-
-        .heroSliderPreview {
-            position: relative !important;
-            height: 100%;
-            margin-left: -230px;
-            width: auto;
-        }
-
         .heroSliderPreview__previewBox {
             cursor: pointer;
             position: relative !important;
@@ -164,10 +147,6 @@
         }
 
         @media screen and (max-width: 500px) {
-            .wrp-heroSliderPreview {
-                display: none;
-            }
-
             .wrp-heroSlider {
 
                 margin-right: 0px;
@@ -188,6 +167,9 @@
         }
 
         @media (max-width: 991.98px) {
+            .heroSliderPreview__count {
+                font-size: 9.6rem;
+            }
             .wrp-heroSlider--mobile .wrp-heroSlider {
                 margin-right: 0 !important;
             }
@@ -221,26 +203,49 @@
         }
 
         @media (max-width: 767.98px) {
+            .heroSlider__txtBox {
+                max-width: 50% !important;
+            }
+            .heroSliderPreview__count {
+                font-size: 9.6rem;
+            }
             .wrp-heroSlider--mobile {
                 width: 100% !important;
-            }
-            .heroSlider__promo {
-                width: 30%;
             }
             .heroSlider__txtBox {
                 padding-left: 19px;
             }
+            .heroSlider__promo {
+                width: 70%;
+            }
         }
 
+        @media (max-width: 600px) {
+            .heroSlider__txtBox {
+                max-width: 40% !important;
+            }
+            .heroSliderPreview {
+                margin-left: -100px;
+            }
+            .wrp-heroSlider {
+                margin-right: 0px;
+            }
+        }
         @media (max-width: 479.98px) {
+            .heroSliderPreview__count {
+                font-size: 9.6rem;
+            }
             .swiper-container-initialized .swiper-slide {
-                 flex-shrink: 0;
+                flex-shrink: 0;
             }
             .heroSlider__promo {
-                width: 25%;
+                width: 80%;
             }
             .heroSlider__title {
                 font-size: 30px;
+            }
+            .heroSlider__txtBox {
+                max-width: 35% !important;
             }
         }
     </style>

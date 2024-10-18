@@ -8,8 +8,22 @@
             <div class="products__container _container">
                 <div class="products__content"
                 >
+                    <div class="products__title--wrapper">
                         <h2 class="products__title t"><a href="/posts/katalog">Товары</a></h2>
-                    <div class="products__body">
+                        <div class="newItems__sliderBtns--mobile">
+                            <div class="newItems__sliderBtn newItems__sliderBtn--mobile newItems__sliderBtn--prev--mobile" role="button" tabindex="0">
+                                <svg>
+                                    <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                </svg>
+                            </div>
+                            <div class="newItems__sliderBtn newItems__sliderBtn--mobile newItems__sliderBtn--next--mobile" role="button" tabindex="0">
+                                <svg>
+                                    <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products__body products__body--desktop">
                         @foreach(\App\Models\ProductCategory::query()->whereNull('parent_id')->limit(6)->get() as $index => $productCategory)
                             <div class="products__itemWrp">
                                 <div
@@ -23,10 +37,6 @@
                                         </h3>
                                                     <ul class="products__list">
                                                         @foreach($productCategory->subcategories()->limit(3)->get() as $subcategory)
-
-
-
-
                                                             <li class="products__listItem">
                                                                 <a class="products__link"
                                                                    href="{{ route('index.products.categoryList', ['category' => $subcategory->slug]) }}">
@@ -52,6 +62,60 @@
                             </div>
                         @endforeach
                     </div>
+
+
+                    <div class="products__body products__body--mobile swiper-container itemsGoodsSlider _swiper">
+                        <div class="swiper-wrapper itemsSlider__wrapper">
+                            @php
+                                $categories = \App\Models\ProductCategory::query()->whereNull('parent_id')->limit(6)->get();
+                            @endphp
+
+                            @for ($i = 0; $i < $categories->count(); $i += 2)
+                                <div class="products__row swiper-slide itemsSlider__slide slider_item">
+                                    @for ($j = $i; $j < $i + 2 && $j < $categories->count(); $j++)
+                                        @php
+                                            $productCategory = $categories[$j];
+                                        @endphp
+                                        <div class="products__itemWrp">
+                                            <div class="products__itemBox {{ ($j % 2 == 0 ? 'products__itemBox--left' : 'products__itemBox--right') }}">
+                                                <div class="products__itemContent">
+                                                    <h3 class="products__name">
+                                                        <a class="link"
+                                                           href="{{ route('index.products.categoryList', ['category' => $productCategory->slug]) }}">
+                                                            {{ $productCategory->title }}
+                                                        </a>
+                                                    </h3>
+                                                    <ul class="products__list">
+                                                        @foreach($productCategory->subcategories()->limit(3)->get() as $subcategory)
+                                                            <li class="products__listItem">
+                                                                <a class="products__link"
+                                                                   href="{{ route('index.products.categoryList', ['category' => $subcategory->slug]) }}">
+                                                                    {{ $subcategory->title }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                        <li class="products__listItem">
+                                                            <a class="products__link"
+                                                               href="{{ route('index.products.categoryList', ['category' => $productCategory->slug]) }}">
+                                                                Ещё...
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <a class="products__itemImgBox block-{{$j}}"
+                                                   href="{{ route('index.products.categoryList', ['category' => $productCategory->slug]) }}">
+                                                    <div class="products__img"
+                                                         style="background-image: url({{asset($productCategory->mainPhotoPath())}})"></div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
     @else

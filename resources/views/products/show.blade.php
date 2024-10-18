@@ -794,7 +794,7 @@
                     </div>
                 </section>
             @endif
-
+            @if(count($product->similarProducts))
             <section class="newItems analogs">
                 <div class="newItems__container _container">
                     <div class="newItems__content">
@@ -832,7 +832,7 @@
                     </div>
                 </div>
             </section>
-
+            @endif
             @if(count($product->relatedProducts))
                 <section class="newItems crossale">
                     <div class="newItems__container _container">

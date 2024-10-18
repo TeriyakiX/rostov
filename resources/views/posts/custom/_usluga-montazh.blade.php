@@ -61,10 +61,10 @@
         </div>
     </div>
 @else
-    <div class="contentContainer">
-        <div class="contentContainer--text">
-            {!! $post->preview !!}
-        </div>
+<div class="contentContainer">
+    <div class="contentContainer--text">
+        {!! $post->preview !!}
+    </div>
     <div class="cooperation--cta">
         <div class="cooperation--cta_item" style="width: 65%;">
             <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"

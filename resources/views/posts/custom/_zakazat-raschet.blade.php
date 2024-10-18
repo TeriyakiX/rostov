@@ -61,7 +61,9 @@
     </div>
 @else
     <div class="contentContainer">
-        {!! $post->preview !!}
+        <div class="contentContainer--text">
+            {!! $post->preview !!}
+        </div>
         <br>
         <div class="cooperation--cta">
             <div class="cooperation--cta_item">

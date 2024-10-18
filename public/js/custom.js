@@ -548,18 +548,3 @@ $(document).on('click', '.addTo', function (event) {
             console.log('Server error occured');
         });
 })
-
-document.addEventListener("DOMContentLoaded", function() {
-    const cardCharsList = document.querySelectorAll('.card__chars');
-
-    cardCharsList.forEach(list => {
-        const items = list.querySelectorAll('li');
-        if (items.length > 3) {
-            items.forEach((item, index) => {
-                if (index >= 3) {
-                    item.style.display = 'none';
-                }
-            });
-        }
-    });
-});

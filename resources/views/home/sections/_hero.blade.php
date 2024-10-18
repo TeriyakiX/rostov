@@ -38,28 +38,28 @@
     </div>
 </section>
 
-<div style="width: 100%;">
-    <div class="wrp-heroSlider wrp-heroSlider--mobile" style="position: static;">
-        <div class="swiper-container heroSlider _swiper">
-            <div class="swiper-wrapper heroSlider__wrapper">
-                @foreach($indexSliders as $indexSlider)
-                    <div class="swiper-slide heroSlider__slide swiper-lazy">
-                        <div class="heroSlider__content _container">
-                            <div class="heroSlider__txtBox">
-                                <h2 class="heroSlider__title">{{ $indexSlider->title }}</h2>
-                                <div class="heroSlider__count"></div>
-                                <p class="heroSlider__txt">
-                                    {{ $indexSlider->description }}
-                                </p>
-                                <a class="heroSlider__btn btn" href="{{ $indexSlider->url }}">Узнать больше</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</div>
+{{--<div style="width: 100%;">--}}
+{{--    <div class="wrp-heroSlider wrp-heroSlider--mobile" style="position: static;">--}}
+{{--        <div class="swiper-container heroSlider _swiper">--}}
+{{--            <div class="swiper-wrapper heroSlider__wrapper">--}}
+{{--                @foreach($indexSliders as $indexSlider)--}}
+{{--                    <div class="swiper-slide heroSlider__slide swiper-lazy">--}}
+{{--                        <div class="heroSlider__content _container">--}}
+{{--                            <div class="heroSlider__txtBox">--}}
+{{--                                <h2 class="heroSlider__title">{{ $indexSlider->title }}</h2>--}}
+{{--                                <div class="heroSlider__count"></div>--}}
+{{--                                <p class="heroSlider__txt">--}}
+{{--                                    {{ $indexSlider->description }}--}}
+{{--                                </p>--}}
+{{--                                <a class="heroSlider__btn btn" href="{{ $indexSlider->url }}">Узнать больше</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 <style>
     .wrp-heroSlider--mobile {
@@ -80,7 +80,7 @@
             padding-bottom: 0;
         }
         .hero {
-            margin-top: 10px;
+            margin-top: 83px;
         }
         .wrp-heroSlider, .wrp-heroSliderPreview {
             right: 150px;
@@ -89,6 +89,16 @@
     @media (max-width: 479.98px) {
         .wrp-heroSlider, .wrp-heroSliderPreview {
             right: 110px;
+        }
+    }
+    @media (max-width: 767.98px) {
+        .hero {
+            margin-top: 56px;
+        }
+    }
+    @media (max-width: 479.98px) {
+        .hero {
+            margin-top: 0;
         }
     }
 </style>

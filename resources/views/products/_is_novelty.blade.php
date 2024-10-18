@@ -86,9 +86,6 @@
     </main>
 
     <style>
-        .productsTmp__title {
-            margin-bottom: 32px;
-        }
         .productsTmp__body {
             margin: 0 -8px;
         }

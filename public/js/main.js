@@ -153,20 +153,20 @@ menu.init(); //=================
 // hero slider
 function sideDash() {
 
-        const sidebar = document.querySelector('.sideDashContainer');
+    const sidebar = document.querySelector('.sideDashContainer');
     console.log(sidebar)
-        const element = document.querySelector('.sideDash');
+    const element = document.querySelector('.sideDash');
     console.log(element)
-        let stickyDash = new hcSticky(element, {
-            stickTo: sidebar,
-            top: 140,
-            bottom: 20,
-            responsive: {
-                992: {
-                    disable: true
-                }
+    let stickyDash = new hcSticky(element, {
+        stickTo: sidebar,
+        top: 140,
+        bottom: 20,
+        responsive: {
+            992: {
+                disable: true
             }
-        });
+        }
+    });
     console.log(stickyDash)
 }
 
@@ -176,297 +176,202 @@ sideDash(); // Dynamic Adapt v.1
 // Andrikanych Yevhen 2020
 // https://www.youtube.com/c/freelancerlifestyle
 try {
-
-
-    let heroSlider = new Swiper('.heroSlider', {
-        allowTouchMove: false,
-        observer: true,
-        observeParents: true,
+    let e = new Swiper(".heroSlider", {
+        allowTouchMove: !0,
+        observer: !0,
+        observeParents: !0,
         slidesPerView: 1,
-        loop: true,
+        loop: !0,
         speed: 800,
-        loopPreventsSlide: false,
+        loopPreventsSlide: !1,
         loopAdditionalSlides: 3,
-        watchSlidesVisibility: true,
-        preloadImages: false,
-        lazy: {
-            loadOnTransitionStart: true
-        },
+        watchSlidesVisibility: !0,
+        preloadImages: !1,
+        lazy: {loadOnTransitionStart: !0},
         on: {
-            beforeInit: swiper => {
-                swiper.el.querySelectorAll('.swiper-slide').forEach((el, index) => {
-                    el.querySelector('.heroSlider__count').innerHTML = index >= 10 ? index + 1 : "0".concat(index + 1);
-                });
+            beforeInit(e) {
+                e.el.querySelectorAll(".swiper-slide").forEach((e, t) => {
+                    e.querySelector(".heroSlider__count").innerHTML = t >= 10 ? t + 1 : "0".concat(t + 1)
+                })
+            }, touchEnd(i, o) {
+                let l = o.clickedIndex - o.activeIndex;
+                if (l >= 0) {
+                    for (let r = 0; r <= l; r++) t.slideNext(), e.slideNext();
+                    return
+                }
+                for (let n = 0; n > l; n--) t.slidePrev(), e.slidePrev()
             }
         }
-    });
-    let heroSliderPreview = new Swiper('.heroSliderPreview', {
-        allowTouchMove: false,
-        observer: true,
-        observeParents: true,
+    }), t = new Swiper(".heroSliderPreview", {
+        allowTouchMove: !0,
+        observer: !0,
+        observeParents: !0,
         slidesPerView: 3,
         initialSlide: 1,
-        loop: true,
+        loop: !0,
         speed: 800,
-        loopPreventsSlide: false,
-        watchSlidesVisibility: true,
-        preloadImages: false,
-        lazy: {
-            loadOnTransitionStart: true
-        },
-        breakpoints: {
-            320: {
-                slidesPerView: 3
-            },
-            768: {
-                slidesPerView: 4
-            },
-            992: {
-                slidesPerView: 3
-            }
-        },
+        loopPreventsSlide: !1,
+        watchSlidesVisibility: !0,
+        preloadImages: !1,
+        lazy: {loadOnTransitionStart: !0},
+        breakpoints: {320: {slidesPerView: 2}, 768: {slidesPerView: 4}, 992: {slidesPerView: 3}},
         on: {
-            //document.querySelector('.heroSliderPreview').style.pointerEvents = 'none';
-            beforeInit: swiper => {
-                swiper.el.querySelectorAll('.swiper-slide').forEach((el, index) => {
-                    el.querySelector('.heroSliderPreview__count').innerHTML = index >= 10 ? index + 1 : "0".concat(index + 1);
-                });
-            },
-            slideChangeTransitionStart: () => {
-                document.querySelector('.heroSliderPreview').style.pointerEvents = 'none';
-            },
-            slideChangeTransitionEnd: () => {
-                document.querySelector('.heroSliderPreview').style.pointerEvents = 'all';
+            beforeInit(e) {
+                e.el.querySelectorAll(".swiper-slide").forEach((e, t) => {
+                    e.querySelector(".heroSliderPreview__count").innerHTML = t >= 10 ? t + 1 : "0".concat(t + 1)
+                })
+            }, slideChangeTransitionStart() {
+                document.querySelector(".heroSliderPreview").style.pointerEvents = "none"
+            }, slideChangeTransitionEnd() {
+                document.querySelector(".heroSliderPreview").style.pointerEvents = "all"
             }
         }
     });
-    heroSliderPreview.on('click', event => {
-        let swipeCount = event.clickedIndex - event.activeIndex;
-
-        if (swipeCount >= 0) {
-            for (let i = 0; i <= swipeCount; i++) {
-                heroSliderPreview.slideNext();
-                heroSlider.slideNext();
-            }
-
-            return;
+    t.on("click", i => {
+        let o = i.clickedIndex - i.activeIndex;
+        if (o >= 0) {
+            for (let l = 0; l <= o; l++) t.slideNext(), e.slideNext();
+            return
         }
-
-        for (let i = 0; i > swipeCount; i--) {
-            heroSliderPreview.slidePrev();
-            heroSlider.slidePrev();
-        }
-    });
-}catch (e) {
-    const swipers = [];
-    const allSliders = document.querySelectorAll('.heroSlider');
-    allSliders.forEach(item => {
-        let currentId = (item.dataset.id)
-
-        const newSlider = new Swiper(item, {
-            allowTouchMove: false,
-            observer: true,
-            observeParents: true,
+        for (let r = 0; r > o; r--) t.slidePrev(), e.slidePrev()
+    })
+} catch (i) {
+    let o = [], l = document.querySelectorAll(".heroSlider");
+    l.forEach(e => {
+        let t = e.dataset.id, i = new Swiper(e, {
+            allowTouchMove: !0,
+            observer: !0,
+            observeParents: !0,
             slidesPerView: 1,
-            loop: true,
-            speed: 800,
-            loopPreventsSlide: false,
+            loop: !0,
+            speed: 1600,
+            loopPreventsSlide: !1,
             loopAdditionalSlides: 3,
-            watchSlidesVisibility: true,
-            preloadImages: false,
-            lazy: {
-                loadOnTransitionStart: true
-            },
-            autoplay: {
-                enabled: true,
-                delay: 4000,
-            },
-            navigation: {
-                nextEl: `.swiper-button-next_${currentId}`,
-                prevEl: `.swiper-button-prev_${currentId}`,
-            },
+            watchSlidesVisibility: !0,
+            preloadImages: !1,
+            lazy: {loadOnTransitionStart: !0},
+            autoplay: {enabled: !0, delay: 4e3},
+            navigation: {nextEl: `.swiper-button-next_${t}`, prevEl: `.swiper-button-prev_${t}`}
         });
-
-
-        swipers.push(newSlider);
+        o.push(i)
     });
-    const swipersPreview = []
-    const allPreviewSliders = document.querySelectorAll('.heroSliderPreview');
-    allPreviewSliders.forEach(item => {
-        const newPreviewSlider = new Swiper(item, {
-            allowTouchMove: false,
-            observer: true,
-            observeParents: true,
+    let r = [], n = document.querySelectorAll(".heroSliderPreview");
+    n.forEach(e => {
+        let t = new Swiper(e, {
+            allowTouchMove: !0,
+            observer: !0,
+            observeParents: !0,
             slidesPerView: 2,
             initialSlide: 1,
-            watchOverflow: true,
-            loop: true,
+            watchOverflow: !0,
+            loop: !0,
             speed: 800,
-            loopPreventsSlide: false,
+            loopPreventsSlide: !1,
             loopAdditionalSlides: 2,
-            watchSlidesVisibility: true,
-            preloadImages: false,
-            autoplay: {
-                enabled: true,
-                delay: 4000,
-            },
-            lazy: {
-                loadOnTransitionStart: true
-            },
+            watchSlidesVisibility: !0,
+            preloadImages: !1,
+            autoplay: {enabled: !0, delay: 4e3},
+            lazy: {loadOnTransitionStart: !0}
         });
-        swipersPreview.push(newPreviewSlider);
-    });
-    $('.swiper-button-next').on('click', item => {
-        let id = item.target.id
-        swipersPreview[id].slideNext();
+        r.push(t)
+    }), $(".swiper-button-next").on("click", e => {
+        r[e.target.id].slideNext()
     })
-
 }
 
 try {
-    let heroSlider = new Swiper('.heroSlider_2', {
-        allowTouchMove: false,
-        observer: true,
-        observeParents: true,
+    let n = new Swiper(".heroSlider_2", {
+        allowTouchMove: !1,
+        observer: !0,
+        observeParents: !0,
         slidesPerView: 1,
-        loop: true,
+        loop: !0,
         speed: 800,
-        loopPreventsSlide: false,
+        loopPreventsSlide: !1,
         loopAdditionalSlides: 3,
-        watchSlidesVisibility: true,
-        preloadImages: false,
-        lazy: {
-            loadOnTransitionStart: true
-        },
+        watchSlidesVisibility: !0,
+        preloadImages: !1,
+        lazy: {loadOnTransitionStart: !0},
         on: {
-            beforeInit: swiper => {
-                swiper.el.querySelectorAll('.swiper-slide_2').forEach((el, index) => {
-                    el.querySelector('.heroSlider__count_2').innerHTML = index >= 10 ? index + 1 : "0".concat(index + 1);
-                });
+            beforeInit: e => {
+                e.el.querySelectorAll(".swiper-slide_2").forEach(((e, t) => {
+                    e.querySelector(".heroSlider__count_2").innerHTML = t >= 10 ? t + 1 : "0".concat(t + 1)
+                }))
             }
         }
-    });
-    let heroSliderPreview = new Swiper('.heroSliderPreview_2', {
-        allowTouchMove: false,
-        observer: true,
-        observeParents: true,
+    }), l = new Swiper(".heroSliderPreview_2", {
+        allowTouchMove: !1,
+        observer: !0,
+        observeParents: !0,
         slidesPerView: 3,
         initialSlide: 1,
-        loop: true,
+        loop: !0,
         speed: 800,
-        loopPreventsSlide: false,
-        watchSlidesVisibility: true,
-        preloadImages: false,
-        lazy: {
-            loadOnTransitionStart: true
-        },
-        breakpoints: {
-            320: {
-                slidesPerView: 3
-            },
-            768: {
-                slidesPerView: 3
-            },
-            992: {
-                slidesPerView: 2.5
-            }
-        },
+        loopPreventsSlide: !1,
+        watchSlidesVisibility: !0,
+        preloadImages: !1,
+        lazy: {loadOnTransitionStart: !0},
+        breakpoints: {320: {slidesPerView: 3}, 768: {slidesPerView: 3}, 992: {slidesPerView: 3}},
         on: {
-            //document.querySelector('.heroSliderPreview').style.pointerEvents = 'none';
-            beforeInit: swiper => {
-                swiper.el.querySelectorAll('.swiper-slide_2').forEach((el, index) => {
-                    el.querySelector('.heroSliderPreview__count_2').innerHTML = index >= 10 ? index + 1 : "0".concat(index + 1);
-                });
-            },
-            slideChangeTransitionStart: () => {
-                document.querySelector('.heroSliderPreview_2').style.pointerEvents = 'none';
-            },
-            slideChangeTransitionEnd: () => {
-                document.querySelector('.heroSliderPreview_2').style.pointerEvents = 'all';
+            beforeInit: e => {
+                e.el.querySelectorAll(".swiper-slide_2").forEach(((e, t) => {
+                    e.querySelector(".heroSliderPreview__count_2").innerHTML = t >= 10 ? t + 1 : "0".concat(t + 1)
+                }))
+            }, slideChangeTransitionStart: () => {
+                document.querySelector(".heroSliderPreview_2").style.pointerEvents = "none"
+            }, slideChangeTransitionEnd: () => {
+                document.querySelector(".heroSliderPreview_2").style.pointerEvents = "all"
             }
         }
     });
-    heroSliderPreview.on('click', event => {
-        let swipeCount = event.clickedIndex - event.activeIndex;
-
-        if (swipeCount >= 0) {
-            for (let i = 0; i <= swipeCount; i++) {
-                heroSliderPreview.slideNext();
-                heroSlider.slideNext();
-            }
-
-            return;
-        }
-
-        for (let i = 0; i > swipeCount; i--) {
-            heroSliderPreview.slidePrev();
-            heroSlider.slidePrev();
-        }
-    });
-}catch (e) {
-    const swipers = [];
-    const allSliders = document.querySelectorAll('.heroSlider_2');
-    allSliders.forEach(item => {
-        let currentId = (item.dataset.id)
-
-        const newSlider = new Swiper(item, {
-            allowTouchMove: false,
-            observer: true,
-            observeParents: true,
+    l.on("click", (e => {
+        let t = e.clickedIndex - e.activeIndex;
+        if (t >= 0) for (let e = 0; e <= t; e++) l.slideNext(), n.slideNext(); else for (let e = 0; e > t; e--) l.slidePrev(), n.slidePrev()
+    }))
+} catch (s) {
+    const c = [];
+    document.querySelectorAll(".heroSlider_2").forEach((e => {
+        let t = e.dataset.id;
+        const o = new Swiper(e, {
+            allowTouchMove: !1,
+            observer: !0,
+            observeParents: !0,
             slidesPerView: 1,
-            loop: true,
+            loop: !0,
             speed: 800,
-            loopPreventsSlide: false,
+            loopPreventsSlide: !1,
             loopAdditionalSlides: 3,
-            watchSlidesVisibility: true,
-            preloadImages: false,
-            lazy: {
-                loadOnTransitionStart: true
-            },
-            autoplay: {
-                enabled: true,
-                delay: 4000,
-            },
-            navigation: {
-                nextEl: `.swiper-button-next_${currentId}`,
-                prevEl: `.swiper-button-prev_${currentId}`,
-            },
+            watchSlidesVisibility: !0,
+            preloadImages: !1,
+            lazy: {loadOnTransitionStart: !0},
+            autoplay: {enabled: !0, delay: 4e3},
+            navigation: {nextEl: `.swiper-button-next_${t}`, prevEl: `.swiper-button-prev_${t}`}
         });
-
-
-        swipers.push(newSlider);
-    });
-    const swipersPreview = []
-    const allPreviewSliders = document.querySelectorAll('.heroSliderPreview_2');
-    allPreviewSliders.forEach(item => {
-        const newPreviewSlider = new Swiper(item, {
-            allowTouchMove: false,
-            observer: true,
-            observeParents: true,
+        c.push(o)
+    }));
+    const a = [];
+    document.querySelectorAll(".heroSliderPreview_2").forEach((e => {
+        const t = new Swiper(e, {
+            allowTouchMove: !1,
+            observer: !0,
+            observeParents: !0,
             slidesPerView: 2,
             initialSlide: 1,
-            watchOverflow: true,
-            loop: true,
+            watchOverflow: !0,
+            loop: !0,
             speed: 800,
-            loopPreventsSlide: false,
+            loopPreventsSlide: !1,
             loopAdditionalSlides: 2,
-            watchSlidesVisibility: true,
-            preloadImages: false,
-            autoplay: {
-                enabled: true,
-                delay: 4000,
-            },
-            lazy: {
-                loadOnTransitionStart: true
-            },
+            watchSlidesVisibility: !0,
+            preloadImages: !1,
+            autoplay: {enabled: !0, delay: 4e3},
+            lazy: {loadOnTransitionStart: !0}
         });
-        swipersPreview.push(newPreviewSlider);
-    });
-    $('.swiper-button-next').on('click', item => {
-        let id = item.target.id
-        swipersPreview[id].slideNext();
-    })
-
+        a.push(t)
+    })), $(".swiper-button-next").on("click", (e => {
+        let t = e.target.id;
+        a[t].slideNext()
+    }))
 }
 const productSliders = [];//product sliders
 let activeProductSlider;

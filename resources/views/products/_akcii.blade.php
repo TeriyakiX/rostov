@@ -110,9 +110,6 @@
         .heroSlider__count {
            color: rgba(37, 161, 65, 0.3);
         }
-        .productsTmp__title {
-            margin-bottom: 32px;
-        }
         .title {
 
             font-style: normal;

@@ -47,7 +47,7 @@
                                          @if($index == $tab) data-active @endif>
                                         <div class="comparison__cards">
                                             <div class="comparisonGrid">
-                                                <div class="comparisonGrid__col comparisonGrid__col--left">
+                                                <div class="comparisonGrid__col comparisonGrid__col--left comparisonGrid__col--left--desktop">
                                                     <div class="comparison__infoCompare">
                                                         <div class="comparison__categoryName">{{ $category->title }}</div>
                                                         <a href="{{ route('index.products.compareFlush') }}">
@@ -67,6 +67,15 @@
                                                     <div class="wrp-compareSlider">
                                                         <div class="swiper-container compareSlider _swiper">
                                                             <div class="swiper-wrapper compareSlider__wrapper">
+                                                                <div class="comparison__infoCompare comparison__infoCompare--mobile swiper-slide itemsSlider__slide">
+                                                                    <div class="comparison__categoryName">{{ $category->title }}</div>
+                                                                    <a href="{{ route('index.products.compareFlush') }}">
+                                                                        <div class="comparison__delAll btn" role="button"
+                                                                             tabindex="0">
+                                                                            Удалить все
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
                                                                 @foreach($category->products as $product)
                                                                     <div class="swiper-slide undefined itemsSlider__slide"
                                                                          data-product="{{ $product->id }}">
@@ -123,10 +132,8 @@
                                                                                 @foreach($product->attributesArray() as $productAttribute)
                                                                                     @if(count($productAttribute['options']) == 1)
                                                                                         <li class="card__char">
-                                                                                            {{ $productAttribute['model']['title'] }}
-                                                                                            :
-                                                                                            @if(count($productAttribute['options']) !== 0 )
-                                                                                            @endif
+                                                                                            {{ $productAttribute['model']->title }}:
+                                                                                            {{ $productAttribute['options'][0]->title }}
                                                                                         </li>
                                                                                     @endif
                                                                                 @endforeach
@@ -216,7 +223,7 @@
                                                 </div>
                                             </div>
                                             <div class="comparisonGrid">
-                                                <div class="comparisonGrid__col comparisonGrid__col--left">
+                                                <div class="comparisonGrid__col comparisonGrid__col--left comparisonGrid__col--left--desktop">
                                                     {{--                                                @foreach($product->attributesArray() as $attribute)--}}
                                                     {{--                                                @endforeach--}}
                                                     {{--                                                    @foreach($product->attributesArray() as $attribute)--}}
@@ -262,6 +269,43 @@
                                                     <div class="wrp-compareParametersSlider">
                                                         <div class="swiper-container compareParametersSlider _swiper">
                                                             <div class="swiper-wrapper compareParametersSlider__wrapper">
+                                                                <div class="comparison__infoCompare comparison__infoCompare--mobile swiper-slide itemsSlider__slide">
+                                                                    @foreach($category->attributes as $attribute)
+                                                                        <div
+                                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                                            {{$attribute}}
+                                                                        </div>
+                                                                    @endforeach
+                                                                    @if(!$category->hidePrice)
+                                                                        <div
+                                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                                            Цена
+                                                                        </div>
+                                                                    @endif
+                                                                    @if(!$category->hideCategory)
+                                                                        <div
+                                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                                            Категория
+                                                                        </div>
+                                                                    @endif
+                                                                    @if($category->is_list)
+                                                                        @if(!$category->hideList1)
+                                                                            <div
+                                                                                class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                                                Ширина полная
+                                                                            </div>
+                                                                        @endif    @if(!$category->hideList2)
+                                                                            <div
+                                                                                class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                                                Ширина полезная
+                                                                            </div>
+                                                                        @endif       @if(!$category->hideList3)
+                                                                            <div
+                                                                                class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                                                Длина на заказ
+                                                                            </div>  @endif
+                                                                    @endif
+                                                                </div>
                                                                 @foreach($category->products as $product)
                                                                     <div
                                                                             class="swiper-slide undefined compareParametersSlider__slide">
@@ -552,7 +596,7 @@
                                     </div>
                                 @else
                                     <div class="comparison__infoCompare">
-                                        <div class="comparison__categoryName">
+                                        <div class="comparison__categoryName" style="margin-top: 32px;">
                                             Список сравнения пуст
                                         </div>
                                     </div>
@@ -560,6 +604,7 @@
                             </div>
                     </div>
                 </div>
+            </div>
         </section>
     </main>
     <script>
@@ -572,4 +617,16 @@
             location='{{ route('index.products.compare',Request::get('difference') == 'true' ? 'difference=false' : 'difference=true') }}'+tab;
         }
     </script>
+    <style>
+        .comparison__parameters .swiper-slide {
+            flex-shrink: 0 !important;
+        }
+        .comparison__cards .swiper-slide {
+            flex-shrink: 0 !important;
+        }
+
+        .compareSlider .compareSlider__wrapper {
+            gap: 0 !important;
+        }
+    </style>
 @endsection

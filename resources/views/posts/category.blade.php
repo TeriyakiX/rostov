@@ -99,60 +99,6 @@
     .gallery__itemTitle {
         font-weight: 700;
     }
-    .cooperation--cta {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .cooperation--cta_item {
-        height: 293px;
-        position: relative;
-        margin-bottom: 30px;
-        max-width: 210px;
-        width: 100%;
-        z-index: 1;
-        left: -51px;
-    }
-
-    .cooperation--cta_item:nth-child(1) {
-        max-width: 801px;
-        width: 100%;
-        overflow: hidden;
-        left: 0;
-    }
-
-    .cooperation--cta_item:nth-child(1):before {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 59px;
-        height: 100%;
-        background-color: white;
-        background-size: 100% 100%;
-        z-index: 1;
-        transform: translate(10%, 0) skewX(-20deg)
-    }
-
-    .cooperation--cta_item > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .cooperation--cta_item-bg:before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: linear-gradient(0deg, rgba(154, 243, 239, 0.84), rgba(154, 243, 239, 0.84));
-        z-index: 11;
-        transform: translate(0, 0) skewX(-20deg)
-    }
 </style>
 <script>
     // $(document).on("click", ".open_help_popup", function () {

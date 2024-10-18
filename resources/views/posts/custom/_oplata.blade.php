@@ -104,7 +104,9 @@
 
 @else
     <div class="contentContainer">
-        {!! $post->body !!}
+        <div class="contentContainer--text">
+            {!! $post->body !!}
+        </div>
         <div class="cooperation--cta">
             <div class="cooperation--cta_item" style="width: 65%;">
                 <img class="" src="{{ asset('img/cooperation/cooperation.png') }}"

@@ -218,7 +218,7 @@
         <section class="productsTmp">
             <div class="productsTmp__container _container">
                 <div class="productsTmp__content">
-                    <h1 class="productsTmp__title t" style="margin-bottom: 32px;">
+                    <h1 class="productsTmp__title t">
                         Товары, которые могут вам подойти
                     </h1>
 {{--                    @if(count($products) == 0)--}}

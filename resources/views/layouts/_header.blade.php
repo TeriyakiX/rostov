@@ -361,8 +361,56 @@ print_r($headerCategories);
                 </button>
             </form>
         </div>
+
         <div class="menu header__menu">
-            <div class="menu__wrapper">
+            <div class="menu__wrapper menu__wrapper--desktop">
+                <div class="menu__body">
+                    <div class="menu__contentWrp _container">
+                        <div class="menu__close" role="button">
+                            <svg>
+                                <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cancel') }}"></use>
+                            </svg>
+                        </div>
+                        <nav class="menu__nav">
+                            <ul class="menu__list">
+                                @foreach($headerCategories as $index=>$headerCategory)
+                                    @if($index <= 3)
+                                        <li class="menu__item">
+                                            <a class="menu__link"
+                                               href="{{ route('index.products.categoryList', ['category' => $headerCategory->slug]) }}">
+                                                {{ $headerCategory->title }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </nav>
+                        <div class="menu__logoBox"><a class="menu__logoLink" href="{{ url('/') }}">
+                                <picture>
+                                    <source type="image/webp" srcset="{{ asset('/img/logo.webp') }}">
+                                    <img src="{{ asset('img/logo.png') }}" alt="logo" width="102" height="119">
+                                </picture>
+                            </a></div>
+                        <nav class="menu__nav">
+                            <ul class="menu__list">
+                                <li class="menu__item"><a class="menu__link"
+                                                          href="{{route('index.posts.show',['slug'=>'poleznoe'])}}">Полезное</a>
+                                </li>
+                                <li class="menu__item"><a class="menu__link" href="{{ route('index.cart.index') }}">Корзина</a>
+                                </li>
+                                <li class="menu__item"><a class="menu__link"
+                                                          href="/posts/category/servis">Оплата
+                                        и доставка</a></li>
+                                <li class="menu__item"><a class="menu__link"
+                                                          href="{{ route('index.posts.show', ['slug' => 'kontakty']) }}">Контакты</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu__wrapper menu__wrapper--mobile">
                 <div class="menu__body">
                     <div class="menu__logoBoxMobile">
                         <a class="menu__logoLinkMobile" href="{{ url('/') }}">
@@ -431,30 +479,29 @@ print_r($headerCategories);
                             <a class="authorization__link" href="{{ route('auth.registerForm') }}">Вход / Регистрация </a>
                         </div>
 
-                        <!-- Блок с иконками -->
                         <div class="infoPanel header__infoPanels">
-                            <a class="infoPanel__btn {{ request()->routeIs('index.products.viewed') ? 'active' : '' }} "
+                            <a class="infoPanel__btn {{ request()->routeIs('index.products.viewed') ? 'active' : '' }} infoPanel__btn--mobile"
                                href="{{ route('index.products.viewed') }}">
                                 <svg class="infoPanel__svg infoPanel__svg--oko">
                                     <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#oko') }}"></use>
                                 </svg>
                             </a>
 
-                            <a class="infoPanel__btn {{ request()->routeIs('index.products.favorites') ? 'active' : '' }} "
+                            <a class="infoPanel__btn {{ request()->routeIs('index.products.favorites') ? 'active' : '' }} infoPanel__btn--mobile"
                                href="{{ route('index.products.favorites') }}">
                                 <svg class="infoPanel__svg infoPanel__svg--heart">
                                     <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#heart') }}"></use>
                                 </svg>
                                 <div class="countOfCart {{$favoriteCount>0 ?'' :'inactive'}}">{{$favoriteCount}}</div>
                             </a>
-                            <a class="infoPanel__btn {{ request()->routeIs('index.products.compare') ? 'active' : '' }} "
+                            <a class="infoPanel__btn {{ request()->routeIs('index.products.compare') ? 'active' : '' }} infoPanel__btn--mobile"
                                href="{{ route('index.products.compare') }}">
                                 <svg class="infoPanel__svg infoPanel__svg--stat">
                                     <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#stat') }}"></use>
                                 </svg>
                                 <div class="countOfCart {{$compareCount>0 ?'' :'inactive'}}">{{$compareCount}}</div>
                             </a>
-                            <a class="infoPanel__btn {{ request()->routeIs('index.cart.index') ? 'active' : '' }} "
+                            <a class="infoPanel__btn {{ request()->routeIs('index.cart.index') ? 'active' : '' }} infoPanel__btn--mobile"
                                href="{{ route('index.cart.index') }}">
                                 <svg class="infoPanel__svg infoPanel__svg--basket">
 
@@ -464,7 +511,6 @@ print_r($headerCategories);
                             </a>
 
                         </div>
-                        <!-- Конец блока с иконками -->
                     </div>
                 </div>
             </div>

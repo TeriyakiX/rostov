@@ -1,10 +1,11 @@
 <div class="cta cooperation__cta">
+    <div class="cta__body">
     <img class="cta__img" src="{{ asset('img/cooperation/cooperation.png') }}" alt="img"
-         loading="lazy" decoding="async" referrerPolicy="no-referrer" style="max-height: 466px">
+         loading="lazy" decoding="async" referrerPolicy="no-referrer">
     <!-- Call to action-->
     <form class="cta__form" action="{{route('index.send_mail')}}" method="post">
         @csrf
-		
+
         <div class="ctaForm">
             <div class="ctaForm__header">
                 <h3 class="ctaForm__title">По всем вопросам обращайтесь по телефону <a class="ctaForm__link" href="tel:+79885109787" target="_blank"> +7(988)510-97-87</a> или пишите на почту <a class="ctaForm__link" style="font-family: Gadugi" href="mailto:m1_mk@aaanet.ru" target="_blank">m1_mk@aaanet.ru</a><br><span class="ctaForm__subtitle">или оствьте свой номер и мы перезвоним вам</span></h3>
@@ -33,6 +34,20 @@
             </div>
         </div>
     </form>
-    {!! $post->body !!}
 </div>
+    <div class="post-content__body-container">
+        {!! $post->body !!}
+    </div>
+</div>
+
+<style>
+    @media screen and (max-width: 767.98px) {
+        .cooperation__container {
+            padding: 0;
+        }
+        .cooperation__title, .pay_title, .pay_desc, .pay_info-title, .pay_info-text {
+            padding: 0 16px;
+        }
+    }
+</style>
 

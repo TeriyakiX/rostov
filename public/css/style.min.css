@@ -9486,7 +9486,7 @@ body:not(._touch) .card__icon--basket:hover svg {
   }
 
   .heroSlider__txtBox {
-    padding: 10px 70px 20px 20px;
+    padding-right: 0;
   }
 
   .heroSliderPreview__count {

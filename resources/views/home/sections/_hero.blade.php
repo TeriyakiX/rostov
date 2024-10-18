@@ -38,28 +38,26 @@
     </div>
 </section>
 
-{{--<div style="width: 100%;">--}}
-{{--    <div class="wrp-heroSlider wrp-heroSlider--mobile" style="position: static;">--}}
-{{--        <div class="swiper-container heroSlider _swiper">--}}
-{{--            <div class="swiper-wrapper heroSlider__wrapper">--}}
-{{--                @foreach($indexSliders as $indexSlider)--}}
-{{--                    <div class="swiper-slide heroSlider__slide swiper-lazy">--}}
-{{--                        <div class="heroSlider__content _container">--}}
-{{--                            <div class="heroSlider__txtBox">--}}
-{{--                                <h2 class="heroSlider__title">{{ $indexSlider->title }}</h2>--}}
-{{--                                <div class="heroSlider__count"></div>--}}
-{{--                                <p class="heroSlider__txt">--}}
-{{--                                    {{ $indexSlider->description }}--}}
-{{--                                </p>--}}
-{{--                                <a class="heroSlider__btn btn" href="{{ $indexSlider->url }}">Узнать больше</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
+<div class="wrp-heroSlider wrp-heroSlider--mobile" style="position: static;">
+    <div class="swiper-container heroSlider--mobile _swiper">
+        <div class="swiper-wrapper heroSlider__wrapper">
+            @foreach($indexSliders as $indexSlider)
+                <div class="swiper-slide swiper-slide--mobile heroSlider__slide swiper-lazy">
+                    <div class="heroSlider__content _container">
+                        <div class="heroSlider__txtBox">
+                            <h2 class="heroSlider__title">{{ $indexSlider->title }}</h2>
+                            <div class="heroSlider__count heroSlider__count--mobile"></div>
+                            <p class="heroSlider__txt">
+                                {{ $indexSlider->description }}
+                            </p>
+                            <a class="heroSlider__btn btn" href="{{ $indexSlider->url }}">Узнать больше</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
 
 <style>
     .wrp-heroSlider--mobile {

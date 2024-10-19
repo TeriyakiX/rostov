@@ -101,8 +101,7 @@
                             <svg class="productsTmp__filters-icon">
                                 <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
                             </svg>
-                            <div class="filters__form"
-                                >
+                            <div class="filters__form">
                                 @if(count($attributesArray) > 0)
                                     <div class="filters__filterGroup">
                                         @foreach($attributesArray as $attributeCode => $attributeData)
@@ -247,61 +246,43 @@
                             </div>
                         </div>
                         <div class="filter__menu-body">
-                            <ul class="filter__menu-list">
-                                <li>
+                            @if(count($attributesArray) > 0)
+                            <div class="filter__menu-list">
+                                @foreach($attributesArray as $attributeCode => $attributeData)
                                     <div class="filter__menu-select-wrp">
-                                        <select class="filter__menu-select">
-                                            <option class="filters__op" value="">Цена</option>
+                                        <select class="filter__menu-select" name="{{ $attributeCode }}">
+                                            <option class="filters__op"
+                                                    value="">{{ $attributeData['attribute']['attribute_title'] }}
+                                            </option>
+                                            @foreach($attributeData['options'] as $option)
+                                                <option class="filters__op" value="{{ $option['option_code'] }}"
+                                                        @if(request()->get($attributeCode) == $option['option_code']) selected
+                                                    @endif
+                                                >
+                                                    {{ $option['option_title'] }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="filter__menu-select-wrp">
-                                         <select class="filter__menu-select">
-                                             <option class="filters__op" value="">Тип профиля</option>
-                                         </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="filter__menu-select-wrp">
-                                        <select class="filter__menu-select">
-                                            <option class="filters__op" value="">Цвет</option>
-                                        </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="filter__menu-select-wrp">
-                                         <select class="filter__menu-select">
-                                             <option class="filters__op" value="">Покрытие</option>
-                                         </select>
-                                     </div>
-                                </li>
-                                <li>
-                                    <div class="filter__menu-select-wrp">
-                                        <select class="filter__menu-select">
-                                            <option class="filters__op" value="">Толщина стали</option>
-                                        </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="filter__menu-select-wrp">
-                                        <select class="filter__menu-select">
-                                            <option class="filters__op" value="">Гарантия</option>
-                                        </select>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="filter__menu-footer">
-                            <button class="filters__btn btn" style="width: 100%" type="submit">Показать</button>
-                            <a href="{{ \Illuminate\Support\Facades\URL::current() }}">
-                                <button class="filters__btn filters__btn--clear btn" style="width: 100%" type="button">Сбросить
-                                    фильтры
-                                    <svg>
-                                        <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#cloze') }}"></use>
-                                    </svg>
-                                </button>
-                            </a>
+                                @endforeach
+                            @else
+                                <div>
+                                    <h3 class="productsTmp__title t">Фильтры отсутствуют</h3>
+                                </div>
+                            @endif
+                            </div>
+
+                                <div class="filter__menu-footer">
+                                    <button class="filters__btn btn" style="width: 100%" type="submit">Показать</button>
+                                    <a href="{{ \Illuminate\Support\Facades\URL::current() }}">
+                                        <button class="filters__btn filters__btn--clear btn" style="width: 100%" type="button">Сбросить
+                                            фильтры
+                                            <svg>
+                                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#cloze') }}"></use>
+                                            </svg>
+                                        </button>
+                                    </a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -309,7 +290,25 @@
         </section>
     </main>
     <style>
+        .filter__menu-select-wrp .choices__inner {
+            border-color: #006BDE;
+        }
+        .filters__filterGroup {
+            flex-wrap: wrap;
+        }
+        .choices {
+            margin: 0;
+        }
+        .productsTmp__title {
+            margin-bottom: 0;
+        }
+        .productsTmp .filters__form {
+            flex-wrap: wrap;
+        }
         @media (max-width: 767.98px) {
+            .productsTmp .newItems__tabs {
+                margin-left: 0;
+            }
            .productsTmp .filters__form {
                 display: none;
            }

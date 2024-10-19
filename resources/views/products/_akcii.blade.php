@@ -88,9 +88,6 @@
         </section>
     </main>
     <style>
-        .wrp-heroSlider, .wrp-heroSliderPreview {
-            right: 325px;
-        }
         .productsTmp__body {
             margin: 0 -8px;
             margin-top: 32px;
@@ -107,7 +104,8 @@
         .heroSlider__txtBox:after {
             background-color: rgba(37, 161, 65, 0.7);
         }
-        .heroSlider__count {
+        .stockSlider__count,
+        .stockSlider__count--mobile{
            color: rgba(37, 161, 65, 0.3);
         }
         .title {
@@ -138,12 +136,11 @@
 
             color: #505050;
         }
-
-        .heroSliderPreview__previewBox {
-            cursor: pointer;
-            position: relative !important;
-            height: 100%;
-            overflow: hidden !important;
+        .wrp-heroSlider {
+            right: auto;
+        }
+        .wrp-heroSlider, .wrp-heroSliderPreview {
+            right: 420px;
         }
         @media (max-width: 1220px) {
             .heroSlider__txtBox {
@@ -197,15 +194,22 @@
             .heroSlider__txtBox {
                 margin-left: 0;
             }
+            .hero__container {
+                min-height: 377px;
+            }
 
         }
 
         @media (max-width: 767.98px) {
+            .swiper {
+                margin-left: -16px;
+                overflow: inherit;
+            }
             .productsTmp__body {
                 margin: 0 -4px;
             }
             .heroSlider__txtBox {
-                max-width: 50% !important;
+                max-width: 60% !important;
             }
             .heroSliderPreview__count {
                 font-size: 5.6rem;
@@ -222,9 +226,6 @@
             }
             .wrp-heroSlider, .wrp-heroSliderPreview {
                 right: 150px;
-            }
-            .hero__container {
-                min-height: 377px;
             }
         }
 

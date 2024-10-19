@@ -214,7 +214,7 @@ try {
         watchSlidesVisibility: !0,
         preloadImages: !1,
         lazy: {loadOnTransitionStart: !0},
-        breakpoints: {320: {slidesPerView: 2}, 768: {slidesPerView: 4}, 992: {slidesPerView: 3}},
+        breakpoints: {320: {slidesPerView: 3}, 768: {slidesPerView: 4}, 992: {slidesPerView: 3}},
         on: {
             beforeInit(e) {
                 e.el.querySelectorAll(".swiper-slide").forEach((e, t) => {
@@ -280,8 +280,8 @@ try {
 }
 
 try {
-    let n = new Swiper(".heroSlider_2", {
-        allowTouchMove: !1,
+    let e = new Swiper(".heroSlider--mobile", {
+        allowTouchMove: !0,
         observer: !0,
         observeParents: !0,
         slidesPerView: 1,
@@ -293,14 +293,21 @@ try {
         preloadImages: !1,
         lazy: {loadOnTransitionStart: !0},
         on: {
-            beforeInit: e => {
-                e.el.querySelectorAll(".swiper-slide_2").forEach(((e, t) => {
-                    e.querySelector(".heroSlider__count_2").innerHTML = t >= 10 ? t + 1 : "0".concat(t + 1)
-                }))
+            beforeInit(e) {
+                e.el.querySelectorAll(".swiper-slide--mobile").forEach((e, t) => {
+                    e.querySelector(".heroSlider__count").innerHTML = t >= 10 ? t + 1 : "0".concat(t + 1)
+                })
+            }, touchEnd(i, o) {
+                let l = o.clickedIndex - o.activeIndex;
+                if (l >= 0) {
+                    for (let r = 0; r <= l; r++) t.slideNext(), e.slideNext();
+                    return
+                }
+                for (let n = 0; n > l; n--) t.slidePrev(), e.slidePrev()
             }
         }
-    }), l = new Swiper(".heroSliderPreview_2", {
-        allowTouchMove: !1,
+    }), t = new Swiper(".heroSliderPreview", {
+        allowTouchMove: !0,
         observer: !0,
         observeParents: !0,
         slidesPerView: 3,
@@ -311,34 +318,37 @@ try {
         watchSlidesVisibility: !0,
         preloadImages: !1,
         lazy: {loadOnTransitionStart: !0},
-        breakpoints: {320: {slidesPerView: 3}, 768: {slidesPerView: 3}, 992: {slidesPerView: 3}},
+        breakpoints: {320: {slidesPerView: 3}, 768: {slidesPerView: 4}, 992: {slidesPerView: 3}},
         on: {
-            beforeInit: e => {
-                e.el.querySelectorAll(".swiper-slide_2").forEach(((e, t) => {
-                    e.querySelector(".heroSliderPreview__count_2").innerHTML = t >= 10 ? t + 1 : "0".concat(t + 1)
-                }))
-            }, slideChangeTransitionStart: () => {
-                document.querySelector(".heroSliderPreview_2").style.pointerEvents = "none"
-            }, slideChangeTransitionEnd: () => {
-                document.querySelector(".heroSliderPreview_2").style.pointerEvents = "all"
+            beforeInit(e) {
+                e.el.querySelectorAll(".swiper-slide--mobile").forEach((e, t) => {
+                    e.querySelector(".heroSliderPreview__count").innerHTML = t >= 10 ? t + 1 : "0".concat(t + 1)
+                })
+            }, slideChangeTransitionStart() {
+                document.querySelector(".heroSliderPreview").style.pointerEvents = "none"
+            }, slideChangeTransitionEnd() {
+                document.querySelector(".heroSliderPreview").style.pointerEvents = "all"
             }
         }
     });
-    l.on("click", (e => {
-        let t = e.clickedIndex - e.activeIndex;
-        if (t >= 0) for (let e = 0; e <= t; e++) l.slideNext(), n.slideNext(); else for (let e = 0; e > t; e--) l.slidePrev(), n.slidePrev()
-    }))
-} catch (s) {
-    const c = [];
-    document.querySelectorAll(".heroSlider_2").forEach((e => {
-        let t = e.dataset.id;
-        const o = new Swiper(e, {
-            allowTouchMove: !1,
+    t.on("click", i => {
+        let o = i.clickedIndex - i.activeIndex;
+        if (o >= 0) {
+            for (let l = 0; l <= o; l++) t.slideNext(), e.slideNext();
+            return
+        }
+        for (let r = 0; r > o; r--) t.slidePrev(), e.slidePrev()
+    })
+} catch (i) {
+    let o = [], l = document.querySelectorAll(".heroSlider");
+    l.forEach(e => {
+        let t = e.dataset.id, i = new Swiper(e, {
+            allowTouchMove: !0,
             observer: !0,
             observeParents: !0,
             slidesPerView: 1,
             loop: !0,
-            speed: 800,
+            speed: 1600,
             loopPreventsSlide: !1,
             loopAdditionalSlides: 3,
             watchSlidesVisibility: !0,
@@ -347,12 +357,12 @@ try {
             autoplay: {enabled: !0, delay: 4e3},
             navigation: {nextEl: `.swiper-button-next_${t}`, prevEl: `.swiper-button-prev_${t}`}
         });
-        c.push(o)
-    }));
-    const a = [];
-    document.querySelectorAll(".heroSliderPreview_2").forEach((e => {
-        const t = new Swiper(e, {
-            allowTouchMove: !1,
+        o.push(i)
+    });
+    let r = [], n = document.querySelectorAll(".heroSliderPreview");
+    n.forEach(e => {
+        let t = new Swiper(e, {
+            allowTouchMove: !0,
             observer: !0,
             observeParents: !0,
             slidesPerView: 2,
@@ -367,11 +377,159 @@ try {
             autoplay: {enabled: !0, delay: 4e3},
             lazy: {loadOnTransitionStart: !0}
         });
-        a.push(t)
-    })), $(".swiper-button-next").on("click", (e => {
-        let t = e.target.id;
-        a[t].slideNext()
-    }))
+        r.push(t)
+    }), $(".swiper-button-next").on("click", e => {
+        r[e.target.id].slideNext()
+    })
+}
+
+// window.addEventListener('resize', () => {
+//     location.reload();
+// });
+
+try {
+    let heroSlider = new Swiper('.heroSlider_akcii', {
+        allowTouchMove: false,
+        observer: true,
+        observeParents: true,
+        slidesPerView: 1,
+        loop: true,
+        speed: 800,
+        loopPreventsSlide: false,
+        loopAdditionalSlides: 3,
+        watchSlidesVisibility: true,
+        preloadImages: false,
+        lazy: {
+            loadOnTransitionStart: true
+        },
+        on: {
+            beforeInit: swiper => {
+                swiper.el.querySelectorAll('.swiper-slide_akcii').forEach((el, index) => {
+                    el.querySelector('.heroSlider__count_akcii').innerHTML = index >= 10 ? index + 1 : "0".concat(index + 1);
+                });
+            }
+        }
+    });
+    let heroSliderPreview = new Swiper('.heroSliderPreview_akcii', {
+        allowTouchMove: false,
+        observer: true,
+        observeParents: true,
+        slidesPerView: 3,
+        initialSlide: 1,
+        loop: true,
+        speed: 800,
+        loopPreventsSlide: false,
+        watchSlidesVisibility: true,
+        preloadImages: false,
+        lazy: {
+            loadOnTransitionStart: true
+        },
+        breakpoints: {
+            320: {
+                slidesPerView: 3
+            },
+            768: {
+                slidesPerView: 3
+            },
+            992: {
+                slidesPerView: 3
+            }
+        },
+        on: {
+            //document.querySelector('.heroSliderPreview').style.pointerEvents = 'none';
+            beforeInit: swiper => {
+                swiper.el.querySelectorAll('.swiper-slide_akcii').forEach((el, index) => {
+                    el.querySelector('.heroSliderPreview__count_akcii').innerHTML = index >= 10 ? index + 1 : "0".concat(index + 1);
+                });
+            },
+            slideChangeTransitionStart: () => {
+                document.querySelector('.heroSliderPreview_akcii').style.pointerEvents = 'none';
+            },
+            slideChangeTransitionEnd: () => {
+                document.querySelector('.heroSliderPreview_akcii').style.pointerEvents = 'all';
+            }
+        }
+    });
+    heroSliderPreview.on('click', event => {
+        let swipeCount = event.clickedIndex - event.activeIndex;
+
+        if (swipeCount >= 0) {
+            for (let i = 0; i <= swipeCount; i++) {
+                heroSliderPreview.slideNext();
+                heroSlider.slideNext();
+            }
+
+            return;
+        }
+
+        for (let i = 0; i > swipeCount; i--) {
+            heroSliderPreview.slidePrev();
+            heroSlider.slidePrev();
+        }
+    });
+}catch (e) {
+    const swipers = [];
+    const allSliders = document.querySelectorAll('.heroSlider_akcii');
+    allSliders.forEach(item => {
+        let currentId = (item.dataset.id)
+
+        const newSlider = new Swiper(item, {
+            allowTouchMove: false,
+            observer: true,
+            observeParents: true,
+            slidesPerView: 1,
+            loop: true,
+            speed: 800,
+            loopPreventsSlide: false,
+            loopAdditionalSlides: 3,
+            watchSlidesVisibility: true,
+            preloadImages: false,
+            lazy: {
+                loadOnTransitionStart: true
+            },
+            autoplay: {
+                enabled: true,
+                delay: 4000,
+            },
+            navigation: {
+                nextEl: `.swiper-button-next_${currentId}`,
+                prevEl: `.swiper-button-prev_${currentId}`,
+            },
+        });
+
+
+        swipers.push(newSlider);
+    });
+    const swipersPreview = []
+    const allPreviewSliders = document.querySelectorAll('.heroSliderPreview_akcii');
+    allPreviewSliders.forEach(item => {
+        const newPreviewSlider = new Swiper(item, {
+            allowTouchMove: false,
+            observer: true,
+            observeParents: true,
+            slidesPerView: 2,
+            initialSlide: 1,
+            watchOverflow: true,
+            loop: true,
+            speed: 800,
+            loopPreventsSlide: false,
+            loopAdditionalSlides: 2,
+            watchSlidesVisibility: true,
+            preloadImages: false,
+            autoplay: {
+                enabled: true,
+                delay: 4000,
+            },
+            lazy: {
+                loadOnTransitionStart: true
+            },
+        });
+        swipersPreview.push(newPreviewSlider);
+    });
+    $('.swiper-button-next').on('click', item => {
+        let id = item.target.id
+        swipersPreview[id].slideNext();
+    })
 }
 const productSliders = [];//product sliders
 let activeProductSlider;
@@ -436,6 +594,33 @@ function activeSliderChange() {
     activeProductSlider.navigation.init();
     activeProductSlider.navigation.update();
 } // Compare Sliders
+
+let activeGoodsSlider;
+
+function goodsSlidersInit(e) {
+    let t = document.querySelectorAll(".itemsGoodsSlider");
+    t.length && (t.forEach(t => {
+        if (!document.querySelector(".wrapperHome") && !document.querySelector(".wrapperComparison")) {
+            let i = t.closest(".products__content").querySelectorAll(".newItems__sliderBtn--mobile");
+            e.navigation = {nextEl: i[1], prevEl: i[0]}
+        }
+        let o = new Swiper(t, e);
+        document.querySelector(".wrapperHome") && o.navigation.destroy(), productSliders.push(o)
+    }), document.querySelector(".wrapperHome") && ((activeGoodsSlider = productSliders[tabs.indexActiveBlock]).navigation.init(), activeGoodsSlider.navigation.update()))
+}
+
+function activeGoodsSliderChange() {
+    activeGoodsSlider !== productSliders[tabs.indexActiveBlock] && (activeGoodsSlider.navigation.destroy(), (activeGoodsSlider = productSliders[tabs.indexActiveBlock]).navigation.init(), activeGoodsSlider.navigation.update())
+}
+
+goodsSlidersInit({
+    observer: !0,
+    observeParents: !0,
+    slidesPerView: 1,
+    spaceBetween: 6,
+    speed: 600,
+    navigation: {nextEl: ".newItems__sliderBtn--next--mobile", prevEl: ".newItems__sliderBtn--prev--mobile"},
+});
 
 
 const compireSliderSettings = {

@@ -23,6 +23,9 @@
 {{--        <!-- Project Gallery-->--}}
         <section class="gallery">
             <div class="gallery__container _container sideDashContainer">
+                <h1 class="gallery__title t">
+                    Услуги
+                </h1>
                 <div class="sideDash sideDash--sticky" style="z-index: 9999">
                     <div class="sideDash__item sideDash__item--gap">
                         <svg class="sideDash__icon">
@@ -61,9 +64,6 @@
                         <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
                     </div>
                 </div>
-                <h1 class="gallery__title t">
-                    Услуги
-                </h1>
                 <div class="gallery__content">
                     <div class="cooperation__body">
                         <div class="gallery__body sideDashContainer">
@@ -98,6 +98,11 @@
     }
     .gallery__itemTitle {
         font-weight: 700;
+    }
+    @media (max-width: 767.98px) {
+        .sideDash--sticky {
+            padding-left: 0 !important;
+        }
     }
 </style>
 <script>

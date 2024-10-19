@@ -104,6 +104,45 @@
                     </div>-->
                         <h2 class="cooperation__title t">{{$VideoYoutube->title}}</h2>
 
+                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
+                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a
+                                        href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
+                                        покрытий</a></div>
+                            </div>
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
+                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a
+                                        href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
+                                        решения</a></div>
+                            </div>
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
+                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
+                            </div>
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
+                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
+                            </div>
+                        </div>
+
                         <h3 class="cooperation__subTitle">Описание</h3>
 
 {{--                        {!! $VideoYoutube->description  !!}--}}

@@ -103,8 +103,6 @@
 
                             <div class="presentation-thumbnails swiper-container presentation__thumbs">
                                 <div class="swiper-wrapper">
-
-
                                     @foreach($project->photos as $photo)
                                         <div class="presentation-thumbnails__item swiper-slide">
                                             <div class="ratio__box">
@@ -115,23 +113,22 @@
                                             </div>
                                         </div>
                                     @endforeach
-
-
                                 </div>
-
-
                                 <div class="presentation-slider__controls">
                                     <div class="presentation-slider__btn presentation-slider__btn_prev">
                                         <svg class="presentation-slider__arrow">
-                                            <use xlink:href="./img/sprites/sprite-mono.svg#arrow_left"></use>
+                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_left') }}"></use>
                                         </svg>
                                     </div>
                                     <div class="presentation-slider__btn presentation-slider__btn_next">
                                         <svg class="presentation-slider__arrow">
-                                            <use xlink:href="./img/sprites/sprite-mono.svg#arrow_right"></use>
+                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_right') }}"></use>
                                         </svg>
                                     </div>
                                 </div>
+                            </div>
+
+
                                 @if(count($project->relatedProjects))
                                     <section class="newItems crossale">
                                         <div class="newItems__container _container">
@@ -151,13 +148,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                                                    <div class="addBox">
-                                                                        <div class="add gallery__add" role="button" tabindex="0">Показать ещё</div>
-                                                                    </div>
+                                            <div class="addBox">
+                                                <div class="add gallery__add" role="button" tabindex="0">Показать ещё</div>
+                                            </div>
                                         </div>
                                     </section>
                                 @endif
-                            </div>
                         </div>
                     </div>
                 </div>

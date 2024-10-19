@@ -5,17 +5,17 @@
 
 <div class="swiper" style=" color: #0dcaf0;position: relative">
 
-    <div class="hero__container _container">
+    <div class="hero__container">
         <div class="wrp-heroSlider">
-            <div class="swiper-container heroSlider_2 slider_0 _swiper" data-id="0">
+            <div class="swiper-container stockSlider _swiper">
                 <div class="swiper-wrapper heroSlider__wrapper">
                     @foreach($slider as $item)
-                        <div class="swiper-slide slide_1 heroSlider__slide swiper-lazy firstSlide swiper-slide_2"
+                        <div class="swiper-slide heroSlider__slide swiper-lazy swiper-slide-stock"
                              data-background="{{ asset('upload_images/' . $item->photo_desktop) }}">
-                            <div class="heroSlider__content _container heroSlider__content--desktop">
+                            <div class="heroSlider__content heroSlider__content--desktop">
                                 <div class="heroSlider__txtBox">
                                     <h2 class="heroSlider__title">Акция выходного дня</h2>
-                                    <div class="heroSlider__count heroSlider__count_2"></div>
+                                    <div class="stockSlider__count"></div>
                                     <p class="heroSlider__txt">
                                         Ротор переворачивает период. Момент силы трения не зависит от скорости
                                         вращения внутреннего кольца подвеса, что не кажется странным, если
@@ -34,17 +34,15 @@
         </div>
 
         <div class="wrp-heroSliderPreview" style="z-index: 1">
-            <div class="swiper-container heroSliderPreview_2
-                                      sliderPreview_0
-                                      _swiper" data-id="0">
+            <div class="swiper-container stockSliderPreview _swiper">
                 <div class="swiper-wrapper heroSliderPreview__wrapper">
                     @foreach($slider as $item)
-                        <div class="swiper-slide heroSliderPreview__slide swiper-slide_2">
+                        <div class="swiper-slide-stock swiper-slide heroSliderPreview__slide">
                             <div class="heroSliderPreview__previewBox">
                                 <div class="heroSliderPreview__previewImgBox swiper-lazy"
                                      data-background="{{ asset('upload_images/' .$item->photo_desktop) }}">
                                 </div>
-                                <div class="heroSliderPreview__count heroSliderPreview__count_2"></div>
+                                <div class="stockSliderPreview__count"></div>
                                 <div class="heroSliderPreview__previewTitle">Черная пятница</div>
                             </div>
                         </div>
@@ -54,31 +52,18 @@
             </div>
         </div>
     </div>
-
-{{--    <div class="swiper-button-next swiper-button-next_0" style="font-size: 36px"--}}
-{{--         id="0">>--}}
-{{--    </div>--}}
-{{--    <div class="swiper-button-prev swiper-button-prev_0" style="font-size: 36px"--}}
-{{--         id="0"><--}}
-{{--    </div>--}}
 </div>
 
-<div style="width: 100%; margin-top: 32px">
+<div class="wrp-heroSlider--mobile--wrapper">
     <div class="wrp-heroSlider wrp-heroSlider--mobile" style="position: static;">
-        <div class="swiper-container heroSlider_2
-                                     slider_0
-                                _swiper" data-id="0">
-            <div class="swiper-wrapper heroSlider__wrapper"
-                 style="height: auto;">
-
-
+        <div class="swiper-container stockSlider--mobile _swiper">
+            <div class="swiper-wrapper heroSlider__wrapper">
                 @foreach($slider as $item)
-                    <div class="swiper-slide slide_1 heroSlider__slide swiper-lazy firstSlide wiper-slide_2"
-                         style="height: auto">
+                    <div class="swiper-slide swiper-slide--mobile heroSlider__slide swiper-lazy">
                         <div class="heroSlider__content _container">
                             <div class="heroSlider__txtBox">
                                 <h2 class="heroSlider__title">Акция выходного дня</h2>
-                                <div class="heroSlider__count heroSlider__count_2">01</div>
+                                <div class="stockSlider__count stockSlider__count--mobile"></div>
                                 <p class="heroSlider__txt">
                                     Ротор переворачивает период. Момент силы трения не зависит от скорости
                                     вращения внутреннего кольца подвеса, что не кажется странным, если
@@ -103,6 +88,10 @@
     .wrp-heroSlider--mobile {
         display: none;
     }
+    .wrp-heroSlider--mobile--wrapper {
+        width: 100%;
+        margin-top: 32px
+    }
     .heroSlider__promo {
         position: absolute;
         bottom: 5%;
@@ -119,9 +108,6 @@
         z-index: 1;
         padding-right: 20px;
         padding-left: 4px;
-    }
-    .firstSlide{
-        cursor: pointer;
     }
     .title {
 
@@ -157,26 +143,26 @@
     }
     .heroSlider__content {
         padding-right: 0;
-        padding-left: 100px;
+        padding-left: 195px;
     }
     .heroSlider__slide {
         display: flex;
         align-items: flex-end;
         padding: 0;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
     }
-
     .heroSliderPreview {
         position: relative;
         height: 100%;
         margin-left: -230px;
     }
-    .heroSliderPreview__previewBox {
-        cursor: pointer;
-        position: relative;
-        height: 100%;
-        overflow: hidden;
+    @media (max-width: 991.98px) {
+        .heroSlider__slide {
+            padding: 32px 0;
+        }
+    }
+    @media (max-width: 767.98px) {
+        .wrp-heroSlider--mobile--wrapper {
+            margin-top: 0;
+        }
     }
 </style>

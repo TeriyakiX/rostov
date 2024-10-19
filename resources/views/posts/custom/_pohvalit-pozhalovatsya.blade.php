@@ -42,6 +42,9 @@
 
 <style>
     @media screen and (max-width: 767.98px) {
+        .sideDash--sticky {
+            padding-left: 16px;
+        }
         .cooperation__container {
             padding: 0;
         }

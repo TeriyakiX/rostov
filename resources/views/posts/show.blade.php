@@ -67,6 +67,44 @@
                     @endif
 
                     <div class="cooperation__body sideDashContainer">
+                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
+                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a
+                                        href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
+                                        покрытий</a></div>
+                            </div>
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
+                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a
+                                        href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
+                                        решения</a></div>
+                            </div>
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
+                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
+                            </div>
+                            <div class="sideDash__item sideDash__item--gap">
+                                <svg class="sideDash__icon">
+                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
+                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
+                                    </use>
+                                </svg>
+                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
+                            </div>
+                        </div>
 
                         @if($post->slug == 'sotrudnichestvo')
                             @include('posts.custom._sotrudnichestvo')
@@ -204,28 +242,6 @@
         margin-bottom: 15px
     }
 
-    @media screen and (max-width: 600px) {
-        .container__div_one {
-            flex-direction: column
-        }
-
-        .container__div_one > div {
-            max-width: 100%;
-        }
-
-        .second {
-            order: 3;
-        }
-
-        .third {
-            order: 2
-        }
-
-        .find_error_btn {
-            margin-top: 5px;
-        }
-    }
-
     @media screen and (max-width: 767.98px) {
         .pay_icons_div {
             padding: 0 16px;
@@ -280,6 +296,27 @@
         }
         .catalogControl__searchInput {
             padding: 10px !important;
+        }
+    }
+    @media screen and (max-width: 600px) {
+        .container__div_one {
+            flex-direction: column
+        }
+
+        .container__div_one > div {
+            max-width: 100%;
+        }
+
+        .second {
+            order: 3;
+        }
+
+        .third {
+            order: 2
+        }
+
+        .find_error_btn {
+            margin-top: 5px;
         }
     }
 </style>

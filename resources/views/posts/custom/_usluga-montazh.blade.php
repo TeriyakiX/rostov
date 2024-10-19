@@ -1,3 +1,8 @@
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+/>
+
 @if(!Str::contains(url()->current(), '/category/servis'))
     <div class="cta cooperation__cta">
        <div class="cta__body">
@@ -65,32 +70,86 @@
     <div class="contentContainer--text">
         {!! $post->preview !!}
     </div>
-    <div class="cooperation--cta">
-        <div class="cooperation--cta_item" style="width: 65%;">
-            <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"
-                 alt="img"
-                 loading="lazy" decoding="async" referrerPolicy="no-referrer">
+
+    <div class="swiper">
+        <div class="contentContainer--slider">
+            <div class="wrp-heroSlider">
+                <div class="swiper-container montageSlider _swiper">
+                    <div class="swiper-wrapper heroSlider__wrapper">
+                        <div class="swiper-slide-montage swiper-slide heroSlider__slide swiper-lazy"
+                             style="background-image: url('{{ asset('img/cooperation/close-up-detail-professional-serious-accountant-sitting-light-office-checking-company-finance-profits-calculator 2.png') }}');">
+                        </div>
+                        <div class="swiper-slide-montage swiper-slide heroSlider__slide swiper-lazy"
+                             style="background-image: url('{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}');">
+                        </div>
+                        <div class="swiper-slide-montage swiper-slide heroSlider__slide swiper-lazy"
+                             style="background-image: url('{{ asset('img/cooperation/young-man-delivering-order 2.png') }}');">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrp-heroSliderPreview" style="z-index: 1">
+                <div class="swiper-container montageSliderPreview _swiper">
+                    <div class="swiper-wrapper heroSliderPreview__wrapper">
+                        <div class="swiper-slide-montage swiper-slide heroSliderPreview__slide">
+                            <div class="heroSliderPreview__previewBox">
+                                <div class="heroSliderPreview__previewImgBox swiper-lazy"
+                                     style="background-image: url('{{ asset('img/cooperation/close-up-detail-professional-serious-accountant-sitting-light-office-checking-company-finance-profits-calculator 2.png') }}');">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide-montage swiper-slide heroSliderPreview__slide">
+                            <div class="heroSliderPreview__previewBox">
+                                <div class="heroSliderPreview__previewImgBox swiper-lazy"
+                                     style="background-image: url('{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}');">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide-montage swiper-slide heroSliderPreview__slide">
+                            <div class="heroSliderPreview__previewBox">
+                                <div class="heroSliderPreview__previewImgBox swiper-lazy"
+                                     style="background-image: url('{{ asset('img/cooperation/young-man-delivering-order 2.png') }}');">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="cooperation--cta_item cooperation--cta_item-bg">
-            <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"
-                 alt="img"
-                 loading="lazy" decoding="async" referrerPolicy="no-referrer"
-                 style="transform: translate(0, 0) skewX(-20deg)">
-        </div>
-        <div class="cooperation--cta_item cooperation--cta_item-bg">
-            <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"
-                 alt="img"
-                 loading="lazy" decoding="async" referrerPolicy="no-referrer"
-                 style="transform: translate(0, 0) skewX(-20deg)">
-        </div>
-        <div class="cooperation--cta_item cooperation--cta_item-bg">
-            <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"
-                 alt="img"
-                 loading="lazy" decoding="async" referrerPolicy="no-referrer"
-                 style="transform: translate(0, 0) skewX(-20deg)">
-        </div>
+
+            <div class="swiper-montage-button-next swiper-button-next swiper-button-next_0" style="font-size: 36px"
+                 id="0">>
+            </div>
     </div>
-        <div class="service__usluga-wrapper">
+
+{{--    <div class="cooperation--cta">--}}
+{{--        <div class="cooperation--cta_item" style="width: 65%;">--}}
+{{--            <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"--}}
+{{--                 alt="img"--}}
+{{--                 loading="lazy" decoding="async" referrerPolicy="no-referrer">--}}
+{{--        </div>--}}
+{{--        <div class="cooperation--cta_item cooperation--cta_item-bg">--}}
+{{--            <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"--}}
+{{--                 alt="img"--}}
+{{--                 loading="lazy" decoding="async" referrerPolicy="no-referrer"--}}
+{{--                 style="transform: translate(0, 0) skewX(-20deg)">--}}
+{{--        </div>--}}
+{{--        <div class="cooperation--cta_item cooperation--cta_item-bg">--}}
+{{--            <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"--}}
+{{--                 alt="img"--}}
+{{--                 loading="lazy" decoding="async" referrerPolicy="no-referrer"--}}
+{{--                 style="transform: translate(0, 0) skewX(-20deg)">--}}
+{{--        </div>--}}
+{{--        <div class="cooperation--cta_item cooperation--cta_item-bg">--}}
+{{--            <img class="" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}"--}}
+{{--                 alt="img"--}}
+{{--                 loading="lazy" decoding="async" referrerPolicy="no-referrer"--}}
+{{--                 style="transform: translate(0, 0) skewX(-20deg)">--}}
+{{--        </div>--}}
+{{--    </div>--}}
+    <div class="service__usluga-wrapper">
         <label class="formBox__fileLabel formBox__fileLabel-mobile" name="file" for="file" style="color: #595959; margin-bottom: 0;">
             <input class="formBox__input" autocomplete="off" type="file" name="file" id="file" style="display: none">
 
@@ -111,12 +170,58 @@
         margin-right: 0;
     }
 
+    .wrp-heroSlider {
+        width: 300px;
+        min-width: 766px;
+        right: auto;
+    }
+    .wrp-heroSliderPreview {
+        width: 500px;
+        right: 500px;
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
+    @media (max-width: 991.98px) {
+        .wrp-heroSlider {
+            min-width: 520px;
+        }
+        .wrp-heroSliderPreview {
+            width: 300px;
+            right: 350px;
+        }
+    }
+
     @media screen and (max-width: 767.98px) {
+        .swiper-button-next,
+        .swiper-button-prev {
+            display: block;
+        }
+        .swiper {
+            overflow: inherit;
+            margin-left: -16px;
+        }
+        .wrp-heroSlider {
+            min-width: 620px;
+        }
+        .wrp-heroSliderPreview {
+            right: 140px;
+        }
+        .sideDash--sticky {
+            padding-left: 16px;
+        }
         .cooperation__container {
             padding: 0;
         }
         .cooperation__title, .pay_title, .pay_desc, .pay_info-title, .pay_info-text {
             padding: 0 16px;
+        }
+    }
+
+    @media screen and (max-width: 479.98px) {
+        .wrp-heroSliderPreview {
+            right: 90px;
         }
     }
 </style>

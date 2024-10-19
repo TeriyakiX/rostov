@@ -100,6 +100,7 @@
                 {{ $brands->links('pagination::bootstrap-4') }}
                 @include('layouts.pagination')
             </div>
+        </div>
 
         </section>
 

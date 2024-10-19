@@ -9010,6 +9010,18 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 767.98px) {
+    .sideDash__mark {
+        top: 50%;
+        right: 50%;
+        transform: rotate3d(0, 1, 0, -90deg);
+        z-index: 1;
+    }
+    .sideDash__item {
+        z-index: 9999;
+    }
+    .sideDash__item:hover .sideDash__mark {
+        transform: rotate3d(0, 0, 1, -90deg);
+    }
     .contentContainer--slider {
         margin-top: 16px;
         margin-bottom: 16px;

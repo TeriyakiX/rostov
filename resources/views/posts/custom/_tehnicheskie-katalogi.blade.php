@@ -92,6 +92,9 @@
     .card-filter {
         margin-bottom: 0;
     }
+    .sideDash--sticky {
+        display: none;
+    }
     @media screen and (max-width: 767.98px){
         .doc_type-line {
             margin-top: 12px;

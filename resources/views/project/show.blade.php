@@ -471,6 +471,11 @@
 .newItems__content {
     padding-top: 64px !important;
 }
+@media (max-width: 767.98px) {
+    .project__title {
+        margin-bottom: 32px;
+    }
+}
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

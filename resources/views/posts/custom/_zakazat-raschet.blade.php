@@ -113,21 +113,23 @@
                 </div>
             </div>
 
-            <div class="swiper-calculation-button-next swiper-button-next swiper-button-next_0" style="font-size: 36px"
-                 id="0">>
+            <div class="swiper-calculation-button-next swiper-button-next swiper-button-next_0" id="0">
+                <svg style="pointer-events: none">
+                    <use xlink:href="{{ asset('img/icons/swiper-blue-arrow.svg#blue-arrow-right') }}"></use>
+                </svg>
             </div>
         </div>
 
         <div class="service__usluga-wrapper">
-            <label class="formBox__fileLabel formBox__fileLabel-mobile" name="file" for="file" style="color: #595959; margin-bottom: 0;">
-                <input class="formBox__input" autocomplete="off" type="file" name="file" id="file" style="display: none">
+{{--            <label class="formBox__fileLabel formBox__fileLabel-mobile" name="file" for="file" style="color: #595959; margin-bottom: 0;">--}}
+{{--                <input class="formBox__input" autocomplete="off" type="file" name="file" id="file" style="display: none">--}}
 
-                <svg>
-                    <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#scr') }}"
-                         style="fill: #595959;"></use>
-                </svg>
-                Прикрепить файл
-            </label>
+{{--                <svg>--}}
+{{--                    <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#scr') }}"--}}
+{{--                         style="fill: #595959;"></use>--}}
+{{--                </svg>--}}
+{{--                Прикрепить файл--}}
+{{--            </label>--}}
             <button class="btn service_raschet_btn" type="button">
                 Оставить заявку
             </button>

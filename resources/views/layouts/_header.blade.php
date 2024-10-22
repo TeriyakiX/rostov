@@ -212,7 +212,6 @@ print_r($headerCategories);
                     <form class="catalogControl__searchform" style="margin-block-end: 0;"
                           action="{{ route('index.products.search') }}">
                         <input class="catalogControl__searchInput" autocomplete="off" type="text" name="query"
-                               data-value="{{ request()->get('query') ?: 'Поиск по товарам' }}"
                                placeholder="{{ request()->get('query') ?: 'Поиск по товарам' }}"
                                value="{{ request()->get('query') }}">
                         <button class="catalogControl__searchBtn" type="submit">
@@ -223,10 +222,10 @@ print_r($headerCategories);
                     </form>
                 </div>
                 <div class="social header__social" id="socialLink3" style="display: none;">
-                    <a class="social__link header__navLink " href="https://wa.me/+79885109783">
+                    <a class="social__link header__navLink" href="https://wa.me/+79885109783">
                         <img src="{{asset('img/sprites/whatsapp.svg')}}" alt="whatsapp" class="social__link-whatsapp">
                     </a>
-                    <a class="social__link header__navLink" href="https://t.me/+79885109783">
+                    <a class="social__link header__navLink header__navLink--tg" href="https://t.me/+79885109783">
                         <img src="{{asset('img/sprites/telegram.svg')}}" alt="telegram" class="social__link-telegram">
                     </a>
                 </div>
@@ -243,7 +242,7 @@ print_r($headerCategories);
             </div>
             <div class="header__col header__col--right">
                 <div class="social header__social" id="socialLink1">
-                    <a class="social__link header__navLink " href="https://wa.me/+79885109783">
+                    <a class="social__link header__navLink" href="https://wa.me/+79885109783">
                         <svg>
                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#wapp') }}"></use>
                         </svg>
@@ -351,7 +350,6 @@ print_r($headerCategories);
             <form class="catalogControl__searchform-mobile" style="margin-block-end: 0;"
                   action="{{ route('index.products.search') }}">
                 <input class="catalogControl__searchInput-mobile" autocomplete="off" type="text" name="query"
-                       data-value="{{ request()->get('query') ?: 'Поиск по товарам' }}"
                        placeholder="{{ request()->get('query') ?: 'Поиск по товарам' }}"
                        value="{{ request()->get('query') }}">
                 <button class="catalogControl__searchBtn-mobile" type="submit">

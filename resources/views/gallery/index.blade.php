@@ -27,7 +27,7 @@
         <section class="gallery">
             <div class="gallery__container _container">
                 <div class="gallery__content">
-                      <div style="display:flex; text-align: center; justify-content: space-between; align-items: center">
+                      <div style="display:flex; align-items: center; justify-content: space-between;">
                           <h1 class="gallery__title t">Фото галерея</h1>
                           <svg class="gallery__filters-icon-mobile">
                               <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
@@ -61,15 +61,17 @@
                         <form class="filters__form" action="#" method="GET">
                             <div class="filters__filterGroup">
                                 @foreach($options as $attrName => $attr)
-                                    <select class="filters__select" name="attribute_id_{{$count}}">
-                                        <option value="">{{$attrName}}</option>
-                                        @foreach($attr as $option)
-                                            <option class="filters__op" value="{{$option['id']}}"
-                                                    @if (in_array($option->id, explode(',', request()->input('attribute_'.$count)))) selected @endif>{{$option['title']}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <p style="display: none">{{$count++}}</p>
+                                   <div class="filters__select-wrp">
+                                       <select class="filters__select" name="attribute_id_{{$count}}">
+                                           <option value="">{{$attrName}}</option>
+                                           @foreach($attr as $option)
+                                               <option class="filters__op" value="{{$option['id']}}"
+                                                       @if (in_array($option->id, explode(',', request()->input('attribute_'.$count)))) selected @endif>{{$option['title']}}
+                                               </option>
+                                           @endforeach
+                                       </select>
+                                       <p style="display: none">{{$count++}}</p>
+                                   </div>
                                 @endforeach
                             </div>
                             <div class="filters__btnGroup">
@@ -86,7 +88,7 @@
                                 <div class="filters__searchBox">
                                     <input class="filters__searchInput" id="searchInput" autocomplete="off" type="text"
                                            name="filter_search"
-                                           data-value="Поиск проекта" value="" placeholder="Поиск проекта">
+                                           value="" placeholder="Поиск проекта">
                                     <button class="filters__searchBtn" type="submit">
                                         <svg>
                                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#search') }}"></use>
@@ -109,18 +111,72 @@
                     </div>
                 </div>
             </div>
+                <div style="margin-top: 20px; margin-bottom: 20px;">
+                    @if(count($projects)>0)
+                        {{ $projects->links('pagination::bootstrap-4') ??''}}
+                        @include('layouts.pagination')
+
+                    @endif
+
+                </div>
+
+                <div class="filter__menu">
+                    <div class="filter__menu-wrapper">
+                        <div class="filter__menu-header">
+                            <div class="filter__menu-filter-icon">
+                                <svg>
+                                    <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#fil') }}"></use>
+                                </svg>
+                            </div>
+                            <div class="filter__menu-close-button">
+                                <svg class="filter__menu-close-icon">
+                                    <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cancel') }}"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="filter__menu-body">
+                            @if(count($options) > 0)
+                                <div class="filter__menu-list">
+                                    @foreach($options as $attrName => $attr)
+                                        <div class="filter__menu-select-wrp">
+                                            <select class="filter__menu-select" name="attribute_id_{{$count}}">
+                                                <option value="">{{$attrName}}</option>
+                                                @foreach($attr as $option)
+                                                    <option class="filters__op" value="{{$option['id']}}"
+                                                            @if (in_array($option->id, explode(',', request()->input('attribute_'.$count)))) selected @endif>{{$option['title']}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endforeach
+                                    @else
+                                        <div>
+                                            <h3 class="productsTmp__title t">Фильтры отсутствуют</h3>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="filter__menu-footer">
+                                    <button class="filters__btn btn" style="width: 100%" type="submit">Показать</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
-        <div style="margin: 20px">
-@if(count($projects)>0)
-                {{ $projects->links('pagination::bootstrap-4') ??''}}
-                @include('layouts.pagination')
-
-@endif
-
-        </div>
 
     </main>
+
+    <script>
+        document.querySelector('.gallery__filters-icon-mobile').addEventListener('click', function () {
+            document.querySelector('.filter__menu').classList.add('filter__menu--active');
+        });
+
+        document.querySelector('.filter__menu-close-button').addEventListener('click', function () {
+            document.querySelector('.filter__menu').classList.remove('filter__menu--active');
+        });
+    </script>
 @endsection
 
 <script>

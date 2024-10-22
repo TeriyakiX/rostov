@@ -84,7 +84,6 @@
                         <div class="presentation project__presentation">
                             <div class="presentation-slider swiper-container presentation__picture">
                                 <div class="swiper-wrapper">
-
                                     @foreach($project->photos as $photo)
                                         <a class="presentation-slider__item swiper-slide" href="{{ url('upload_images/' . $photo->path) }}" data-fslightbox>
                                             <div class="ratio__box">
@@ -128,6 +127,11 @@
                                 </div>
                             </div>
 
+                            <div class="info project__info--mobile">
+                                <div class="info__txt">
+                                    {!! $project->body !!}
+                                </div>
+                            </div>
 
                                 @if(count($project->relatedProjects))
                                     <section class="newItems crossale">
@@ -137,19 +141,29 @@
                                                     <div class="newItems__controlPanel">
                                                         <h2 class="newItems__title t">Товары, которые могут вам подойти</h2>
                                                     </div>
-                                                    <div class="wrp-itemsSlider">
-                                                        <div class="swiper-container itemsSlider">
-                                                            <div class="swiper-wrapper itemsSlider__wrapper">
-                                                                @foreach($project->relatedProjects as $sliderProduct)
-                                                                    @include('products._block_item')
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
+{{--                                                    <div class="wrp-itemsSlider">--}}
+{{--                                                        <div class="swiper-container itemsSlider">--}}
+{{--                                                            <div class="swiper-wrapper itemsSlider__wrapper">--}}
+{{--                                                                @foreach($project->relatedProjects as $sliderProduct)--}}
+{{--                                                                    @include('products._block_item')--}}
+{{--                                                                @endforeach--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+
+                                                    <div class="productsTmp__body" id="data-wrapper">
+                                                        @foreach($project->relatedProjects as $product)
+                                                            @include('products._product_item')
+                                                        @endforeach
                                                     </div>
+
+                                                    @if(count($project->relatedProjects) > 8)
+                                                        <div class="addBox">
+                                                            <div class="add gallery__add" id="load-more" role="button" tabindex="0">Показать ещё</div>
+                                                        </div>
+                                                    @endif
+
                                                 </div>
-                                            </div>
-                                            <div class="addBox">
-                                                <div class="add gallery__add" role="button" tabindex="0">Показать ещё</div>
                                             </div>
                                         </div>
                                     </section>
@@ -447,17 +461,38 @@
 @endsection
 
 <style>
+    .hidden {
+        display: none;
+    }
 .newItems__container {
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
 .newItems__content {
-        padding-top: 64px !important;
-    }
-
-@media (max-width: 767.98px) {
-    .addBox {
-        display: none !important;
-    }
+    padding-top: 64px !important;
 }
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const products = document.querySelectorAll('#data-wrapper > *');
+        const loadMoreBtn = document.getElementById('load-more');
+        const productsToShow = 8;
+
+        products.forEach((product, index) => {
+            if (index >= productsToShow) {
+                product.style.display = 'none';
+            }
+        });
+
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function () {
+                products.forEach((product, index) => {
+                    if (index >= productsToShow) {
+                        product.style.display = 'block';
+                    }
+                });
+                loadMoreBtn.style.display = 'none';
+            });
+        }
+    });
+</script>

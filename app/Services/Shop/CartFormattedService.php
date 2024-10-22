@@ -8,7 +8,7 @@ use phpDocumentor\Reflection\Types\Collection;
 
 class CartFormattedService
 {
-public function getFormattedOptionsText( array $options=[],bool $isFirst=true,\Illuminate\Support\Collection $collection){
+public function getFormattedOptionsText(array $options = [], bool $isFirst = true, \Illuminate\Support\Collection $collection, bool $excludeLength = false, bool $excludeSquare = false){
     $return = '';
 
     if(isset($options['attribute'])) {
@@ -32,7 +32,7 @@ foreach ($collection as $item){
         $totalSquare+=$item->options['totalSquare'];
     }
 }
-    if(isset($options['length']) && !$isFirst) {
+    if (isset($options['length']) && !$isFirst && !$excludeLength) {
         $return .= 'Длина ' . $this->millsFormattedToText($options['length']) . ' / ';
     }
 
@@ -40,8 +40,8 @@ foreach ($collection as $item){
         $return .= 'Ширина ' . $this->millsFormattedToText($options['width']) . ' / ';
     }
 
-    if(isset($options['square'])) {
-        $return .= 'Площадь: ' .  $options['square'] . 'м2 / ';
+    if (isset($options['square']) && !$excludeSquare) {
+        $return .= 'Площадь: ' . $options['square'] . 'м2 / ';
     }
 
     return trim(trim($return),'/');

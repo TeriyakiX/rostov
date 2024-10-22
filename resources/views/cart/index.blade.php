@@ -11,7 +11,10 @@
                                 <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#slideArrow') }}"></use>
                             </svg>
                         </a></li>
-                    <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active" href="#"><span>Корзина</span></a>
+                    <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active" href="#"><span>Корзина</span>
+                            <svg>
+                                <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                            </svg></a>
                     </li>
                 </ul>
             </div>
@@ -84,6 +87,11 @@
                                                             </a>
                                                         </div>
                                                     @endif
+                                                        @php
+                                                            $cartService = new \App\Services\Shop\CartFormattedService();
+                                                            $totalInfo = $cartService->getFormattedOptionsText($item->options, true, $position);
+                                                            $attributes = $cartService->getFormattedOptionsText($item->options, false, $position, true, true);
+                                                        @endphp
                                                     <div class="basket__combinedContainer">
                                                     @if ($index===0)
                                                         <div class="basket__cardDesc">
@@ -92,6 +100,8 @@
                                                                     {{ $item->product->title }}
                                                                 </a>
                                                             </div>
+
+                                                            <div class="productCalc__col--desc">{{ $attributes }}</div>
                                                     @endif
                                                             @php
                                                                 $cartService=new \App\Services\Shop\CartFormattedService();

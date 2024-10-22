@@ -5,8 +5,6 @@
     crossorigin="anonymous"></script>
 <script src="{{asset('js/owl.carousel.min.js')}}"></script>
 
-
-
 @section('content')
     <main class="page">
         <nav class="breadcrumbs">
@@ -47,36 +45,91 @@
                             {{ $coating->title }}
                         </h2>
                         <div class="prodCard__sideBody">
-                            <div class="prodCard__gallery" id="lightgallery">
+                            <div class="prodCard__gallery prodCard__gallery--desktop" id="lightgallery">
                                 @if($firstPhoto)
-                                    <div class="prodCard__galleryHero">
-                                        <a class="prodCard__heroBox ibg"
-                                           href="{{ asset('upload_images/' . $firstPhoto->path) }}"
-                                           data-fslightbox>
-                                            <picture>
-                                                <source type="image/webp"
-                                                        srcset="{{ asset('upload_images/' . $firstPhoto->path) }}">
-                                                <img src="{{ asset('upload_images/' . $firstPhoto->path) }}" alt="img0">
-                                            </picture>
-                                        </a>
+                                    <div class="prodCard-slider swiper-container">
+                                        <div class="swiper-wrapper">
+                                            @foreach($otherPhotos as $photo)
+                                                <a class="prodCard-slider__item swiper-slide"
+                                                   href="{{ asset('upload_images/' . $photo->path) }}"
+                                                   data-fslightbox>
+                                                    <div class="ratio__box">
+                                                        <picture>
+                                                            <source type="image/webp"
+                                                                    srcset="{{ asset('upload_images/' . $photo->path) }}">
+                                                            <img class="prodCard-slider__pic" src="{{ asset('upload_images/' . $photo->path) }}" alt="img0">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 @endif
-                                <div class="prodCard__galleryThumbs owl-carousel">
-                                    @foreach($otherPhotos as $photo)
-                                        <div class="prodCard__thumbsWrp" style="width: 80px; margin: 0">
-                                            <a class="prodCard__thumbsBox ibg"
+                                <div class="prodCard-thumbnails swiper-container prodCard__thumbs">
+                                    <div class="swiper-wrapper">
+                                        @foreach($otherPhotos as $photo)
+                                            <a class="prodCard-thumbnails__item swiper-slide"
                                                href="{{ asset('upload_images/' . $photo->path) }}"
                                                data-fslightbox>
-                                                <picture>
-                                                    <source type="image/webp"
-                                                            srcset="{{ asset('upload_images/' . $photo->path) }}">
-                                                    <img src="{{ asset('upload_images/' . $photo->path) }}" alt="img1">
-                                                </picture>
+                                                <div class="ratio__box">
+                                                    <picture>
+                                                        <source type="image/webp"
+                                                                srcset="{{ asset('upload_images/' . $photo->path) }}">
+                                                        <img class="prodCard-thumbnails__pic" src="{{ asset('upload_images/' . $photo->path) }}" alt="img1">
+                                                    </picture>
+                                                </div>
                                             </a>
+                                        @endforeach
+                                    </div>
+                                    <div class="prodCard-slider__controls">
+                                        <div class="prodCard-slider__btn prodCard-slider__btn_prev">
+                                            <svg class="prodCard-slider__arrow">
+                                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_left') }}"></use>
+                                            </svg>
                                         </div>
-                                    @endforeach
+                                        <div class="prodCard-slider__btn prodCard-slider__btn_next">
+                                            <svg class="prodCard-slider__arrow">
+                                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_right') }}"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="prodCard__gallery prodCard__gallery--mobile" id="lightgallery-mobile">
+                                @if($firstPhoto)
+                                    <div class="prodCard-slider-mobile swiper-container">
+                                        <div class="swiper-wrapper">
+                                            @foreach($otherPhotos as $photo)
+                                                <a class="prodCard-slider__item swiper-slide"
+                                                   href="{{ asset('upload_images/' . $photo->path) }}"
+                                                   data-fslightbox>
+                                                    <div class="ratio__box">
+                                                        <picture>
+                                                            <source type="image/webp"
+                                                                    srcset="{{ asset('upload_images/' . $photo->path) }}">
+                                                            <img class="prodCard-slider__pic" src="{{ asset('upload_images/' . $photo->path) }}" alt="img0">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                        <div class="prodCard-slider__controls">
+                                            <div class="prodCard-slider__btn prodCard-slider__btn_prev-mobile">
+                                                <svg class="prodCard-slider__arrow">
+                                                    <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_left') }}"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="prodCard-slider__btn prodCard-slider__btn_next-mobile">
+                                                <svg class="prodCard-slider__arrow">
+                                                    <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_right') }}"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+
                         </div>
                     </div>
                     <div class="addToCartForm">
@@ -193,7 +246,7 @@
                                             {{$coating->description}}
                                         </div>
                                     </div>
-                                    <div class="card__icon--statWrp" style="display: flex; margin-top: 50px">
+                                    <div class="card__icon--statWrp">
                                         <div class="card__icon coatings card__icon--stat addTo " data-destination="Compare"
                                              role="button" id="{{$coating->id}}"
                                              tabindex="0">
@@ -212,6 +265,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
 
         @if(count($products) > 0)
@@ -264,14 +318,26 @@
 </script>
 
 <style>
+    .prodCard-thumbnails__item {
+        height: 68px;
+    }
+    .prodCard-slider {
+        margin-bottom: 10px;
+    }
     .prodCard__descBody {
         line-height: 150%;
     }
-    .prodCard__heroBox {
-        padding-bottom: 70% !important;
-    }
-
     .prodCard__title--mobile {
+        display: none;
+    }
+    .card__icon--statWrp {
+        display: flex;
+        margin-top: 32px;
+    }
+    .card__icon--statWrp--desktop .swiper-wrapper {
+        height: auto !important;
+    }
+    .prodCard__gallery-mobile {
         display: none;
     }
     @media (max-width: 900px) {
@@ -286,9 +352,6 @@
         .prodCard__title--mobile {
             display: flex;
         }
-        .card__icon--statWrp {
-            margin-top: 0 !important;
-        }
         .prodCard__line {
             display: none !important;
         }
@@ -300,6 +363,13 @@
         }
         .prodCard__desc {
             padding-top: 32px !important;
+        }
+    }
+    @media (max-width: 767.98px) {
+        .card__icon--statWrp {
+            margin-top: 16px;
+            margin-bottom: 8px;
+            align-items: end;
         }
     }
 </style>

@@ -265,7 +265,6 @@
             margin-top: 0 !important;
         }
         .doc_type-wrp {
-            justify-content: space-between;
             text-align: center;
         }
         .doc_type {
@@ -290,9 +289,6 @@
         }
         .catalogControl__searchBtn {
             right: 16px !important;
-        }
-        .prodCard__docsName {
-            text-align: center;
         }
         .catalogControl__searchInput {
             padding: 10px !important;

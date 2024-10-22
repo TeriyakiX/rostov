@@ -10,7 +10,7 @@ class VideoYoutubeController extends Controller
 {
     public function index($id)
     {
-		
+
         $VideoYoutube = VideoYoutube::find($id);
 
         return view('video._video', compact('VideoYoutube'));

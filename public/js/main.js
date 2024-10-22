@@ -1006,7 +1006,7 @@ function sideBar() {
     const element = document.querySelector('.prodCard__sideBody');
     let sticky = new hcSticky(element, {
         stickTo: sidebar,
-        top: 140,
+        top: 50,
         bottom: 20,
         responsive: {
             992: {

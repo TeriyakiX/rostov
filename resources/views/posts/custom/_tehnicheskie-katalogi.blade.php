@@ -1,18 +1,4 @@
-<style>
-    @media screen and (max-width: 900px) {
-        .prodCard__docsItem {
-            flex: 0 0 100% !important;
-        }
 
-        .doc_type {
-            font-size: smaller;
-            word-break: initial;
-        }
-    }
-    .prodCard__docsItem{
-        flex: 0 0 21%; margin: 15px;
-    }
-</style>
 <section class="documentation">
     <input type="hidden" id="doc_type_id" value="{{$id}}">
     <div class="doc_type-wrp" style="display: flex; margin-bottom: 1%; font-size: 2rem; cursor: pointer">
@@ -55,14 +41,15 @@
                             <svg>
                                 <use
                                     @if(substr(strrchr($file->filepath, "."), 1) == 'docx')
-                                        xlink:href="{{ asset('img/sprites/sprite-mono.svg#doc1') }}"></use>
+                                        xlink:href="{{ asset('img/sprites/sprite-mono.svg#doc1') }}">
                                 @endif
                                 @if(substr(strrchr($file->filepath, "."), 1) == 'pdf')
-                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#doc2') }}"></use>
+                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#doc2') }}">
                                 @endif
                                 @if(substr(strrchr($file->filepath, "."), 1) == 'XLS')
-                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#doc3') }}"></use>
+                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#doc3') }}">
                                 @endif
+                                </use>
                             </svg>
                         </div>
                         <a class="prodCard__docsName link"
@@ -95,9 +82,29 @@
     .sideDash--sticky {
         display: none;
     }
+    .prodCard__docsItem{
+        flex: 0 0 21%;
+        margin: 0;
+        margin-top: 12px;
+    }
+    @media screen and (max-width: 900px) {
+        .prodCard__docsItem {
+            flex: 0 0 50% !important;
+            margin-right: 8px;
+        }
+
+        .doc_type {
+            font-size: 14px;
+            align-self: end;
+        }
+    }
     @media screen and (max-width: 767.98px){
         .doc_type-line {
             margin-top: 12px;
+        }
+        .prodCard__docsBody {
+            margin-left: 16px;
+            margin-right: 16px;
         }
         .cooperation__container {
             padding: 0;

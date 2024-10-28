@@ -46,7 +46,7 @@
                         </h2>
                         <div class="prodCard__sideBody">
                             <div class="prodCard__gallery prodCard__gallery--desktop" id="lightgallery">
-                                @if($firstPhoto)
+                                @if(count($otherPhotos) > 1)
                                     <div class="prodCard-slider swiper-container">
                                         <div class="swiper-wrapper">
                                             @foreach($otherPhotos as $photo)
@@ -62,6 +62,28 @@
                                                     </div>
                                                 </a>
                                             @endforeach
+                                        </div>
+                                    </div>
+                                @elseif(count($otherPhotos) == 0)
+                                    <div class="prodCard-slider swiper-container">
+                                        <div class="swiper-wrapper">
+
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="prodCard-slider swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <a class="prodCard-slider__item swiper-slide"
+                                               href="{{ asset('upload_images/' . $firstPhoto->path) }}"
+                                               data-fslightbox>
+                                                <div class="ratio__box">
+                                                    <picture>
+                                                        <source type="image/webp"
+                                                                srcset="{{ asset('upload_images/' . $firstPhoto->path) }}">
+                                                        <img class="prodCard-slider__pic" src="{{ asset('upload_images/' . $firstPhoto->path) }}" alt="img0">
+                                                    </picture>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
                                 @endif
@@ -97,7 +119,7 @@
                             </div>
 
                             <div class="prodCard__gallery prodCard__gallery--mobile" id="lightgallery-mobile">
-                                @if($firstPhoto)
+                                @if(count($otherPhotos) > 1)
                                     <div class="prodCard-slider-mobile swiper-container">
                                         <div class="swiper-wrapper">
                                             @foreach($otherPhotos as $photo)
@@ -125,6 +147,24 @@
                                                     <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_right') }}"></use>
                                                 </svg>
                                             </div>
+                                        </div>
+                                    </div>
+                                @elseif(count($otherPhotos) == 0)
+
+                                @else
+                                    <div class="prodCard-slider-mobile swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <a class="prodCard-slider__item swiper-slide"
+                                               href="{{ asset('upload_images/' . $firstPhoto->path) }}"
+                                               data-fslightbox>
+                                                <div class="ratio__box">
+                                                    <picture>
+                                                        <source type="image/webp"
+                                                                srcset="{{ asset('upload_images/' . $firstPhoto->path) }}">
+                                                        <img class="prodCard-slider__pic" src="{{ asset('upload_images/' . $firstPhoto->path) }}" alt="img0">
+                                                    </picture>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
                                 @endif

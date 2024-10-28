@@ -6,7 +6,7 @@
             </h2>
             <div class="process__videoBox">
                 <div class="process__videoWrp">
-                    <video class="process__video" src="https://media.istockphoto.com/videos/real-estate-project-construction-site-with-architectural-engineer-video-id1273352492" poster="img/index/video/video.jpg" preload="metadata"></video>
+                    <video class="process__video" src="https://media.istockphoto.com/videos/real-estate-project-construction-site-with-architectural-engineer-video-id1273352492" poster="img/index/video/video.png" preload="metadata"></video>
                     <svg class="process__videoPlay">
                         <use xlink:href="{{ asset('/img/sprites/sprite-multi.svg#play') }}"></use>
                     </svg>

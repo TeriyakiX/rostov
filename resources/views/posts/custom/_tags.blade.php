@@ -22,6 +22,7 @@
         display: flex;
         white-space: nowrap;
         position: relative;
+        flex-wrap: wrap;
         gap: 10px;
     }
     .card-filter__item--wrapper:before {
@@ -87,7 +88,6 @@
         align-content: flex-start;
         align-items: flex-start;
         width: 100%;
-        flex-wrap: wrap;
         padding: 1.8rem 0;
     }
 
@@ -98,6 +98,7 @@
         font-weight: bold;
         margin: 0.6rem 0;
         font-size: 16px;
+        white-space: nowrap;
     }
 
     .card-filter__item {

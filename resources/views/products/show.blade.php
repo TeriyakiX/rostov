@@ -5,8 +5,6 @@
         crossorigin="anonymous"></script>
 <script src="{{asset('js/owl.carousel.min.js')}}"></script>
 
-
-
 @section('content')
     <div class="productContent">
         <main class="page">
@@ -100,77 +98,127 @@
                         <div class="prodCard__content">
                             <div class="prodCard__side">
                                 <div class="prodCard__sideBody">
-
                                     <div class="prodCard__gallery prodCard__gallery--desktop" id="lightgallery">
-                                        @if($firstPhoto)
-                                            <div class="prodCard__galleryHero">
-                                                <a class="prodCard__heroBox ibg"
-                                                   href="{{ asset('upload_images/' . $firstPhoto->path) }}"
-                                                   data-fslightbox>
-                                                    <picture>
-                                                        <source type="image/webp"
-                                                                srcset="{{ asset('upload_images/' . $firstPhoto->path) }}">
-                                                        <img src="{{ asset('upload_images/' . $firstPhoto->path) }}"
-                                                             alt="img0">
-                                                    </picture>
-                                                </a>
+                                        @if(count($otherPhotos) > 1)
+                                            <div class="coatCard-slider swiper-container">
+                                                <div class="swiper-wrapper">
+                                                    @foreach($otherPhotos as $photo)
+                                                        <a class="coatCard-slider__item swiper-slide"
+                                                           href="{{ asset('upload_images/' . $photo->path) }}"
+                                                           data-fslightbox>
+                                                            <div class="ratio__box">
+                                                                <picture>
+                                                                    <source type="image/webp"
+                                                                            srcset="{{ asset('upload_images/' . $photo->path) }}">
+                                                                    <img class="coatCard-slider__pic" src="{{ asset('upload_images/' . $photo->path) }}" alt="img0">
+                                                                </picture>
+                                                            </div>
+                                                        </a>
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                        @endif
-                                        <div class="prodCard__galleryThumbs">
-                                            @foreach($threePhotos as $photo)
-                                                <div class="prodCard__thumbsWrp">
-                                                    <a class="prodCard__thumbsBox ibg"
-                                                       href="{{ asset('upload_images/' . $photo->path) }}"
+                                        @elseif(count($otherPhotos) == 0)
+
+                                        @else
+                                            <div class="coatCard-slider swiper-container">
+                                                <div class="swiper-wrapper">
+                                                    <a class="coatCard-slider__item swiper-slide"
+                                                       href="{{ asset('upload_images/' . $firstPhoto->path) }}"
                                                        data-fslightbox>
-                                                        <picture>
-                                                            <source type="image/webp"
-                                                                    srcset="{{ asset('upload_images/' . $photo->path) }}">
-                                                            <img src="{{ asset('upload_images/' . $photo->path) }}"
-                                                                 alt="img1">
-                                                        </picture>
+                                                        <div class="ratio__box">
+                                                            <picture>
+                                                                <source type="image/webp"
+                                                                        srcset="{{ asset('upload_images/' . $firstPhoto->path) }}">
+                                                                <img class="coatCard-slider__pic" src="{{ asset('upload_images/' . $firstPhoto->path) }}" alt="img0">
+                                                            </picture>
+                                                        </div>
                                                     </a>
                                                 </div>
-                                            @endforeach
-                                            <div class="prodCard__hiddenImgs">
+                                            </div>
+                                        @endif
+                                        <div class="coatCard-thumbnails swiper-container coatCard__thumbs">
+                                            <div class="swiper-wrapper">
                                                 @foreach($otherPhotos as $photo)
-                                                    <a href="{{ asset('upload_images/' . $photo->path) }}"
-                                                       data-fslightbox></a>
+                                                    <a class="coatCard-thumbnails__item swiper-slide"
+                                                       href="{{ asset('upload_images/' . $photo->path) }}"
+                                                       data-fslightbox>
+                                                        <div class="ratio__box">
+                                                            <picture>
+                                                                <source type="image/webp"
+                                                                        srcset="{{ asset('upload_images/' . $photo->path) }}">
+                                                                <img class="coatCard-thumbnails__pic" src="{{ asset('upload_images/' . $photo->path) }}" alt="img1">
+                                                            </picture>
+                                                        </div>
+                                                    </a>
                                                 @endforeach
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="prodCard__gallery--mobile" id="lightgallery-mobile">
-                                        <div class="prodCard__arrow prodCard__arrow--left" >
-                                            <svg>
-                                                <use
-                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="prodCard__arrow prodCard__arrow--right">
-                                            <svg>
-                                                <use
-                                                    xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
-                                            </svg>
-                                        </div>
-
-                                        @foreach($photos as $photo)
-                                            <div class="prodCard__galleryItem">
-                                                <a class="prodCard__heroBox ibg"
-                                                   href="{{ asset('upload_images/' . $photo->path) }}"
-                                                   data-fslightbox>
-                                                    <picture>
-                                                        <source type="image/webp"
-                                                                srcset="{{ asset('upload_images/' . $photo->path) }}">
-                                                        <img src="{{ asset('upload_images/' . $photo->path) }}"
-                                                             alt="img{{ $loop->iteration }}">
-                                                    </picture>
-                                                </a>
+                                            <div class="coatCard-slider__controls">
+                                                <div class="coatCard-slider__btn coatCard-slider__btn_prev">
+                                                    <svg class="coatCard-slider__arrow">
+                                                        <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_left') }}"></use>
+                                                    </svg>
+                                                </div>
+                                                <div class="coatCard-slider__btn coatCard-slider__btn_next">
+                                                    <svg class="coatCard-slider__arrow">
+                                                        <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_right') }}"></use>
+                                                    </svg>
+                                                </div>
                                             </div>
-                                        @endforeach
+                                        </div>
                                     </div>
 
-                                    <h2 class="prodCard__title prodCard__title--mobile" data-da=".prodCard__content, 992, 0">
+                                    <div class="prodCard__gallery prodCard__gallery--mobile" id="lightgallery-mobile">
+                                        @if(count($otherPhotos) > 1)
+                                            <div class="coatCard-slider-mobile swiper-container">
+                                                <div class="swiper-wrapper">
+                                                    @foreach($otherPhotos as $photo)
+                                                        <a class="prodCard-slider__item swiper-slide"
+                                                           href="{{ asset('upload_images/' . $photo->path) }}"
+                                                           data-fslightbox>
+                                                            <div class="ratio__box">
+                                                                <picture>
+                                                                    <source type="image/webp"
+                                                                            srcset="{{ asset('upload_images/' . $photo->path) }}">
+                                                                    <img class="prodCard-slider__pic" src="{{ asset('upload_images/' . $photo->path) }}" alt="img0">
+                                                                </picture>
+                                                            </div>
+                                                        </a>
+                                                    @endforeach
+                                                </div>
+                                                <div class="prodCard-slider__controls">
+                                                    <div class="prodCard-slider__btn coatCard-slider__btn_prev-mobile">
+                                                        <svg class="prodCard-slider__arrow">
+                                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_left') }}"></use>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="prodCard-slider__btn coatCard-slider__btn_next-mobile">
+                                                        <svg class="prodCard-slider__arrow">
+                                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#arrow_right') }}"></use>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @elseif(count($otherPhotos) == 0)
+                                        @else
+                                            <div class="coatCard-slider-mobile swiper-container">
+                                                <div class="swiper-wrapper">
+                                                    <a class="prodCard-slider__item swiper-slide"
+                                                       href="{{ asset('upload_images/' . $firstPhoto->path) }}"
+                                                       data-fslightbox>
+                                                        <div class="ratio__box">
+                                                            <picture>
+                                                                <source type="image/webp"
+                                                                        srcset="{{ asset('upload_images/' . $firstPhoto->path) }}">
+                                                                <img class="prodCard-slider__pic" src="{{ asset('upload_images/' . $firstPhoto->path) }}" alt="img0">
+                                                            </picture>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+
+                                    <h2 class="prodCard__title prodCard__title--mobile">
                                         {{ $product->title }}
                                         <script src="https://yastatic.net/share2/share.js"></script>
                                         <div class="ya-share2 share-icon" data-curtain data-limit="0"
@@ -748,8 +796,6 @@
                                             </div>
                                     </div>
                                 </div>
-
-
                             </form>
                         </div>
                     </div>
@@ -885,6 +931,15 @@
         @include('products.product_description_modal')
     </div>
     <style>
+        .coatCard-thumbnails__item {
+            height: 68px;
+        }
+        .coatCard-slider {
+            margin-bottom: 10px;
+        }
+        .prodCard__gallery--desktop {
+            margin-bottom: 20px;
+        }
         .add__list {
             display: flex;
             flex-direction: row;

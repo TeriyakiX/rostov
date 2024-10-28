@@ -11,7 +11,11 @@
                                 <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
                             </svg>
                         </a></li>
-                    <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active" href="#"><span>Бренды</span></a>
+                    <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active" href="#"><span>Бренды</span>
+                            <svg>
+                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                            </svg>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -23,7 +27,8 @@
                 <div class="brands__content">
                     <div class="brands__head">
                         <h2 class="brands__title t">Бренды</h2>
-                        <div class="brands__controls newItems__tabs"><a class="brands__tabsEl newItems__tabsEl" href="{{route('index.posts.show',['slug'=>'katalog'])}}"
+                        <div class="brands__controls newItems__tabs">
+                            <a class="brands__tabsEl newItems__tabsEl" href="{{route('index.posts.show',['slug'=>'katalog'])}}"
                                                                         role="button" tabindex="0">Категории товаров</a><a
                                 class="brands__tabsEl brands__tabsEl--active newItems__tabsEl" href="#" role="button"
                                 tabindex="0">Бренды</a></div>
@@ -67,48 +72,57 @@
                                 <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
                             </div>
                         </div>
-                    @include('posts.custom._tags')
-                    <div class="brands__body">
-                        @forelse($brands as $brand)
-                            <div class="brands__cardWrp">
-                                <div class="brands__card">
-                                    <div class="brands__imgBox ibg"><a class="brands__imgLink"
-                                                                       href="{{route('index.brands.index', $brand['id'])}}">
-                                                                       @if(isset($brand->files[0]))
-                                            <picture>
-                                                <source type="image/webp"
-                                                        srcset="{{ asset('upload_files/' . $brand->files[0]->filepath) }}">
-                                                <img
-                                                    src="{{ asset('upload_files/' . $brand->files[0]->filepath) }}"
-                                                    alt="#image">
-                                            </picture>
-                                            @endif
-                                        </a></div>
-                                    <div class="brands__cardBody"><a class="brands__cardTitle link"
-                                                                     href="{{route('index.brands.index', $brand['id'])}}">{{$brand['title']}}</a>
-                                        <div class="brands__cardBrands" style="margin-top: 5px">
-                                            <div>{{$brand['description']}}</div>
-                                        </div>
+                        <div class="brands__content__tags">@include('posts.custom._tags')</div>
+                    <div class="catalogContainer">
+                        @forelse($brands as $index => $brand)
+                            <div class="catalogItemBoxWrp">
+                                <a href="{{route('index.brands.index', $brand['id'])}}"
+                                   class="catalogItemBox {{ $index % 2 == 0 ? 'catalogItemBox--left' : 'catalogItemBox--right' }}">
+
+                                    <div class="catalogItemContent">
+                                        <div class="catalogTitle">{{$brand['title']}}</div>
                                     </div>
-                                </div>
+
+                                    <div class="catalogItemImgBox block-{{$loop->index}}">
+
+                                        @if(isset($brand->files[0]))
+                                          <div class="catalogItemImg">
+                                              <img
+                                                  src="{{ asset('upload_files/' . $brand->files[0]->filepath) }}"
+                                                  alt="#image">
+                                          </div>
+                                        @endif
+                                    </div>
+                                </a>
                             </div>
                         @empty
                             <div>Empty</div>
                         @endforelse
                     </div>
                 </div>
-                {{ $brands->links('pagination::bootstrap-4') }}
-                @include('layouts.pagination')
+                 <div style="margin-top: 20px;">
+                     {{ $brands->links('pagination::bootstrap-4') }}
+                     @include('layouts.pagination')
+                 </div>
             </div>
         </div>
 
         </section>
-
-
-        <div class="_container" style="margin-top: 30px">
-            <p class="_txt">SEO текст. Дивергенция векторного поля позитивно трансформирует натуральный логарифм.
-                Умножение двух векторов (скалярное) накладывает неопровержимый двойной интеграл, что несомненно приведет
-                нас к истине. Математический анализ изящно ускоряет абстрактный Наибольший Общий Делитель (НОД).</p>
-        </div>
     </main>
+
+    <style>
+        .brands {
+            padding-bottom: 74px;
+        }
+        .catalogItemImg img {
+            height: 100%;
+            width: 100%;
+        }
+
+        @media (max-width: 767.98px) {
+            .brands {
+                padding-bottom: 40px;
+            }
+        }
+    </style>
 @endsection

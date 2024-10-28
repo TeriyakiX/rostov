@@ -2695,7 +2695,12 @@ strong {
 
 .products__link {
   transition: color 0.2s ease;
-  line-height: 1;
+  line-height: 140%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .products__link:active {
@@ -3001,9 +3006,11 @@ strong {
   padding-bottom: 69%;
 }
 
+.coatCard-slider__item,
 .prodCard-slider__item,
 .presentation-slider__item,
 .prodCard-thumbnails__item,
+.coatCard-thumbnails__item,
 .presentation-thumbnails__item {
     flex-shrink: 0 !important;
 }
@@ -5273,6 +5280,11 @@ body:not(._touch) .card__icon--basket:hover svg {
     font-size: 24px;
     line-height: 140.6%;
     transition: 0.2s;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .catalogItemBoxWrp:hover .catalogTitle {
     color: #006BDE;
@@ -6596,6 +6608,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 .video__info--video {
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 .video__info--right {
@@ -7010,12 +7023,14 @@ body:not(._touch) .card__icon--basket:hover svg {
   margin-bottom: 10px;
 }
 
+.coatCard-slider__item,
 .prodCard-slider__item,
 .presentation-slider__item {
   display: block;
   position: relative;
 }
 
+.coatCard-slider__item:before,
 .prodCard-slider__item:before,
 .presentation-slider__item:before {
   display: block;
@@ -7024,6 +7039,7 @@ body:not(._touch) .card__icon--basket:hover svg {
   padding-top: calc(594 / 1182 * 100%);
 }
 
+.coatCard-slider__item .ratio__box,
 .prodCard-slider__item .ratio__box,
 .presentation-slider__item .ratio__box {
   position: absolute;
@@ -7033,11 +7049,13 @@ body:not(._touch) .card__icon--basket:hover svg {
   bottom: 0;
 }
 
+.coatCard-slider__item,
 .prodCard-slider__item {
     height: 100%;
     width: 100%;
 }
 
+.coatCard-slider__item .coatCard-slider__pic,
 .prodCard-slider__item .prodCard-slider__pic {
     height: 100%;
     width: 100%;
@@ -7059,6 +7077,8 @@ body:not(._touch) .card__icon--basket:hover svg {
   -o-object-fit: cover;
   object-fit: cover;
 }
+
+.coatCard-slider__controls,
 .prodCard-slider__controls,
 .presentation-slider__controls {
   position: absolute;
@@ -7072,7 +7092,8 @@ body:not(._touch) .card__icon--basket:hover svg {
   z-index: 2;
 }
 
-.prodCard__gallery--desktop .prodCard-slider {
+.prodCard__gallery--desktop .prodCard-slider,
+.prodCard__gallery--desktop .coatCard-slider {
     height: 330px;
     width: 100%;
 }
@@ -7081,15 +7102,20 @@ body:not(._touch) .card__icon--basket:hover svg {
     padding: 0 16px;
 }
 
+
+.coatCard-slider__controls,
 .prodCard-slider__controls {
     padding: 0 8px;
 }
 
+
+.coatCard-slider__btn,
 .prodCard-slider__btn,
 .presentation-slider__btn {
   pointer-events: auto;
 }
 
+.coatCard-slider__arrow,
 .prodCard-slider__arrow,
 .presentation-slider__arrow {
   width: 30px;
@@ -7099,23 +7125,28 @@ body:not(._touch) .card__icon--basket:hover svg {
   fill: #fff;
   cursor: pointer;
 }
+
+.coatCard-slider__arrow:hover,
 .prodCard-slider__arrow:hover,
 .presentation-slider__arrow:hover {
   fill: #9af3ef;
 }
 
 .prodCard-thumbnails,
-.presentation-thumbnails {
+.presentation-thumbnails,
+.coatCard-thumbnails {
   position: relative;
 }
 
-.prodCard-thumbnails__item ,
+.coatCard-thumbnails__item,
+.prodCard-thumbnails__item,
 .presentation-thumbnails__item {
   display: block;
   position: relative;
   background-color: #000;
 }
 
+.coatCard-thumbnails__item:before,
 .prodCard-thumbnails__item:before,
 .presentation-thumbnails__item:before {
   display: block;
@@ -7124,6 +7155,7 @@ body:not(._touch) .card__icon--basket:hover svg {
   padding-top: calc(594 / 1182 * 100%);
 }
 
+.coatCard-thumbnails__item .ratio__box,
 .prodCard-thumbnails__item .ratio__box,
 .presentation-thumbnails__item .ratio__box {
   position: absolute;
@@ -7133,6 +7165,9 @@ body:not(._touch) .card__icon--basket:hover svg {
   bottom: 0;
 }
 
+.coatCard-thumbnails__item .ratio__box img,
+.coatCard-thumbnails__item .ratio__box iframe,
+.coatCard-thumbnails__item .ratio__box picture,
 .prodCard-thumbnails__item .ratio__box img,
 .prodCard-thumbnails__item .ratio__box iframe,
 .prodCard-thumbnails__item .ratio__box picture,
@@ -7146,7 +7181,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 .presentation-thumbnails__item.swiper-slide-thumb-active
-  .presentation-thumbnails__pic {
+.presentation-thumbnails__pic {
   opacity: 1;
 }
 
@@ -7155,6 +7190,12 @@ body:not(._touch) .card__icon--basket:hover svg {
     opacity: 1;
 }
 
+.coatCard-thumbnails__item.swiper-slide-thumb-active
+.coatCard-thumbnails__pic {
+    opacity: 1;
+}
+
+.coatCard-thumbnails__pic,
 .prodCard-thumbnails__pic,
 .presentation-thumbnails__pic {
   position: absolute;
@@ -8174,7 +8215,8 @@ body:not(._touch) .card__icon--basket:hover svg {
     .prodCard__gallery--mobile {
         display: flex;
     }
-    .prodCard__gallery--mobile .prodCard-slider-mobile {
+    .prodCard__gallery--mobile .prodCard-slider-mobile,
+    .prodCard__gallery--mobile .coatCard-slider-mobile {
         height: 390px;
         width: 100%;
     }
@@ -9095,6 +9137,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 767.98px) {
+
     .catalogItemBoxWrp {
         min-height: 185px;
     }
@@ -9260,12 +9303,7 @@ body:not(._touch) .card__icon--basket:hover svg {
         clip-path: polygon(0 0, 100% 0, calc(100% - 23px) 100%, 0 100%);
     }
     .catalogTitle {
-        font-size: 24px;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 16px;
     }
     .production__slider {
         margin-bottom: 16px;
@@ -9365,6 +9403,10 @@ body:not(._touch) .card__icon--basket:hover svg {
 
     .prodCard__anchors svg {
         display: none;
+    }
+    .prodCard__title--mobile {
+        margin-top: 8px;
+        justify-content: space-between;
     }
 
     .prodCard__title--mobile, .prodCard__art--mobile {
@@ -11216,4 +11258,10 @@ iframe.note-video-clip {
   position: relative;
   margin: 0 0 0 0;
   padding: 0 0 10px 0;
+}
+
+@media (max-width: 370px) {
+    .productsTmp__itemWrp {
+        flex: 0 1 100%;
+    }
 }

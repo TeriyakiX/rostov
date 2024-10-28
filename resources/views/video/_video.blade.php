@@ -218,7 +218,12 @@
                         <div class="video__second-block">
                             <div class="video__info--left">
                                 <div class="video__info--video">
-                                    <iframe frameborder="0" src="//www.youtube.com/embed/-2niZLoZ4uM?start=33" width="100%" height="100%"></iframe>
+                                    <div class="process__videoWrp">
+                                        <video class="process__video" src="//www.youtube.com/embed/-2niZLoZ4uM?start=33" poster="../img/index/video/video_2.png" preload="metadata" width="100%" height="100%"></video>
+                                        <svg class="process__videoPlay">
+                                            <use xlink:href="{{ asset('/img/sprites/sprite-multi.svg#play') }}"></use>
+                                        </svg>
+                                    </div>
                                 </div>
 
                                 <div class="video__info--warning video__info--warning--desktop">
@@ -406,3 +411,8 @@
     </section>
 @endsection
 
+<style>
+    .process__videoWrp {
+        width: 100% !important;
+    }
+</style>

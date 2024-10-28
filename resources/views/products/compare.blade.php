@@ -618,6 +618,9 @@
         }
     </script>
     <style>
+        .comparison__title {
+            margin-bottom: 0;
+        }
         .comparison__parameters .swiper-slide {
             flex-shrink: 0 !important;
         }

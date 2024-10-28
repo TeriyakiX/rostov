@@ -124,8 +124,6 @@ class ProductController extends Controller
         foreach ($photos as $index => $photo) {
             if ($index == 0) {
                 $firstPhoto = $photo;
-            } elseif ($index > 0 && $index <= 3) {
-                $threePhotos[] = $photo;
             } else {
                 $otherPhotos[] = $photo;
             }
@@ -135,7 +133,7 @@ class ProductController extends Controller
         return view('products.show')->with(compact(
             'product', 'category', 'manufacturer', 'thickness',
             'profile_type', 'sliderProducts', 'productAttributes',
-            'photos', 'firstPhoto', 'threePhotos',
+            'photos', 'firstPhoto',
             'otherPhotos', 'viewedProducts'));
     }
 

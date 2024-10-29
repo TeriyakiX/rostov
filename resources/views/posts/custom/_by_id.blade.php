@@ -43,6 +43,9 @@
         </section>
     </main>
     <style>
+        .postContent {
+            line-height: 150%;
+        }
         .postImage{
             max-width: 60%;
             float: left;

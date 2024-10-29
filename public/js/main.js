@@ -692,41 +692,229 @@ function colorSliderInit() {
 colorSliderInit(); // Presentation
 // ====================================================
 
-let present = document.querySelector('.presentation-slider');
-let presentSlides = document.querySelector('.presentation-thumbnails');
+let present = document.querySelector(".presentation-slider"),
+    presentSlides = document.querySelector(".presentation-thumbnails");
 
 if (present && presentSlides) {
-    const presentationSlides = new Swiper(".presentation-thumbnails", {
+    let Y = new Swiper(".presentation-thumbnails", {
         freeMode: true,
         watchSlidesProgress: true,
         breakpoints: {
-            320: {
-                slidesPerView: 3,
-                spaceBetween: 10
-            },
-            767.98: {
-                slidesPerView: 4,
-                spaceBetween: 20
-            },
-            991.98: {
-                slidesPerView: 5,
-                spaceBetween: 20
-            },
-            1199.98: {
-                slidesPerView: 6,
-                spaceBetween: 20
-            }
+            320: {slidesPerView: 3, spaceBetween: 10},
+            767.98: {slidesPerView: 4, spaceBetween: 20},
+            991.98: {slidesPerView: 5, spaceBetween: 20},
+            1199.98: {slidesPerView: 6, spaceBetween: 20}
         }
     });
-    const presentation = new Swiper(".presentation-slider", {
+
+    let swiperMain = new Swiper(".presentation-slider", {
         navigation: {
             nextEl: ".presentation-slider__btn_next",
             prevEl: ".presentation-slider__btn_prev"
         },
-        thumbs: {
-            swiper: presentationSlides
+        thumbs: {swiper: Y},
+        on: {
+            init: function() {
+                checkArrowsVisibility(this);
+            },
+            slideChange: function() {
+                checkArrowsVisibility(this);
+            }
         }
     });
+
+    function checkArrowsVisibility(swiper) {
+        let prevArrow = document.querySelector('.presentation-slider__btn_prev');
+        let nextArrow = document.querySelector('.presentation-slider__btn_next');
+
+        if (swiper.isBeginning) {
+            prevArrow.style.visibility = 'hidden';
+        } else {
+            prevArrow.style.visibility = 'visible';
+        }
+
+        if (swiper.isEnd) {
+            nextArrow.style.visibility = 'hidden';
+        } else {
+            nextArrow.style.visibility = 'visible';
+        }
+    }
+}
+
+let coat = document.querySelector(".coatCard-slider"),
+    coatSlides = document.querySelector(".coatCard-thumbnails");
+
+if (coat && coatSlides) {
+    let Y = new Swiper(".coatCard-thumbnails", {
+        freeMode: true,
+        watchSlidesProgress: true,
+        breakpoints: {
+            320: {slidesPerView: 1, spaceBetween: 8},
+            767.98: {slidesPerView: 4, spaceBetween: 8},
+            991.98: {slidesPerView: 5, spaceBetween: 8},
+            1199.98: {slidesPerView: 6, spaceBetween: 8}
+        }
+    });
+
+    let swiperMain = new Swiper(".coatCard-slider", {
+        navigation: {
+            nextEl: ".coatCard-slider__btn_next",
+            prevEl: ".coatCard-slider__btn_prev"
+        },
+        thumbs: {swiper: Y},
+        on: {
+            init: function() {
+                checkArrowsVisibilityCoat(this);
+            },
+            slideChange: function() {
+                checkArrowsVisibilityCoat(this);
+            }
+        }
+    });
+
+    function checkArrowsVisibilityCoat(swiper) {
+        let prevArrow = document.querySelector('.coatCard-slider__btn_prev');
+        let nextArrow = document.querySelector('.coatCard-slider__btn_next');
+
+        if (swiper.isBeginning) {
+            prevArrow.style.visibility = 'hidden';
+        } else {
+            prevArrow.style.visibility = 'visible';
+        }
+
+        if (swiper.isEnd) {
+            nextArrow.style.visibility = 'hidden';
+        } else {
+            nextArrow.style.visibility = 'visible';
+        }
+    }
+}
+
+let coatMobile = document.querySelector(".coatCard-slider-mobile");
+
+if (coatMobile) {
+    let swiperMain = new Swiper(".coatCard-slider-mobile", {
+        navigation: {
+            nextEl: ".coatCard-slider__btn_next-mobile",
+            prevEl: ".coatCard-slider__btn_prev-mobile"
+        },
+        breakpoints: {
+            320: {slidesPerView: 1},
+        },
+        on: {
+            init: function() {
+                checkArrowsVisibilityCoatMobile(this);
+            },
+            slideChange: function() {
+                checkArrowsVisibilityCoatMobile(this);
+            }
+        }
+    });
+
+    function checkArrowsVisibilityCoatMobile(swiper) {
+        let prevArrow = document.querySelector('.coatCard-slider__btn_prev-mobile');
+        let nextArrow = document.querySelector('.coatCard-slider__btn_next-mobile');
+
+        if (swiper.isBeginning) {
+            prevArrow.style.visibility = 'hidden';
+        } else {
+            prevArrow.style.visibility = 'visible';
+        }
+
+        if (swiper.isEnd) {
+            nextArrow.style.visibility = 'hidden';
+        } else {
+            nextArrow.style.visibility = 'visible';
+        }
+    }
+}
+
+let prod = document.querySelector(".prodCard-slider"),
+    prodSlides = document.querySelector(".prodCard-thumbnails");
+
+if (prod && prodSlides) {
+    let Y = new Swiper(".prodCard-thumbnails", {
+        freeMode: true,
+        watchSlidesProgress: true,
+        breakpoints: {
+            320: {slidesPerView: 1, spaceBetween: 8},
+            767.98: {slidesPerView: 4, spaceBetween: 8},
+            991.98: {slidesPerView: 5, spaceBetween: 8},
+            1199.98: {slidesPerView: 6, spaceBetween: 8}
+        }
+    });
+
+    let swiperMain = new Swiper(".prodCard-slider", {
+        navigation: {
+            nextEl: ".prodCard-slider__btn_next",
+            prevEl: ".prodCard-slider__btn_prev"
+        },
+        thumbs: {swiper: Y},
+        on: {
+            init: function() {
+                checkArrowsVisibilityProd(this);
+            },
+            slideChange: function() {
+                checkArrowsVisibilityProd(this);
+            }
+        }
+    });
+
+    function checkArrowsVisibilityProd(swiper) {
+        let prevArrow = document.querySelector('.prodCard-slider__btn_prev');
+        let nextArrow = document.querySelector('.prodCard-slider__btn_next');
+
+        if (swiper.isBeginning) {
+            prevArrow.style.visibility = 'hidden';
+        } else {
+            prevArrow.style.visibility = 'visible';
+        }
+
+        if (swiper.isEnd) {
+            nextArrow.style.visibility = 'hidden';
+        } else {
+            nextArrow.style.visibility = 'visible';
+        }
+    }
+}
+
+let prodMobile = document.querySelector(".prodCard-slider-mobile");
+
+if (prodMobile) {
+    let swiperMain = new Swiper(".prodCard-slider-mobile", {
+        navigation: {
+            nextEl: ".prodCard-slider__btn_next-mobile",
+            prevEl: ".prodCard-slider__btn_prev-mobile"
+        },
+        breakpoints: {
+            320: {slidesPerView: 1},
+        },
+        on: {
+            init: function() {
+                checkArrowsVisibilityProdMobile(this);
+            },
+            slideChange: function() {
+                checkArrowsVisibilityProdMobile(this);
+            }
+        }
+    });
+
+    function checkArrowsVisibilityProdMobile(swiper) {
+        let prevArrow = document.querySelector('.prodCard-slider__btn_prev-mobile');
+        let nextArrow = document.querySelector('.prodCard-slider__btn_next-mobile');
+
+        if (swiper.isBeginning) {
+            prevArrow.style.visibility = 'hidden';
+        } else {
+            prevArrow.style.visibility = 'visible';
+        }
+
+        if (swiper.isEnd) {
+            nextArrow.style.visibility = 'hidden';
+        } else {
+            nextArrow.style.visibility = 'visible';
+        }
+    }
 } // ====================================================
 // Presentation
 // POPUP

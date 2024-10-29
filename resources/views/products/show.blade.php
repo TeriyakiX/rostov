@@ -99,7 +99,7 @@
                             <div class="prodCard__side">
                                 <div class="prodCard__sideBody">
                                     <div class="prodCard__gallery prodCard__gallery--desktop" id="lightgallery">
-                                        @if(count($otherPhotos) > 1)
+                                        @if(count($photos) > 1)
                                             <div class="coatCard-slider swiper-container">
                                                 <div class="swiper-wrapper">
                                                     @foreach($otherPhotos as $photo)
@@ -117,7 +117,7 @@
                                                     @endforeach
                                                 </div>
                                             </div>
-                                        @elseif(count($otherPhotos) == 0)
+                                        @elseif(count($photos) == 0)
 
                                         @else
                                             <div class="coatCard-slider swiper-container">
@@ -168,7 +168,7 @@
                                     </div>
 
                                     <div class="prodCard__gallery prodCard__gallery--mobile" id="lightgallery-mobile">
-                                        @if(count($otherPhotos) > 1)
+                                        @if(count($photos) > 1)
                                             <div class="coatCard-slider-mobile swiper-container">
                                                 <div class="swiper-wrapper">
                                                     @foreach($otherPhotos as $photo)
@@ -198,7 +198,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @elseif(count($otherPhotos) == 0)
+                                        @elseif(count($photos) == 0)
+
                                         @else
                                             <div class="coatCard-slider-mobile swiper-container">
                                                 <div class="swiper-wrapper">

@@ -46,7 +46,7 @@
                         </h2>
                         <div class="prodCard__sideBody">
                             <div class="prodCard__gallery prodCard__gallery--desktop" id="lightgallery">
-                                @if(count($otherPhotos) > 1)
+                                @if(count($photos) > 1)
                                     <div class="prodCard-slider swiper-container">
                                         <div class="swiper-wrapper">
                                             @foreach($otherPhotos as $photo)
@@ -64,12 +64,8 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                @elseif(count($otherPhotos) == 0)
-                                    <div class="prodCard-slider swiper-container">
-                                        <div class="swiper-wrapper">
+                                @elseif(count($photos) == 0)
 
-                                        </div>
-                                    </div>
                                 @else
                                     <div class="prodCard-slider swiper-container">
                                         <div class="swiper-wrapper">
@@ -119,7 +115,7 @@
                             </div>
 
                             <div class="prodCard__gallery prodCard__gallery--mobile" id="lightgallery-mobile">
-                                @if(count($otherPhotos) > 1)
+                                @if(count($photos) > 1)
                                     <div class="prodCard-slider-mobile swiper-container">
                                         <div class="swiper-wrapper">
                                             @foreach($otherPhotos as $photo)
@@ -149,7 +145,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @elseif(count($otherPhotos) == 0)
+                                @elseif(count($photos) == 0)
 
                                 @else
                                     <div class="prodCard-slider-mobile swiper-container">

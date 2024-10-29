@@ -24,6 +24,7 @@
         position: relative;
         flex-wrap: wrap;
         gap: 10px;
+        width: 100%;
     }
     .card-filter__item--wrapper:before {
         content: '';

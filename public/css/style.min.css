@@ -1685,6 +1685,7 @@ strong {
 .post-content__body-container {
     line-height: 150%;
     padding-top: 64px;
+    color: #212121;
 }
 
 .post-content__body-container h3:nth-child(1),

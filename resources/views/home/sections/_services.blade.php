@@ -9,6 +9,7 @@
                             <div class="serviceCard__imgBox">
                                 <a class="serviceCard__imgWrp" href="{{ route('index.posts.show', ['slug' => $ourService->slug]) }}">
                                     <picture>
+                                        <source srcset="{{ asset('upload_images/' . $ourService->filepath) }}">
                                         <img src="{{ asset('upload_images/' . $ourService->filepath) }}" alt="s1">
                                     </picture>
                                 </a>

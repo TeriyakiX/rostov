@@ -38,4 +38,7 @@
             display: none;
         }
     }
+    .catalogTitle {
+        -webkit-line-clamp: 5;
+    }
 </style>

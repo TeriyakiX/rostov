@@ -2,8 +2,12 @@
 
     <div class="card-filter__wrap">
         @if(isset($tags))
-        <div class="card-filter__title">Категории:</div>
         <div class="card-filter__item--wrapper">
+            <div class="{{ request()->has('tagId') ? 'card-filter__holder' : 'card-filter__holder__active' }}">
+                <a class="card-filter__item" id="all-categories">
+                    <span class="title">Все категории</span>
+                </a>
+            </div>
             @foreach($tags as $tag)
                 <div class="{{ $_SERVER['REQUEST_URI']==='/posts/stati'.'?tagId='.$tag->id ||$_SERVER['REQUEST_URI']==='/posts/stati'.'?tagId='.$tag->id.'&page='.request()->get('page')  ? 'card-filter__holder__active' : 'card-filter__holder' }}">
                     <a class="card-filter__item" id="{{$tag->id}}"> <span
@@ -17,6 +21,9 @@
 </div>
 
 <style>
+    .title {
+        font-size: 1.4rem;
+    }
     .card-filter__item--wrapper {
         display: flex;
         white-space: nowrap;
@@ -28,20 +35,20 @@
         position: absolute;
         z-index: 10;
         width: 18px;
-        height: 40px;
+        height: 45px;
         left: -10px;
         background: #fff;
     }
 
-    .card-filter__item--wrapper:after {
-        content: '';
-        position: absolute;
-        z-index: 10;
-        width: 15px;
-        height: 30px;
-        right: -5px;
-        background: #fff;
-    }
+    /*.card-filter__item--wrapper:after {*/
+    /*    content: '';*/
+    /*    position: absolute;*/
+    /*    z-index: 10;*/
+    /*    width: 18px;*/
+    /*    height: 45px;*/
+    /*    right: -5px;*/
+    /*    background: #fff;*/
+    /*}*/
 
     .card-filter__holder__active{
         color: white;
@@ -114,15 +121,19 @@
         $(document).on('click', '.card-filter__item', function () {
             var slug='stati';
             var value=$(this).attr("id");
-            let params = (new URL(window.location.href)).searchParams;
-            let currentId=params.get("tagId");
-            console.log(currentId);
-            console.log(value);
-            let href =  slug;
-            if (currentId!==value){
-                href =  href+'?'+'tagId='+value;
+
+            if (value === 'all-categories') {
+                document.location.href = slug;
+            } else {
+                let params = (new URL(window.location.href)).searchParams;
+                let currentId = params.get("tagId");
+
+                let href = slug;
+                if (currentId !== value) {
+                    href = href + '?' + 'tagId=' + value;
+                }
+                document.location.href = href;
             }
-            document.location.href = href;
-        })
-    })
+        });
+    });
 </script>

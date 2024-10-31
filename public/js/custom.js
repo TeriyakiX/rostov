@@ -362,7 +362,7 @@ $(document).on('click', '.doc_type', function () {
             $('.prodCard__docsBody').empty()
             // console.log(data.files.data)
             $.each(data.files.data, function (key, value) {
-                $('.prodCard__docsBody').append('<div class="prodCard__docsItem" style="margin-right: 15px"><div class="prodCard__docsSvgBox"><svg><use xlink:href="http://mkrostov.ru/img/sprites/sprite-mono.svg#doc' + data.type + '"></use></svg></div></br><a class="prodCard__docsName link" href="../upload_files/' + value['filepath'] + '">' + value['title'] + '</a></div>')
+                $('.prodCard__docsBody').append('<div class="prodCard__docsItem" style="margin-right: 15px"><div class="prodCard__docsSvgBox"><svg><use xlink:href="/img/sprites/sprite-mono.svg#doc' + data.type + '"></use></svg></div></br><a class="prodCard__docsName link" href="../upload_files/' + value['filepath'] + '">' + value['title'] + '</a></div>')
             });
             if (data.files.length === 0) {
                 $('.prodCard__docsBody').append('<h2 style="font-size: 30px">Пусто</h2>')
@@ -387,7 +387,7 @@ $(document).on('click', '.file_search_input_btn', function () {
             success: function (data) {
                 $('.prodCard__docsBody').empty()
                 $.each(data.files, function (key, value) {
-                    $('.prodCard__docsBody').append('<div class="prodCard__docsItem" style="margin-right: 15px"><div class="prodCard__docsSvgBox"><svg><use xlink:href="http://mkrostov.ru/img/sprites/sprite-mono.svg#doc' + data.type + '"></use></svg></div></br><a class="prodCard__docsName link" href="../upload_files/' + value['filepath'] + '">' + value['title'] + '</a></div>')
+                    $('.prodCard__docsBody').append('<div class="prodCard__docsItem" style="margin-right: 15px"><div class="prodCard__docsSvgBox"><svg><use xlink:href="/img/sprites/sprite-mono.svg#doc' + data.type + '"></use></svg></div></br><a class="prodCard__docsName link" href="../upload_files/' + value['filepath'] + '">' + value['title'] + '</a></div>')
                 });
                 if (data.files.length === 0) {
                     $('.prodCard__docsBody').append('<h2 style="font-size: 30px">Пусто</h2>')

@@ -192,6 +192,9 @@
             right: 90px;
         }
     }
+    .cooperation__cta {
+        margin-bottom: 0;
+    }
 </style>
 
 

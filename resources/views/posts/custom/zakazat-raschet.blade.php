@@ -37,7 +37,9 @@
             </div>
         </div>
     </form>
-    {!! $post->body!!}
+    <div class="post-content__body-container">
+        {!! $post->body !!}
+    </div>
 </div>
 
 

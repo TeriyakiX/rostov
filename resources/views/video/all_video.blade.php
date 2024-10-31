@@ -18,37 +18,43 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="addBox">
-                    @if(count($VideoYoutube) > 8)
-                        <div class="add gallery__add" id="load-more" role="button" tabindex="0">Показать ещё</div>
-                    @endif
+{{--                <div class="addBox">--}}
+{{--                    @if(count($VideoYoutube) > 8)--}}
+{{--                        <div class="add gallery__add" id="load-more" role="button" tabindex="0">Показать ещё</div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+
+                <div style="margin-top: 20px">
+                    @include('layouts.pagination')
+                    {{ $VideoYoutube->links('pagination::bootstrap-4') }}
                 </div>
+
             </div>
         </div>
     </section>
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const videos = document.querySelectorAll('#video-container > *');
-        const loadMoreBtn = document.getElementById('load-more');
-        const productsToShow = 8;
-
-        videos.forEach((video, index) => {
-            if (index >= productsToShow) {
-                video.style.display = 'none';
-            }
-        });
-
-        if (loadMoreBtn) {
-            loadMoreBtn.addEventListener('click', function () {
-                videos.forEach((video, index) => {
-                    if (index >= productsToShow) {
-                        video.style.display = 'block';
-                    }
-                });
-                loadMoreBtn.style.display = 'none';
-            });
-        }
-    });
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const videos = document.querySelectorAll('#video-container > *');
+    //     const loadMoreBtn = document.getElementById('load-more');
+    //     const productsToShow = 8;
+    //
+    //     videos.forEach((video, index) => {
+    //         if (index >= productsToShow) {
+    //             video.style.display = 'none';
+    //         }
+    //     });
+    //
+    //     if (loadMoreBtn) {
+    //         loadMoreBtn.addEventListener('click', function () {
+    //             videos.forEach((video, index) => {
+    //                 if (index >= productsToShow) {
+    //                     video.style.display = 'block';
+    //                 }
+    //             });
+    //             loadMoreBtn.style.display = 'none';
+    //         });
+    //     }
+    // });
 </script>

@@ -831,6 +831,9 @@ strong {
 .swiper-container-initialized .swiper-slide {
   flex-shrink: 0;
 }
+.coatCard-slider .swiper-slide, .coatCard-thumbnails .swiper-slide {
+    border: 1px solid #C8C8C8;
+}
 
 .swiper-container-android .swiper-slide,
 .swiper-container-android .swiper-wrapper {

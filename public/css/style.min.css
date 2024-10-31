@@ -7095,10 +7095,14 @@ body:not(._touch) .card__icon--basket:hover svg {
 
 .prodCard__gallery--desktop .prodCard-slider,
 .prodCard__gallery--desktop .coatCard-slider {
-    height: 330px;
     width: 100%;
 }
-
+.prodCard__gallery--desktop .prodCard-slider {
+    height: 330px;
+}
+.prodCard__gallery--desktop .coatCard-slider {
+    height: 577px;
+}
 .presentation-slider__controls {
     padding: 0 16px;
 }

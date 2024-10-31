@@ -9138,7 +9138,9 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 767.98px) {
-
+    .presentation-slider__item {
+        height: 260px;
+    }
     .catalogItemBoxWrp {
         min-height: 185px;
     }

@@ -134,7 +134,7 @@ class PostAction extends Controller
             }
 			case(35):
             {
-                $VideoYoutube = VideoYoutube::get()->toArray();
+                $VideoYoutube = VideoYoutube::paginate(8);
 				//print_r($VideoYoutube);die();
                 return view('posts.show')->with(compact('post', 'VideoYoutube'));
             }

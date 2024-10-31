@@ -111,7 +111,7 @@
                     </div>
                 </div>
             </div>
-                <div style="margin-top: 20px; margin-bottom: 20px;">
+                <div style="margin-top: 20px;">
                     @if(count($projects)>0)
                         {{ $projects->links('pagination::bootstrap-4') ??''}}
                         @include('layouts.pagination')
@@ -204,8 +204,13 @@
     .productsTmp--wrp {
         display: none;
     }
-
+    .gallery {
+        padding-bottom: 80px;
+    }
     @media (max-width: 767.98px) {
+        .gallery {
+            padding-bottom: 40px;
+        }
         .gallery__title {
             margin-bottom: 0 !important;
         }

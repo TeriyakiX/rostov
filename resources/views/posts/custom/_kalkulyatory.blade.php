@@ -15,7 +15,8 @@
                                                      href="#"><span>Калькуляторы</span>
                             <svg>
                                 <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
-                            </svg></a></li>
+                            </svg>
+                        </a></li>
                 </ul>
             </div>
         </nav>
@@ -62,25 +63,32 @@
                                 <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
                             </div>
                         </div>
-                    <div class="catalogContainer">
-                        @foreach($calculators as $index => $calculator)
-                             <div class="catalogItemBoxWrp">
-                                 <a href="{{route('index.posts.kalkulyator',['slug' => $calculator->slug])}}"
-                                    class="catalogItemBox {{ $index % 2 == 0 ? 'catalogItemBox--left' : 'catalogItemBox--right' }}">
-                                     <div class="catalogItemContent">
-                                         <div class="catalogTitle">{{ $calculator->title }}</div>
-                                     </div>
-                                     <div class="catalogItemImgBox block-{{$loop->index}}">
-                                         <div class="catalogItemImg"
-                                              style="background-image: url({{ $calculator->mainPhotoPath() }})">
-                                         </div>
-                                     </div>
-                                 </a>
-                             </div>
-                        @endforeach
+                        <div class="catalogContainer">
+                            @foreach($calculators as $index => $calculator)
+                                <div class="catalogItemBoxWrp">
+                                    <a href="{{route('index.posts.kalkulyator',['slug' => $calculator->slug])}}"
+                                       class="catalogItemBox {{ $index % 2 == 0 ? 'catalogItemBox--left' : 'catalogItemBox--right' }}">
+                                        <div class="catalogItemContent">
+                                            <div class="catalogTitle">{{ $calculator->title }}</div>
+                                        </div>
+                                        <div class="catalogItemImgBox block-{{$loop->index}}">
+                                            <div class="catalogItemImg"
+                                                 style="background-image: url({{ $calculator->mainPhotoPath() }})">
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 @endsection
+
+<style>
+    .catalogTitle {
+        -webkit-line-clamp: 5;
+    }
+</style>

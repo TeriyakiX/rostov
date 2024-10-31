@@ -321,7 +321,7 @@
 
 
                     </div>
-                    <div style="margin: 20px">
+                    <div style="margin-top: 20px">
                         {{ ($products->links('pagination::bootstrap-4')) }}
                         @include('layouts.pagination')
                     </div>

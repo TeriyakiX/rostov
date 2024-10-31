@@ -683,7 +683,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="coatings_attribute_filter" style="margin-top: 20px">
+                                <div class="coatings_attribute_filter" style="margin-top: 32px">
                                     {{--                                @foreach($options as $attrName => $attr)--}}
                                     {{--                                    <div class="row" style="margin-top: 20px">--}}
                                     {{--                                        <div class="col-md-6">--}}

@@ -631,5 +631,8 @@
         .compareSlider .compareSlider__wrapper {
             gap: 0 !important;
         }
+        .itemsSlider__slide {
+            padding: 10px;
+        }
     </style>
 @endsection

@@ -58,3 +58,8 @@
     //     }
     // });
 </script>
+<style>
+    .catalogTitle {
+        -webkit-line-clamp: 4;
+    }
+</style>

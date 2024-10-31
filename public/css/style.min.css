@@ -2165,7 +2165,7 @@ strong {
 
 .breadcrumbs--light svg {
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   top: 50%;
   right: 0px;
   width: 5px;
@@ -2458,7 +2458,7 @@ strong {
 
 .heroSlider__title {
   position: relative;
-  z-index: 5;
+  z-index: 2;
   margin-bottom: 13px;
   font-size: 3.6rem;
   line-height: 1.4;
@@ -2513,7 +2513,7 @@ strong {
 .heroSliderPreview__previewBox:before {
   content: '';
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   top: 0;
   right: 0;
   bottom: 0;
@@ -2538,7 +2538,7 @@ strong {
 .stockSliderPreview__count {
   pointer-events: none;
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   left: 0;
 }
 
@@ -2581,7 +2581,7 @@ strong {
     display: none;
     margin-left: auto;
     position: relative;
-    z-index: 5;
+    z-index: 2;
     height: 100%;
 }
 
@@ -2678,7 +2678,7 @@ strong {
 
 .products__itemContent {
   position: relative;
-  z-index: 5;
+  z-index: 2;
   flex: 0 0 238px;
 }
 
@@ -2773,7 +2773,7 @@ strong {
   flex: 0 0 auto;
   white-space: nowrap;
   position: relative;
-  z-index: 5;
+  z-index: 2;
   min-width: 66px;
   padding: 13px 15px 12px;
   color: #333;
@@ -2825,7 +2825,7 @@ strong {
   display: flex;
   margin-left: auto;
   position: relative;
-  z-index: 5;
+  z-index: 2;
   height: 100%;
 }
 
@@ -3416,7 +3416,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 
 .serviceCard__imgWrp {
   position: absolute;
-  z-index: 5;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
@@ -3525,7 +3525,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 .benefitCard__countRow:after {
   content: '';
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   top: 0;
   left: 0;
   height: 100%;
@@ -3543,7 +3543,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 
 .benefitCard__count {
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   left: 42%;
   top: 50%;
   height: 100%;
@@ -3948,7 +3948,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 .brands__imgBox:before {
   content: '';
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   top: 50%;
   height: 110%;
   width: 20%;
@@ -4359,7 +4359,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 .history__imgBox:after {
   content: '';
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   width: 20px;
   height: 20px;
 }
@@ -4632,7 +4632,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 .basket__cardImgBox:after {
   content: '';
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   width: 20px;
   height: 20px;
 }
@@ -5056,7 +5056,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 .comparison__tab[data-active]:before {
   content: '';
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   width: 100%;
   height: 3px;
   bottom: -10px;
@@ -5105,7 +5105,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 
 .comparison__parameterRow {
   position: relative;
-  z-index: 5;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5257,10 +5257,11 @@ body:not(._touch) .card__icon--basket:hover svg {
 .catalogDesc {
     padding-top: 12px;
     padding-bottom: 12px;
+    line-height: 150%;
 }
 .catalogItemContent {
     position: relative;
-    z-index: 5;
+    z-index: 2;
     flex: 0 0 238px;
 }
 .catalogItemBox--left:before {
@@ -7472,6 +7473,9 @@ body:not(._touch) .card__icon--basket:hover svg {
   text-decoration: underline;
 }
 
+.tabBar {
+    display: none;
+}
 
 @media (min-width: 1px) {
     .menu {
@@ -8307,7 +8311,7 @@ body:not(._touch) .card__icon--basket:hover svg {
         display: none;
         margin-left: auto;
         position: relative;
-        z-index: 5;
+        z-index: 2;
         height: 100%;
     }
 
@@ -9145,6 +9149,49 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 767.98px) {
+    .tabBar {
+        display: flex;
+        position: fixed;
+        background: #fff;
+        bottom: 0;
+        left: 0;
+        padding: 21px 25px;
+        width: 100%;
+        z-index: 10;
+        border-top: 2px solid #006BDE;
+    }
+    .tabBar__inner {
+        display: flex;
+        gap: 32px;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .tabBar__inner svg {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        color: #B9BCBE;
+    }
+    .tabBar__item-active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .tabBar__item-active span {
+        font-size: 16px;
+        font-weight: 600;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .tabBar__item-active svg {
+        width: 6px;
+        height: 6px;
+        color: #1DAEFF;
+    }
     .presentation-slider__item {
         height: 260px;
     }
@@ -10375,6 +10422,7 @@ body:not(._touch) .card__icon--basket:hover svg {
   .footer__bottom {
     margin-top: 0;
     flex-wrap: wrap;
+    margin-bottom: 60px;
   }
 
   .footer__copyBox {
@@ -11271,7 +11319,16 @@ iframe.note-video-clip {
 }
 
 @media (max-width: 370px) {
+    .tabBar__item-active span {
+        width: 90%;
+    }
     .productsTmp__itemWrp {
         flex: 0 1 100%;
+    }
+    .tabBar {
+        padding: 16px 25px;
+    }
+    .tabBar__inner {
+        gap: 28px;
     }
 }

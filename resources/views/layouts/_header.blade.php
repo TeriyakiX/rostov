@@ -235,7 +235,7 @@ print_r($headerCategories);
                     <a class="header__logoLink" href="{{ route('index.home') }}">
                         <picture>
                             <source type="image/webp" srcset="{{ asset('/img/logo.webp') }}">
-                            <img src="{{ asset('/img/logo.png') }}" alt="logo" width="166" height="194">
+                            <img src="{{ asset('/img/logo.svg') }}" alt="logo" width="166" height="194">
                         </picture>
                     </a>
                 </div>
@@ -386,7 +386,7 @@ print_r($headerCategories);
                         <div class="menu__logoBox"><a class="menu__logoLink" href="{{ url('/') }}">
                                 <picture>
                                     <source type="image/webp" srcset="{{ asset('/img/logo.webp') }}">
-                                    <img src="{{ asset('img/logo.png') }}" alt="logo" width="102" height="119">
+                                    <img src="{{ asset('/img/logo.svg') }}" alt="logo" width="102" height="119">
                                 </picture>
                             </a></div>
                         <nav class="menu__nav">
@@ -414,7 +414,7 @@ print_r($headerCategories);
                         <a class="menu__logoLinkMobile" href="{{ url('/') }}">
                             <picture>
                                 <source type="image/webp" srcset="{{ asset('/img/logo.webp') }}">
-                                <img src="{{ asset('img/logo.png') }}" alt="logo" width="102" height="119">
+                                <img src="{{ asset('/img/logo.svg') }}" alt="logo" width="102" height="119">
                             </picture>
                         </a>
                         <div class="close-button">

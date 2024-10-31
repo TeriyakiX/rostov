@@ -30,8 +30,8 @@
         content: '';
         position: absolute;
         z-index: 10;
-        width: 15px;
-        height: 30px;
+        width: 18px;
+        height: 40px;
         left: -10px;
         background: #fff;
     }
@@ -50,7 +50,8 @@
         background: #006bde;
         position: relative;
         margin-right: 1%;
-        min-width: 4%;
+        padding: 0 1rem;
+        min-width: 5%;
         margin-bottom: 1%;
         text-align: center;
         transform: skew(-20deg);
@@ -105,7 +106,7 @@
     .card-filter__item {
         display: inline-block;
         transform: skew(20deg);
-        margin: 0.6rem 1rem;
+        margin: 1.2rem 1rem;
         text-align: center;
         vertical-align: middle;
     }

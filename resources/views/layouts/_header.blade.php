@@ -221,12 +221,21 @@ print_r($headerCategories);
                         </button>
                     </form>
                 </div>
-                <div class="social header__social" id="socialLink3" style="display: none;">
+                <div class="social header__social" id="socialLink3">
                     <a class="social__link header__navLink" href="https://wa.me/+79885109783">
-                        <img src="{{asset('img/sprites/whatsapp.svg')}}" alt="whatsapp" class="social__link-whatsapp">
+                        <svg class="social__link-whatsapp">
+                            <use xlink:href="{{ asset('img/sprites/whatsapp.svg#whatsapp') }}"></use>
+                        </svg>
                     </a>
                     <a class="social__link header__navLink header__navLink--tg" href="https://t.me/+79885109783">
-                        <img src="{{asset('img/sprites/telegram.svg')}}" alt="telegram" class="social__link-telegram">
+                        <svg class="social__link-telegram">
+                            <use xlink:href="{{ asset('img/sprites/telegram.svg#telegram') }}"></use>
+                        </svg>
+                    </a>
+                    <a class="social__link header__navLink header__navLink--phone" href="tel:+78633114660">
+                        <svg class="social__link-phone">
+                            <use xlink:href="{{ asset('img/sprites/phone.svg#phone') }}"></use>
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -241,7 +250,7 @@ print_r($headerCategories);
                 </div>
             </div>
             <div class="header__col header__col--right">
-                <div class="social header__social" id="socialLink1">
+                <div class="social social-right header__social" id="socialLink1">
                     <a class="social__link header__navLink" href="https://wa.me/+79885109783">
                         <svg>
                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#wapp') }}"></use>
@@ -258,12 +267,25 @@ print_r($headerCategories);
                         </svg>
                     </a>
                 </div>
-                <div class="social header__social" id="socialLink4" style="display: none;">
-                    <a class="social__link header__navLink " href="tel:+78633114660" style="background: #016BDE">
-                        <img src="{{asset('img/sprites/phone.svg')}}" alt="phone">
+                <div class="social header__social" id="socialLink4">
+{{--                    <a class="social__link header__navLink " href="tel:+78633114660" style="background: #016BDE">--}}
+{{--                        <img src="{{asset('img/sprites/phone.svg')}}" alt="phone">--}}
+{{--                    </a>--}}
+
+                    <a class="social__link header__navLink--heart header__navLink {{ request()->routeIs('index.products.favorites') ? 'active' : '' }}"
+                       href="{{ route('index.products.favorites') }}">
+                        <svg class="infoPanel__svg infoPanel__svg--heart" style="fill: transparent;">
+                            <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#heart') }}"></use>
+                        </svg>
+                    </a>
+                    <a class="social__link header__navLink {{ request()->routeIs('index.cart.index') ? 'active' : '' }}"
+                       href="{{ route('index.cart.index') }}">
+                        <svg class="infoPanel__svg infoPanel__svg--basket">
+                            <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#basket') }}"></use>
+                        </svg>
                     </a>
 
-                    <div class="header__iconMenu iconMenu" role="button" tabindex="0" style="margin-left: 30px">
+                    <div class="header__iconMenu iconMenu" role="button" tabindex="0">
                         <span></span>
                     </div>
                 </div>
@@ -294,8 +316,9 @@ print_r($headerCategories);
                     </ul>
                 </nav>
 
-                <div class="header__controllers"><a class="calc header__calc"
-                                                    href="{{ route('index.posts.show', ['slug' => 'kalkulyatory']) }}">
+                <div class="header__controllers">
+                    <a class="calc header__calc"
+                       href="{{ route('index.posts.show', ['slug' => 'kalkulyatory']) }}">
                         Калькуляторы
                         <div class="calc__icon">
                             <svg>
@@ -472,6 +495,18 @@ print_r($headerCategories);
                                 </li>
                             </ul>
                         </nav>
+
+                        <div class="menu__calc-mobile">
+                            <a class="calc-mobile"
+                               href="{{ route('index.posts.show', ['slug' => 'kalkulyatory']) }}">
+                                Калькуляторы
+                                <div class="calc__icon">
+                                    <svg>
+                                        <use xlink:href="{{ asset('/img/sprites/sprite-multi.svg#calc') }}"></use>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
 
                         <div class="authorization__item_mobile">
                             <a class="authorization__link" href="{{ route('auth.registerForm') }}">Вход / Регистрация </a>

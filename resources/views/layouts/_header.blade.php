@@ -472,11 +472,11 @@ print_r($headerCategories);
                                 </li>
 
                                 <li class="menu__item">
-                                    <a class="menu__link" href="{{route('index.posts.show',['slug'=>'poleznoe'])}}">Специалистам</a>
+                                    <a class="menu__link" href="/documents/all">Специалистам</a>
                                 </li>
 
                                 <li class="menu__item">
-                                    <a class="menu__link" href="{{route('index.posts.show',['slug'=>'poleznoe'])}}">Фотогалерея</a>
+                                    <a class="menu__link" href="{{ route('index.gallery.index') }}">Фотогалерея</a>
                                 </li>
 
                                 <li class="menu__item">

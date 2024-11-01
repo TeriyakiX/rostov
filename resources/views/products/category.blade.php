@@ -147,8 +147,6 @@
                                           <div class="filters__select-wrp">
                                               <select class="filters__select" name="orderBy"
                                                       onchange="$(this).closest('form').submit()">
-                                                  <option class="filters__op" value="">По популярности прибывания</option>
-
                                                   <option class="filters__op" value="priceAsc"
                                                           @if(request()->get('orderBy') == 'priceAsc') selected @endif >
                                                       Сначала дешевле

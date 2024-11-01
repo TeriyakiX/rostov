@@ -74,7 +74,7 @@
 {{--                </div>--}}
 
                 <div class="project__content">
-                    <h2 class="project__title t">{{ $project->title }}</h2>
+                    <h2 class="project__title">{{ $project->title }}</h2>
                     <div class="project__body">
                         <div class="info project__info">
                             <div class="info__txt">
@@ -464,6 +464,12 @@
     .hidden {
         display: none;
     }
+    .project__title {
+        font-size: 3.4rem;
+        font-weight: 700;
+        line-height: 140.62%;
+        color: #595959;
+    }
 .newItems__container {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -474,6 +480,7 @@
 @media (max-width: 767.98px) {
     .project__title {
         margin-bottom: 32px;
+        font-size: 30px;
     }
 }
 </style>

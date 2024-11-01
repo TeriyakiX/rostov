@@ -221,12 +221,12 @@
 
                                     <h2 class="prodCard__title prodCard__title--mobile">
                                         {{ $product->title }}
-                                        <script src="https://yastatic.net/share2/share.js"></script>
-                                        <div class="ya-share2 share-icon" data-curtain data-limit="0"
-                                             data-more-button-type="short"
-                                             style="background:transparent;display: inline-flex;position: absolute;"
-                                             data-services="vkontakte,facebook,odnoklassniki,telegram,twitter,viber,whatsapp">
-                                        </div>
+{{--                                        <script src="https://yastatic.net/share2/share.js"></script>--}}
+{{--                                        <div class="ya-share2 share-icon" data-curtain data-limit="0"--}}
+{{--                                             data-more-button-type="short"--}}
+{{--                                             style="background:transparent;display: inline-flex;position: absolute;"--}}
+{{--                                             data-services="vkontakte,facebook,odnoklassniki,telegram,twitter,viber,whatsapp">--}}
+{{--                                        </div>--}}
                                     </h2>
                                     <div class="prodCard__art prodCard__art--mobile">Код товара: {{ $product->vendor_code }}</div>
 

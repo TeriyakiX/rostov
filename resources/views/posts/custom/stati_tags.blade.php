@@ -28,16 +28,19 @@
         display: flex;
         white-space: nowrap;
         position: relative;
-        gap: 10px;
     }
     .card-filter__item--wrapper:before {
         content: '';
         position: absolute;
         z-index: 10;
         width: 18px;
-        height: 45px;
+        /*height: -moz-available;*/
+        /*height: -webkit-fill-available;*/
+        /*height: fill-available;*/
         left: -10px;
         background: #fff;
+
+        height: 100%;
     }
 
     /*.card-filter__item--wrapper:after {*/

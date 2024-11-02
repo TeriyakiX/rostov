@@ -1,6 +1,6 @@
 <div class="cta cooperation__cta">
     <div class="cta__body">
-        <img class="cta__img"  src="{{ asset('img/cooperation/cooperation.png') }}" alt="img" loading="lazy" style="max-height: 418px" decoding="async" referrerPolicy="no-referrer">
+        <img class="cta__img"  src="{{ asset('img/cooperation/cooperation.png') }}" alt="img" loading="lazy" decoding="async" referrerPolicy="no-referrer">
         <!-- Call to action-->
         <form class="cta__form" action="{{route('index.send_mail')}}" method="post">
             @csrf

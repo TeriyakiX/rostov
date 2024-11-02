@@ -30,7 +30,6 @@
         white-space: nowrap;
         position: relative;
         flex-wrap: wrap;
-        gap: 10px;
         width: 100%;
         margin-left: -8px;
     }
@@ -39,9 +38,13 @@
         position: absolute;
         z-index: 10;
         width: 18px;
-        height: 46px;
+        /*height: -moz-available;*/
+        /*height: -webkit-fill-available;*/
+        /*height: fill-available;*/
         left: -10px;
         background: #fff;
+
+        height: 100%;
     }
 
     /*.card-filter__item--wrapper:after {*/

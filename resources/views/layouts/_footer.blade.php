@@ -213,131 +213,131 @@
             </div>
         </div>
 
-        <div class="tabBar">
-            <div class="tabBar__inner">
-                <a href="{{ route('index.home') }}">
-                    @if(Request::is('/'))
-                        <div class="tabBar__item-active">
-                            <span>Главная</span>
-                            <svg>
-                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>
-                            </svg>
-                        </div>
-                    @else
-                        <svg>
-                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#home-tab') }}"></use>
-                        </svg>
-                    @endif
-                </a>
+{{--        <div class="tabBar">--}}
+{{--            <div class="tabBar__inner">--}}
+{{--                <a href="{{ route('index.home') }}">--}}
+{{--                    @if(Request::is('/'))--}}
+{{--                        <div class="tabBar__item-active">--}}
+{{--                            <span>Главная</span>--}}
+{{--                            <svg>--}}
+{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
+{{--                            </svg>--}}
+{{--                        </div>--}}
+{{--                    @else--}}
+{{--                        <svg>--}}
+{{--                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#home-tab') }}"></use>--}}
+{{--                        </svg>--}}
+{{--                    @endif--}}
+{{--                </a>--}}
 
-                <a href="{{ url('/posts/katalog') }}">
-                    @if(Request::is('posts/katalog'))
-                        <div class="tabBar__item-active">
-                            <span>Каталог</span>
-                            <svg>
-                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>
-                            </svg>
-                        </div>
-                    @else
-                        <svg>
-                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#document-tab') }}"></use>
-                        </svg>
-                    @endif
-                </a>
+{{--                <a href="{{ url('/posts/katalog') }}">--}}
+{{--                    @if(Request::is('posts/katalog'))--}}
+{{--                        <div class="tabBar__item-active">--}}
+{{--                            <span>Каталог</span>--}}
+{{--                            <svg>--}}
+{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
+{{--                            </svg>--}}
+{{--                        </div>--}}
+{{--                    @else--}}
+{{--                        <svg>--}}
+{{--                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#document-tab') }}"></use>--}}
+{{--                        </svg>--}}
+{{--                    @endif--}}
+{{--                </a>--}}
 
-                @if(auth()->guest())
-                    <a href="{{ route('auth.loginForm') }}">
-                        @if(Request::is('login'))
-                            <div class="tabBar__item-active">
-                                <span>Профиль</span>
-                                <svg>
-                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>
-                                </svg>
-                            </div>
-                        @else
-                            <svg>
-                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>
-                            </svg>
-                        @endif
-                    </a>
-                @elseif(auth()->user()->hasRole('admin'))
-                    <a href="{{ route('admin.dashboard.index') }}">
-                        @if(Request::is('admin/dashboard'))
-                            <div class="tabBar__item-active">
-                                <span>Профиль</span>
-                                <svg>
-                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>
-                                </svg>
-                            </div>
-                        @else
-                            <svg>
-                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>
-                            </svg>
-                        @endif
-                    </a>
-                @elseif(auth()->user()->hasRole('manager'))
-                    <a href="{{ route('admin.dashboard.index') }}">
-                        @if(Request::is('admin/dashboard'))
-                            <div class="tabBar__item-active">
-                                <span>Профиль</span>
-                                <svg>
-                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>
-                                </svg>
-                            </div>
-                        @else
-                            <svg>
-                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>
-                            </svg>
-                        @endif
-                    </a>
-                @elseif(auth()->user()->hasRole('client'))
-                    <a href="{{ route('client.dashboard.index') }}">
-                        @if(Request::is('client/dashboard'))
-                            <div class="tabBar__item-active">
-                                <span>Профиль</span>
-                                <svg>
-                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>
-                                </svg>
-                            </div>
-                        @else
-                            <svg>
-                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>
-                            </svg>
-                        @endif
-                    </a>
-                @endif
+{{--                @if(auth()->guest())--}}
+{{--                    <a href="{{ route('auth.loginForm') }}">--}}
+{{--                        @if(Request::is('login'))--}}
+{{--                            <div class="tabBar__item-active">--}}
+{{--                                <span>Профиль</span>--}}
+{{--                                <svg>--}}
+{{--                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
+{{--                                </svg>--}}
+{{--                            </div>--}}
+{{--                        @else--}}
+{{--                            <svg>--}}
+{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>--}}
+{{--                            </svg>--}}
+{{--                        @endif--}}
+{{--                    </a>--}}
+{{--                @elseif(auth()->user()->hasRole('admin'))--}}
+{{--                    <a href="{{ route('admin.dashboard.index') }}">--}}
+{{--                        @if(Request::is('admin/dashboard'))--}}
+{{--                            <div class="tabBar__item-active">--}}
+{{--                                <span>Профиль</span>--}}
+{{--                                <svg>--}}
+{{--                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
+{{--                                </svg>--}}
+{{--                            </div>--}}
+{{--                        @else--}}
+{{--                            <svg>--}}
+{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>--}}
+{{--                            </svg>--}}
+{{--                        @endif--}}
+{{--                    </a>--}}
+{{--                @elseif(auth()->user()->hasRole('manager'))--}}
+{{--                    <a href="{{ route('admin.dashboard.index') }}">--}}
+{{--                        @if(Request::is('admin/dashboard'))--}}
+{{--                            <div class="tabBar__item-active">--}}
+{{--                                <span>Профиль</span>--}}
+{{--                                <svg>--}}
+{{--                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
+{{--                                </svg>--}}
+{{--                            </div>--}}
+{{--                        @else--}}
+{{--                            <svg>--}}
+{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>--}}
+{{--                            </svg>--}}
+{{--                        @endif--}}
+{{--                    </a>--}}
+{{--                @elseif(auth()->user()->hasRole('client'))--}}
+{{--                    <a href="{{ route('client.dashboard.index') }}">--}}
+{{--                        @if(Request::is('client/dashboard'))--}}
+{{--                            <div class="tabBar__item-active">--}}
+{{--                                <span>Профиль</span>--}}
+{{--                                <svg>--}}
+{{--                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
+{{--                                </svg>--}}
+{{--                            </div>--}}
+{{--                        @else--}}
+{{--                            <svg>--}}
+{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>--}}
+{{--                            </svg>--}}
+{{--                        @endif--}}
+{{--                    </a>--}}
+{{--                @endif--}}
 
-                <a href="{{ url('/cart') }}">
-                    @if(Request::is('cart'))
-                        <div class="tabBar__item-active">
-                            <span>Корзина</span>
-                            <svg>
-                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>
-                            </svg>
-                        </div>
-                    @else
-                        <svg>
-                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#shopping-cart-tab') }}"></use>
-                        </svg>
-                    @endif
-                </a>
+{{--                <a href="{{ url('/cart') }}">--}}
+{{--                    @if(Request::is('cart'))--}}
+{{--                        <div class="tabBar__item-active">--}}
+{{--                            <span>Корзина</span>--}}
+{{--                            <svg>--}}
+{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
+{{--                            </svg>--}}
+{{--                        </div>--}}
+{{--                    @else--}}
+{{--                        <svg>--}}
+{{--                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#shopping-cart-tab') }}"></use>--}}
+{{--                        </svg>--}}
+{{--                    @endif--}}
+{{--                </a>--}}
 
-                <a href="{{ url('/favorites') }}">
-                    @if(Request::is('favorites'))
-                        <div class="tabBar__item-active">
-                            <span>Избранное</span>
-                            <svg>
-                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>
-                            </svg>
-                        </div>
-                    @else
-                        <svg>
-                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#heart-tab') }}"></use>
-                        </svg>
-                    @endif
-                </a>
-            </div>
-        </div>
+{{--                <a href="{{ url('/favorites') }}">--}}
+{{--                    @if(Request::is('favorites'))--}}
+{{--                        <div class="tabBar__item-active">--}}
+{{--                            <span>Избранное</span>--}}
+{{--                            <svg>--}}
+{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
+{{--                            </svg>--}}
+{{--                        </div>--}}
+{{--                    @else--}}
+{{--                        <svg>--}}
+{{--                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#heart-tab') }}"></use>--}}
+{{--                        </svg>--}}
+{{--                    @endif--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 </footer>
 

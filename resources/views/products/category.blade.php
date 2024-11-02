@@ -82,12 +82,11 @@
                           </svg>
                       </div>
                     <div class="cooperation__body sideDashContainer">
-                        <form id="form_filters" action="{{ \Illuminate\Support\Facades\URL::current() }}"
+                        <form id="form_filters" action="{{ \Illuminate\Support\Facades\URL::current() }}" style="margin-bottom: 0;"
                               method="GET">
                         @if(count($tags) > 0)
                             <div class="newItems__controlPanel">
                                 <div class="newItems__tabs">
-                                    <input type="hidden" name="tags" value="">
                                     @foreach($tags as $tag)
                                     <a data-tag="{{$tag->id}}" onclick="selectTag(this);return false;" class="newItems__tabsEl @if(in_array($tag->id,$selected_tags)) -active @endif">
                                         {{$tag->title}}
@@ -147,8 +146,6 @@
                                           <div class="filters__select-wrp">
                                               <select class="filters__select" name="orderBy"
                                                       onchange="$(this).closest('form').submit()">
-                                                  <option class="filters__op" value="">По популярности прибывания</option>
-
                                                   <option class="filters__op" value="priceAsc"
                                                           @if(request()->get('orderBy') == 'priceAsc') selected @endif >
                                                       Сначала дешевле
@@ -305,9 +302,15 @@
         .productsTmp .filters__form {
             flex-wrap: wrap;
         }
+        .card__controllers--mobile {
+            display: none;
+        }
+        .newItems__tabsEl:first-child {
+            padding-left: 20px;
+        }
         @media (max-width: 767.98px) {
             .productsTmp .newItems__tabs {
-                margin-left: 0;
+                margin-left: -8px;
             }
            .productsTmp .filters__form {
                 display: none;
@@ -316,6 +319,17 @@
                border: none;
                padding-left: 0;
            }
+            .productsTmp__body--line .card__controllers--desktop {
+                display: none;
+            }
+            .productsTmp__body--line .card__controllers--mobile {
+                margin-top: 8px;
+                display: flex;
+                flex: 1 0 100%;
+            }
+            .productsTmp__body--line .card {
+                flex-wrap: wrap;
+            }
        }
 
         body:not(._touch) .newItems__tabsEl.-active:after {

@@ -1267,6 +1267,15 @@
                                                         <img src="{{ $product->mainPhotoPath() }}" alt="p1">
                                                     </picture>
                                                 </a>
+
+                                                <div
+                                                    class="card__icon card__mini-icon card__icon--stat addTo"
+                                                    data-destination="Compare" role="button" tabindex="0">
+                                                    <svg>
+                                                        <use
+                                                            xlink:href="{{ asset('img/sprites/sprite-mono.svg#stat') }}"></use>
+                                                    </svg>
+                                                </div>
                                             </div>
                                             <div class="card__body">
                                                 <div class="card__title">
@@ -1276,7 +1285,7 @@
                                                     </a>
 
                                                     <div
-                                                        class="card__icon card__icon--stat card__icon--stat--mobile addTo"
+                                                        class="card__mini-icon card__icon card__icon--stat card__icon--stat--mobile addTo"
                                                         data-destination="Compare" role="button" tabindex="0">
                                                         <svg>
                                                             <use
@@ -1299,7 +1308,7 @@
                                                         </svg>
                                                     </div>
                                                     <div
-                                                        class="card__icon card__icon--stat card__icon--stat--desktop addTo"
+                                                        class="card__icon card__icon--stat card__mini-icon card__icon--stat--desktop addTo"
                                                         data-destination="Compare" role="button" tabindex="0">
                                                         <svg>
                                                             <use
@@ -1341,11 +1350,13 @@
             align-items: center
         }
         .card__detail {
-            width: auto !important;
             flex-grow: 0 !important;
         }
         .card__controllers a {
             flex: 0;
+        }
+        .newBodyCol .card__controllers a {
+            flex: 1;
         }
         .card__controllers {
             margin-top: auto;
@@ -1363,9 +1374,6 @@
         .card__imgBox {
             padding-bottom: 100% !important;
         }
-        .card {
-            box-shadow: none !important;
-        }
         .productsTmp__itemWrp {
             padding: 0 !important;
             padding-bottom: 16px !important;
@@ -1377,12 +1385,33 @@
 
         .brands__body {
             margin: 0 !important;
+            flex-wrap: nowrap;
+            row-gap: 32px;
         }
         .left__side {
-            width: 30%;
             margin-right: 20px;
         }
-
+        .right__side {
+            grid-template-columns: repeat(3, 250px);
+            row-gap: 32px;
+            column-gap: 8px;
+        }
+        .productsTmp__body {
+            margin: 0 !important;
+            display: block;
+        }
+        .card__imgWrp .card__icon--stat {
+            display: none;
+        }
+        .newCol .card__imgWrp .card__icon--stat {
+            display: block;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+        .newCol .card__icon--stat--desktop, .newCol .card__icon--stat--mobile {
+            display: none;
+        }
         .card__title {
             hyphens: auto !important;
         }
@@ -1392,13 +1421,6 @@
         /*    width: 68%;*/
         /*    flex-wrap: wrap;*/
         /*}*/
-        .newCol {
-            width: 250px !important
-        }
-
-        .newBodyCol {
-            width: 33.3333%;
-        }
 
         .left__side--mobile {
             display: none;
@@ -1409,17 +1431,33 @@
         .card__icon--stat--mobile {
             display: none;
         }
-
+        @media (max-width: 1220px) {
+            .right__side {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .brands__body {
+                justify-content: space-between;
+            }
+        }
         @media (max-width: 1100px) {
+            .right__side {
+                width: 100%;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .brands__body {
+                flex-direction: column;
+            }
             .left__side {
                 width: 100%;
                 margin-right: 0;
             }
 
-            .card__btn {
-                width: 100%;
+            .card__btn, .cancel_coatings_btn {
+                width: 100% !important;
             }
-
+            .brands__head {
+                gap: 16px;
+            }
         }
         @media (max-width: 767.98px) {
             .card__imgWrp:after {
@@ -1443,16 +1481,21 @@
             .card__icon--stat--mobile {
                 display: block;
             }
-            .card {
+            .productsTmp__body--line .card {
                 flex-wrap: wrap;
             }
-            .card__controllers--mobile {
-                display: flex;
+            .productsTmp__body--line .card__controllers--mobile {
                 flex: 1 0 100%;
+            }
+            .card__controllers--mobile {
                 margin-top: 8px;
+                display: flex;
             }
             .card__controllers a {
                 flex: 1;
+            }
+            .right__side {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             }
             .card__detail {
                 width: 100% !important;
@@ -1480,9 +1523,6 @@
             }
             .brands__title-wrp {
                 width: 100%;
-            }
-            .brands__head {
-                gap: 16px;
             }
             .productsTmp__layoutControl-wrp {
                 width: 100%;
@@ -1519,7 +1559,7 @@
                         $(this).addClass('newBodyCol');
                         $('.coatings').addClass('newCol');
                         $(this).removeClass('productsTmp__body--line');
-                        $('.right__side').css({"display": "flex", "width": "68%", "flex-wrap": "wrap"});
+                        $('.right__side').css({"display": "grid"});
                         $('.card__chars').css({"display": "none"});
 
                     })

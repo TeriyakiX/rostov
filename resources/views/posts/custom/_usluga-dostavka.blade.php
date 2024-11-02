@@ -2,9 +2,9 @@
     <div class="cta cooperation__cta">
         <div class="cta__body">
            <img class="cta__img cta__img-desktop" src="{{ asset('img/cooperation/young-man-delivering-order 2.png') }}" alt="img"
-                loading="lazy" decoding="async" referrerPolicy="no-referrer" style="max-height: 521.8px">
+                loading="lazy" decoding="async" referrerPolicy="no-referrer">
            <img class="cta__img cta__img-mobile" src="{{ asset('img/cooperation/cooperation.png') }}" alt="img"
-                loading="lazy" decoding="async" referrerPolicy="no-referrer" style="max-height: 521.8px">
+                loading="lazy" decoding="async" referrerPolicy="no-referrer">
            <!-- Call to action-->
 
            <form class="cta__form" action="{{route('index.send_mail')}}" method="post" enctype="multipart/form-data">

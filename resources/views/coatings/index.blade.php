@@ -1391,10 +1391,14 @@
         .left__side {
             margin-right: 20px;
         }
+        .left__side--desktop {
+            width: 45%;
+        }
         .right__side {
-            grid-template-columns: repeat(3, 250px);
+            grid-template-columns: repeat(3, 1fr);
             row-gap: 32px;
             column-gap: 8px;
+            width: 100%;
         }
         .productsTmp__body {
             margin: 0 !important;

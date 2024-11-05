@@ -6382,7 +6382,6 @@ body:not(._touch) .card__icon--basket:hover svg {
 .prodCard__docs {
     padding-top: 30px;
 }
-
 .prodCard__docsBody--wrp {
     display: flex;
     gap: 10px;

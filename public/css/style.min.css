@@ -6142,6 +6142,15 @@ body:not(._touch) .card__icon--basket:hover svg {
     overflow: auto;
 }
 
+.wrp-colorsSlider {
+    flex: 0 1 100%;
+    max-width: 535px;
+    min-width: 0;
+    display: flex;
+    margin: 0 -5px;
+    padding: 0 5px;
+}
+
 .wrp-colorsSlider::-webkit-scrollbar {
     width: 3px;
     height: 3px;
@@ -6418,14 +6427,6 @@ body:not(._touch) .card__icon--basket:hover svg {
     line-height: 150%;
     font-weight: 700;
     float: left;
-}
-
-.wrp-colorsSlider {
-    flex: 0 1 100%;
-    width: 0;
-    display: flex;
-    padding: 0 5px;
-    overflow: auto;
 }
 
 .colorsSlider__wrapper {
@@ -7735,6 +7736,11 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 991.98px) {
+    .wrp-colorsSlider {
+        max-width: none;
+        padding: 0;
+        margin: 0;
+    }
     .menu__wrapper--mobile {
         display: flex;
     }

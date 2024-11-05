@@ -682,7 +682,7 @@ function colorSliderInit() {
         slidesPerView: 'auto',
         speed: 800,
         freeMode: {
-            enebled: true,
+            enabled: true,
             momentumBounce: false,
             momentumRatio: 0.1
         }

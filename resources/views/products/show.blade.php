@@ -450,17 +450,17 @@
                                         @if($colorsArray = $product->colorsArray())
                                             <div class="prodCard__colorBox">
                                                 <div class="prodCard__name">Цвет</div>
-                                                <div class="prodCard__wrapper">
+                                                <div class="prodCard__wrapper prodCard__wrapper-colors">
                                                     {{--                                                      <div class="leftPointer" style="cursor: pointer;margin:auto; transform: rotate(180deg)">--}}
                                                     {{--                                                          <img src="{{ asset('img/icons/right-arrow.png') }}"/>--}}
                                                     {{--                                                      </div>--}}
                                                     <div class="wrp-colorsSlider">
-                                                        <div class="colorsSlider">
-                                                            <div class="colorsSlider__wrapper">
+                                                        <div class="swiper-container colorsSlider _swiper ">
+                                                            <div class="swiper-wrapper colorsSlider__wrapper">
                                                                 <input type="hidden" name="color"
                                                                        @if($colorsArray && $colorsArray[0]) value="{{ $colorsArray[0]['ral'] }}" @endif>
                                                                 @foreach($colorsArray as $index => $item)
-                                                                    <div class="colorsSlider__slide">
+                                                                    <div class="swiper-slide colorsSlider__slide">
                                                                         <div class="prodCard__colorWrp">
                                                                             <div
                                                                                 class="prodCard__color @if($index ==0) selected @endif "

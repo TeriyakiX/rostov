@@ -1564,7 +1564,7 @@
                         $('.coatings').addClass('newCol');
                         $(this).removeClass('productsTmp__body--line');
                         $('.right__side').css({"display": "grid"});
-                        $('.card__chars').css({"display": "none"});
+                        $('.card__chars').css({"margin-bottom": "0"});
 
                     })
                 } else {
@@ -1573,7 +1573,7 @@
                         $('.coatings').removeClass('newCol');
                         $(this).addClass('productsTmp__body--line')
                         $('.right__side').css({"display": "block"});
-                        $('.card__chars').css({"display": "block"});
+                        $('.card__chars').css({"margin-bottom": "10px"});
                         // $('.card__body').css({"display": "none"});
                     })
                 }

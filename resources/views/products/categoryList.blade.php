@@ -210,7 +210,7 @@
                                                 @foreach($subcategories as $index => $subSubcategory)
                                                     <a class="brands__cardCategory {{ $index >= 7 ? 'hidden-category' : '' }}"
                                                        href="{{ route('index.products.category', ['category' => $subSubcategory->slug]) }}">
-                                                        <p>{{ $subSubcategory->title }}</p>
+                                                        {{ $subSubcategory->title }}
                                                     </a>
                                                 @endforeach
                                                 @if(count($subcategories) > 7)
@@ -225,7 +225,7 @@
                                             <div class="brands__cardCategories" id="brands-{{ $subcategory->id }}">
                                                 @foreach ($category->products as $index => $product)
                                                     <a class="brands__cardCategory {{ $index >= 7 ? 'hidden-brand' : '' }}" href="{{ $product->brand ? '/brands/' . $product->brand['id'] : '#' }}">
-                                                        <p>{{ $product->brand ? $product->brand->title : 'Без бренда' }}</p>
+                                                        {{ $product->brand->title }}
                                                     </a>
                                                 @endforeach
                                                 @if(count($category->products) > 7)

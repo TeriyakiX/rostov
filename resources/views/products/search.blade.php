@@ -317,5 +317,10 @@
                 flex-wrap: wrap;
             }
         }
+        @media (max-width: 479.98px) {
+            .filters__btn {
+                flex: 0 0 auto;
+            }
+        }
     </style>
 @endsection

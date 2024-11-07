@@ -10792,7 +10792,6 @@ body:not(._touch) .card__icon--basket:hover svg {
     .footer__bottom {
         margin-top: 0;
         flex-wrap: wrap;
-        margin-bottom: 60px;
     }
 
     .footer__copyBox {

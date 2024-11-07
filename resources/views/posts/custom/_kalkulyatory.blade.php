@@ -85,10 +85,9 @@
             </div>
         </section>
     </main>
+    <style>
+        .catalogTitle {
+            -webkit-line-clamp: 5;
+        }
+    </style>
 @endsection
-
-<style>
-    .catalogTitle {
-        -webkit-line-clamp: 5;
-    }
-</style>

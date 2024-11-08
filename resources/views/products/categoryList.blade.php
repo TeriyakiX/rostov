@@ -225,7 +225,7 @@
                                             <div class="brands__cardCategories" id="brands-{{ $subcategory->id }}">
                                                 @foreach ($category->products as $index => $product)
                                                     <a class="brands__cardCategory {{ $index >= 7 ? 'hidden-brand' : '' }}" href="{{ $product->brand ? '/brands/' . $product->brand['id'] : '#' }}">
-                                                        {{ $product->brand->title }}
+                                                        {{ $product->brand ? $product->brand->title : '' }}
                                                     </a>
                                                 @endforeach
                                                 @if(count($category->products) > 7)
@@ -348,10 +348,8 @@
 </style>
 <script defer>
     document.addEventListener("DOMContentLoaded", function () {
-        // Сначала отображаем только категории, скрывая бренды
         toggleTab('categories');
 
-        // Скрываем все скрытые категории и бренды по умолчанию
         document.querySelectorAll('.hidden-category').forEach(category => {
             category.style.display = 'none';
         });

@@ -10,7 +10,10 @@
                                 <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
                             </svg>
                         </a></li>
-                    <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active" href="#"><span>Товары</span></a>
+                    <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active" href="#"><span>Товары</span>
+                            <svg>
+                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                            </svg></a>
                     </li>
                 </ul>
             </div>
@@ -39,4 +42,26 @@
             </div>
         </section>
     </main>
+
+    <style>
+        .brands__container {
+            margin-bottom: 80px;
+        }
+        .brands__body {
+            margin: 0;
+        }
+        @media (max-width: 767.98px) {
+            .brands__container {
+                margin-bottom: 40px;
+            }
+            .brands__title {
+                margin-bottom: 32px;
+            }
+        }
+        @media (max-width: 991.98px) {
+            .newItems__tabs:before {
+                left: -18px;
+            }
+        }
+    </style>
 @endsection

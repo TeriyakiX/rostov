@@ -8367,6 +8367,9 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 991.98px) {
+    .menu--active {
+        background: #fff;
+    }
     .social {
         display: flex;
         gap: 12px;
@@ -9336,9 +9339,6 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
     .brands__cardCategory-more p {
         padding: 8px;
-    }
-    .menu--active {
-        background: #fff;
     }
     .card__controllers--mobile {
         display: flex;

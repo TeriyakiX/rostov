@@ -224,9 +224,11 @@
 
                                             <div class="brands__cardCategories" id="brands-{{ $subcategory->id }}">
                                                 @foreach ($category->products as $index => $product)
-                                                    <a class="brands__cardCategory {{ $index >= 7 ? 'hidden-brand' : '' }}" href="{{ $product->brand ? '/brands/' . $product->brand['id'] : '#' }}">
-                                                        {{ $product->brand ? $product->brand->title : '' }}
-                                                    </a>
+                                                  @if($product->brand)
+                                                        <a class="brands__cardCategory {{ $index >= 7 ? 'hidden-brand' : '' }}" href="{{ $product->brand ? '/brands/' . $product->brand['id'] : '#' }}">
+                                                            {{ $product->brand->title }}
+                                                        </a>
+                                                  @endif
                                                 @endforeach
                                                 @if(count($category->products) > 7)
                                                     <a class="brands__cardCategory-more" href="javascript:void(0);"

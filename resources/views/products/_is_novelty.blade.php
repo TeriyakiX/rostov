@@ -17,7 +17,7 @@
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                             <span>Новинки</span>
                             <svg>
-                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
                             </svg>
                         </a>
                     </li>

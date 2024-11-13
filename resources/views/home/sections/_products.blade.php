@@ -139,7 +139,7 @@
 
                             <div class="catalogList">
 
-                                @foreach($productCategory->subcategories()->limit(5)->get() as $index=> $subcategory)
+                                @foreach($productCategory->subcategories()->limit(4)->get() as $index=> $subcategory)
                                     {{--                        <li class="product_list" >  white-space: nowrap;overflow: hidden;   text-overflow: ellipsis; --}}
                                     <a class="products__link title"
                                        style=""

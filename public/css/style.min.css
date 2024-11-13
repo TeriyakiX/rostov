@@ -2060,7 +2060,6 @@ strong {
 
 .breadcrumbs__list {
     display: flex;
-    overflow: auto;
     flex-wrap: wrap;
     row-gap: 8px;
     max-width: 97%;
@@ -2114,13 +2113,24 @@ strong {
 }
 
 .breadcrumbs__link--active {
-    color: #505050;
-    background-color: #e7e7e7;
+    color: #006BDE;
+    background-color: transparent;
     pointer-events: none;
 }
 
+.breadcrumbs__link.breadcrumbs__link--active:before {
+    border: 1px solid #006BDE;
+    border-bottom: none;
+}
+
+.breadcrumbs__link.breadcrumbs__link--active:after {
+    border: 1px solid #006BDE;
+    border-top: none;
+}
+
 .breadcrumbs__link--active svg {
-    fill: #757575 !important;
+    width: 8px !important;
+    height: 8px !important;
 }
 
 .breadcrumbs__link span {
@@ -2710,10 +2720,11 @@ strong {
     transition: color 0.2s ease;
     line-height: 140%;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #757575;
 }
 
 .products__link:active {
@@ -4059,7 +4070,6 @@ body:not(._touch) .card__icon--basket:hover svg {
 .brands__cardCategory {
     background-color: #F6F6F6;
     color: #006BDE;
-    max-width: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4068,20 +4078,19 @@ body:not(._touch) .card__icon--basket:hover svg {
     border-radius: 4px;
     transition: 0.1s;
 
-    padding: 16px;
+    padding: 10px 16px;
     /*display: -webkit-box;*/
     /*-webkit-line-clamp: 2;*/
     /*-webkit-box-orient: vertical;*/
     /*overflow: hidden;*/
     /*text-overflow: ellipsis;*/
-    text-align: left;
+    text-align: center;
 }
 
 .brands__cardCategory-more {
     background-color: #FFF;
-    color: #006BDE;
+    color: #fff;
     border: 1px solid #F6F6F6;
-    max-width: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4089,11 +4098,12 @@ body:not(._touch) .card__icon--basket:hover svg {
     text-align: center;
     border-radius: 4px;
     transition: 0.1s;
+    background: #006BDE;
 }
 
 .brands__cardCategory-more p {
-    padding: 16px;
-    font-weight: 600;
+    padding: 10px 16px;
+    font-weight: 400;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -4101,7 +4111,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 
 .categories__cardCategories,
 .brands__cardCategories {
-    flex-wrap: wrap;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
@@ -4184,6 +4194,19 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 .productsTmp__body--line .card__imgBox {
     padding-bottom: 100%;
+}
+
+.productsTmp__body--line .card__controllers--desktop .card__btn {
+    width: auto;
+    flex-grow: 0;
+}
+
+.productsTmp__body--line .card__controllers--desktop {
+    justify-content: flex-start;
+}
+
+.productsTmp__body--line .card__controllers--desktop a {
+    width: auto;
 }
 
 .card__sale {
@@ -8067,7 +8090,6 @@ body:not(._touch) .card__icon--basket:hover svg {
         margin-bottom: 10px;
         padding-left: 4px;
         padding-right: 4px;
-        color: #929292;
         transition: 0.2s ease;
     }
 
@@ -8089,10 +8111,13 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
 
     .sideDash--sticky {
-        position: static !important;
+        position: relative !important;
+        top: auto;
+        left: auto;
         display: flex;
         gap: 10px;
         margin-bottom: 30px;
+        z-index: 3 !important;
     }
 
     .sideDash__item--gap:not(:last-child) {
@@ -8114,6 +8139,7 @@ body:not(._touch) .card__icon--basket:hover svg {
     .catalogItemBox:before {
         width: 100%;
         overflow: hidden;
+        z-index: -1;
     }
 
     .catalogItemContent {
@@ -8367,6 +8393,10 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 991.98px) {
+    .categories__cardCategories,
+    .brands__cardCategories {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
     .menu--active {
         background: #fff;
     }
@@ -8448,7 +8478,7 @@ body:not(._touch) .card__icon--basket:hover svg {
         /*height: -moz-available;*/
         /*height: -webkit-fill-available;*/
         /*height: fill-available;*/
-        left: -10px;
+        left: -18px;
         background: #fff;
         height: 100%;
     }
@@ -9331,9 +9361,14 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 @media (max-width: 767.98px) {
-    .brands__cardCategory-more {
-        background: #F6F6F6;
+    .products__name .link {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
+
     .brands__cardCategory {
         padding: 8px;
     }
@@ -9484,6 +9519,7 @@ body:not(._touch) .card__icon--basket:hover svg {
         right: 50%;
         transform: rotate3d(0, 1, 0, -90deg);
         z-index: 1;
+        transition: 0.2s;
         font-size: 18px;
         padding: 2px 10px;
     }
@@ -9505,28 +9541,12 @@ body:not(._touch) .card__icon--basket:hover svg {
         margin: 0 0 32px 0;
     }
 
-    .products__body {
-        flex-wrap: nowrap;
-    }
-
-    .products__body--mobile {
-        display: flex;
-    }
-
-    .products__body--desktop {
-        display: none;
-    }
-
     .products__title--wrapper {
         justify-content: space-between;
     }
 
     .products__title {
         padding-bottom: 16px;
-    }
-
-    .newItems__sliderBtns--mobile {
-        display: flex;
     }
 
     .itemsSlider__slide {
@@ -9667,7 +9687,7 @@ body:not(._touch) .card__icon--basket:hover svg {
     }
 
     .catalogTitle {
-        font-size: 16px;
+        font-size: 24px;
     }
 
     .production__slider {
@@ -9787,6 +9807,20 @@ body:not(._touch) .card__icon--basket:hover svg {
 
         height: 100%;
     }
+
+    .breadcrumbs__item {
+        max-width: 90vw;
+    }
+
+    .breadcrumbs__link span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        display: inline-block;
+        vertical-align: top;
+    }
+
 
     .prodCard__anchors::-webkit-scrollbar {
         width: 3px;
@@ -9922,8 +9956,9 @@ body:not(._touch) .card__icon--basket:hover svg {
         padding-top: 0;
     }
 
+
     .brands__cardCategory {
-        max-width: 135px;
+        max-width: fit-content;
     }
 
     .breadcrumbs__link {

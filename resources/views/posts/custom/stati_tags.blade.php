@@ -28,6 +28,8 @@
         display: flex;
         white-space: nowrap;
         position: relative;
+        width: 100%;
+        margin-left: -8px;
     }
     .card-filter__item--wrapper:before {
         content: '';

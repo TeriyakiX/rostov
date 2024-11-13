@@ -16,6 +16,9 @@
                     <li class="breadcrumbs__item">
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="{{ route('index.projects.index') }}">
                             <span>Наши проекты</span>
+                            <svg>
+                                <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>

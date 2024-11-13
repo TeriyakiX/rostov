@@ -1,4 +1,3 @@
-
 <div class="container__div_one">
 
     <div class="menuPoleznoe">
@@ -13,9 +12,9 @@
 
     </div>
 
-    <div class="poleznoeContent" >
+    <div class="poleznoeContent">
 
-{!! $post->body !!}
+        {!! $post->body !!}
 
     </div>
 
@@ -31,27 +30,25 @@
 </script>
 <style>
 
-h2 {
-    font-weight: bold;
-}
+    h2 {
+        font-weight: bold;
+    }
 
-@media (max-width: 900px) {
-    .menuPoleznoe{
-        width: 100% !important;
+    @media (max-width: 900px) {
+        .menuPoleznoe {
+            width: 100% !important;
+        }
+
+        .poleznoeContent {
+            font-size: 14px !important;
+            padding: 20px 0 !important;
+        }
     }
-    .poleznoeContent {
-        font-size: 14px !important;
-        padding: 20px 0 !important;
-    }
-}
+
     .menuPoleznoe {
         width: 25%;
         height: auto;
-        background: #F6F6F6;
-        padding-left: 15px;
         padding-right: 15px;
-
-
     }
 
     .poleznoeContent {
@@ -63,13 +60,19 @@ h2 {
     }
 
     .categoryMenu {
-        height: 50px;
+        height: 52px;
 
-        padding-top: 15px;
+        padding-top: 13px;
         font-weight: 400;
         font-size: 16px;
         line-height: 150%;
-        border-bottom: 1px solid #E2E2E2;
+        border-bottom: 4px solid #fff;
+
+        background: rgba(3, 211, 212, 0.25) !important;
+        margin-right: -15px;
+        clip-path: polygon(0 1%, 100% 0%, 90% 100%, 0% 100%);
+        color: #505050;
+        cursor: pointer;
     }
 
     .categoryMenu:hover:before {

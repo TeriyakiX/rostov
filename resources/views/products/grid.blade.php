@@ -17,7 +17,7 @@
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                             <span>{{ $title }}</span>
                             <svg>
-                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
                             </svg>
                         </a>
                     </li>
@@ -31,51 +31,20 @@
                         {{ $title }}
                     </h1>
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
-                                        <img src="{{asset('img/sprites/3.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                        href="{{route('index.posts.show',['slug'=>'vidy-pokrytiya'])}}">Виды
-                                        покрытий</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a
-                                        href="{{route('index.posts.show',['slug'=>'gotovye-resheniya']) }}">Готовые
-                                        решения</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
-                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
-                            </div>
-                            <div class="sideDash__item sideDash__item--gap">
-                                <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/1.png') }}#building">
-                                        <img src="{{asset('img/sprites/1.png')}}" alt="">
-                                    </use>
-                                </svg>
-                                <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
-                            </div>
-                        </div>
+
                     @if(count($products) > 0)
                         <div class="productsTmp__body" id="data-wrapper">
                             @foreach($products as $product)
                                 @include('products._product_item')
                             @endforeach
                         </div>
-                    @endif
+                        @else
+                            <div class="comparison__infoCompare">
+                                <div class="comparison__categoryName" style="margin-top: 32px;">
+                                    Список пуст
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -19,8 +19,8 @@
                             </svg>
                         </a></li>
                     <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active"
-                                                     href="#"><span>{{$post->title}}</span>     <svg>
-                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                                     href="#"><span>{{$post->title}}</span> <svg>
+                                <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
                             </svg></a></li>
                 </ul>
             </div>

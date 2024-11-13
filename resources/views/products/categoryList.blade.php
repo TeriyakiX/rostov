@@ -62,7 +62,7 @@
                         <a class="breadcrumbs__link breadcrumbs__link--active">
                             <span>{{ $category->title }}</span>
                             <svg>
-                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
                             </svg>
                         </a>
                     </li>
@@ -173,47 +173,15 @@
                                                 </a>
                                             @endif
 
-
-                                            {{--                                        --}}{{--<div class="brands__cardCategories ac">--}}
-
-                                            {{--                                            @foreach($subcategories as $index=>$subSubcategory)--}}
-                                            {{--                                                @if($index < 5)--}}
-                                            {{--                                                    <a class="brands__cardCategory"--}}
-                                            {{--                                                       href="{{ route('index.products.category', ['category' => $subSubcategory->slug]) }}">--}}
-                                            {{--                                                        {{ $subSubcategory->title }}--}}
-                                            {{--                                                    </a>--}}
-                                            {{--                                                @endif--}}
-                                            {{--                                            @endforeach--}}
-                                            {{--                                            @if(count($subcategories) >= 5)--}}
-                                            {{--                                                <div class="ac-panel">--}}
-                                            {{--                                                    @foreach($subcategories as $index=>$subSubcategory)--}}
-                                            {{--                                                        @if($index >= 5)--}}
-                                            {{--                                                            <a class="brands__cardCategory"--}}
-                                            {{--                                                               href="{{ route('index.products.category', ['category' => $subSubcategory->slug]) }}">--}}
-                                            {{--                                                                {{ $subSubcategory->title }}--}}
-                                            {{--                                                            </a>--}}
-                                            {{--                                                        @endif--}}
-                                            {{--                                                    @endforeach--}}
-                                            {{--                                                </div>--}}
-                                            {{--                                                <div class="brands__cardMore ac-trigger off" data-more-open="Показать еще" data-more-close="Скрыть ">--}}
-                                            {{--                                                    {{ count($subcategories) - 5 }} {{ show_categories_count_rus(count($subcategories) - 5) }}--}}
-                                            {{--                                                    <svg class="brands__cardArrow">--}}
-                                            {{--                                                        <use xlink:href="/img/sprites/sprite-mono.svg#sel3"></use>--}}
-                                            {{--                                                    </svg>--}}
-                                            {{--                                                </div>--}}
-                                            {{--                                            @endif--}}
-                                            {{--                                        </div>--}}
-
-
                                             <div class="categories__cardCategories"
                                                  id="categories-{{ $subcategory->id }}">
                                                 @foreach($subcategories as $index => $subSubcategory)
-                                                    <a class="brands__cardCategory {{ $index >= 7 ? 'hidden-category' : '' }}"
+                                                    <a class="brands__cardCategory {{ $index >= 6 ? 'hidden-category' : '' }}"
                                                        href="{{ route('index.products.category', ['category' => $subSubcategory->slug]) }}">
                                                         {{ $subSubcategory->title }}
                                                     </a>
                                                 @endforeach
-                                                @if(count($subcategories) > 7)
+                                                @if(count($subcategories) > 6)
                                                     <a class="brands__cardCategory-more" href="javascript:void(0);"
                                                        data-category-id="{{ $subcategory->id }}"
                                                        onclick="toggleCategories(this)">
@@ -225,12 +193,12 @@
                                             <div class="brands__cardCategories" id="brands-{{ $subcategory->id }}">
                                                 @foreach ($category->products as $index => $product)
                                                   @if($product->brand)
-                                                        <a class="brands__cardCategory {{ $index >= 7 ? 'hidden-brand' : '' }}" href="{{ $product->brand ? '/brands/' . $product->brand['id'] : '#' }}">
+                                                        <a class="brands__cardCategory {{ $index >= 6 ? 'hidden-brand' : '' }}" href="{{ $product->brand ? '/brands/' . $product->brand['id'] : '#' }}">
                                                             {{ $product->brand->title }}
                                                         </a>
                                                   @endif
                                                 @endforeach
-                                                @if(count($category->products) > 7)
+                                                @if(count($category->products) > 6)
                                                     <a class="brands__cardCategory-more" href="javascript:void(0);"
                                                        data-brand-id="{{ $subcategory->id }}"
                                                        onclick="toggleBrands(this)">
@@ -352,31 +320,43 @@
     document.addEventListener("DOMContentLoaded", function () {
         toggleTab('categories');
 
-        document.querySelectorAll('.hidden-category').forEach(category => {
-            category.style.display = 'none';
-        });
-        document.querySelectorAll('.hidden-brand').forEach(brand => {
-            brand.style.display = 'none';
-        });
+        applyInitialVisibility();
+
+        setEqualHeightForTitles();
+
+        window.addEventListener("resize", applyInitialVisibility);
     });
+
+    function applyInitialVisibility() {
+        const limit = window.innerWidth <= 768 ? 3 : 6;
+
+        document.querySelectorAll('.categories__cardCategories').forEach(categoryContainer => {
+            const categories = categoryContainer.querySelectorAll('.brands__cardCategory');
+            categories.forEach((category, index) => {
+                if (index >= limit) {
+                    category.classList.add('hidden-category');
+                    category.style.display = 'none';
+                } else {
+                    category.classList.remove('hidden-category');
+                    category.style.display = 'grid';
+                }
+            });
+        });
+    }
 
     function toggleCategories(link) {
         const categoryId = link.getAttribute('data-category-id');
         const hiddenCategories = document.querySelectorAll(`#categories-${categoryId} .hidden-category`);
 
         hiddenCategories.forEach(category => {
-            category.style.display = category.style.display === 'none' ? 'flex' : 'none';
+            category.style.display = category.style.display === 'none' ? 'grid' : 'none';
         });
 
         const linkText = link.querySelector('p');
         if (linkText.textContent === 'Показать еще') {
             linkText.textContent = 'Скрыть...';
-            linkText.style.fontWeight = '400';
-            linkText.style.color = '#000';
         } else {
             linkText.textContent = 'Показать еще';
-            linkText.style.fontWeight = '600';
-            linkText.style.color = '#006BDE';
         }
     }
 
@@ -385,18 +365,14 @@
         const hiddenBrands = document.querySelectorAll(`#brands-${brandId} .hidden-brand`);
 
         hiddenBrands.forEach(brand => {
-            brand.style.display = brand.style.display === 'none' ? 'flex' : 'none';
+            brand.style.display = brand.style.display === 'none' ? 'grid' : 'none';
         });
 
         const linkText = link.querySelector('p');
         if (linkText.textContent === 'Показать еще') {
             linkText.textContent = 'Скрыть...';
-            linkText.style.fontWeight = '400';
-            linkText.style.color = '#000';
         } else {
             linkText.textContent = 'Показать еще';
-            linkText.style.fontWeight = '600';
-            linkText.style.color = '#006BDE';
         }
     }
 
@@ -416,12 +392,26 @@
             const brandsContainer = card.querySelector('.brands__cardCategories');
 
             if (tab === 'categories') {
-                subcategoryContainer.style.display = 'flex';
+                subcategoryContainer.style.display = 'grid';
                 brandsContainer.style.display = 'none';
             } else {
                 subcategoryContainer.style.display = 'none';
-                brandsContainer.style.display = 'flex';
+                brandsContainer.style.display = 'grid';
             }
         });
     }
+
+    function setEqualHeightForTitles() {
+        const titles = document.querySelectorAll('.brands__cardTitle');
+        let maxHeight = 0;
+
+        titles.forEach(title => {
+            maxHeight = Math.max(maxHeight, title.offsetHeight);
+        });
+
+        titles.forEach(title => {
+            title.style.height = maxHeight + 'px';
+        });
+    }
 </script>
+

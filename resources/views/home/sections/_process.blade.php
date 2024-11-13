@@ -14,7 +14,7 @@
             </div>
             <div class="process__body">
                 <h2 class="process__title t">
-                    <a class="link" href="{{ route('index.posts.show', ['slug' => 'o-kompanii']) }}">Производство</a>
+                    <a class="link" href="{{ route('index.posts.show', ['slug' => 'o-kompanii']) }}">О компании</a>
                 </h2>
                 <p class="process__txt">
                     Ротор переворачивает период. Момент силы трения не зависит от скорости вращения внутреннего кольца подвеса, что не кажется странным,

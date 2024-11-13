@@ -27,6 +27,9 @@
                     <li class="breadcrumbs__item">
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                             <span>Оформление заказа</span>
+                            <svg>
+                                <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>

@@ -21,7 +21,7 @@
                         <a class="breadcrumbs__link breadcrumbs__link--active">
                             <span>Поиск по запросу "{{ $query }}"</span>
                             <svg>
-                                <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
                             </svg>
                         </a>
                     </li>
@@ -287,9 +287,6 @@
 
         .productsTmp .filters__form {
             flex-wrap: wrap;
-        }
-        .card__controllers--mobile {
-            display: none;
         }
 
         .newItems__tabs:before {

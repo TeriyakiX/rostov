@@ -18,7 +18,7 @@
                         <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
                             <span>Акции</span>
                             <svg>
-                                <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                                <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
                             </svg>
                         </a>
                     </li>
@@ -73,6 +73,27 @@
                    @include('products.sections.slider')
 
                 @if(count(\App\Models\Product::where('is_promo', '>', 0)->get()) > 0)
+                        <div class="newItems__controlPanel">
+                            <div class="newItems__tabs">
+                                <div class="newItems__tabsEl all_categories newItems__tabsEl--active" role="button" tabindex="0"
+                                     data-tab="all" data-active><div class="newItems__tabsEl--first">Все</div>
+                                </div>
+                                <div class="newItems__tabsEl sort_button" role="button" type="submit" tabindex="0"
+                                     data-tab="roof">
+                                    Кровля
+                                </div>
+                                <div class="newItems__tabsEl sort_button" role="button" tabindex="0" data-tab="facade">
+                                    Фасад
+                                </div>
+                                <div class="newItems__tabsEl sort_button" role="button" tabindex="0" data-tab="poly">
+                                    Поликарбонат
+                                </div>
+                                <div class="newItems__tabsEl sort_button" role="button" tabindex="0" data-tab="terrace">
+                                    Террасная доска
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="productsTmp__body" id="data-wrapper">
                             @foreach(\App\Models\Product::where('is_promo', '>', 0)->get() as $product)
                                 @include('products._product_item')
@@ -90,7 +111,6 @@
     <style>
         .productsTmp__body {
             margin: 0 -8px;
-            margin-top: 32px;
         }
         .heroSliderPreview__previewBox:before {
             background-color: rgba(37, 161, 65, 0.7);
@@ -159,6 +179,18 @@
         }
 
         @media (max-width: 991.98px) {
+            .productsTmp .newItems__tabs {
+                flex-wrap: wrap;
+            }
+            .newItems__tabsEl:not(:first-child) {
+                margin-left: 30px !important;
+            }
+            .productsTmp .newItems__tabsEl:not(:last-child) {
+                margin-right: 0 !important;
+            }
+            .swiper {
+                z-index: -1;
+            }
             .heroSliderPreview__count {
                 font-size: 9.6rem;
             }

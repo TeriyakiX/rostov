@@ -10,6 +10,7 @@ Route::prefix('entity')->name('entity.')->group(function () {
 
     Route::get('/{entity}/{id}', [EntityController::class, 'show'])->name('show');
     Route::post('/{entity}/{id}', [EntityController::class, 'update'])->name('update');
+    Route::post('{entity}/copy/{id}', [EntityController::class, 'copy'])->name('copy');
 
     Route::get('/{entity}', [EntityController::class, 'index'])->name('index');
 

@@ -29,7 +29,7 @@
                         <h2 class="brands__title t">Бренды</h2>
                         <div class="brands__controls newItems__tabs">
                             <a class="brands__tabsEl newItems__tabsEl" href="{{route('index.posts.show',['slug'=>'katalog'])}}"
-                                                                        role="button" tabindex="0">Категории товаров</a><a
+                                                                        role="button" tabindex="0">Каталог товаров</a><a
                                 class="brands__tabsEl brands__tabsEl--active newItems__tabsEl" href="#" role="button"
                                 tabindex="0">Бренды</a></div>
                     </div>

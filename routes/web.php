@@ -52,3 +52,8 @@ Route::get('/change-password', function() {
 
 
 //$2y$10$/mwFuYnh//tRnI7BzGi3.u78Z7D56PYonAdnjHMToxkAIOok/9wTS
+
+
+Route::get('/test-error/{code}', function ($code) {
+    abort($code);
+});

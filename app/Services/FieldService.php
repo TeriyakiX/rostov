@@ -54,6 +54,7 @@ class FieldService
                 case 'dateTime':
 
                     $return .= $this->endPromoDate($fieldName, $fieldData, $item);
+                    $return .= $this->endNovetlyDate($fieldName, $fieldData, $item);
                     break;
                 case 'belongsTo':
                     $return .= $this->belongsTo($fieldName, $fieldData, false, $item);
@@ -192,7 +193,18 @@ class FieldService
             ->with(compact('fieldName', 'fieldData', 'item'))
             ->render();
     }
-
+    /**
+     * @param $fieldName
+     * @param $fieldData
+     * @param null $item
+     * @return string
+     */
+    public function endNovetlyDate($fieldName, $fieldData, $item = null)
+    {
+        return view('admin.fields._end_novelty_date')
+            ->with(compact('fieldName', 'fieldData', 'item'))
+            ->render();
+    }
     /**
      * @param $fieldName
      * @param $fieldData

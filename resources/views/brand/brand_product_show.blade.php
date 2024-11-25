@@ -23,7 +23,7 @@
                 <div class="brands__content">
                     <div class="brands__head">
                         <h2 class="brands__title t">@if(is_object($products)){{\App\Models\Brand::where('id', $products[0]['brand_id'])->get()[0]['title']}} @else {{$products}} @endif</h2>
-                        <div class="brands__controls newItems__tabs"><a class="brands__tabsEl newItems__tabsEl" href="/posts/katalog" role="button" tabindex="0">Категории товаров</a><a
+                        <div class="brands__controls newItems__tabs"><a class="brands__tabsEl newItems__tabsEl" href="/posts/katalog" role="button" tabindex="0">Каталог товаров</a><a
                                 class="brands__tabsEl brands__tabsEl--active newItems__tabsEl" href="#" role="button"
                                 tabindex="0">Бренды</a></div>
                     </div>

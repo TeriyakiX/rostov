@@ -117,6 +117,7 @@ class Product extends Model implements ProductContract
         'is_novelty',
         'is_promo',
         'end_promo_date',
+        'end_novelty_date',
         'minimum_batch',
         'description',
         'list_width_full',
@@ -135,9 +136,10 @@ class Product extends Model implements ProductContract
         'sort',
     ];
 
-//    protected $casts = [
-//        'is_novelty' => 'boolean'
-//    ];
+    protected $casts = [
+        'end_novelty_date' => 'datetime',
+        'end_promo_date' => 'datetime',
+    ];
 
     /**
      * @var string[]
@@ -170,7 +172,15 @@ class Product extends Model implements ProductContract
         'show_calculator' => [
             'type' => 'yes_no',
             'title' => 'Отобразить калькулятор'
-        ]
+        ],
+        'end_novelty_date' => [
+            'type' => 'dateTime',
+            'title' => 'Время окончания новинки',
+        ],
+        'end_promo_date' => [
+            'type' => 'dateTime',
+            'title' => 'Время окончания акции',
+        ],
     ];
 
     /**
@@ -311,6 +321,10 @@ class Product extends Model implements ProductContract
         'end_promo_date' => [
             'type' => 'dateTime',
             'title' => 'Время окончания акции'
+        ],
+        'end_novelty_date' => [
+            'type' => 'dateTime',
+            'title' => 'Время окончания новинки'
         ],
         'sort' => [
             'type' => 'text',
@@ -455,7 +469,7 @@ class Product extends Model implements ProductContract
      * @param $orderBy
      * @return mixed
      */
-    
+
 
     /**
      * {@inheritdoc}

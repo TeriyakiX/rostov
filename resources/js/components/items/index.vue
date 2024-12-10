@@ -14,7 +14,7 @@
 
         <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'actions'">
-                <a class="btn btn-sm btn-primary" @click="updateItem(props.formattedRow['id'])">Обновить</a>
+                <a class="btn btn-sm btn-primary" @click="updateItem(props.formattedRow['id'])">ыфв</a>
                 <a class="btn btn-sm btn-danger" @click="deleteItem(props.formattedRow['id'], props.row.originalIndex)">Удалить</a>
             </span>
             <span v-else>

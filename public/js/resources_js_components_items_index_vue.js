@@ -57,6 +57,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     updateItem: function updateItem(id) {
       window.location.href = './' + this.entity + '/' + id;
     },
+      async downloadPdf(id) {
+          try {
+              // Извлекаем сущность из URL
+              const parts = window.location.pathname.split('/');
+              const entity = parts[3]; // Индекс сущности в URL
+
+              // Проверка на наличие сущности
+              if (!entity) {
+                  throw new Error("Не указана сущность.");
+              }
+
+              // Логируем URL для отладки
+              console.log(`URL для скачивания: /admin/orders/${id}/download-pdf`);
+
+              // Открываем ссылку на скачивание PDF
+              window.location.href = `/admin/orders/${id}/download-pdf`;
+          } catch (error) {
+              console.error("Ошибка скачивания PDF:", error);
+              this.$toast.error("Произошла ошибка при скачивании PDF.");
+          }
+      },
+      async copyItem(id) {
+          try {
+              // Извлекаем сущность из URL
+              const parts = window.location.pathname.split('/');
+              const entity = parts[3]; // Индекс сущности в URL
+
+              // Проверка на наличие сущности
+              if (!entity) {
+                  throw new Error("Не указана сущность.");
+              }
+
+              // Логируем URL для отладки
+              console.log(`URL запроса: /admin/${entity}/${id}/copy`);
+
+              // Выполнение запроса на сервер для копирования объекта
+              const response = await axios.post(`/admin/${entity}/${id}/copy`);
+
+              if (response.data.success) {
+                  this.$toast.success("Объект успешно скопирован!");
+                  this.loadItems(); // Перезагружаем список или выполняем нужное обновление
+              } else {
+                  this.$toast.error("Не удалось скопировать объект.");
+              }
+          } catch (error) {
+              console.error("Ошибка копирования:", error);
+              this.$toast.error("Произошла ошибка при копировании.");
+          }
+      },
     deleteItem: function deleteItem(id, index) {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -160,47 +209,101 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("vue-good-table", {
-    attrs: {
-      mode: "remote",
-      totalRows: _vm.totalRecords,
-      "pagination-options": {
-        enabled: true
-      },
-      columns: _vm.columns,
-      rows: _vm.rows
-    },
-    on: {
-      "on-page-change": _vm.onPageChange,
-      "on-sort-change": _vm.onSortChange,
-      "on-column-filter": _vm.onColumnFilter,
-      "on-per-page-change": _vm.onPerPageChange
-    },
-    scopedSlots: _vm._u([{
-      key: "table-row",
-      fn: function fn(props) {
-        return [props.column.field == "actions" ? _c("span", [_c("a", {
-          staticClass: "btn btn-sm btn-primary",
-          on: {
-            click: function click($event) {
-              return _vm.updateItem(props.formattedRow["id"]);
-            }
-          }
-        }, [_vm._v("Обновить")]), _vm._v(" "), _c("a", {
-          staticClass: "btn btn-sm btn-danger",
-          on: {
-            click: function click($event) {
-              return _vm.deleteItem(props.formattedRow["id"], props.row.originalIndex);
-            }
-          }
-        }, [_vm._v("Удалить")])]) : _c("span", [_vm._v("\n            " + _vm._s(props.formattedRow[props.column.field]) + "\n        ")])];
-      }
-    }])
-  });
-};
+
+        var render = function render() {
+            var _vm = this,
+                _c = _vm._self._c;
+
+            return _c("vue-good-table", {
+                attrs: {
+                    mode: "remote",
+                    totalRows: _vm.totalRecords,
+                    "pagination-options": {
+                        enabled: true
+                    },
+                    columns: _vm.columns,
+                    rows: _vm.rows
+                },
+                on: {
+                    "on-page-change": _vm.onPageChange,
+                    "on-sort-change": _vm.onSortChange,
+                    "on-column-filter": _vm.onColumnFilter,
+                    "on-per-page-change": _vm.onPerPageChange
+                },
+                scopedSlots: _vm._u([{
+                    key: "table-row",
+                    fn: function fn(props) {
+                        return [
+                            props.column.field == "actions"
+                                ? _c("span", [
+                                    _c(
+                                        "a",
+                                        {
+                                            staticClass: "btn btn-sm btn-primary",
+                                            on: {
+                                                click: function click($event) {
+                                                    return _vm.updateItem(props.formattedRow["id"]);
+                                                }
+                                            }
+                                        },
+                                        [_vm._v("Обновить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                        "a",
+                                        {
+                                            staticClass: "btn btn-sm btn-danger",
+                                            on: {
+                                                click: function click($event) {
+                                                    return _vm.deleteItem(
+                                                        props.formattedRow["id"],
+                                                        props.row.originalIndex
+                                                    );
+                                                }
+                                            }
+                                        },
+                                        [_vm._v("Удалить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                        "a",
+                                        {
+                                            staticClass: "btn btn-sm btn-success",
+                                            on: {
+                                                click: function click($event) {
+                                                    return _vm.copyItem(props.formattedRow["id"]);
+                                                }
+                                            }
+                                        },
+                                        [_vm._v("Копировать")]
+                                    ),
+                                    _vm._v(" "),
+                                    // Убираем проверку на 'orders', скачивание PDF для всех сущностей
+                                    _c(
+                                        "a",
+                                        {
+                                            staticClass: "btn btn-sm btn-info",
+                                            on: {
+                                                click: function click($event) {
+                                                    return _vm.downloadPdf(props.formattedRow["id"]);
+                                                }
+                                            }
+                                        },
+                                        [_vm._v("Скачать PDF")]
+                                    )
+                                ])
+                                : _c("span", [
+                                    _vm._v(
+                                        "\n            " +
+                                        _vm._s(props.formattedRow[props.column.field]) +
+                                        "\n        "
+                                    )
+                                ])
+                        ];
+                    }
+                }])
+            });
+        };
 var staticRenderFns = [];
 render._withStripped = true;
 
@@ -387,3 +490,5 @@ function normalizeComponent(
 /***/ })
 
 }]);
+
+

@@ -368,29 +368,42 @@ class EntityController extends Controller
      */
     public function copy(Request $request, $entity, $id)
     {
-        try {
-            $user = $request->user();
-            $config = self::getConfigByRole($user, $entity);
-            $model = $config['model'];
+        Log::info("Entity: $entity, ID: $id"); // Логируем сущность и ID
 
-            // Найти оригинальную запись
-            $originalItem = $model::findOrFail($id);
-
-            // Создать копию записи
-            $newItem = $originalItem->replicate();
-            $newItem->save();
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Запись успешно скопирована!',
-                'new_item' => $newItem,
-            ]);
-        } catch (\Exception $e) {
+        // Проверка на наличие конфигурации для сущности
+        $config = config('admin.entities.' . $entity);
+        if (!$config) {
+            Log::error("Конфигурация сущности не найдена: $entity");
             return response()->json([
                 'success' => false,
-                'message' => 'Ошибка: ' . $e->getMessage(),
-            ], 500);
+                'message' => 'Сущность не найдена.',
+            ], 404);
         }
+
+        // Получаем модель из конфигурации
+        $model = $config['model'];
+
+        try {
+            // Находим оригинальный элемент по ID
+            $originalItem = $model::findOrFail($id);
+        } catch (\Exception $e) {
+            Log::error("Ошибка при поиске элемента: " . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Элемент не найден.',
+            ], 404);
+        }
+
+        // Делаем копию элемента
+        $newItem = $originalItem->replicate();
+
+        // Сохраняем новую запись в базе
+        $newItem->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Запись успешно скопирована!',
+        ]);
     }
 
 }

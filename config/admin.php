@@ -122,6 +122,11 @@ return [
         'akcii_slider'=>[
             'title'=>'Слайдер страницы акции',
             'model'=>\App\Models\AkciiSlider::class
+        ],
+        'office_hours'=>[
+            'title'=>'Режим работы офиса',
+            'model'=>\App\Models\OfficeHour::class
         ]
+
     ]
 ];

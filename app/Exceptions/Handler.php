@@ -35,7 +35,28 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpException && $e->getStatusCode() >= 500 && $e->getStatusCode() < 600) {
+                \Log::error('Ошибка '.$e->getStatusCode().': '.$e->getMessage(), [
+                    'url' => request()->url(),
+                    'trace' => $e->getTraceAsString(),
+                ]);
+            }
         });
+    }
+
+    /**
+     * Render the exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Illuminate\Http\Response
+     */
+    public function render($request, Throwable $exception)
+    {
+        if ($this->isHttpException($exception) && $exception->getStatusCode() >= 500 && $exception->getStatusCode() < 600) {
+            return response()->view('errors.500', ['status' => $exception->getStatusCode()], $exception->getStatusCode());
+        }
+
+        return parent::render($request, $exception);
     }
 }

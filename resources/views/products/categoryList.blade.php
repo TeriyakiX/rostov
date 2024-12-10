@@ -116,7 +116,7 @@
                             <div class="brands__controls newItems__tabs">
                                 <a class="brands__tabsEl brands__tabsEl--active newItems__tabsEl" role="button"
                                    tabindex="0" href="#"
-                                   onclick="toggleTab('categories')">Категории товаров</a>
+                                   onclick="toggleTab('categories')">Каталог товаров</a>
                                 <a class="brands__tabsEl newItems__tabsEl" role="button" tabindex="0" href="#"
                                    onclick="toggleTab('brands')">Бренды</a>
                             </div>
@@ -380,7 +380,7 @@
         const tabs = document.querySelectorAll('.brands__tabsEl');
 
         tabs.forEach(tabEl => {
-            if (tabEl.textContent === (tab === 'categories' ? 'Категории товаров' : 'Бренды')) {
+            if (tabEl.textContent === (tab === 'categories' ? 'Каталог товаров' : 'Бренды')) {
                 tabEl.classList.add('brands__tabsEl--active');
             } else {
                 tabEl.classList.remove('brands__tabsEl--active');

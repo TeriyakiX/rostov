@@ -52,12 +52,17 @@ class EntityResource extends JsonResource
                     $return[$fieldName] = $showValue;
                     break;
 
+                case 'dateTime':
+                    $value = $this->$fieldName;
+                    $formattedDate = $value ? $value->format('Y-m-d H:i:s') : "-";
+                    $return[$fieldName] = $formattedDate;
+                    break;
+
                 case 'belongsTo':
                     $relationName = $fieldData['relation_name'];
                     $relationTitle = $fieldData['relation_title'];
                     $value = $this->$relationName ? $this->$relationName->$relationTitle : "-";
                     $return[$fieldName] = $value;
-
 
             }
         }

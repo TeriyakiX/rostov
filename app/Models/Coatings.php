@@ -40,6 +40,10 @@ class Coatings extends Model
 
     protected $guarded = [];
 
+
+    protected $fillable = [
+        'is_popular',
+    ];
     /**
      * @var string[]
      */
@@ -55,6 +59,10 @@ class Coatings extends Model
         'slug' => [
             'type' => 'plain',
             'title' => 'Код атрибута'
+        ],
+        'is_popular' => [
+            'type' => 'yes_no',
+            'title' => 'Популярное',
         ],
     ];
 
@@ -119,6 +127,11 @@ class Coatings extends Model
         'photos' => [
             'type' => 'photos',
             'title' => 'Фотографии'
+        ],
+        'is_popular' => [
+            'type' => 'checkbox',
+            'title' => 'Популярное покрытие',
+            'validation' => 'boolean',
         ],
 //        'attributes' => [
 //            'type' => 'attributes',

@@ -38,9 +38,6 @@ class EntityController extends Controller
      */
     public function index(Request $request, $entity, EntityService $entityService)
     {
-
-
-
         $user = $request->user();
         $config = self::getConfigByRole($user, $entity);
         if ($request->ajax()) {
@@ -77,7 +74,6 @@ class EntityController extends Controller
 
         return view('admin.entity.update')->with(compact('entity', 'id', 'item', 'config', 'fieldsHtml'));
     }
-
     /**
      * @param \Illuminate\Http\Request $request
      * @param $entity
@@ -88,15 +84,7 @@ class EntityController extends Controller
      */
     public function update(Request $request, $entity, $id, EntityService $entityService, FieldService $fieldService)
     {
-
-
-
-//        dd($request->all());
-//        $input = $request->file();
-//        $imageName = time().'.'.$input['photos'][0]->getClientOriginalExtension();
-//        $input['photos'][0]->move(public_path('/upload_files'), $imageName);
-
-        if($request->is_delete && $request->is_delete == 1) {
+        if ($request->is_delete && $request->is_delete == 1) {
             $request->request->add(['image' => '']);
         }
 
@@ -107,68 +95,59 @@ class EntityController extends Controller
         $editFields = $model::ADMIN_EDIT;
         $validationRules = $entityService->getValidationRules($editFields);
         $this->validate($request, $validationRules);
+
         $item = $model::findOrFail($id);
 
-		$order = Order::query()->find($id);
+        // Обработка даты окончания акции
+        if ($request->has('end_promo_date')) {
+            $endPromoDate = $request->end_promo_date ? \Carbon\Carbon::parse($request->end_promo_date) : null;
 
-		if ($model === 'App\Models\Order') {
+            // Устанавливаем флаг is_promo на основе даты
+            $item->is_promo = $endPromoDate && !$endPromoDate->isPast();
+            $item->end_promo_date = $endPromoDate;
+        }
 
-			if($order->status != $request->status){
-				$status = OrderStatus::query()->findOrFail($request->status);
-				if(strlen(phone_format($request->phone_number)) === 10){
-					if($status->title){
-						$mess_phone = 'Ваш заказ № ('.$id.') "'.$status->title.'"';
-						$api = new SmsHelper ( config('constants.apiname_SmsHelper'), config('constants.apikey_SmsHelper'), true, false );
-						$result_sms = $api->sendSMS ( preg_replace( '/[^0-9]/', '', $request->phone_number ), $mess_phone , 'mkrostov');
-						//https://wa.me/15551234567?text=I%27m%20interested%20in%20your%20car%20for%20sale
-						$order->status = $status->title;
-						Mail::to($request->email)->send(new OrdersMail($order));
-					}
+        // Обработка даты окончания новинки
+        if ($request->has('end_novelty_date')) {
+            $endNoveltyDate = $request->end_novelty_date ? \Carbon\Carbon::parse($request->end_novelty_date) : null;
 
-					//logger($order->products);
+            // Устанавливаем флаг is_novelty на основе даты
+            $item->is_novelty = $endNoveltyDate && !$endNoveltyDate->isPast();
+            $item->end_novelty_date = $endNoveltyDate;
+        }
 
-				}
+        if ($model === 'App\Models\Order') {
+            $order = Order::query()->find($id);
+            if ($order && $order->status != $request->status) {
+                $status = OrderStatus::query()->findOrFail($request->status);
+                $formattedPhone = phone_format($request->phone_number);
 
-			}
+                if (strlen($formattedPhone) === 10 && $status->title) {
+                    $message = 'Ваш заказ № (' . $id . ') "' . $status->title . '"';
+                    $api = new SmsHelper(config('constants.apiname_SmsHelper'), config('constants.apikey_SmsHelper'), true, false);
+                    $api->sendSMS(preg_replace('/[^0-9]/', '', $formattedPhone), $message, 'mkrostov');
 
-		}
-        if ($model === 'App\Models\Post') {
-
-            $usefulChapterCount = UsefulChapter::where('slug', $item->slug)->count();
-            if ($usefulChapterCount > 0) {
-                $usefulChapter = UsefulChapter::where('slug', $item->slug)->first();
-
-                $editFieldsPosts = \App\Models\Post::ADMIN_EDIT;
-                $validationRulesPosts = $entityService->getValidationRules($editFieldsPosts);
-                $this->validate($request, $validationRulesPosts);
-                $entityService->update($usefulChapter, $request);
-
-            } elseif (isset($request->show_in_header) && $request->show_in_header == 1 && isset($request->categories) && in_array(2, $request->categories)) {
-                $chapterRequest = $request;
-                $editFieldsPosts = \App\Models\Post::ADMIN_EDIT;
-                $validationRulesPosts = $entityService->getValidationRules($editFieldsPosts);
-                $this->validate($chapterRequest, $validationRulesPosts);
-
-                $entityService->create('App\Models\UsefulChapter', $chapterRequest);
+                    $order->status = $status->title;
+                    Mail::to($request->email)->send(new OrdersMail($order));
+                }
             }
         }
+
+        if ($model === 'App\Models\Post') {
+            $usefulChapter = UsefulChapter::where('slug', $item->slug)->first();
+            if ($usefulChapter) {
+                $entityService->update($usefulChapter, $request);
+            } elseif ($request->show_in_header == 1 && isset($request->categories) && in_array(2, $request->categories)) {
+                $entityService->create('App\Models\UsefulChapter', $request);
+            }
+        }
+
         $entityService->update($item, $request);
 
-
-
-        //$data = $request->file();
-		//logger($order->files[0]->filepath);
-
-        // Проверяем наличие файлов и наличие send_invoice
-		if (isset($order->files[0]->filepath) && $request->send_invoice && !empty($order->files[0]->filepath)) {
+        if ($model === 'App\Models\Order' && isset($order->files[0]->filepath) && $request->send_invoice) {
             $file_name = $order->files[0]->filepath;
-			$orderr = $order->files[0];
-			$file = $request->file();
-
-//			Mail::to($order->email)->attach(public_path('upload_files/' . $file_name))->send(new SendInvoiceMail($order));
-            // Отправляем письмо владельцу ордера с файлом.
             Mail::send('posts.invoice', ['order_id' => $id], function ($message) use ($order, $file_name) {
-                $message->to($order->email)->subject('Счет оплату по заказу №'.$order->id)
+                $message->to($order->email)->subject('Счет оплаты по заказу №' . $order->id)
                     ->attach(public_path('upload_files/' . $file_name));
             });
         }
@@ -378,6 +357,53 @@ class EntityController extends Controller
 
 
         return $config;
+    }
+
+    /**
+     * Копирование записи.
+     *
+     * @param Request $request
+     * @param $entity
+     * @param $id
+     */
+    public function copy(Request $request, $entity, $id)
+    {
+        Log::info("Entity: $entity, ID: $id"); // Логируем сущность и ID
+
+        // Проверка на наличие конфигурации для сущности
+        $config = config('admin.entities.' . $entity);
+        if (!$config) {
+            Log::error("Конфигурация сущности не найдена: $entity");
+            return response()->json([
+                'success' => false,
+                'message' => 'Сущность не найдена.',
+            ], 404);
+        }
+
+        // Получаем модель из конфигурации
+        $model = $config['model'];
+
+        try {
+            // Находим оригинальный элемент по ID
+            $originalItem = $model::findOrFail($id);
+        } catch (\Exception $e) {
+            Log::error("Ошибка при поиске элемента: " . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Элемент не найден.',
+            ], 404);
+        }
+
+        // Делаем копию элемента
+        $newItem = $originalItem->replicate();
+
+        // Сохраняем новую запись в базе
+        $newItem->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Запись успешно скопирована!',
+        ]);
     }
 
 }

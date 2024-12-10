@@ -26,6 +26,15 @@
                     <label class="message" for="file" style="color: red">
 
                     </label>
+                    <div class="formRow">
+                        <div class="inpBox">
+                            <label for="consent" class="ctaForm__label">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                Я соглашаюсь на обработку моих персональных данных в соответствии с
+                                <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
+                            </label>
+                        </div>
+                    </div>
                     <button class="formBox__submit" type="submit">Получить консультацию</button>
                 </form>
                 <div class="formBox__policy">
@@ -198,8 +207,18 @@
             <div class="footer__contactsBox">
                 <ul class="footer__contactsBoxList">
                     <li class="footer__contactsBoxItem">г. Ростов-на-Дону, ул. Доватора, 144/13</li>
-                    <li class="footer__contactsBoxItem">пн-пт 8:30-17:30</li>
+
+                    @if($officeHours->isNotEmpty())
+                        @foreach($officeHours as $officeHour)
+                            <li class="footer__contactsBoxItem">
+                                {{ $officeHour->days }}: {{ $officeHour->hours }}
+                            </li>
+                        @endforeach
+                    @else
+                        <li class="footer__contactsBoxItem">Режим работы не задан</li>
+                    @endif
                 </ul>
+
                 <ul class="footer__contactsBoxList">
                     <li class="footer__contactsBoxItem"><a href="tel:+78633114660">+7 (863) 311-46-60</a></li>
                     <li class="footer__contactsBoxItem"><a href="tel:+78632193523">+7 (863) 219-35-23</a></li>
@@ -213,131 +232,6 @@
             </div>
         </div>
 
-{{--        <div class="tabBar">--}}
-{{--            <div class="tabBar__inner">--}}
-{{--                <a href="{{ route('index.home') }}">--}}
-{{--                    @if(Request::is('/'))--}}
-{{--                        <div class="tabBar__item-active">--}}
-{{--                            <span>Главная</span>--}}
-{{--                            <svg>--}}
-{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
-{{--                            </svg>--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        <svg>--}}
-{{--                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#home-tab') }}"></use>--}}
-{{--                        </svg>--}}
-{{--                    @endif--}}
-{{--                </a>--}}
-
-{{--                <a href="{{ url('/posts/katalog') }}">--}}
-{{--                    @if(Request::is('posts/katalog'))--}}
-{{--                        <div class="tabBar__item-active">--}}
-{{--                            <span>Каталог</span>--}}
-{{--                            <svg>--}}
-{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
-{{--                            </svg>--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        <svg>--}}
-{{--                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#document-tab') }}"></use>--}}
-{{--                        </svg>--}}
-{{--                    @endif--}}
-{{--                </a>--}}
-
-{{--                @if(auth()->guest())--}}
-{{--                    <a href="{{ route('auth.loginForm') }}">--}}
-{{--                        @if(Request::is('login'))--}}
-{{--                            <div class="tabBar__item-active">--}}
-{{--                                <span>Профиль</span>--}}
-{{--                                <svg>--}}
-{{--                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
-{{--                                </svg>--}}
-{{--                            </div>--}}
-{{--                        @else--}}
-{{--                            <svg>--}}
-{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>--}}
-{{--                            </svg>--}}
-{{--                        @endif--}}
-{{--                    </a>--}}
-{{--                @elseif(auth()->user()->hasRole('admin'))--}}
-{{--                    <a href="{{ route('admin.dashboard.index') }}">--}}
-{{--                        @if(Request::is('admin/dashboard'))--}}
-{{--                            <div class="tabBar__item-active">--}}
-{{--                                <span>Профиль</span>--}}
-{{--                                <svg>--}}
-{{--                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
-{{--                                </svg>--}}
-{{--                            </div>--}}
-{{--                        @else--}}
-{{--                            <svg>--}}
-{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>--}}
-{{--                            </svg>--}}
-{{--                        @endif--}}
-{{--                    </a>--}}
-{{--                @elseif(auth()->user()->hasRole('manager'))--}}
-{{--                    <a href="{{ route('admin.dashboard.index') }}">--}}
-{{--                        @if(Request::is('admin/dashboard'))--}}
-{{--                            <div class="tabBar__item-active">--}}
-{{--                                <span>Профиль</span>--}}
-{{--                                <svg>--}}
-{{--                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
-{{--                                </svg>--}}
-{{--                            </div>--}}
-{{--                        @else--}}
-{{--                            <svg>--}}
-{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>--}}
-{{--                            </svg>--}}
-{{--                        @endif--}}
-{{--                    </a>--}}
-{{--                @elseif(auth()->user()->hasRole('client'))--}}
-{{--                    <a href="{{ route('client.dashboard.index') }}">--}}
-{{--                        @if(Request::is('client/dashboard'))--}}
-{{--                            <div class="tabBar__item-active">--}}
-{{--                                <span>Профиль</span>--}}
-{{--                                <svg>--}}
-{{--                                    <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
-{{--                                </svg>--}}
-{{--                            </div>--}}
-{{--                        @else--}}
-{{--                            <svg>--}}
-{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#user-tab') }}"></use>--}}
-{{--                            </svg>--}}
-{{--                        @endif--}}
-{{--                    </a>--}}
-{{--                @endif--}}
-
-{{--                <a href="{{ url('/cart') }}">--}}
-{{--                    @if(Request::is('cart'))--}}
-{{--                        <div class="tabBar__item-active">--}}
-{{--                            <span>Корзина</span>--}}
-{{--                            <svg>--}}
-{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
-{{--                            </svg>--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        <svg>--}}
-{{--                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#shopping-cart-tab') }}"></use>--}}
-{{--                        </svg>--}}
-{{--                    @endif--}}
-{{--                </a>--}}
-
-{{--                <a href="{{ url('/favorites') }}">--}}
-{{--                    @if(Request::is('favorites'))--}}
-{{--                        <div class="tabBar__item-active">--}}
-{{--                            <span>Избранное</span>--}}
-{{--                            <svg>--}}
-{{--                                <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#circle-tab') }}"></use>--}}
-{{--                            </svg>--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        <svg>--}}
-{{--                            <use xlink:href="{{ asset('img/sprites/tabBar-sprite.svg#heart-tab') }}"></use>--}}
-{{--                        </svg>--}}
-{{--                    @endif--}}
-{{--                </a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
     </div>
 </footer>
 

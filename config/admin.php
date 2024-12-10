@@ -7,7 +7,7 @@ return [
             'title' => 'Заказы',
             'model' => \App\Models\Order::class
         ],
-		
+
 		'statuses' => [
             'title' => 'Статусы заказов',
             'model' => \App\Models\OrderStatus::class
@@ -65,7 +65,7 @@ return [
         ],
         // Projects
        'projects' => [
-            'title' => 'Проекты (+галерея)',
+            'title' => 'Фотогалерея',
             'model' => \App\Models\Project::class
         ],
         //
@@ -122,6 +122,11 @@ return [
         'akcii_slider'=>[
             'title'=>'Слайдер страницы акции',
             'model'=>\App\Models\AkciiSlider::class
+        ],
+        'office_hours'=>[
+            'title'=>'Режим работы офиса',
+            'model'=>\App\Models\OfficeHour::class
         ]
+
     ]
 ];

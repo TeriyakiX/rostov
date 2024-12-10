@@ -92,7 +92,11 @@
                                         </svg>
                                         Прикрепить файл
                                     </label>
-                                    <div class="ctaForm__info">Нажав кнопку «Отправить», я даю согласие на <span>обработку моих персональных данных</span>
+                                    <div class="formBox__policy" style="color: black">
+                                        Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
+                                        <a href="/privacy-policy" target="_blank">Политикой конфиденциальности</a> и даю согласие на
+                                        <a href="<?php echo e(route('index.posts.show', ['slug' => 'obrabotka-personalnyh-dannyh'])); ?>">обработку моих
+                                            персональных данных</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\EntityController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -52,3 +54,14 @@ Route::get('/change-password', function() {
 
 
 //$2y$10$/mwFuYnh//tRnI7BzGi3.u78Z7D56PYonAdnjHMToxkAIOok/9wTS
+
+
+Route::get('/test-error/{code}', function ($code) {
+    abort($code);
+});
+
+
+Route::post('/admin/{entity}/{id}/copy', [EntityController::class, 'copy']);
+
+Route::get('/admin/orders/{id}/download-pdf', [OrderController::class, 'downloadPdf']);
+

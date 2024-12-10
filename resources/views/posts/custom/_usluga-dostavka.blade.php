@@ -51,11 +51,21 @@
                            </svg>
                            Прикрепить файл
                        </label>
+                       <div class="formRow">
+                           <div class="inpBox">
+                               <label for="consent" class="ctaForm__label">
+                                   <input type="checkbox" id="consent" name="consent" required>
+                                   Я даю согласие на обработку моих персональных данных в соответствии с
+                                   <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
+                               </label>
+                           </div>
+                       </div>
                        <div>
                            <button class="ordering__submit btn" type="submit" style="margin-left: 2px;">Отправить</button>
                        </div>
-                       <div class="ctaForm__info">Нажав кнопку «Отправить», я даю согласие на обработку моих персональных
-                           данных
+                       <div class="ctaForm__info">
+                           Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
+                           <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a> и соглашаюсь на обработку моих персональных данных.
                        </div>
                    </div>
                </div>

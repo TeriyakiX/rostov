@@ -59,19 +59,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
       async downloadPdf(id) {
           try {
-              // Извлекаем сущность из URL
               const parts = window.location.pathname.split('/');
-              const entity = parts[3]; // Индекс сущности в URL
-
-              // Проверка на наличие сущности
+              const entity = parts[3];
               if (!entity) {
                   throw new Error("Не указана сущность.");
               }
-
-              // Логируем URL для отладки
               console.log(`URL для скачивания: /admin/orders/${id}/download-pdf`);
-
-              // Открываем ссылку на скачивание PDF
               window.location.href = `/admin/orders/${id}/download-pdf`;
           } catch (error) {
               console.error("Ошибка скачивания PDF:", error);
@@ -80,24 +73,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       async copyItem(id) {
           try {
-              // Извлекаем сущность из URL
               const parts = window.location.pathname.split('/');
-              const entity = parts[3]; // Индекс сущности в URL
-
-              // Проверка на наличие сущности
+              const entity = parts[3];
               if (!entity) {
                   throw new Error("Не указана сущность.");
               }
-
-              // Логируем URL для отладки
               console.log(`URL запроса: /admin/${entity}/${id}/copy`);
-
-              // Выполнение запроса на сервер для копирования объекта
               const response = await axios.post(`/admin/${entity}/${id}/copy`);
 
               if (response.data.success) {
                   this.$toast.success("Объект успешно скопирован!");
-                  this.loadItems(); // Перезагружаем список или выполняем нужное обновление
+                  this.loadItems();
               } else {
                   this.$toast.error("Не удалось скопировать объект.");
               }

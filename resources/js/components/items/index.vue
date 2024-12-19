@@ -13,11 +13,11 @@
         :rows="rows">
 
         <template slot="table-row" slot-scope="props">
-            <span v-if="props.column.field == 'actions'">
+            <span v-if="props.column.field == 'actions'" class="table-btns">
                 <a class="btn btn-sm btn-primary" @click="updateItem(props.formattedRow['id'])">ыфв</a>
                 <a class="btn btn-sm btn-danger" @click="deleteItem(props.formattedRow['id'], props.row.originalIndex)">Удалить</a>
             </span>
-            <span v-else>
+            <span v-else class="table-btns">
                 {{ props.formattedRow[props.column.field] }}
             </span>
         </template>

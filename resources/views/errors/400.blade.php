@@ -1,21 +1,21 @@
 @extends('layouts.index')
 
-@section('title', 'Ошибка {{ $status ?? 500 }}')
+@section('title', 'Ошибка {{ $status ?? 400 }}')
 
 @section('content')
     <main class="page">
         <div class="error-page _container">
             <div class="error-info-wrapper">
                 <div class="error-info">
-                    <h1 class="error-title">Техническая ошибка</h1>
-                    <p class="error-subtitle">{{ $message ?? 'Что-то пошло не так' }}</p>
-                    <p class="error-text">Извините, на сервере произошла ошибка. Мы уже знаем об этой проблеме и работаем над её устранением. Пожалуйста, попробуйте позже.</p>
+                    <h1 class="error-title">Уууупс...</h1>
+                    <p class="error-subtitle">{{ $message ?? 'Страница не найдена' }}</p>
+                    <p class="error-text">Извините. контент, который вы ищете, не существует. Либо он был удален, либо вы неправильно ввели ссылку.</p>
                     <a class="error-link btn" href="{{ url('/categoryList/krovlya') }}">Перейти в каталог</a>
                 </div>
             </div>
             <div class="error-status">
                 <p>
-                    @foreach(str_split((string)($status ?? 500)) as $char)
+                    @foreach(str_split((string)($status ?? 400)) as $char)
                         <span class="{{ $char === '0' ? 'digit-zero' : 'digit-other' }}">{{ $char }}</span>
                     @endforeach
                 </p>

@@ -548,3 +548,25 @@ $(document).on('click', '.addTo', function (event) {
             console.log('Server error occured');
         });
 })
+
+$('form[data-ajax="true"]').on('submit', function (e) {
+    e.preventDefault();
+
+    let form = $(this);
+    let formData = new FormData(this);
+
+    $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            $('#successModal').fadeIn();
+            form[0].reset();
+        },
+        error: function (xhr) {
+            alert('Ошибка: ' + (xhr.responseJSON?.error || 'Неизвестная ошибка'));
+        },
+    });
+});

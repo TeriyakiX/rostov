@@ -185,35 +185,42 @@ class PostController extends Controller
 
     public function sendMail(Request $request)
     {
-        $typeOfRequest = $request->typeOfRequest ?? '';
-        $address = $request->address;
+        try {
+            $typeOfRequest = $request->typeOfRequest ?? '';
+            $address = $request->address;
 
-        $link = $request->link ?? '';
-        $phone = $request->phone_number;
-        $comment = $request->comment;
-        if ($request->has('file')) {
+            $link = $request->link ?? '';
+            $phone = $request->phone_number;
+            $comment = $request->comment;
+            if ($request->has('file')) {
 
-            $file = $request->file('file');
-            $file_name = time() . '.' . $file->getClientOriginalExtension();
-            $upload_path = public_path('upload_files');
+                $file = $request->file('file');
+                $file_name = time() . '.' . $file->getClientOriginalExtension();
+                $upload_path = public_path('upload_files');
 
-            if (!file_exists($upload_path)) {
-                mkdir($upload_path, 0755, true);
+                if (!file_exists($upload_path)) {
+                    mkdir($upload_path, 0755, true);
+                }
+
+                $file->move(public_path('upload_files'), $file_name);
+
+                Mail::send('posts.send_email', [], function ($message) use ($file, $file_name) {
+                    $message->to(ManagerContacts::firstOrFail()->email, 'Manager')->subject('Консультация')
+                        ->attach(public_path('upload_files/' . $file_name), ['as' => $file_name]);
+                });
+            } else {
+                Mail::to(ManagerContacts::firstOrFail())->send(new SendMail($address, $phone, $comment, $typeOfRequest, $link));
+
             }
+            $api = new SmsHelper (config('constants.apiname_SmsHelper'), config('constants.apikey_SmsHelper'), true, false);
+            $result_sms = $api->sendSMS(preg_replace('/[^0-9]/', '', ManagerContacts::firstOrFail()->phone), $typeOfRequest, 'mkrostov');
+//        return redirect()->back();
+            return response()->json(['message' => 'Форма успешно отправлена!'], 200);
+        } catch (\Exception $e) {
+            \Log::error('Ошибка при отправке формы: ' . $e->getMessage());
 
-            $file->move(public_path('upload_files'), $file_name);
-
-            Mail::send('posts.send_email', [], function ($message) use ($file, $file_name) {
-                $message->to(ManagerContacts::firstOrFail()->email, 'Manager')->subject('Консультация')
-                    ->attach(public_path('upload_files/' . $file_name), ['as' => $file_name]);
-            });
-        } else {
-            Mail::to(ManagerContacts::firstOrFail())->send(new SendMail($address, $phone, $comment, $typeOfRequest, $link));
-
+            return response()->json(['error' => 'Произошла ошибка при отправке формы. Попробуйте позже.'], 500);
         }
-        $api = new SmsHelper (config('constants.apiname_SmsHelper'), config('constants.apikey_SmsHelper'), true, false);
-        $result_sms = $api->sendSMS(preg_replace('/[^0-9]/', '', ManagerContacts::firstOrFail()->phone), $typeOfRequest, 'mkrostov');
-        return redirect()->back();
     }
 
     public function FileFilter(Request $request)

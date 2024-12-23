@@ -7587,6 +7587,28 @@ body:not(._touch) .card__icon--basket:hover svg {
     transition: 0.2s ease;
 }
 
+.ctaForm__btn.disabled,
+.formBox__submit.disabled,
+.ordering__submit.disabled {
+    color: #fff;
+    background: rgba(184, 183, 183, 1);
+    border-color: rgba(184, 183, 183, 1);
+    transition: 0.2s ease;
+    cursor: not-allowed;
+}
+body:not(._touch) .ordering__submit.disabled:hover,
+body:not(._touch) .ordering__submit:disabled:hover,
+body:not(._touch) .ctaForm__btn.disabled:hover,
+body:not(._touch) .ctaForm__btn:disabled:hover,
+body:not(._touch) .formBox__submit.disabled:hover,
+body:not(._touch) .formBox__submit:disabled:hover
+{
+    background-color: rgba(184, 183, 183, 1);
+    border-color: rgba(184, 183, 183, 1);
+    cursor: not-allowed;
+    color: #fff;
+}
+
 .formBox__policy {
     color: #e0e0e0;
     font-size: 14px;
@@ -7599,6 +7621,72 @@ body:not(._touch) .card__icon--basket:hover svg {
 
 .tabBar {
     display: none;
+}
+
+#successModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.38));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    background: #fff;
+    padding: 3.2rem;
+    border-radius: 8px;
+    max-width: 40.5rem;
+}
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+.modal-status {
+    width: 112px;
+    height: 112px;
+}
+
+.modal-content h3 {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.modal-content p {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #000;
+}
+
+.modal-content span {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: rgba(129, 129, 129, 1);
+}
+
+#consent,
+#consent_1,
+#consent_2,
+#consent_3,
+#consent_4,
+#consent_5,
+#consent_6 {
+    margin: 0;
+    vertical-align: bottom;
 }
 
 @media (min-width: 1px) {
@@ -8784,6 +8872,7 @@ body:not(._touch) .card__icon--basket:hover svg {
         left: 0;
         right: 0;
         background-color: #fff;
+        max-width: none;
     }
 
     .header__col .authorization {

@@ -11,6 +11,7 @@
         -moz-appearance: textfield;
     }
 </style>
+@include('partials.modal')
 @section('content')
     <nav class="breadcrumbs">
         <div class="breadcrumbs__container _container">
@@ -48,7 +49,7 @@
                         <img class="cta__img" src="{{ asset('upload_images/'. $solution->photos[0]['path']) }}"
                              alt="img" loading="lazy" decoding="async" referrerPolicy="no-referrer">
                         <!-- Call to action-->
-                        <form class="cta__form" action="{{route('index.send_mail')}}" method="post">
+                        <form class="cta__form" id="consultationForm" action="{{route('index.send_mail')}}" method="post" data-ajax="true">
                             @csrf
                             <div class="ctaForm">
                                 <div class="ctaForm__header">

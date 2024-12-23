@@ -3,6 +3,7 @@
     href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
 />
 
+@include('partials.modal')
 @if(!Str::contains(url()->current(), '/category/servis'))
     <div class="cta cooperation__cta">
        <div class="cta__body">
@@ -10,7 +11,7 @@
                 alt="img"
                 loading="lazy" decoding="async" referrerPolicy="no-referrer">
            <!-- Call to action-->
-           <form class="cta__form" action="{{route('index.send_mail')}}" method="post" enctype="multipart/form-data">
+           <form class="cta__form" id="consultationForm" action="{{route('index.send_mail')}}" method="post" enctype="multipart/form-data" data-ajax="true">
                @csrf
                <div class="ctaForm">
                    <div class="ctaForm__header">
@@ -54,13 +55,13 @@
                        <div class="formRow">
                            <div class="inpBox">
                                <label for="consent" class="ctaForm__label">
-                                   <input type="checkbox" id="consent" name="consent" required>
+                                   <input type="checkbox" id="consent_3" name="consent" required>
                                    Я даю согласие на обработку моих персональных данных в соответствии с
                                    <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
                                </label>
                            </div>
                        </div>
-                       <button class="ordering__submit btn" type="submit" style="font-size: 16px;margin-left: 2px">
+                       <button class="ordering__submit btn disabled" disabled type="submit" style="font-size: 16px;margin-left: 2px">
                            Отправить
                        </button>
                        <div class="ctaForm__info">
@@ -195,6 +196,15 @@
     .swiper-button-prev {
         display: none;
     }
+    .cooperation__cta .inpBox label {
+        color: #aaa;
+        font-weight: 400;
+        font-size: 1.4rem;
+    }
+    .cooperation__cta .inpBox label a {
+        color: #9af3ef;
+        text-decoration: underline;
+    }
     @media (max-width: 991.98px) {
         .wrp-heroSlider {
             min-width: 520px;
@@ -237,3 +247,20 @@
         }
     }
 </style>
+<script>
+    const consentCheckboxMontazh = $('#consent_3');
+    const submitButtonMontazh = $('.ordering__submit');
+
+    function toggleSubmitButton() {
+        if (consentCheckboxMontazh.is(':checked')) {
+            submitButtonMontazh.removeClass('disabled').prop('disabled', false);
+        } else {
+            submitButtonMontazh.addClass('disabled').prop('disabled', true);
+        }
+    }
+
+    consentCheckboxMontazh.on('change', toggleSubmitButton);
+
+    toggleSubmitButton();
+</script>
+

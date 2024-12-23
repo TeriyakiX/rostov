@@ -2,7 +2,7 @@
     <div class="cta__body">
         <img class="cta__img"  src="{{ asset('img/cooperation/cooperation.png') }}" alt="img" loading="lazy" decoding="async" referrerPolicy="no-referrer">
         <!-- Call to action-->
-        <form class="cta__form" action="{{route('index.send_mail')}}" method="post">
+        <form class="cta__form" id="consultationForm" action="{{route('index.send_mail')}}" method="post" data-ajax="true">
             @csrf
             <div class="ctaForm" >
                 <div class="ctaForm__header">
@@ -24,15 +24,15 @@
                     <div class="formRow">
                         <div class="inpBox">
                             <label for="consent" class="ctaForm__label">
-                                <input type="checkbox" id="consent" name="consent" required>
-                                Я даю согласие на обработку моих персональных данных в соответствии с
-                                <a href="/privacy-policy" target="_blank">Политикой конфиденциальности</a>.
+                                <input type="checkbox" id="consent_4" name="consent" required>
+                                Я даю своё согласие на
+                                <a href="/posts/politika-konfidencialnosti" target="_blank">обработку и распространение персональных данных</a>.
                             </label>
                         </div>
                     </div>
 
                     <div>
-                        <button class="ordering__submit btn" type="submit" style="margin-left: 2px;">Отправить</button>
+                        <button class="ordering__submit btn disabled" disabled type="submit" style="margin-left: 2px;">Отправить</button>
                     </div>
                     <div class="ctaForm__info">
                         Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
@@ -59,6 +59,32 @@
         padding-left: 16px;
     }
 }
+.ctaForm__label {
+    color: #aaa;
+    font-weight: 400;
+    font-size: 1.4rem;
+}
+.ctaForm__label a {
+    color: #9af3ef;
+    text-decoration: underline;
+}
 </style>
+<script>
+    const consentCheckboxSotrudnichestvo = $('#consent_4');
+    const submitButtonSotrudnichestvo = $('.ordering__submit');
+
+    function toggleSubmitButton() {
+        if (consentCheckboxSotrudnichestvo.is(':checked')) {
+            submitButtonSotrudnichestvo.removeClass('disabled').prop('disabled', false);
+        } else {
+            submitButtonSotrudnichestvo.addClass('disabled').prop('disabled', true);
+        }
+    }
+
+    consentCheckboxSotrudnichestvo.on('change', toggleSubmitButton);
+
+    toggleSubmitButton();
+</script>
+
 
 

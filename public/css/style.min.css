@@ -399,7 +399,7 @@ body:not(._touch) .prodCard__icon--share:hover svg {
 }
 
 body:not(._touch) .prodCard__icon--like:hover svg {
-    fill: #006bde;
+    stroke: #006bde;
 }
 
 body:not(._touch) .prodCard__icon--stat:hover svg {
@@ -7541,6 +7541,14 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 .formBox__form input[type='file'] {
+    position: absolute;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+}
+
+.ctaForm__body input[type='file'] {
     position: absolute;
     visibility: hidden;
     width: 1px;

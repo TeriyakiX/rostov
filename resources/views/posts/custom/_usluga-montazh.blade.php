@@ -55,13 +55,13 @@
                        <div class="formRow">
                            <div class="inpBox">
                                <label for="consent" class="ctaForm__label">
-                                   <input type="checkbox" id="consent_3" name="consent" required>
+                                   <input type="checkbox" id="consent_3" name="consent" required data-consent>
                                    Я даю согласие на обработку моих персональных данных в соответствии с
                                    <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
                                </label>
                            </div>
                        </div>
-                       <button class="ordering__submit btn disabled" disabled type="submit" style="font-size: 16px;margin-left: 2px">
+                       <button class="ordering__submit btn disabled" data-submit disabled type="submit" style="font-size: 16px;margin-left: 2px">
                            Отправить
                        </button>
                        <div class="ctaForm__info">
@@ -247,20 +247,4 @@
         }
     }
 </style>
-<script>
-    const consentCheckboxMontazh = $('#consent_3');
-    const submitButtonMontazh = $('.ordering__submit');
-
-    function toggleSubmitButton() {
-        if (consentCheckboxMontazh.is(':checked')) {
-            submitButtonMontazh.removeClass('disabled').prop('disabled', false);
-        } else {
-            submitButtonMontazh.addClass('disabled').prop('disabled', true);
-        }
-    }
-
-    consentCheckboxMontazh.on('change', toggleSubmitButton);
-
-    toggleSubmitButton();
-</script>
 

@@ -85,17 +85,21 @@
                                     </div>
                                     <button class="ctaForm__btn ctaForm__btn--gap btn btn--md" type="submit">Отправить
                                     </button>
-                                    <label class="formBox__fileLabel" for="file" name="file"
-                                           style="color: #595959; padding-top: 20px;">
+                                    <label class="formBox__fileLabel" for="formBox_file" name="file"
+                                           style="padding-top: 20px;">
+                                        <input class="formBox__input" autocomplete="off" type="file" name="file" id="formBox_file">
                                         <svg>
-                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#scr') }}"
-                                                 style="fill: #595959;"></use>
+                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#scr') }}"></use>
                                         </svg>
                                         Прикрепить файл
                                     </label>
+                                    <br>
+                                    <label class="message" for="formBox_file" style="color: red">
+
+                                    </label>
                                     <div class="formBox__policy" style="color: black">
                                         Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
-                                        <a href="/privacy-policy" target="_blank">Политикой конфиденциальности</a> и даю согласие на
+                                        <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a> и даю согласие на
                                         <a href="<?php echo e(route('index.posts.show', ['slug' => 'obrabotka-personalnyh-dannyh'])); ?>">обработку моих
                                             персональных данных</a>
                                     </div>
@@ -231,6 +235,19 @@
         .cta__description-right .btn:hover {
             color: #fff;
             background-color: #006bde;
+        }
+
+        .formBox__policy a {
+            color: #9af3ef;
+            text-decoration: underline;
+        }
+
+        .ctaForm__body .formBox__fileLabel {
+            color: #505050;
+        }
+
+        .ctaForm__body .formBox__fileLabel svg {
+            fill: #505050;
         }
 
         @media (max-width: 767.98px) {

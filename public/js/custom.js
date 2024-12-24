@@ -79,6 +79,7 @@ $(document).on("click", ".addToCartLink", function () {
         }
     })
         .done(function (response) {
+            showNotification(response.message, 'success')
             $('#cart_modal .cart-list__body').html(response.cartContentView);
             $('#cart_modal .cart-list__info').html(response.cartInfo);
             if(response.totalItemsInCart <= 0){
@@ -88,6 +89,7 @@ $(document).on("click", ".addToCartLink", function () {
             }
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
             console.log('Server error occured');
         });
 });
@@ -419,12 +421,14 @@ $(document).on('submit', '.getConsult', function (event) {
         }
     })
         .done(function (response) {
+            $('.popup_consult').removeClass('_active')
             $form[0].reset();
-            Swal.fire(
-                '',
-                response,
-                'success'
-            )
+            // Swal.fire(
+            //     '',
+            //     response,
+            //     'success'
+            // )
+            showNotification('Запрос успешно отправлен! Среднее время ожидания ответа: 20–30 минут в рабочее время.', 'info');
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
 
@@ -433,11 +437,12 @@ $(document).on('submit', '.getConsult', function (event) {
             $.each(response.errors, function (key, value) {
                 errorString += value;
             });
-            Swal.fire(
-                '',
-                errorString,
-                'error'
-            )
+            // Swal.fire(
+            //     '',
+            //     errorString,
+            //     'error'
+            // )
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
 
             console.log('Server error occured');
         });
@@ -465,26 +470,33 @@ $(document).on('submit', '.getModalBuy', function (event) {
 
             $('.popup_buy').removeClass('_active')
             $form[0].reset();
-            Swal.fire(
-                '',
-                'Запрос успешно отправлен! В ближайшее время с Вами свяжется менеджер!<br>',
-                'success'
-            )
+            // Swal.fire(
+            //     '',
+            //     'Запрос успешно отправлен! В ближайшее время с Вами свяжется менеджер!<br>',
+            //     'success'
+            // )
+            showNotification('Запрос успешно отправлен! Среднее время ожидания ответа: 20–30 минут в рабочее время.', 'info');
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-
-            var response = JSON.parse(jqXHR.responseText);
-            var errorString = '';
-            $.each(response.errors, function (key, value) {
-                errorString += value;
-            });
-            Swal.fire(
-                '',
-                errorString,
-                'error'
-            )
-
-            console.log('Server error occured');
+            try {
+                if (jqXHR.responseJSON && jqXHR.responseJSON.errors) {
+                    let errorString = '';
+                    $.each(jqXHR.responseJSON.errors, function (key, value) {
+                        errorString += value + '<br>';
+                    });
+                    showNotification(errorString, 'error');
+                } else {
+                    if (jqXHR.status === 404) {
+                        showNotification('Ошибка. Пожалуйста, попробуйте позже', 'error');
+                    } else if (jqXHR.status === 500) {
+                        showNotification('Ошибка. Пожалуйста, попробуйте позже', 'error');
+                    } else {
+                        showNotification('Ошибка. Пожалуйста, попробуйте позже', 'error');
+                    }
+                }
+            } catch (e) {
+                showNotification('Ошибка. Пожалуйста, попробуйте позже', 'error');
+            }
         });
 })
 
@@ -525,17 +537,18 @@ $(document).on('click', '.addTo', function (event) {
     })
         .done(function (response) {
             $button.toggleClass('active');
+            showNotification(response.message, 'success');
 
             if ($button.hasClass('removeCard')) {
                 $card.remove();
                 location.reload();
             } else {
                 console.log(response)
-                Swal.fire(
-                    '',
-                    response.message,
-                    'success'
-                )
+                // Swal.fire(
+                //     '',
+                //     response.message,
+                //     'success'
+                // )
                 if(response.count <= 0){
                     $('.' + destination.toLowerCase() +' .countOfCart').addClass('inactive').html('');
                 } else {
@@ -545,6 +558,7 @@ $(document).on('click', '.addTo', function (event) {
             }
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
             console.log('Server error occured');
         });
 })
@@ -570,3 +584,105 @@ $('form[data-ajax="true"]').on('submit', function (e) {
         },
     });
 });
+
+$(document).on('click', '.prodCard__icon--share', function () {
+    const link = $(this).data('link');
+    if (link && navigator.clipboard) {
+        navigator.clipboard.writeText(link).then(() => {
+            alert('Ссылка скопирована в буфер обмена!');
+        }).catch(err => {
+            console.error('Не удалось скопировать ссылку:', err);
+        });
+    }
+});
+
+$('[data-consent]').each(function () {
+    const consentCheckbox = $(this);
+    const submitButton = consentCheckbox.closest('form').find('[data-submit]');
+
+    function toggleSubmitButton() {
+        if (consentCheckbox.is(':checked')) {
+            submitButton.removeClass('disabled').prop('disabled', false);
+        } else {
+            submitButton.addClass('disabled').prop('disabled', true);
+        }
+    }
+
+    consentCheckbox.on('change', toggleSubmitButton);
+    toggleSubmitButton();
+});
+
+function showNotification(message, type = 'success') {
+    const $container = $('#notification-container');
+
+    if ($container.length === 0) {
+        $('body').append('<div id="notification-container" style="position: fixed; top: 32px; right: 32px; z-index: 9999; width: 364px; padding: 32px;"></div>');
+    }
+
+    const iconPaths = {
+        success: '/img/icons/success.svg',
+        error: '/img/icons/error.svg',
+        info: '/img/icons/info_2.svg',
+        close: '/img/icons/cross.svg'
+    };
+
+    const typeStyles = {
+        success: { background: 'rgba(255, 255, 255, 1)', border: '1px solid rgba(89, 216, 20, 1)', color: 'rgba(89, 216, 20, 1)' },
+        error: { background: 'rgba(255, 255, 255, 1)', border: '1px solid rgba(255, 0, 0, 1)', color: 'rgba(255, 0, 0, 1)' },
+        info: { background: 'rgba(255, 255, 255, 1)', border: '1px solid rgba(0, 107, 222, 1)', color: 'rgba(0, 107, 222, 1)' }
+    };
+
+    const styles = typeStyles[type] || {
+        background: '#000',
+        border: '1px solid #000',
+        color: 'white'
+    };
+
+    const $notification = $(`
+        <div class="notification notification-${type}">
+            <img class="notification-status" src="${iconPaths[type] || iconPaths.success}" alt="${type}">
+            <span>${message}</span>
+            <button>
+                <img class="notification-close" src="${iconPaths.close}" alt="close">
+            </button>
+        </div>
+    `);
+
+    $notification.css({
+        background: styles.background,
+        border: styles.border,
+        color: styles.color,
+        padding: '16px',
+        'margin-bottom': '8px',
+        'border-radius': '8px',
+        'box-shadow': '0 2px 5px rgba(0, 0, 0, 0.2)',
+        opacity: 0,
+        transition: 'opacity 0.3s, transform 0.3s',
+        transform: 'translateY(-10px)'
+    });
+
+    $('#notification-container').append($notification);
+
+    setTimeout(() => {
+        $notification.css({
+            opacity: 1,
+            transform: 'translateY(0)'
+        });
+    }, 10);
+
+    setTimeout(() => {
+        $notification.css({
+            opacity: 0,
+            transform: 'translateY(-10px)'
+        });
+        setTimeout(() => $notification.remove(), 300);
+    }, 3000);
+
+    $notification.find('button').on('click', () => {
+        $notification.css({
+            opacity: 0,
+            transform: 'translateY(-10px)'
+        });
+        setTimeout(() => $notification.remove(), 300);
+    });
+}

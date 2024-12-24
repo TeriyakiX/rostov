@@ -215,9 +215,9 @@ class CartController extends Controller
         /** @var CartService $cart */
         $cart = app()->make('cart');
         Session::put('temp',[]);
+        $message = '';
+
         if ($request->has('product_id')) {
-
-
             $productId = $request->get('product_id');
             if ($request->get('length')) {
                 foreach ($request->get('length') as $key => $length) {
@@ -248,7 +248,9 @@ class CartController extends Controller
             }
 
             $cart->commit();
-
+            $message = 'Товар успешно добавлен в корзину!';
+        } else {
+            $message = 'Не удалось добавить товар в корзину.';
         }
 
         $quantity = $cart->getTotalQuantity();
@@ -263,6 +265,7 @@ class CartController extends Controller
 
         return [
             'status' => 200,
+            'message' => $message,
             'cartContentView' => $cartContentView,
             'cartInfo' => 'В корзине ' . $cart->getTotalQuantity() . ' товар на сумму ' . $cart->getTotalPrice() . ' ₽',
             'totalItemsInCart' => $quantity

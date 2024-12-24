@@ -31,13 +31,13 @@
                     <div class="formRow">
                         <div class="inpBox">
                             <label for="consent" class="ctaForm__label">
-                                <input type="checkbox" id="consent_1" name="consent" required>
+                                <input type="checkbox" id="consent_1" name="consent" required data-consent>
                                 Я даю своё согласие на
                                 <a href="/posts/politika-konfidencialnosti" target="_blank">обработку и распространение персональных данных</a>.
                             </label>
                         </div>
                     </div>
-                    <button class="formBox__submit disabled" id="submit_1" type="submit" disabled>Получить консультацию</button>
+                    <button class="formBox__submit disabled" id="submit_1" type="submit" disabled data-submit>Получить консультацию</button>
                 </form>
             </div>
             <nav class="footer__menu accordion-container">
@@ -250,20 +250,3 @@
         height: auto !important;
     }
 </style>
-
-<script>
-    const consentCheckboxFooter = $('#consent_1');
-    const submitButtonFooter = $('#submit_1');
-
-    function toggleSubmitButton() {
-        if (consentCheckboxFooter.is(':checked')) {
-            submitButtonFooter.removeClass('disabled').prop('disabled', false);
-        } else {
-            submitButtonFooter.addClass('disabled').prop('disabled', true);
-        }
-    }
-
-    consentCheckboxFooter.on('change', toggleSubmitButton);
-
-    toggleSubmitButton();
-</script>

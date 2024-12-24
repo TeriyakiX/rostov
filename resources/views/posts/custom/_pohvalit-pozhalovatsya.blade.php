@@ -42,14 +42,14 @@
                     <div class="formRow">
                         <div class="inpBox">
                             <label for="consent" class="ctaForm__label">
-                                <input type="checkbox" id="consent_2" name="consent" required>
+                                <input type="checkbox" id="consent_2" name="consent" required data-consent>
                                 Я даю своё согласие на
                                 <a href="/posts/politika-konfidencialnosti" target="_blank">обработку и распространение персональных данных</a>.
                             </label>
                         </div>
                     </div>
 
-                    <button class="ctaForm__btn ctaForm__btn--gap btn btn--md disabled" disabled type="submit">Отправить</button>
+                    <button class="ctaForm__btn ctaForm__btn--gap btn btn--md disabled" disabled type="submit" data-submit>Отправить</button>
                     <div class="ctaForm__info">
                         Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
                         <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a> и соглашаюсь на обработку моих персональных данных.
@@ -85,20 +85,3 @@
         }
     }
 </style>
-
-<script>
-    const consentCheckboxPohvalitPozhalovatsya = $('#consent_2');
-    const submitButtonPohvalitPozhalovatsya = $('.ctaForm__btn');
-
-    function toggleSubmitButton() {
-        if (consentCheckboxPohvalitPozhalovatsya.is(':checked')) {
-            submitButtonPohvalitPozhalovatsya.removeClass('disabled').prop('disabled', false);
-        } else {
-            submitButtonPohvalitPozhalovatsya.addClass('disabled').prop('disabled', true);
-        }
-    }
-
-    consentCheckboxPohvalitPozhalovatsya.on('change', toggleSubmitButton);
-
-    toggleSubmitButton();
-</script>

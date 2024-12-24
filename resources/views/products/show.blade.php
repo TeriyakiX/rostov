@@ -542,15 +542,14 @@
                                                     </div>
                                                     <div
                                                         class="prodCard__icon prodCard__icon--share"
-                                                        role="button" tabindex="0">
+                                                        role="button"
+                                                        tabindex="0"
+                                                        data-link="{{ route('index.products.show', ['category' => $category->slug, 'product' => $product->slug]) }}">
                                                         <svg>
-                                                            <use
-                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#share') }}"></use>
+                                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#share') }}"></use>
                                                         </svg>
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                             <div class="prodCard__price">
 

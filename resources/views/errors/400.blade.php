@@ -10,7 +10,7 @@
                     <h1 class="error-title">Уууупс...</h1>
                     <p class="error-subtitle">{{ $message ?? 'Страница не найдена' }}</p>
                     <p class="error-text">Извините. контент, который вы ищете, не существует. Либо он был удален, либо вы неправильно ввели ссылку.</p>
-                    <a class="error-link btn" href="{{ url('/categoryList/krovlya') }}">Перейти в каталог</a>
+                    <a class="error-link btn" href="{{ url('/posts/katalog') }}">Перейти в каталог</a>
                 </div>
             </div>
             <div class="error-status">

@@ -10,7 +10,7 @@
                     <h1 class="error-title">Техническая ошибка</h1>
                     <p class="error-subtitle">{{ $message ?? 'Что-то пошло не так' }}</p>
                     <p class="error-text">Извините, на сервере произошла ошибка. Мы уже знаем об этой проблеме и работаем над её устранением. Пожалуйста, попробуйте позже.</p>
-                    <a class="error-link btn" href="{{ url('/categoryList/krovlya') }}">Перейти в каталог</a>
+                    <a class="error-link btn" href="{{ url('/posts/katalog') }}">Перейти в каталог</a>
                 </div>
             </div>
             <div class="error-status">

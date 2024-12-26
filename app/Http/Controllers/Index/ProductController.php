@@ -411,7 +411,8 @@ class ProductController extends Controller
             ->get();
 
         $title = 'Избранные товары';
-        return view('products.grid')->with(compact('products', 'title'));
+        $pageType = 'favorites';
+        return view('products.grid')->with(compact('products', 'title', 'pageType'));
     }
 
     /**
@@ -617,6 +618,7 @@ class ProductController extends Controller
             })
             ->get();
         $title = 'Просмотренные товары';
-        return view('products.grid')->with(compact('products', 'title'));
+        $pageType = 'viewed';
+        return view('products.grid')->with(compact('products', 'title', 'pageType'));
     }
 }

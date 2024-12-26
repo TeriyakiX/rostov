@@ -67,7 +67,7 @@
                     @endif
 
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
+                        <div class="sideDash sideDash--sticky" style="z-index: 1111">
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">
                                     <use xlink:href="{{ url('/img/sprites/3.png') }}#building">

@@ -1254,6 +1254,18 @@
 
 
                         <div class="right__side" style="height: 100%;">
+                            @if($coatings->isEmpty())
+                                <div class="empty__block">
+                                    <h1 class="empty__title">
+                                        По вашему запросу нет подходящих видов покрытия
+                                    </h1>
+                                    <picture>
+                                        <source type="image/webp"
+                                                srcset="/img/emptyProducts/magnifier.png">
+                                        <img src="/img/emptyProducts/magnifier.png" alt="empty-products">
+                                    </picture>
+                                </div>
+                            @else
                             @foreach($coatings as $product)
                                 <div class="productsTmp__body productsTmp__body--line">
                                     <div class="productsTmp__itemWrp">
@@ -1333,6 +1345,7 @@
                                     </div>
                                 </div>
                             @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -1549,6 +1562,17 @@
             .left__side--desktop {
                 display: none;
             }
+        }
+        .empty__block {
+            flex-direction: column;
+            text-align: center;
+        }
+        .empty__block img {
+            width: auto;
+            height: auto;
+        }
+        .empty__title {
+            width: 80%;
         }
     </style>
     <script>

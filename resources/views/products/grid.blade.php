@@ -39,10 +39,27 @@
                             @endforeach
                         </div>
                         @else
-                            <div class="comparison__infoCompare">
-                                <div class="comparison__categoryName" style="margin-top: 32px;">
-                                    Список пуст
+                            <div class="empty__block">
+                                <div class="empty__block-info">
+                                    <h1 class="empty__title">
+                                        @if($pageType === 'favorites')
+                                            Ваш список избранных товаров пока что пуст
+                                        @elseif($pageType === 'viewed')
+                                            Ваш список просмотренных товаров пока что пуст
+                                        @endif
+                                    </h1>
+                                    <p class="empty__text">
+                                        @if($pageType === 'favorites')
+                                            Выберите в каталоге несколько интересующих товаров и нажмите кнопку «добавить в избранное»
+                                        @elseif($pageType === 'viewed')
+                                            Здесь будут появляться недавно просмотренные товары
+                                        @endif
+                                    </p>
+                                    <a class="btn btn-primary" href="{{ url('/posts/katalog') }}">
+                                        Перейти в каталог
+                                    </a>
                                 </div>
+                                <img src="img/emptyProducts/package.png" alt="empty-products">
                             </div>
                         @endif
                     </div>

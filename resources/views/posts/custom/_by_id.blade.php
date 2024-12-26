@@ -50,7 +50,7 @@
                 <div class="cooperation__content">
                     <h2 class="cooperation__title t">{{$post->title}}</h2>
 
-                    <div class="sideDash sideDash--sticky" style="z-index: 9999">
+                    <div class="sideDash sideDash--sticky" style="z-index: 1111">
                         <div class="sideDash__item sideDash__item--gap">
                             <svg class="sideDash__icon">
                                 <use xlink:href="{{ url('/img/sprites/3.png') }}#building">

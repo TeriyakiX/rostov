@@ -1986,6 +1986,8 @@ strong {
     padding: 16px 60px 16px 16px;
     border: 1px solid #e7e9ec;
     border-radius: 6px;
+
+    white-space: nowrap;
 }
 
 .calc__icon {
@@ -4683,7 +4685,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 .basket__content {
-    padding-bottom: 60px;
+    padding-bottom: 80px;
 }
 
 .basket__title {
@@ -5694,6 +5696,44 @@ body:not(._touch) .card__icon--basket:hover svg {
 
 .input:focus {
     border: 1px solid #006bde;
+}
+
+.empty__block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 70px;
+}
+
+.empty__block img {
+    width: 53.5rem;
+    height: 34.5rem;
+}
+
+.empty__title {
+    color: rgba(0, 107, 222, 0.85);
+    font-size: 4.8rem;
+    font-weight: 700;
+    line-height: 53px;
+    margin-bottom: 5rem;
+}
+
+.empty__text {
+    color: rgba(89, 89, 89, 1);
+    font-weight: 500;
+    font-size: 1.8rem;
+    margin-bottom: 7.2rem;
+    width: 70%;
+    line-height: 21.94px !important;
+    padding: 0 !important;
+}
+
+.empty__block-info .btn {
+    background: rgba(0, 107, 222, 0.85);
+    font-size: 2.4rem;
+    font-weight: 700;
+    border: 2px solid rgba(0, 107, 222, 0.85);
+    padding: 15px 58px;
 }
 
 .fileBox {
@@ -7865,6 +7905,28 @@ body:not(._touch) .formBox__submit:disabled:hover
 }
 
 @media (max-width: 991.98px) {
+    .empty__block {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .empty__block img {
+        width: auto;
+        height: auto;
+    }
+    .empty__text {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .empty__title {
+        font-size: 36px;
+        line-height: 36px;
+        margin-bottom: 20px;
+    }
+    .empty__block-info .btn {
+        font-size: 14px;
+        padding: 9px 18px;
+    }
     .wrp-colorsSlider {
         max-width: none;
         padding: 0;
@@ -8275,6 +8337,7 @@ body:not(._touch) .formBox__submit:disabled:hover
 
     .header__item--drop {
         margin-right: 10px;
+        white-space: nowrap;
     }
 
     .header__logoBox {

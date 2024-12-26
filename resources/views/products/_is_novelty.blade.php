@@ -31,7 +31,7 @@
                         Новинки
                     </h1>
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
+                        <div class="sideDash sideDash--sticky" style="z-index: 1111">
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">
                                     <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
@@ -69,16 +69,22 @@
                                 <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
                             </div>
                         </div>
-                    @if(count(\App\Models\Product::where('is_novelty', '>', 0)->get()) > 0)
+                    @if(count(\App\Models\Product::where('is_novelty', '>', 10)->get()) > 0)
                         <div class="productsTmp__body" id="data-wrapper">
                             @foreach(\App\Models\Product::where('is_novelty', '>', 0)->get() as $product)
                                 @include('products._product_item')
                             @endforeach
                         </div>
                     @else
-                        <h1 class="productsTmp__title t">
-                            Пусто
-                        </h1>
+                            <div class="empty__block">
+                                <div class="empty__block-info">
+                                    <h1 class="empty__title">
+                                        Новые товары отсутствуют
+                                    </h1>
+                                    <p class="empty__text">Здесь будут отображаться наши новые товары</p>
+                                </div>
+                                <img src="/img/emptyProducts/package.png" alt="empty-products">
+                            </div>
                     @endif
                 </div>
             </div>
@@ -89,6 +95,7 @@
         .productsTmp__body {
             margin: 0 -8px;
         }
+
         @media (max-width: 767.98px) {
             .productsTmp__body {
                 margin: 0 -4px;

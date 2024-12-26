@@ -1,5 +1,5 @@
 @extends('layouts.index')
-@include('cart.success_modal')
+{{--@include('cart.success_modal')--}}
 
 @section('content')
     <main class="page">
@@ -14,7 +14,8 @@
                     <li class="breadcrumbs__item"><a class="breadcrumbs__link breadcrumbs__link--active" href="#"><span>Корзина</span>
                             <svg>
                                 <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
-                            </svg></a>
+                            </svg>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -49,6 +50,20 @@
                 <div class="basket__content">
                     <h2 class="basket__title t">Корзина</h2>
                     <div class="cooperation__body sideDashContainer">
+                        @if ($cart->getTotalQuantity() == 0)
+                        <div class="empty__block">
+                            <div class="empty__block-info">
+                                <h1 class="empty__title">
+                                    Ваша корзина товаров пока что пуста
+                                </h1>
+                                <p class="empty__text">Выберите в каталоге интересующий товар и нажмите кнопку «В корзину».</p>
+                                <a class="btn btn-primary" href="{{ url('/posts/katalog') }}">
+                                    Перейти в каталог
+                                </a>
+                            </div>
+                            <img src="img/emptyProducts/box.png" alt="empty-products">
+                        </div>
+                        @else
                         <form class="basket__grid" action="#" method="post" onsubmit="return false">
                             <div class="basket__body">
 
@@ -61,16 +76,17 @@
                                                 $category = $item->product->categories()->first();
                                               $link=  route('index.products.show', ['product' => $item->product->slug, 'category' => $category->slug]);
     //                                        @endphp
-                                            <div id="backet_card_{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
-                                                 data-price="{{$item->options['price']}}"
-                                                 data-total="{{ $item->total_price }}"
-                                                 data-qtty="{{ $item->quantity }}"
-                                                 data-length="{{ $item->options['length'] }}"
-                                                 data-width="{{ $item->options['width'] }}"
-                                                 data-square="{{ $item->options['square'] }}"
-                                                 data-id="{{$item->product_id}}"
-                                                 class="basket__card "
-                                                 style="{{$index===0? 'margin-bottom: 25px ':' '}}"
+                                            <div
+                                                id="backet_card_{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
+                                                data-price="{{$item->options['price']}}"
+                                                data-total="{{ $item->total_price }}"
+                                                data-qtty="{{ $item->quantity }}"
+                                                data-length="{{ $item->options['length'] }}"
+                                                data-width="{{ $item->options['width'] }}"
+                                                data-square="{{ $item->options['square'] }}"
+                                                data-id="{{$item->product_id}}"
+                                                class="basket__card "
+                                                style="{{$index===0? 'margin-bottom: 25px ':' '}}"
                                                 {{--                                                     style=" background-color: #f6f6f6; padding: 15px;margin-bottom: 15px"--}}
                                                 {{--                                                @endif--}}
                                             >
@@ -87,62 +103,68 @@
                                                             </a>
                                                         </div>
                                                     @endif
-                                                        @php
-                                                            $cartService = new \App\Services\Shop\CartFormattedService();
-                                                            $totalInfo = $cartService->getFormattedOptionsText($item->options, true, $position);
-                                                            $attributes = $cartService->getFormattedOptionsText($item->options, false, $position, true, true);
-                                                        @endphp
+                                                    @php
+                                                        $cartService = new \App\Services\Shop\CartFormattedService();
+                                                        $totalInfo = $cartService->getFormattedOptionsText($item->options, true, $position);
+                                                        $attributes = $cartService->getFormattedOptionsText($item->options, false, $position, true, true);
+                                                    @endphp
                                                     <div class="basket__combinedContainer">
-                                                    @if ($index===0)
-                                                        <div class="basket__cardDesc">
-                                                            <div class="basket__cardTitle link">
-                                                                <a href="{{ $link }}" style="margin: auto;">
-                                                                    {{ $item->product->title }}
-                                                                </a>
-                                                            </div>
+                                                        @if ($index===0)
+                                                            <div class="basket__cardDesc">
+                                                                <div class="basket__cardTitle link">
+                                                                    <a href="{{ $link }}" style="margin: auto;">
+                                                                        {{ $item->product->title }}
+                                                                    </a>
+                                                                </div>
 
-                                                            <div class="productCalc__col--desc">{{ $attributes }}</div>
-                                                    @endif
-                                                            @php
-                                                                $cartService=new \App\Services\Shop\CartFormattedService();
-                                                                $totalInfo=  $cartService->getFormattedOptionsText($item->options,true,$position);
-                                                                $attributes=  $cartService->getFormattedOptionsText($item->options,false,$position);
-                                                            @endphp
-                                                        </div>
-                                                        @if($index===0)
-                                                            <div id="total_square_{{$item->product_id}}" class="total__square"
-                                                                 style="margin: auto;"></div>
-                                                            <div class="basket__cardPrice"
-                                                                 style="align-content: center">
-
-                                                                {{ $item->options['price'] }}
-                                                                ₽ @if($item->product->show_calculator)
-                                                                    /м2
+                                                                <div
+                                                                    class="productCalc__col--desc">{{ $attributes }}</div>
                                                                 @endif
+                                                                @php
+                                                                    $cartService=new \App\Services\Shop\CartFormattedService();
+                                                                    $totalInfo=  $cartService->getFormattedOptionsText($item->options,true,$position);
+                                                                    $attributes=  $cartService->getFormattedOptionsText($item->options,false,$position);
+                                                                @endphp
                                                             </div>
-                                                        @endif
+                                                            @if($index===0)
+                                                                <div id="total_square_{{$item->product_id}}"
+                                                                     class="total__square"
+                                                                     style="margin: auto;"></div>
+                                                                <div class="basket__cardPrice"
+                                                                     style="align-content: center">
+
+                                                                    {{ $item->options['price'] }}
+                                                                    ₽ @if($item->product->show_calculator)
+                                                                        /м2
+                                                                    @endif
+                                                                </div>
+                                                            @endif
                                                     </div>
                                                 </div>
                                                 <div class="productCalc__col--wrp">
 
-                                                    <div class="productCalc__col productCalc__col--desc">{{ $attributes }}</div>
+                                                    <div
+                                                        class="productCalc__col productCalc__col--desc">{{ $attributes }}</div>
 
                                                     <div class="productCalc__col productCalc__col--count">
                                                         <div class="productCalc__named">Количество</div>
                                                         <div class="productCalc__counter">
-                                                            <div data-prod="{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
-                                                                 class="productCalc__counterBtn productCalc__counterBtn--minus">
+                                                            <div
+                                                                data-prod="{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
+                                                                class="productCalc__counterBtn productCalc__counterBtn--minus">
                                                                 -
                                                             </div>
 
-                                                            <input data-prod="{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
-                                                                   class="productCalc__inpCount" autocomplete="off"
-                                                                   type="text"
-                                                                   name="form[]"
-                                                                   data-value="{{ $item->quantity }}"
-                                                            value="{{ $item->quantity }}">
-                                                            <div data-prod="{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
-                                                                 class="productCalc__counterBtn productCalc__counterBtn--plus">
+                                                            <input
+                                                                data-prod="{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
+                                                                class="productCalc__inpCount" autocomplete="off"
+                                                                type="text"
+                                                                name="form[]"
+                                                                data-value="{{ $item->quantity }}"
+                                                                value="{{ $item->quantity }}">
+                                                            <div
+                                                                data-prod="{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
+                                                                class="productCalc__counterBtn productCalc__counterBtn--plus">
                                                                 +
                                                             </div>
                                                         </div>
@@ -150,8 +172,9 @@
                                                     <div class="productCalc__col productCalc__col--total">
                                                         <div class="productCalc__named">
                                                             Итого: {{--<span>за 0.543 м2</span>--}} </div>
-                                                        <div id="prod_total_{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
-                                                             class="productCalc__result">
+                                                        <div
+                                                            id="prod_total_{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
+                                                            class="productCalc__result">
                                                             = {{ number_format($item->total_price,2) }}₽
                                                         </div>
                                                     </div>
@@ -178,14 +201,16 @@
                                                             $category = $item->product->categories()->first();
                                                           $link=  route('index.products.show', ['product' => $item->product->slug, 'category' => $category->slug]);
                                                         @endphp
-                                                        <div id="backet_card_{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
-                                                             data-price="{{$item->options['price']}}" data-total="{{ $item->total_price }}"
-                                                             data-qtty="{{ $item->quantity }}"
-                                                             data-length="{{ $item->options['length'] ?? 0 }}"
-                                                             data-width="{{ $item->options['width'] ?? 0 }}"
-                                                             data-square="{{ $item->options['square'] ?? 0 }}"
-                                                             data-id="{{$item->product_id}}"
-                                                             class="basket__card"
+                                                        <div
+                                                            id="backet_card_{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
+                                                            data-price="{{$item->options['price']}}"
+                                                            data-total="{{ $item->total_price }}"
+                                                            data-qtty="{{ $item->quantity }}"
+                                                            data-length="{{ $item->options['length'] ?? 0 }}"
+                                                            data-width="{{ $item->options['width'] ?? 0 }}"
+                                                            data-square="{{ $item->options['square'] ?? 0 }}"
+                                                            data-id="{{$item->product_id}}"
+                                                            class="basket__card"
                                                         >
                                                             <div class="basket__cardBody">
 
@@ -211,9 +236,10 @@
 
                                                                         @php
                                                                             $cartService=new \App\Services\Shop\CartFormattedService();
-                                                                            $attributes=  $cartService->getFormattedOptionsText($item->options,false,$position);
+                                                                         $attributes=  $cartService->getFormattedOptionsText($item->options,false,$position);
                                                                         @endphp
-                                                                        <div style="margin: auto;">{{ $attributes}}</div>
+                                                                        <div
+                                                                            style="margin: auto;">{{ $attributes}}</div>
                                                                     </div>
 
 
@@ -234,20 +260,23 @@
                                                                 <div class="productCalc__col productCalc__col--count">
                                                                     <div class="productCalc__named">Количество</div>
                                                                     <div class="productCalc__counter">
-                                                                        <div data-prod="{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
-                                                                             class="productCalc__counterBtn productCalc__counterBtn--minus">
+                                                                        <div
+                                                                            data-prod="{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
+                                                                            class="productCalc__counterBtn productCalc__counterBtn--minus">
                                                                             -
                                                                         </div>
 
-                                                                        <input data-prod="{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
-                                                                               class="productCalc__inpCount"
-                                                                               autocomplete="off"
-                                                                               type="text"
-                                                                               name="form[]"
-                                                                               data-value="{{ $item->quantity }}"
-                                                                               value="{{ $item->quantity }}">
-                                                                        <div data-prod="{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
-                                                                             class="productCalc__counterBtn productCalc__counterBtn--plus">
+                                                                        <input
+                                                                            data-prod="{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
+                                                                            class="productCalc__inpCount"
+                                                                            autocomplete="off"
+                                                                            type="text"
+                                                                            name="form[]"
+                                                                            data-value="{{ $item->quantity }}"
+                                                                            value="{{ $item->quantity }}">
+                                                                        <div
+                                                                            data-prod="{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
+                                                                            class="productCalc__counterBtn productCalc__counterBtn--plus">
                                                                             +
                                                                         </div>
                                                                     </div>
@@ -256,8 +285,9 @@
                                                                     <div class="productCalc__named">
                                                                         Итого:
                                                                     </div>
-                                                                    <div id="prod_total_{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
-                                                                         class="productCalc__result">
+                                                                    <div
+                                                                        id="prod_total_{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
+                                                                        class="productCalc__result">
                                                                         = {{ number_format($item->total_price,2) }}₽
                                                                     </div>
                                                                 </div>
@@ -272,9 +302,7 @@
                                                                     </svg>
                                                                 </div>
                                                             </div>
-
                                                             @endforeach
-
                                                             @endif</div>
                                                     @endforeach
                                             </div>
@@ -337,6 +365,7 @@
                                             </div>
                             </div>
                         </form>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -391,17 +420,19 @@
 
             calculateSquare();
         }
+
         calculateSquare();
+
         function calculateSquare() {
             let square = [];
             $('.basket__card').each(function () {
 
                 let plus = $(this).data('square') * $(this).data('qtty');
-                square[$(this).data('id')] = square[$(this).data('id')] ? square[$(this).data('id')] +plus :  plus;
+                square[$(this).data('id')] = square[$(this).data('id')] ? square[$(this).data('id')] + plus : plus;
             });
-            if(square){
-                $.each( square, function( key, value ) {
-                    $('#total_square_'+key).text(parseFloat(value).toFixed(2)+'/м2');
+            if (square) {
+                $.each(square, function (key, value) {
+                    $('#total_square_' + key).text(parseFloat(value).toFixed(2) + '/м2');
                 });
             }
         }
@@ -413,21 +444,31 @@
 
     window.onload = () => {
         if ($('#myModal').length) {
-            $('#myModal').modal('show');
+            // $('#myModal').modal('show');
+
+            showNotification('Заказ успешно оформлен!', 'success');
         }
         if ($('#myModal2').length) {
-            $('#myModal2').modal('show');
+            // $('#myModal2').modal('show');
+
+            showNotification('Произошла ошибка. Пожалуйста, попробуйте позже', 'error');
         }
         $('.send_to_mail_btn').on('click', function () {
-            $('.popup_email_info').addClass('_active')
+            // $('.popup_email_info').addClass('_active')
+
+            showNotification('Заказ отправлен', 'success');
         })
 
         $('.no_auth_btn').on('click', function () {
-            $('.popup_email_error_info').addClass('_active')
+            // $('.popup_email_error_info').addClass('_active');
+
+            showNotification('Войдите или зарегистрируйтесь, чтобы отправить заказ на E-mail', 'info');
         })
 
         $('.no_auth_print_btn').on('click', function () {
-            $('.popup_print_error_info').addClass('_active')
+            // $('.popup_print_error_info').addClass('_active')
+
+            showNotification('Войдите или зарегистрируйтесь, чтобы рапечатать заказ', 'info');
         })
         $(".deleteBut").on('click', function () {
 
@@ -519,27 +560,33 @@
     .productCalc__col--count {
         text-align: start;
     }
+
     .productCalc__col--desc {
         flex: 0 1 40%;
     }
+
     @media screen and (max-width: 767.98px) {
         .productCalc__col--desc {
             flex: 0 1 90%;
             order: 1;
         }
+
         .deleteBut__moreOne {
             order: 2;
         }
+
         .deleteBut {
             transform: none;
             position: absolute;
             right: 10px;
             top: 10px;
         }
+
         .productCalc__col--count {
             order: 3;
             flex: 1;
         }
+
         .productCalc__col--total {
             order: 4;
             margin-left: 20px !important;

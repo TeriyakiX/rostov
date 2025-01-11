@@ -64,7 +64,6 @@ $(document).on("click", ".addToCartLink", function () {
         }
     })
         .done(function (response) {
-            showNo
             $('#cart_modal .cart-list__body').html(response.cartContentView);
             $('#cart_modal .cart-list__info').html(response.cartInfo);
         })

@@ -970,7 +970,7 @@
         @include('products._docs_modal')
         @include('products._modal_consult')
         @include('products._modal_buy')
-        @include('products._cart_modal')
+{{--        @include('products._cart_modal')--}}
         @include('products.product_description_modal')
     </div>
     <style>

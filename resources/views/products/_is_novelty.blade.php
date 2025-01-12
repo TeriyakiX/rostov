@@ -31,6 +31,7 @@
                         Новинки
                     </h1>
                     <div class="cooperation__body sideDashContainer">
+                        @if(count(\App\Models\Product::where('is_novelty', '>', 10)->get()) > 0)
                         <div class="sideDash sideDash--sticky" style="z-index: 1111">
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">
@@ -69,7 +70,7 @@
                                 <div class="sideDash__mark"><a href="/posts/zakazat-raschet">Заказать расчет</a></div>
                             </div>
                         </div>
-                    @if(count(\App\Models\Product::where('is_novelty', '>', 10)->get()) > 0)
+
                         <div class="productsTmp__body" id="data-wrapper">
                             @foreach(\App\Models\Product::where('is_novelty', '>', 0)->get() as $product)
                                 @include('products._product_item')

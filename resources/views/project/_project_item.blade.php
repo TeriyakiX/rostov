@@ -4,7 +4,7 @@
         <a class="gallery__imgBox ibg" href="{{ route('index.projects.show', ['slug' => $project->slug]) }}">
             <picture>
                 <source type="image/webp" srcset="{{ $project->photos->first() ? url('/upload_images/' . $project->photos->first()->path) : null }}">
-                <img src="{{ $project->photos->first() ? url('/upload_images/' . $project->photos->first()->path) : null }}" alt="g1">
+                <img src="{{ $project->photos->first() ? url('/upload_images/' . $project->photos->first()->path) : null }}" alt="g1" class="cropped-img-large">
             </picture>
         </a>
         <div class="gallery__itemTitle">

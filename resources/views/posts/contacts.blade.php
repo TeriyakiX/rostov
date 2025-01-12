@@ -72,8 +72,37 @@
     <div class="container">
         <div class="show">
             <div class="show__caption">
-                <div class="show__title">Юридический и<br/> почтовый адрес<br/> компании</div>
-                <div class="show__description">344041, г. Ростов-на-Дону, ул.<br/> Буквенная 25, комната 6<br/> ИНН: 6168056526<br/> ОГРН: 1116194006444
+                <div class="show__title">Наш адрес:</div>
+                <div class="show__description">344041, г. Ростов-на-Дону, <br/>ул. Доватора, 144/13</div>
+
+                <div class="show__title show__title-second">Связь с нами:</div>
+                <div class="show__description show__description-second">
+                    <div class="show__description-inner">
+                        <div>
+                            + 7 (863) 311 46 60
+                        </div>
+                        <div>
+                            + 7 (988) 510 97 83
+                        </div>
+                    </div>
+
+                    <div class="show__description-inner">
+                        <div>
+                            + 7 (863) 219 35 23
+                        </div>
+                        <div>
+                            + 7 (903) 432 93 93
+                        </div>
+                    </div>
+
+                    <div class="show__description-inner">
+                        <div>
+                            m1_mk@aaanet.ru
+                        </div>
+                        <div>
+                            mk_rostov@mail.ru
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="show__caption">

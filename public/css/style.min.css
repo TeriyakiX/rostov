@@ -301,6 +301,11 @@ body:not(._touch) .infoPanel__btn:hover svg {
     stroke: transparent;
 }
 
+body:not(._touch) .infoPanel__btn:hover .infoPanel__svg--heart {
+    fill: #006bde;
+    stroke: #006bde;
+}
+
 body:not(._touch) .catalogControl__btn {
     flex: 0 0 auto;
 }
@@ -2043,7 +2048,8 @@ strong {
     height: 20px;
     fill: transparent;
     stroke: #d6d6d6;
-    stroke-width: 2px;
+    stroke-width: 3px;
+    transition: 0.2s ease;
 }
 
 .infoPanel__svg--stat {
@@ -3057,6 +3063,10 @@ strong {
     clip-path: polygon(12% 0, 100% 0, 100% 81%, 86% 100%, 0 100%, 0 15%);
 }
 
+.cropped-img-large {
+    clip-path: polygon(10% 0, 100% 0, 100% 80%, 90% 100%, 0 100%, 0 20%);
+}
+
 .info__txt ul {
     padding-left: 0 !important;
 }
@@ -3236,8 +3246,8 @@ strong {
 }
 
 .card__icon--basket {
-    height: 40px;
-    width: 40px;
+    height: 40px !important;
+    width: 40px !important;
     border: 1px solid #006BDE;
     border-radius: 4px;
 }
@@ -8273,6 +8283,9 @@ body:not(._touch) .formBox__submit:disabled:hover
 }
 
 @media (max-width: 1390px) {
+    .sideDash__mark {
+        display: none;
+    }
     .sticky-spacer {
         display: none !important;
     }
@@ -9697,10 +9710,6 @@ body:not(._touch) .formBox__submit:disabled:hover
         z-index: 0;
     }
 
-    .sideDash__item:hover .sideDash__mark {
-        transform: rotate3d(0, 0, 1, -90deg);
-    }
-
     .contentContainer--slider {
         margin-top: 16px;
         margin-bottom: 16px;
@@ -10710,6 +10719,7 @@ body:not(._touch) .formBox__submit:disabled:hover
     .compareParametersSlider .swiper-slide {
         pointer-events: all;
         color: #505050;
+        padding: 0;
     }
 
     .ordering__confirmBoxWrp {
@@ -11726,6 +11736,10 @@ body:not(._touch) .formBox__submit:disabled:hover
     margin-top: 70px;
 }
 
+.show__title-second {
+    margin-top: 18px;
+}
+
 @media screen and (max-width: 1024px) {
     .show__title {
         font-size: 18px;
@@ -11787,6 +11801,11 @@ body:not(._touch) .formBox__submit:disabled:hover
     line-height: 32px;
 }
 
+.show__description-inner {
+    display: flex;
+    gap: 3.6rem;
+}
+
 @media screen and (max-width: 1024px) {
     .show__description {
         font-size: 18px;
@@ -11795,6 +11814,18 @@ body:not(._touch) .formBox__submit:disabled:hover
 
     .show__description br {
         display: none;
+    }
+
+    .show__description-inner {
+        justify-content: center;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .show__description-second {
+        gap: 12px;
+        display: flex;
+        flex-direction: column;
     }
 }
 
@@ -12115,4 +12146,45 @@ iframe.note-video-clip {
     .header__navLink--heart {
         display: none;
     }
+}
+
+/* HTML: <div class="loader"></div> */
+.spinner-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    display: grid;
+    border-radius: 50%;
+    background:
+        linear-gradient(0deg ,rgb(0 0 0/50%) 30%,#0000 0 70%,rgb(0 0 0/100%) 0) 50%/8% 100%,
+        linear-gradient(90deg,rgb(0 0 0/25%) 30%,#0000 0 70%,rgb(0 0 0/75% ) 0) 50%/100% 8%;
+    background-repeat: no-repeat;
+    animation: l23 1s infinite steps(12);
+}
+.loader::before,
+.loader::after {
+    content: "";
+    grid-area: 1/1;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.915;
+    transform: rotate(30deg);
+}
+.loader::after {
+    opacity: 0.83;
+    transform: rotate(60deg);
+}
+@keyframes l23 {
+    100% {transform: rotate(1turn)}
 }

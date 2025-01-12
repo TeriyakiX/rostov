@@ -129,8 +129,8 @@
                             @include('posts.custom._pohvalit-pozhalovatsya')
                         @elseif($post->slug == 'kontakty')
                             @include('posts.custom.kontakty')
-                        @elseif($post->slug == 'karta-proezda')
-                            @include('posts.custom._karta-proezda')
+{{--                        @elseif($post->slug == 'karta-proezda')--}}
+{{--                            @include('posts.custom._karta-proezda')--}}
                         @elseif($post->slug == 'dokumenty')
 
                             @include('posts.custom._tehnicheskie-katalogi')

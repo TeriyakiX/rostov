@@ -1205,7 +1205,6 @@
         const counters = document.querySelectorAll('.productCalc__counter');
 
         if (counters.length === 0) {
-            console.error("Не удалось найти элементы с классом '.productCalc__counter'");
             return;
         }
 
@@ -1215,7 +1214,6 @@
             const input = counter.querySelector('.productCalc__inpCount');
 
             if (!minus || !plus || !input) {
-                console.error("Не удалось найти кнопки или поле ввода в одном из счетчиков");
                 continue;
             }
 
@@ -1247,7 +1245,6 @@
         let currentIndex = 0;
 
         if (!galleryItems.length || !leftArrow || !rightArrow) {
-            console.error('Галерея или стрелки не найдены. Проверьте селекторы.');
             return;
         }
 

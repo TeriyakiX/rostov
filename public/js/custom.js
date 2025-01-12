@@ -75,10 +75,11 @@ $(document).on("click", ".addToCartLink", function () {
         datatype: "html",
         type: "POST",
         beforeSend: function () {
-            // $('.auto-load').show();
+            $('#loader').fadeIn();
         }
     })
         .done(function (response) {
+            $('#loader').fadeOut();
             showNotification(response.message, 'success')
             $('#cart_modal .cart-list__body').html(response.cartContentView);
             $('#cart_modal .cart-list__info').html(response.cartInfo);
@@ -89,6 +90,7 @@ $(document).on("click", ".addToCartLink", function () {
             }
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
+            $('#loader').fadeOut();
             showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
             console.log('Server error occured');
         });
@@ -106,14 +108,16 @@ $(document).on("click", ".addToCartLinkOneClick", function () {
         datatype: "html",
         type: "POST",
         beforeSend: function () {
-            // $('.auto-load').show();
+            $('#loader').fadeIn();
         }
     })
         .done(function (response) {
+            $('#loader').fadeOut();
             $('#cart_modal .cart-list__body').html(response.cartContentView);
             $('#cart_modal .cart-list__info').html(response.cartInfo);
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
+            $('#loader').fadeOut();
             console.log('Server error occured');
         });
 });
@@ -416,11 +420,12 @@ $(document).on('submit', '.getConsult', function (event) {
         processData: false,
         contentType: false,
         type: "POST",
-        beforeSend: function () {
-            // $('.auto-load').show();
-        }
+        beforeSend: function (response) {
+            $('#loader').fadeIn();
+        },
     })
         .done(function (response) {
+            $('#loader').fadeOut();
             $('.popup_consult').removeClass('_active')
             $form[0].reset();
             // Swal.fire(
@@ -431,7 +436,7 @@ $(document).on('submit', '.getConsult', function (event) {
             showNotification('Запрос успешно отправлен! Среднее время ожидания ответа: 20–30 минут в рабочее время.', 'info');
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-
+            $('#loader').fadeOut();
             var response = JSON.parse(jqXHR.responseText);
             var errorString = '';
             $.each(response.errors, function (key, value) {
@@ -462,12 +467,12 @@ $(document).on('submit', '.getModalBuy', function (event) {
         processData: false,
         contentType: false,
         type: "POST",
-        beforeSend: function () {
-            // $('.auto-load').show();
-        }
+        beforeSend: function (response) {
+            $('#loader').fadeIn();
+        },
     })
         .done(function (response) {
-
+            $('#loader').fadeOut();
             $('.popup_buy').removeClass('_active')
             $form[0].reset();
             // Swal.fire(
@@ -478,6 +483,7 @@ $(document).on('submit', '.getModalBuy', function (event) {
             showNotification('Запрос успешно отправлен! Среднее время ожидания ответа: 20–30 минут в рабочее время.', 'info');
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
+            $('#loader').fadeOut();
             try {
                 if (jqXHR.responseJSON && jqXHR.responseJSON.errors) {
                     let errorString = '';
@@ -531,11 +537,12 @@ $(document).on('click', '.addTo', function (event) {
         data: {product_id: productId, _token: _token, coatings: coatings, active: active},
         datatype: "html",
         type: "POST",
-        beforeSend: function () {
-            // $('.auto-load').show();
-        }
+        beforeSend: function (response) {
+            $('#loader').fadeIn();
+        },
     })
         .done(function (response) {
+            $('#loader').fadeOut();
             $button.toggleClass('active');
             showNotification(response.message, 'success');
 
@@ -543,7 +550,6 @@ $(document).on('click', '.addTo', function (event) {
                 $card.remove();
                 location.reload();
             } else {
-                console.log(response)
                 // Swal.fire(
                 //     '',
                 //     response.message,
@@ -558,6 +564,7 @@ $(document).on('click', '.addTo', function (event) {
             }
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
+            $('#loader').fadeOut();
             showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
             console.log('Server error occured');
         });
@@ -575,12 +582,18 @@ $('form[data-ajax="true"]').on('submit', function (e) {
         data: formData,
         processData: false,
         contentType: false,
+        beforeSend: function (response) {
+          $('#loader').fadeIn();
+        },
         success: function (response) {
+            $('#loader').fadeOut();
             $('#successModal').fadeIn();
             form[0].reset();
         },
         error: function (xhr) {
-            alert('Ошибка: ' + (xhr.responseJSON?.error || 'Неизвестная ошибка'));
+            $('#loader').fadeOut();
+            // alert('Ошибка: ' + (xhr.responseJSON?.error || 'Неизвестная ошибка'));
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
         },
     });
 });

@@ -1314,11 +1314,11 @@
                                                             Подробнее
                                                         </div>
                                                     </a>
-                                                    <div class="card__icon card__icon--basket" data-destination="Basket" role="button" tabindex="0">
+                                                    <a href="{{ route('index.products.coatingShow', ['coating' => $product->slug]) }}" class="card__icon card__icon--basket" data-destination="Basket" role="button" tabindex="0">
                                                         <svg>
                                                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#basket') }}"></use>
                                                         </svg>
-                                                    </div>
+                                                    </a>
                                                     <div
                                                         class="card__icon card__icon--stat card__mini-icon card__icon--stat--desktop addTo"
                                                         data-destination="Compare" role="button" tabindex="0">

@@ -54,8 +54,8 @@
                        </label>
                        <div class="formRow">
                            <div class="inpBox">
-                               <label for="consent" class="ctaForm__label">
-                                   <input type="checkbox" id="consent_3" name="consent" required data-consent>
+                               <label for="consent_3" class="ctaForm__label" style="cursor: pointer">
+                                   <input type="checkbox" id="consent_3" name="consent" required data-consent style="pointer-events: none">
                                    Я даю согласие на обработку моих персональных данных в соответствии с
                                    <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
                                </label>

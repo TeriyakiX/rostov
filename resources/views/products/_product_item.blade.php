@@ -78,11 +78,11 @@
                     </a>
 
                     <div class="card__icons">
-                        <div class="card__icon card__icon--basket" data-destination="Basket" role="button" tabindex="0">
+                        <a href="{{ route('index.products.show', ['product' => $product->slug??'empty', 'category' => $product->categories->first() ? $product->categories->first()->slug : 'empty']) }}" class="card__icon card__icon--basket" data-destination="Basket" role="button" tabindex="0">
                             <svg>
                                 <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#basket') }}"></use>
                             </svg>
-                        </div>
+                        </a>
                     </div>
 
                     {{--                <div class="card__icons">--}}

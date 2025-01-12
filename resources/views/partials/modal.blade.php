@@ -15,6 +15,10 @@
     </div>
 </div>
 
+<div class="spinner-loader" id="loader" style="display: none;">
+    <div class="loader"></div>
+</div>
+
 <script>
     function closeModal() {
         document.getElementById('successModal').style.display = 'none';

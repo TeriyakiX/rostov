@@ -563,8 +563,10 @@ print_r($headerCategories);
         padding-top: 2px;
         text-align: center;
         border-radius: 50%;
-        background: #d6d6d6;
+        background: #006bde;
+        color: #fff;
         width: 20px;
+        min-width: 20px;
         height: 20px;
         white-space: nowrap;
     }

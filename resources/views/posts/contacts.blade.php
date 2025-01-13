@@ -124,6 +124,10 @@
         </div>
     </div>
 
+    <div class="container" style="margin-bottom: 40px">
+        <img src="{{ asset('img/travel-map.png') }}" alt="map">
+    </div>
+
     <div class="minfo">
         <div class="container minfo__container">
             <div class="minfo__right minfo__right--is-revert">

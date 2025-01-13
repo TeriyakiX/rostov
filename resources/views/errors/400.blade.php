@@ -34,7 +34,7 @@
         .error-info-wrapper {
             display: flex;
             align-items: center;
-            background-image: url('../img/error-status.png');
+            background-image: url('img/error-status.png');
             background-repeat: no-repeat;
             background-position: calc(100% - 10%) 150%;
             background-size: 50%;

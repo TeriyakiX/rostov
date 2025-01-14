@@ -8,7 +8,7 @@
             <div class="error-info-wrapper">
                 <div class="error-info">
                     <h1 class="error-title">Техническая ошибка</h1>
-                    <p class="error-subtitle">{{ $message ?? 'Что-то пошло не так' }}</p>
+{{--                    <p class="error-subtitle">{{ $message ?? 'Что-то пошло не так' }}</p>--}}
                     <p class="error-text">Извините, на сервере произошла ошибка. Мы уже знаем об этой проблеме и работаем над её устранением. Пожалуйста, попробуйте позже.</p>
                     <a class="error-link btn" href="{{ url('/posts/katalog') }}">Перейти в каталог</a>
                 </div>
@@ -34,7 +34,7 @@
         .error-info-wrapper {
             display: flex;
             align-items: center;
-            background-image: url('../img/error-status.png');
+            background-image: url('img/error-status.png');
             background-repeat: no-repeat;
             background-position: calc(100% - 10%) 150%;
             background-size: 50%;
@@ -45,7 +45,7 @@
             flex-direction: column;
         }
         .error-title {
-            margin-bottom: 18px;
+            margin-bottom: 28px;
             font-size: 6.4rem;
             font-weight: 700;
             color: rgba(0, 0, 0, 1);

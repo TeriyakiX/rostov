@@ -80,8 +80,8 @@
                             </div>
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
+                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
+                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
                                     </use>
                                 </svg>
                                 <div class="sideDash__mark"><a

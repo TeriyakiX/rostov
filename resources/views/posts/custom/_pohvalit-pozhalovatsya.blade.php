@@ -50,10 +50,6 @@
                     </div>
 
                     <button class="ctaForm__btn ctaForm__btn--gap btn btn--md disabled" disabled type="submit" data-submit>Отправить</button>
-                    <div class="ctaForm__info">
-                        Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
-                        <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a> и соглашаюсь на обработку моих персональных данных.
-                    </div>
                 </div>
             </div>
         </form>

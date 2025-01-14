@@ -7664,6 +7664,15 @@ body:not(._touch) .card__icon--basket:hover svg {
     transition: 0.2s ease;
     cursor: not-allowed;
 }
+
+.btn--cl.disabled {
+    color: #fff;
+    background: rgba(184, 183, 183, 1);
+    border-color: rgba(184, 183, 183, 1);
+    transition: 0.2s ease;
+    cursor: not-allowed;
+}
+
 body:not(._touch) .ordering__submit.disabled:hover,
 body:not(._touch) .ordering__submit:disabled:hover,
 body:not(._touch) .ctaForm__btn.disabled:hover,
@@ -7671,6 +7680,14 @@ body:not(._touch) .ctaForm__btn:disabled:hover,
 body:not(._touch) .formBox__submit.disabled:hover,
 body:not(._touch) .formBox__submit:disabled:hover
 {
+    background-color: rgba(184, 183, 183, 1);
+    border-color: rgba(184, 183, 183, 1);
+    cursor: not-allowed;
+    color: #fff;
+}
+
+body:not(._touch) .btn--cl.disabled:hover,
+body:not(._touch) .btn--cl:disabled:hover {
     background-color: rgba(184, 183, 183, 1);
     border-color: rgba(184, 183, 183, 1);
     cursor: not-allowed;
@@ -7752,7 +7769,12 @@ body:not(._touch) .formBox__submit:disabled:hover
 #consent_3,
 #consent_4,
 #consent_5,
-#consent_6 {
+#consent_6,
+#consent_7,
+#consent_8,
+#consent_9,
+#consent_10,
+#consent_11 {
     margin: 0;
     vertical-align: bottom;
 }
@@ -11557,6 +11579,12 @@ body:not(._touch) .formBox__submit:disabled:hover
     margin-bottom: 60px;
 }
 
+.minfo2 {
+    display: flex;
+    position: relative;
+    margin-bottom: 60px;
+}
+
 .minfo .container {
     display: flex;
     padding-left: 0;
@@ -11716,6 +11744,7 @@ body:not(._touch) .formBox__submit:disabled:hover
 .minfo__left--revert {
     margin-left: auto;
     display: block;
+    width: 57%;
 }
 
 @media screen and (max-width: 1024px) {
@@ -11896,6 +11925,17 @@ body:not(._touch) .formBox__submit:disabled:hover
     height: 465px;
 }
 
+.minfo2::after {
+    content: '';
+    background: url('../img/bg321.png') no-repeat;
+    position: absolute;
+    left: 0;
+    top: 45px;
+    transform: rotateX(180deg) rotateY(180deg);
+    width: 56%;
+    height: 298px;
+}
+
 @media screen and (max-width: 1620px) {
     .minfo::after {
         width: 58%;
@@ -11926,6 +11966,7 @@ body:not(._touch) .formBox__submit:disabled:hover
 .minfo__right--is-revert {
     text-align: left;
     margin-right: auto;
+    position: relative;
     z-index: 4;
     max-width: 640px;
     margin-left: unset;

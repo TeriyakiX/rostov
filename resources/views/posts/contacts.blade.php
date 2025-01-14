@@ -224,9 +224,9 @@
         <img src="{{ asset('img/travel-map.png') }}" alt="map">
     </div>
 
-    <div class="minfo">
+    <div class="minfo2">
         <div class="container minfo__container">
-            <div class="minfo__right minfo__right--is-revert">
+            <div class="minfo__right--is-revert">
                 <div class="minfo__title minfo__title--is-big">СКЛАДЫ ОТГРУЗКИ МК РОСТОВ:</div>
 
                 <div class="minfo__text">Малый склад штучного товара: г. Ростов-на-Дону ул. Доватора 144/13</div>
@@ -242,7 +242,7 @@
                 </div>
             </div>
         </div>
-        <div class="minfo__left minfo__left--revert">
+        <div class="minfo__left--revert">
             <div style="position:relative;overflow:hidden;"><a
                     href="https://yandex.ru/maps/39/rostov-na-donu/?utm_medium=mapframe&utm_source=maps"
                     style="color:#eee;font-size:12px;position:absolute;top:0px;">Ростов‑на‑Дону</a><a
@@ -267,12 +267,12 @@
                     <div>
                         <a href="tel:+78633114660">+7 (863) 311 46 60</a>
                         <a href="tel:+78632193523">+7 (863) 219 35 23</a>
-                        <a href="mailto:m1_mk@aaanet.ru">m1_mк@aaanet.ru</a>
+                        <a href="mailto:m1_mk@aaanet.ru">m1_mk@aaanet.ru</a>
                     </div>
                     <div>
                         <a href="tel:+79885109783">+7 (988) 510 97 83</a>
                         <a href="tel:+79034329393">+7 (903) 432 93 93</a>
-                        <a href="mailto:mk-rostov@mail.ru">mк-rostov@mail.ru</a>
+                        <a href="mailto:mk-rostov@mail.ru">mk-rostov@mail.ru</a>
                     </div>
                 </div>
             </div>

@@ -83,10 +83,7 @@
                                                    placeholder="Комментарий" name="customer_comment" required>
                                         </div>
                                     </div>
-                                    <button class="ctaForm__btn ctaForm__btn--gap btn btn--md" type="submit">Отправить
-                                    </button>
-                                    <label class="formBox__fileLabel" for="formBox_file" name="file"
-                                           style="padding-top: 20px;">
+                                    <label class="formBox__fileLabel" for="formBox_file" name="file">
                                         <input class="formBox__input" autocomplete="off" type="file" name="file" id="formBox_file">
                                         <svg>
                                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#scr') }}"></use>
@@ -97,12 +94,17 @@
                                     <label class="message" for="formBox_file" style="color: red">
 
                                     </label>
-                                    <div class="formBox__policy" style="color: black">
-                                        Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
-                                        <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a> и даю согласие на
-                                        <a href="<?php echo e(route('index.posts.show', ['slug' => 'obrabotka-personalnyh-dannyh'])); ?>">обработку моих
-                                            персональных данных</a>
+                                    <div class="formRow formRowG">
+                                        <div class="inpBox">
+                                            <label for="consent_5" class="ctaForm__label" style="cursor: pointer">
+                                                <input type="checkbox" id="consent_5" name="consent" required data-consent style="pointer-events: none">
+                                                Я даю согласие на обработку моих персональных данных в соответствии с
+                                                <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
+                                            </label>
+                                        </div>
                                     </div>
+                                    <button class="ctaForm__btn ctaForm__btn--gap btn btn--md disabled" data-submit disabled type="submit">Отправить
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -250,6 +252,15 @@
             fill: #505050;
         }
 
+        .formRowG .inpBox label {
+            color: #aaa;
+            font-weight: 400;
+            font-size: 1.4rem;
+        }
+        .formRowG .inpBox label a {
+            color: #9af3ef;
+            text-decoration: underline;
+        }
         @media (max-width: 767.98px) {
             .cooperation__container {
                 padding: 0;

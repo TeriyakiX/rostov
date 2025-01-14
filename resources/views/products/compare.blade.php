@@ -209,13 +209,25 @@
                                                                                 </a>
 
                                                                                 <div class="card__icons">
-                                                                                    <div
-                                                                                        class="card__icon card__icon--basket"
-                                                                                        data-destination="Basket"
-                                                                                        role="button" tabindex="0">
+                                                                                    <div class="card__icon card__icon--basket"
+                                                                                         data-action="{{ route('index.cart.add') }}"
+
+                                                                                         data-product-id="{{ $product->id }}"
+                                                                                         data-total-price="{{ $product->total_price }}"
+                                                                                         data-price="{{ $product->is_promo ?  $product->promo_price :  $product->price }}"
+                                                                                         data-length="{{ $product->length }}"
+                                                                                         data-total-square="{{ $product->total_square }}"
+                                                                                         data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
+                                                                                         data-start-price="{{ $product->price }}"
+                                                                                         data-attribute-prices="{{$product->attribute_prices ? $product->attribute_prices : 0}}"
+                                                                                         data-color="{{ $product->color }}"
+                                                                                         data-quantity="1"
+                                                                                         data-width="{{ $product->list_width_useful }}"
+                                                                                         data-destination="Basket"
+                                                                                         role="button"
+                                                                                         tabindex="0">
                                                                                         <svg>
-                                                                                            <use
-                                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#basket') }}"></use>
+                                                                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#basket') }}"></use>
                                                                                         </svg>
                                                                                     </div>
                                                                                 </div>

@@ -216,35 +216,64 @@ class CartController extends Controller
         $cart = app()->make('cart');
         Session::put('temp',[]);
         $message = '';
+        // TODO: ПОКА НЕ УДАЛЯТЬ!!!
+//        if ($request->has('product_id')) {
+//            $productId = $request->get('product_id');
+//            if ($request->get('length')) {
+//                foreach ($request->get('length') as $key => $length) {
+//                    if ($request->get('totalSquare')[$key]) {
+//                        $all = $request->except(['_token', 'product_id', 'length']);
+//                        $all['quantity'] = $request->get('quantity')[$key];
+//                        $all['totalSquare'] = $request->get('totalSquare')[$key];
+//                        $all['square'] = $request->get('totalSquare')[$key] / $request->get('quantity')[$key];
+//                        $all['totalPrice'] = $request->get('totalPrice')[$key];
+//                        $all['price'] = $request->get('price');
+//                        $all['length'] = $length;
+//                        if($request->get('temporary_cart'))
+//                        $sessionKey = 'temp.'.$cart::SESSION_KEY_PRODUCTS . '.' . $productId . 'length=' . $length;
+//                        else
+//                            $sessionKey = $cart::SESSION_KEY_PRODUCTS . '.' . $productId . 'length=' . $length;
+//                        $cart->setPositionAlt($productId, $sessionKey, $all);
+//                    }
+//                }
+//            } else {
+//                $all = $request->except(['_token', 'product_id', 'length']);
+//                if($request->get('temporary_cart'))
+//                $sessionKey =  'temp.'.$cart::SESSION_KEY_PRODUCTS . '.' . $productId;
+//                else
+//                    $sessionKey = $cart::SESSION_KEY_PRODUCTS . '.' . $productId;
+//                $all['quantity'] = $request->get('quantity')[0];
+//                $all['totalPrice'] = $request->get('totalPrice')[0];
+//                $cart->setPositionAlt($productId, $sessionKey, $all);
+//            }
+//
+//            $cart->commit();
+//            $message = 'Товар успешно добавлен в корзину!';
+//            \Log::debug('Request Data:', $request->all());
+//        } else {
+//            $message = 'Не удалось добавить товар в корзину.';
+//        }
 
         if ($request->has('product_id')) {
             $productId = $request->get('product_id');
+            $options = $request->except(['_token', 'product_id']);
+
+            $sessionKey = $cart::SESSION_KEY_PRODUCTS . '.' . $productId;
             if ($request->get('length')) {
                 foreach ($request->get('length') as $key => $length) {
-                    if ($request->get('totalSquare')[$key]) {
-                        $all = $request->except(['_token', 'product_id', 'length']);
-                        $all['quantity'] = $request->get('quantity')[$key];
-                        $all['totalSquare'] = $request->get('totalSquare')[$key];
-                        $all['square'] = $request->get('totalSquare')[$key] / $request->get('quantity')[$key];
-                        $all['totalPrice'] = $request->get('totalPrice')[$key];
-                        $all['price'] = $request->get('price');
-                        $all['length'] = $length;
-                        if($request->get('temporary_cart'))
-                        $sessionKey = 'temp.'.$cart::SESSION_KEY_PRODUCTS . '.' . $productId . 'length=' . $length;
-                        else
-                            $sessionKey = $cart::SESSION_KEY_PRODUCTS . '.' . $productId . 'length=' . $length;
-                        $cart->setPositionAlt($productId, $sessionKey, $all);
-                    }
+                    $options['length'] = $length;
+                    $options['totalSquare'] = $request->get('totalSquare')[$key] ?? 0;
+                    $options['quantity'] = $request->get('quantity')[$key] ?? 1;
+                    $options['totalPrice'] = $request->get('totalPrice')[$key] ?? 0;
+                    $options['square'] = $request->get('totalSquare')[$key] / $request->get('quantity')[$key];
+                    $options['price'] = $request->get('price');
+                    $sessionKeyWithLength = $sessionKey . 'length=' . $length;
+                    $cart->setPositionAlt($productId, $sessionKeyWithLength, $options);
                 }
             } else {
-                $all = $request->except(['_token', 'product_id', 'length']);
-                if($request->get('temporary_cart'))
-                $sessionKey =  'temp.'.$cart::SESSION_KEY_PRODUCTS . '.' . $productId;
-                else
-                    $sessionKey = $cart::SESSION_KEY_PRODUCTS . '.' . $productId;
-                $all['quantity'] = $request->get('quantity')[0];
-                $all['totalPrice'] = $request->get('totalPrice')[0];
-                $cart->setPositionAlt($productId, $sessionKey, $all);
+                $options['quantity'] = $request->get('quantity')[0] ?? 1;
+                $options['totalPrice'] = $request->get('totalPrice')[0] ?? 0;
+                $cart->setPositionAlt($productId, $sessionKey, $options);
             }
 
             $cart->commit();

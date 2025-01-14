@@ -6,64 +6,160 @@
 
 @section('content')
 
-    <div class="container">
-        <div class="socials">
-            <a href="mailto:m1_mk@aaanet.ru" class="socials__item" title="E-mail">
-                <img src="{{ asset('img/mail.jpg') }}">
-            </a>
-            <a href="https://vk.com/public97309835" class="socials__item" title="Vkontakte">
-                <img src="{{ asset('img/vk.jpg') }}">
-            </a>
-            <a href="https://wa.me/+79885109783" class="socials__item" title="Whatsapp">
-                <img src="{{ asset('img/viber.jpg') }}">
-            </a>
-            <a href="https://t.me/+79885109783" class="socials__item" title="Telegram">
-                <img src="{{ asset('img/telegram.jpg') }}">
-            </a>
-            <a href="viber://chat?number=%2B79885109783" class="socials__item" title="Viber">
-                <img src="{{ asset('img/messanger.jpg') }}">
-            </a>
-            <a href="tel:+79885109783" class="socials__item" title="Звонок">
-                <img src="{{ asset('img/whatsapp.jpg') }}">
-            </a>
+{{--    <div class="container">--}}
+{{--        <div class="socials">--}}
+{{--            <a href="mailto:m1_mk@aaanet.ru" class="socials__item" title="E-mail">--}}
+{{--                <img src="{{ asset('img/mail.jpg') }}">--}}
+{{--            </a>--}}
+{{--            <a href="https://vk.com/public97309835" class="socials__item" title="Vkontakte">--}}
+{{--                <img src="{{ asset('img/vk.jpg') }}">--}}
+{{--            </a>--}}
+{{--            <a href="https://wa.me/+79885109783" class="socials__item" title="Whatsapp">--}}
+{{--                <img src="{{ asset('img/viber.jpg') }}">--}}
+{{--            </a>--}}
+{{--            <a href="https://t.me/+79885109783" class="socials__item" title="Telegram">--}}
+{{--                <img src="{{ asset('img/telegram.jpg') }}">--}}
+{{--            </a>--}}
+{{--            <a href="viber://chat?number=%2B79885109783" class="socials__item" title="Viber">--}}
+{{--                <img src="{{ asset('img/messanger.jpg') }}">--}}
+{{--            </a>--}}
+{{--            <a href="tel:+79885109783" class="socials__item" title="Звонок">--}}
+{{--                <img src="{{ asset('img/whatsapp.jpg') }}">--}}
+{{--            </a>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs__container _container">
+            <ul class="breadcrumbs__list">
+                <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{{ route('index.home') }}">
+                        <span>Главная</span>
+                        <svg>
+                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#slideArrow') }}"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link breadcrumbs__link--active" href="#">
+                        <span>Контакты</span>
+                        <svg>
+                            <use xlink:href="{{ asset('img/icons/blue-play.svg#blue-play') }}"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container contacts__container">
+        <div class="contacts__title t">
+            Как к нам добраться ?
         </div>
     </div>
-
     <div class="minfo">
-        <div class="minfo__left">
-            <img src="{{ asset('img/map.png') }}" class="minfo__oa">
+        <div class="container">
+            <div class="minfo__left">
 
-            <div class="bts-box">
-                <script src="https://yastatic.net/share2/share.js"></script>
-                <div class="ya-share2" data-curtain data-limit="0"
-                     data-more-button-type="short"
-                     style="background:transparent"
-                     data-services="vkontakte,facebook,odnoklassniki,telegram,twitter,viber,whatsapp"></div>
-                <a href="http://mkrostov.ru/img/map.png" download="">
-                    <img src="{{ asset('img/down.jpg') }}">
-                </a>
+                <ul class="minfo__left-breadcrumbs">
+                    <li class="minfo__left-breadcrumbs-item">
+                        <a href="#">
+                            <span>Ул. Доватора, 144/13</span>
+                        </a>
+                    </li>
+                    <li class="minfo__left-breadcrumbs-item">
+                        <a href="tel:+79833114660">
+                            <svg>
+                                <use xlink:href="{{ asset('img/sprites/phone-contacts.svg#phone-contacts') }}"></use>
+                            </svg>
+                            <span>+ 7 (863) 311-46-60</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="minfo__left-socials">
+                    <a href="mailto:m1_mk@aaanet.ru" title="E-mail" class="minfo__left-social">
+                        <svg>
+                            <use xlink:href="{{ asset('img/sprites/sprite-contacts.svg#c-mail') }}"></use>
+                        </svg>
+                    </a>
+
+                    <a href="https://vk.com/public97309835" title="vkontakte" class="minfo__left-social">
+                        <svg>
+                            <use xlink:href="{{ asset('img/sprites/sprite-contacts.svg#c-vk') }}"></use>
+                        </svg>
+                    </a>
+
+                    <a href="https://wa.me/+79885109783" title="whatsapp" class="minfo__left-social">
+                        <svg>
+                            <use xlink:href="{{ asset('img/sprites/sprite-contacts.svg#c-wapp') }}"></use>
+                        </svg>
+                    </a>
+
+                    <a href="https://t.me/+79885109783" title="telegram" class="minfo__left-social">
+                        <svg>
+                            <use xlink:href="{{ asset('img/sprites/sprite-contacts.svg#c-tg') }}"></use>
+                        </svg>
+                    </a>
+
+                    <a href="tel:+79885109783" title="Звонок" class="minfo__left-social">
+                        <svg>
+                            <use xlink:href="{{ asset('img/sprites/sprite-contacts.svg#c-phone') }}"></use>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="minfo__left-imageWrp">
+                    <img src="{{ asset('img/map.png') }}" class="minfo__oa">
+                </div>
+
+                {{--            <div class="bts-box">--}}
+                {{--                <script src="https://yastatic.net/share2/share.js"></script>--}}
+                {{--                <div class="ya-share2" data-curtain data-limit="0"--}}
+                {{--                     data-more-button-type="short"--}}
+                {{--                     style="background:transparent"--}}
+                {{--                     data-services="vkontakte,facebook,odnoklassniki,telegram,twitter,viber,whatsapp"></div>--}}
+                {{--                <a href="http://mkrostov.ru/img/map.png" download="">--}}
+                {{--                    <img src="{{ asset('img/down.jpg') }}">--}}
+                {{--                </a>--}}
+                {{--            </div>--}}
             </div>
-        </div>
-        <div class="container minfo__container">
             <div class="minfo__right">
-                <div class="minfo__title">КАК К НАМ ДОБРАТЬСЯ</div>
-                <div class="minfo__subtitle" style="padding-top: 13px;">НА ОБЩЕСТВЕННОМ ТРАНСПОРТЕ:</div>
-
-                <div class="minfo__text"><strong>N 96, 10, 94, 40, 113, 91</strong><br>
-                    До остановки "Издательство Молот"<br>
-                    и пройти 500-700 метров пешком.
+                <div class="minfo__block">
+                    <div class="minfo__block-inner">
+                        <div class="minfo__block-imageWrp">
+                            <div class="minfo__block-image">
+                                <img
+                                    src="{{ asset('img/contacts-car.png') }}"
+                                    alt="car">
+                            </div>
+                        </div>
+                        <div class="minfo__block-text">
+                            <div class="minfo__block-title">На автомобиле:</div>
+                            <div class="minfo__block-description">
+                                Двигаясь со стороны кольца ул. Мадояна / ул. Доватора
+                                к ул. Малиновского справа, до ул. Малиновского
+                                не доезжать один светофор 500 метров.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="minfo__text">N 56 До остановки "Маршальская улица"<br>
-                    и пройти 300 метров пешком.
-                </div>
-
-                <div class="minfo__subtitle">НА АВТОМОБИЛЕ:</div>
-
-                <div class="minfo__text"> Двигаясь со стороны кольца<br>
-                    ул. Мадояна / ул. Доватора<br>
-                    к ул. Малиновского справа, до ул. Малиновского<br>
-                    не доезжать один светофор 500 метров.
+                <div class="minfo__block">
+                    <div class="minfo__block-inner">
+                        <div class="minfo__block-imageWrp">
+                            <div class="minfo__block-image">
+                                <img
+                                    src="{{ asset('img/contacts-bus.png') }}"
+                                    alt="car">
+                            </div>
+                        </div>
+                        <div class="minfo__block-text">
+                            <div class="minfo__block-title">На общественном транспорте:</div>
+                            <div class="minfo__block-numbers">N96, 10, 94, 40, 113, 91</div>
+                            <div class="minfo__block-description">
+                                До остановки "Издательство Молот" и пройти 500-700 метров пешком. N56 До остановки "Маршальскаяулица" и пройти
+                                300 метров пешком.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,9 +224,9 @@
         <img src="{{ asset('img/travel-map.png') }}" alt="map">
     </div>
 
-    <div class="minfo">
+    <div class="minfo2">
         <div class="container minfo__container">
-            <div class="minfo__right minfo__right--is-revert">
+            <div class="minfo__right--is-revert">
                 <div class="minfo__title minfo__title--is-big">СКЛАДЫ ОТГРУЗКИ МК РОСТОВ:</div>
 
                 <div class="minfo__text">Малый склад штучного товара: г. Ростов-на-Дону ул. Доватора 144/13</div>
@@ -146,7 +242,7 @@
                 </div>
             </div>
         </div>
-        <div class="minfo__left minfo__left--revert">
+        <div class="minfo__left--revert">
             <div style="position:relative;overflow:hidden;"><a
                     href="https://yandex.ru/maps/39/rostov-na-donu/?utm_medium=mapframe&utm_source=maps"
                     style="color:#eee;font-size:12px;position:absolute;top:0px;">Ростов‑на‑Дону</a><a
@@ -171,12 +267,12 @@
                     <div>
                         <a href="tel:+78633114660">+7 (863) 311 46 60</a>
                         <a href="tel:+78632193523">+7 (863) 219 35 23</a>
-                        <a href="mailto:m1_mk@aaanet.ru">m1_mк@aaanet.ru</a>
+                        <a href="mailto:m1_mk@aaanet.ru">m1_mk@aaanet.ru</a>
                     </div>
                     <div>
                         <a href="tel:+79885109783">+7 (988) 510 97 83</a>
                         <a href="tel:+79034329393">+7 (903) 432 93 93</a>
-                        <a href="mailto:mk-rostov@mail.ru">mк-rostov@mail.ru</a>
+                        <a href="mailto:mk-rostov@mail.ru">mk-rostov@mail.ru</a>
                     </div>
                 </div>
             </div>

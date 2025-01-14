@@ -63,6 +63,68 @@ $(document).on("click", ".removeCoatingCompare", function () {
 //             location.reload()
 //         })
 // });
+
+$(document).on("click", ".card__icon--basket", function () {
+    let url = $(this).data("action");
+
+    let productId = $(this).data("product-id");
+    let quantity = $(this).data("quantity") || 1;
+    let startPrice = $(this).data("start-price") || 0;
+    let startPricePromo = $(this).data("start-price-promo") || 0;
+
+    let price = $(this).data("price") || 0;
+    let totalSquare = $(this).data("total-square") || 0;
+    let length = $(this).data("length") || null;
+    let attributePrices = $(this).data("attribute-prices") || 0;
+    let color = $(this).data("color") || null;
+    let width = $(this).data("width") || null;
+
+    let totalPrice = totalSquare > 0
+        ? ((price + attributePrices) * totalSquare).toFixed(2)
+        : ((price + attributePrices) * quantity).toFixed(2);
+
+    let data = {
+        '_token': $('meta[name="csrf_token"]').attr('content'),
+        'product_id': productId,
+        'totalPrice': [totalPrice],
+        'price': price,
+        'startprice': startPrice,
+        'startpricepromo': startPricePromo,
+        'attribute_prices': attributePrices,
+        'color': color,
+        'totalSquare': [totalSquare],
+        'length': [length],
+        'quantity': [quantity],
+        'width': width,
+    }
+
+    $.ajax({
+        url: url,
+        datatype: "html",
+        type: "POST",
+        data: data,
+        beforeSend: function () {
+            $('#loader').fadeIn();
+        }
+    })
+        .done(function (response) {
+            $('#loader').fadeOut();
+            showNotification(response.message, 'success')
+            $('#cart_modal .cart-list__body').html(response.cartContentView);
+            $('#cart_modal .cart-list__info').html(response.cartInfo);
+            if(response.totalItemsInCart <= 0){
+                $('.cart .countOfCart').addClass('inactive').html('');
+            } else {
+                $('.cart .countOfCart').removeClass('inactive').html(response.totalItemsInCart);
+            }
+        })
+        .fail(function (jqXHR, ajaxOptions, thrownError) {
+            $('#loader').fadeOut();
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
+            console.log('Server error occured');
+        });
+});
+
 $(document).on("click", ".addToCartLink", function () {
     let $button = $(this);
     let $form = $button.closest('form.addToCartForm');

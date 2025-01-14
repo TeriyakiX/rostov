@@ -85,7 +85,23 @@
                 </a>
 
                 <div class="card__icons">
-                    <div class="card__icon card__icon--basket" data-destination="Basket" role="button" tabindex="0">
+                    <div class="card__icon card__icon--basket"
+                         data-action="{{ route('index.cart.add') }}"
+
+                         data-product-id="{{ $sliderProduct->id }}"
+                         data-total-price="{{ $sliderProduct->total_price }}"
+                         data-price="{{ $sliderProduct->is_promo ?  $sliderProduct->promo_price :  $sliderProduct->price }}"
+                         data-length="{{ $sliderProduct->length }}"
+                         data-total-square="{{ $sliderProduct->total_square }}"
+                         data-start-price-promo="{{ $sliderProduct->is_promo ?  $sliderProduct->promo_price : 0 }}"
+                         data-start-price="{{ $sliderProduct->price }}"
+                         data-attribute-prices="{{$sliderProduct->attribute_prices ? $product->attribute_prices : 0}}"
+                         data-color="{{ $sliderProduct->color }}"
+                         data-quantity="1"
+                         data-width="{{ $sliderProduct->list_width_useful }}"
+                         data-destination="Basket"
+                         role="button"
+                         tabindex="0">
                         <svg>
                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#basket') }}"></use>
                         </svg>

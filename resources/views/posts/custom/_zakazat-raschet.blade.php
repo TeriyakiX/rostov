@@ -4,7 +4,7 @@
             <img class="cta__img" src="{{ asset('img/cooperation/close-up-detail.png') }}" alt="img"
                  loading="lazy" decoding="async" referrerPolicy="no-referrer">
             <!-- Call to action-->
-            <form class="cta__form" action="{{route('index.send_mail')}}" method="post" enctype="multipart/form-data">
+            <form class="cta__form" action="{{route('index.send_mail')}}" method="post" enctype="multipart/form-data" data-ajax="true">
                 @csrf
                 <div class="ctaForm">
                     <div class="ctaForm__header">
@@ -39,6 +39,7 @@
                             </div>
                         </div>
                         <label class="formBox__fileLabel" for="file" name="file" style="color: #595959">
+                            <input class="formBox__input" autocomplete="off" type="file" name="file" id="file" style="display: none">
                             <svg>
                                 <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#scr') }}"
                                      style="fill: #595959;"></use>
@@ -47,20 +48,16 @@
                         </label>
                         <div class="formRow">
                             <div class="inpBox">
-                                <label for="consent" class="ctaForm__label">
-                                    <input type="checkbox" id="consent" name="consent" required>
+                                <label for="consent_7" class="ctaForm__label" style="cursor: pointer">
+                                    <input type="checkbox" id="consent_7" name="consent" required data-consent style="pointer-events: none">
                                     Я даю согласие на обработку моих персональных данных в соответствии с
                                     <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
                                 </label>
                             </div>
                         </div>
-                        <button class="ordering__submit btn" type="submit" style="font-size: 16px;margin-left: 2px">
+                        <button class="ordering__submit btn disabled" data-submit disabled type="submit" style="font-size: 16px;margin-left: 2px">
                             Отправить
                         </button>
-                        <div class="ctaForm__info">
-                            Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
-                            <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a> и соглашаюсь на обработку моих персональных данных.
-                        </div>
                     </div>
                 </div>
             </form>
@@ -162,6 +159,15 @@
     .swiper-button-next,
     .swiper-button-prev {
         display: none;
+    }
+    .cooperation__cta .inpBox label {
+        color: #aaa;
+        font-weight: 400;
+        font-size: 1.4rem;
+    }
+    .cooperation__cta .inpBox label a {
+        color: #9af3ef;
+        text-decoration: underline;
     }
     @media (max-width: 991.98px) {
         .wrp-heroSlider {

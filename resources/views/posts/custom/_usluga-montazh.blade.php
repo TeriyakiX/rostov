@@ -64,10 +64,6 @@
                        <button class="ordering__submit btn disabled" data-submit disabled type="submit" style="font-size: 16px;margin-left: 2px">
                            Отправить
                        </button>
-                       <div class="ctaForm__info">
-                           Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
-                           <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a> и соглашаюсь на обработку моих персональных данных.
-                       </div>
                    </div>
                </div>
            </form>

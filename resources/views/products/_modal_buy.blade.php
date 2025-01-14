@@ -42,12 +42,30 @@
                             <input class="input" id="numb" autocomplete="off" placeholder="Адрес" name="address">
                         </div>
                     </div>
-                    <div class="popup__info popup__info--center popup__info--gap">Нажав кнопку «Перезвонить», я даю
-                        согласие на обработку моих персональных данных
+                    <div class="formRow">
+                        <div class="inpBox">
+                            <label for="consent_8" class="ctaForm__label" style="cursor: pointer">
+                                <input type="checkbox" id="consent_8" name="consent" required data-consent style="pointer-events: none">
+                                Я даю согласие на обработку моих персональных данных в соответствии с
+                                <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
+                            </label>
+                        </div>
                     </div>
-                    <button class="btn btn--cl " type="submit">Перезвонить</button>
+                    <button class="btn btn--cl disabled" data-submit disabled type="submit">Перезвонить</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .getModalBuy .inpBox label {
+        color: #aaa;
+        font-weight: 400;
+        font-size: 1.4rem;
+    }
+    .getModalBuy .inpBox label a {
+        color: #9af3ef;
+        text-decoration: underline;
+    }
+</style>

@@ -7,7 +7,7 @@
                 loading="lazy" decoding="async" referrerPolicy="no-referrer">
            <!-- Call to action-->
 
-           <form class="cta__form" action="{{route('index.send_mail')}}" method="post" enctype="multipart/form-data">
+           <form class="cta__form" action="{{route('index.send_mail')}}" method="post" enctype="multipart/form-data" data-ajax="true">
                @csrf
                <div class="ctaForm">
 
@@ -53,19 +53,17 @@
                        </label>
                        <div class="formRow">
                            <div class="inpBox">
-                               <label for="consent" class="ctaForm__label">
-                                   <input type="checkbox" id="consent" name="consent" required>
+                               <label for="consent_6" class="ctaForm__label" style="cursor: pointer">
+                                   <input type="checkbox" id="consent_6" name="consent" required data-consent style="pointer-events: none">
                                    Я даю согласие на обработку моих персональных данных в соответствии с
                                    <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
                                </label>
                            </div>
                        </div>
                        <div>
-                           <button class="ordering__submit btn" type="submit" style="margin-left: 2px;">Отправить</button>
-                       </div>
-                       <div class="ctaForm__info">
-                           Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
-                           <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a> и соглашаюсь на обработку моих персональных данных.
+                           <button class="ordering__submit btn disabled" data-submit disabled type="submit" style="font-size: 16px;margin-left: 2px">
+                               Отправить
+                           </button>
                        </div>
                    </div>
                </div>
@@ -163,6 +161,15 @@
     .swiper-button-next,
     .swiper-button-prev {
         display: none;
+    }
+    .cooperation__cta .inpBox label {
+        color: #aaa;
+        font-weight: 400;
+        font-size: 1.4rem;
+    }
+    .cooperation__cta .inpBox label a {
+        color: #9af3ef;
+        text-decoration: underline;
     }
     @media (max-width: 991.98px) {
         .wrp-heroSlider {

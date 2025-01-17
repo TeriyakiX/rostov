@@ -70,3 +70,6 @@ Route::post('/favorites/updateQuantity', [\App\Http\Controllers\Index\ProductCon
 
 // Маршрут для загрузки данных о товарах из сессии
 Route::get('/favorites/loadFavorites', [\App\Http\Controllers\Index\ProductController::class, 'loadFavorites']);
+
+
+

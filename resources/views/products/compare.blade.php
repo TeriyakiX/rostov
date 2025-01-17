@@ -22,7 +22,9 @@
         <section class="comparison">
             <div class="comparison__container _container">
                 <div class="comparison__content">
-                    <h2 class="comparison__title t">Сравнение товаров</h2>
+                    <h1 class="comparison__title t">
+                        Сравнение товаров
+                    </h1>
                     <div class="cooperation__body sideDashContainer">
                         @if(count($categories) > 0 || $compareCoatings > 0)
                             <div class="comparison__tabsWrp">
@@ -49,9 +51,11 @@
                                          @if($index == $tab) data-active @endif>
                                         <div class="comparison__cards">
                                             <div class="comparisonGrid">
-                                                <div class="comparisonGrid__col comparisonGrid__col--left comparisonGrid__col--left--desktop">
+                                                <div
+                                                    class="comparisonGrid__col comparisonGrid__col--left comparisonGrid__col--left--desktop">
                                                     <div class="comparison__infoCompare">
-                                                        <div class="comparison__categoryName">{{ $category->title }}</div>
+                                                        <div
+                                                            class="comparison__categoryName">{{ $category->title }}</div>
                                                         <a href="{{ route('index.products.compareFlush') }}">
                                                             <div class="comparison__delAll btn" role="button"
                                                                  tabindex="0">
@@ -63,24 +67,29 @@
                                                 <div class="comparisonGrid__col comparisonGrid__col--right">
                                                     <div class="compareSlider__btn" role="button">
                                                         <svg>
-                                                            <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                                            <use
+                                                                xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
                                                         </svg>
                                                     </div>
                                                     <div class="wrp-compareSlider">
                                                         <div class="swiper-container compareSlider _swiper">
                                                             <div class="swiper-wrapper compareSlider__wrapper">
-                                                                <div class="comparison__infoCompare comparison__infoCompare--mobile swiper-slide itemsSlider__slide">
-                                                                    <div class="comparison__categoryName">{{ $category->title }}</div>
+                                                                <div
+                                                                    class="comparison__infoCompare comparison__infoCompare--mobile swiper-slide itemsSlider__slide">
+                                                                    <div
+                                                                        class="comparison__categoryName">{{ $category->title }}</div>
                                                                     <a href="{{ route('index.products.compareFlush') }}">
-                                                                        <div class="comparison__delAll btn" role="button"
+                                                                        <div class="comparison__delAll btn"
+                                                                             role="button"
                                                                              tabindex="0">
                                                                             Удалить все
                                                                         </div>
                                                                     </a>
                                                                 </div>
                                                                 @foreach($category->products as $product)
-                                                                    <div class="swiper-slide undefined itemsSlider__slide"
-                                                                         data-product="{{ $product->id }}">
+                                                                    <div
+                                                                        class="swiper-slide undefined itemsSlider__slide"
+                                                                        data-product="{{ $product->id }}">
                                                                         <div class="card comparison__card"
                                                                              data-product="{{ $product->id }}">
                                                                             @if($product->is_novelty)
@@ -88,7 +97,8 @@
                                                                             @endif
                                                                             <div class="card__imgBox-wrapper">
                                                                                 @if($product->is_promo)
-                                                                                    <div class="card__promo-label">{{$product->getFormattedEndPromoDate()}}</div>
+                                                                                    <div
+                                                                                        class="card__promo-label">{{$product->getFormattedEndPromoDate()}}</div>
                                                                                 @endif
                                                                                 <a class="card__imgBox ibg"
                                                                                    href="{{ $product->showLink() }}">
@@ -96,31 +106,40 @@
                                                                                         <source type="image/webp"
                                                                                                 srcset="{{ $product->mainPhotoPath() }}">
                                                                                         <img
-                                                                                                src="{{ $product->mainPhotoPath() }}"
-                                                                                                alt="p4"
-                                                                                                class="cropped-img">
+                                                                                            src="{{ $product->mainPhotoPath() }}"
+                                                                                            alt="p4"
+                                                                                            class="cropped-img">
                                                                                     </picture>
                                                                                 </a>
 
                                                                                 <div class="card__mini-icons">
-                                                                                    <div class="card__mini-icon card__icon--like addTo {{ product_id_in_list($product->id, 'favorites') ? 'active' : '' }}" data-destination="Favorites" role="button" tabindex="0">
+                                                                                    <div
+                                                                                        class="card__mini-icon card__icon--like addTo {{ product_id_in_list($product->id, 'favorites') ? 'active' : '' }}"
+                                                                                        data-destination="Favorites"
+                                                                                        role="button" tabindex="0">
                                                                                         <svg>
-                                                                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#heart') }}"></use>
+                                                                                            <use
+                                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#heart') }}"></use>
                                                                                         </svg>
                                                                                     </div>
-                                                                                    <div class="card__mini-icon card__icon--stat addTo {{ product_id_in_list($product->id, 'compare') ? 'active' : '' }}" data-destination="Compare" role="button" tabindex="0">
+                                                                                    <div
+                                                                                        class="card__mini-icon card__icon--stat addTo {{ product_id_in_list($product->id, 'compare') ? 'active' : '' }}"
+                                                                                        data-destination="Compare"
+                                                                                        role="button" tabindex="0">
                                                                                         <svg>
-                                                                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#stat') }}"></use>
+                                                                                            <use
+                                                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#stat') }}"></use>
                                                                                         </svg>
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="card__delete addTo removeCard"
-                                                                                     data-destination="Compare"
-                                                                                     role="button">
+                                                                                <div
+                                                                                    class="card__delete addTo removeCard"
+                                                                                    data-destination="Compare"
+                                                                                    role="button">
                                                                                     <svg>
                                                                                         <use
-                                                                                                xlink:href="/img/sprites/sprite-mono.svg#cancel"></use>
+                                                                                            xlink:href="/img/sprites/sprite-mono.svg#cancel"></use>
                                                                                     </svg>
                                                                                 </div>
                                                                             </div>
@@ -134,7 +153,8 @@
                                                                                 @foreach($product->attributesArray() as $productAttribute)
                                                                                     @if(count($productAttribute['options']) == 1)
                                                                                         <li class="card__char">
-                                                                                            {{ $productAttribute['model']->title }}:
+                                                                                            {{ $productAttribute['model']->title }}
+                                                                                            :
                                                                                             {{ $productAttribute['options'][0]->title }}
                                                                                         </li>
                                                                                     @endif
@@ -144,27 +164,40 @@
                                                                                 @if($product->is_promo)
                                                                                     <div>
                                                                                         @if(intval($product->promo_price) == $product->promo_price)
-                                                                                            {{ number_format($product->promo_price, 0, ',', ' ') }} ₽
+                                                                                            {{ number_format($product->promo_price, 0, ',', ' ') }}
+                                                                                            ₽
                                                                                         @else
-                                                                                            {{ number_format($product->promo_price, 2, ',', ' ') }} ₽
+                                                                                            {{ number_format($product->promo_price, 2, ',', ' ') }}
+                                                                                            ₽
                                                                                         @endif
-                                                                                        @if($product->show_calculator)/м²@endif
+                                                                                        @if($product->show_calculator)
+                                                                                            /м²
+                                                                                        @endif
                                                                                     </div>
-                                                                                    <div style="text-decoration: line-through; font-size: 12px">
+                                                                                    <div
+                                                                                        style="text-decoration: line-through; font-size: 12px">
                                                                                         @if(intval($product->price) == $product->price)
-                                                                                            {{ number_format($product->price, 0, ',', ' ') }} ₽
+                                                                                            {{ number_format($product->price, 0, ',', ' ') }}
+                                                                                            ₽
                                                                                         @else
-                                                                                            {{ number_format($product->price, 2, ',', ' ') }} ₽
+                                                                                            {{ number_format($product->price, 2, ',', ' ') }}
+                                                                                            ₽
                                                                                         @endif
-                                                                                        @if($product->show_calculator)/м²@endif
+                                                                                        @if($product->show_calculator)
+                                                                                            /м²
+                                                                                        @endif
                                                                                     </div>
                                                                                 @else
                                                                                     @if(intval($product->price) == $product->price)
-                                                                                        {{ number_format($product->price, 0, ',', ' ') }} ₽
+                                                                                        {{ number_format($product->price, 0, ',', ' ') }}
+                                                                                        ₽
                                                                                     @else
-                                                                                        {{ number_format($product->price, 2, ',', ' ') }} ₽
+                                                                                        {{ number_format($product->price, 2, ',', ' ') }}
+                                                                                        ₽
                                                                                     @endif
-                                                                                    @if($product->show_calculator)/м²@endif
+                                                                                    @if($product->show_calculator)
+                                                                                        /м²
+                                                                                    @endif
                                                                                 @endif
                                                                             </div>
                                                                             <div class="card__controllers">
@@ -176,7 +209,23 @@
                                                                                 </a>
 
                                                                                 <div class="card__icons">
-                                                                                    <div class="card__icon card__icon--basket" data-destination="Basket" role="button" tabindex="0">
+                                                                                    <div class="card__icon card__icon--basket"
+                                                                                         data-action="{{ route('index.cart.add') }}"
+
+                                                                                         data-product-id="{{ $product->id }}"
+                                                                                         data-total-price="{{ $product->total_price }}"
+                                                                                         data-price="{{ $product->is_promo ?  $product->promo_price :  $product->price }}"
+                                                                                         data-length="{{ $product->length }}"
+                                                                                         data-total-square="{{ $product->total_square }}"
+                                                                                         data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
+                                                                                         data-start-price="{{ $product->price }}"
+                                                                                         data-attribute-prices="{{$product->attribute_prices ? $product->attribute_prices : 0}}"
+                                                                                         data-color="{{ $product->color }}"
+                                                                                         data-quantity="1"
+                                                                                         data-width="{{ $product->list_width_useful }}"
+                                                                                         data-destination="Basket"
+                                                                                         role="button"
+                                                                                         tabindex="0">
                                                                                         <svg>
                                                                                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#basket') }}"></use>
                                                                                         </svg>
@@ -184,26 +233,26 @@
                                                                                 </div>
 
 
-{{--                                                                                <div class="card__icons">--}}
-{{--                                                                                    <div--}}
-{{--                                                                                            class="card__icon card__icon--like addTo {{ product_id_in_list($product->id, 'favorites') ? 'active' : '' }}"--}}
-{{--                                                                                            data-destination="Favorites"--}}
-{{--                                                                                            role="button" tabindex="0">--}}
-{{--                                                                                        <svg>--}}
-{{--                                                                                            <use--}}
-{{--                                                                                                    xlink:href="/img/sprites/sprite-mono.svg#heart"></use>--}}
-{{--                                                                                        </svg>--}}
-{{--                                                                                    </div>--}}
-{{--                                                                                    <div--}}
-{{--                                                                                            class="card__icon card__icon--stat addTo removeCard {{ product_id_in_list($product->id, 'compare') ? 'active' : '' }}"--}}
-{{--                                                                                            data-destination="Compare"--}}
-{{--                                                                                            role="button" tabindex="0">--}}
-{{--                                                                                        <svg>--}}
-{{--                                                                                            <use--}}
-{{--                                                                                                    xlink:href="/img/sprites/sprite-mono.svg#stat"></use>--}}
-{{--                                                                                        </svg>--}}
-{{--                                                                                    </div>--}}
-{{--                                                                                </div>--}}
+                                                                                {{--                                                                                <div class="card__icons">--}}
+                                                                                {{--                                                                                    <div--}}
+                                                                                {{--                                                                                            class="card__icon card__icon--like addTo {{ product_id_in_list($product->id, 'favorites') ? 'active' : '' }}"--}}
+                                                                                {{--                                                                                            data-destination="Favorites"--}}
+                                                                                {{--                                                                                            role="button" tabindex="0">--}}
+                                                                                {{--                                                                                        <svg>--}}
+                                                                                {{--                                                                                            <use--}}
+                                                                                {{--                                                                                                    xlink:href="/img/sprites/sprite-mono.svg#heart"></use>--}}
+                                                                                {{--                                                                                        </svg>--}}
+                                                                                {{--                                                                                    </div>--}}
+                                                                                {{--                                                                                    <div--}}
+                                                                                {{--                                                                                            class="card__icon card__icon--stat addTo removeCard {{ product_id_in_list($product->id, 'compare') ? 'active' : '' }}"--}}
+                                                                                {{--                                                                                            data-destination="Compare"--}}
+                                                                                {{--                                                                                            role="button" tabindex="0">--}}
+                                                                                {{--                                                                                        <svg>--}}
+                                                                                {{--                                                                                            <use--}}
+                                                                                {{--                                                                                                    xlink:href="/img/sprites/sprite-mono.svg#stat"></use>--}}
+                                                                                {{--                                                                                        </svg>--}}
+                                                                                {{--                                                                                    </div>--}}
+                                                                                {{--                                                                                </div>--}}
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -217,61 +266,66 @@
                                         <div class="comparison__parameters">
                                             <div class="comparison__settings">
                                                 <div class="checkbox">
-                                                    <input {{Request::get('difference') == 'true' ? 'checked' : ''}} onchange="compareDifference()"
-                                                           class="checkbox__input" id="chkbox" autocomplete="off"
-                                                           type="checkbox">
+                                                    <input
+                                                        {{Request::get('difference') == 'true' ? 'checked' : ''}} onchange="compareDifference()"
+                                                        class="checkbox__input" id="chkbox" autocomplete="off"
+                                                        type="checkbox">
                                                     <label class="checkbox__label link" for="chkbox">Показывать только
                                                         различия</label>
                                                 </div>
                                             </div>
                                             <div class="comparisonGrid">
-                                                <div class="comparisonGrid__col comparisonGrid__col--left comparisonGrid__col--left--desktop">
+                                                <div
+                                                    class="comparisonGrid__col comparisonGrid__col--left comparisonGrid__col--left--desktop">
                                                     {{--                                                @foreach($product->attributesArray() as $attribute)--}}
                                                     {{--                                                @endforeach--}}
                                                     {{--                                                    @foreach($product->attributesArray() as $attribute)--}}
                                                     {{--                                                    @endforeach--}}
                                                     @foreach($category->attributes as $attribute)
                                                         <div
-                                                                class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
                                                             {{$attribute}}
                                                         </div>
                                                     @endforeach
                                                     @if(!$category->hidePrice)
                                                         <div
-                                                                class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
                                                             Цена
                                                         </div>
                                                     @endif
                                                     @if(!$category->hideCategory)
                                                         <div
-                                                                class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
                                                             Категория
                                                         </div>
                                                     @endif
                                                     @if($category->is_list)
                                                         @if(!$category->hideList1)
-                                                        <div
+                                                            <div
                                                                 class="comparison__parameterRow comparison__parameterRow--name bold">
-                                                            Ширина полная
-                                                        </div>
+                                                                Ширина полная
+                                                            </div>
                                                         @endif    @if(!$category->hideList2)
-                                                        <div
+                                                            <div
                                                                 class="comparison__parameterRow comparison__parameterRow--name bold">
-                                                            Ширина полезная
-                                                        </div>
-                                                            @endif       @if(!$category->hideList3)
-                                                        <div
+                                                                Ширина полезная
+                                                            </div>
+                                                        @endif       @if(!$category->hideList3)
+                                                            <div
                                                                 class="comparison__parameterRow comparison__parameterRow--name bold">
-                                                            Длина на заказ
-                                                        </div>  @endif
+                                                                Длина на заказ
+                                                            </div>
+                                                        @endif
                                                     @endif
                                                 </div>
 
                                                 <div class="comparisonGrid__col comparisonGrid__col--right">
                                                     <div class="wrp-compareParametersSlider">
                                                         <div class="swiper-container compareParametersSlider _swiper">
-                                                            <div class="swiper-wrapper compareParametersSlider__wrapper">
-                                                                <div class="comparison__infoCompare comparison__infoCompare--mobile swiper-slide itemsSlider__slide">
+                                                            <div
+                                                                class="swiper-wrapper compareParametersSlider__wrapper">
+                                                                <div
+                                                                    class="comparison__infoCompare comparison__infoCompare--mobile swiper-slide itemsSlider__slide">
                                                                     @foreach($category->attributes as $attribute)
                                                                         <div
                                                                             class="comparison__parameterRow comparison__parameterRow--name bold">
@@ -305,12 +359,13 @@
                                                                             <div
                                                                                 class="comparison__parameterRow comparison__parameterRow--name bold">
                                                                                 Длина на заказ
-                                                                            </div>  @endif
+                                                                            </div>
+                                                                        @endif
                                                                     @endif
                                                                 </div>
                                                                 @foreach($category->products as $product)
                                                                     <div
-                                                                            class="swiper-slide undefined compareParametersSlider__slide">
+                                                                        class="swiper-slide undefined compareParametersSlider__slide">
                                                                         @foreach($category->attributes as $attribute_id => $attribute)
                                                                             @if($product->attributes[$attribute_id])
 
@@ -322,7 +377,8 @@
                                                                                             <p></p>
                                                                                         @endif
                                                                                     @endforeach
-                                                                                    <span class="comparison__parameterName">
+                                                                                    <span
+                                                                                        class="comparison__parameterName">
                                                                                  {{ $product->attributes[$attribute_id]['model']->title }}
                                                                                  </span>
                                                                                 </div>
@@ -331,7 +387,6 @@
 
                                                                                 </div>
                                                                             @endif
-
 
                                                                         @endforeach
                                                                         @if($product->price !== null && !$category->hidePrice)
@@ -396,15 +451,17 @@
                                                 <div class="comparisonGrid__col comparisonGrid__col--right">
                                                     <div class="compareSlider__btn" role="button">
                                                         <svg>
-                                                            <use xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
+                                                            <use
+                                                                xlink:href="/img/sprites/sprite-mono.svg#slideArrow"></use>
                                                         </svg>
                                                     </div>
                                                     <div class="wrp-compareSlider">
                                                         <div class="swiper-container compareSlider _swiper">
                                                             <div class="swiper-wrapper compareSlider__wrapper">
                                                                 @foreach(\App\Models\Coatings::whereIn('id', \Illuminate\Support\Facades\Session::get('coating_id'))->get() as $product)
-                                                                    <div class="swiper-slide undefined itemsSlider__slide"
-                                                                         data-product="{{ $product->id }}">
+                                                                    <div
+                                                                        class="swiper-slide undefined itemsSlider__slide"
+                                                                        data-product="{{ $product->id }}">
                                                                         <div class="card comparison__card"
                                                                              data-product="{{ $product->id }}">
                                                                             <div class="card__imgWrp">
@@ -414,18 +471,18 @@
                                                                                         <source type="image/webp"
                                                                                                 srcset="{{ $product->mainPhotoPath() }}">
                                                                                         <img
-                                                                                                src="{{ $product->mainPhotoPath() }}"
-                                                                                                alt="p4">
+                                                                                            src="{{ $product->mainPhotoPath() }}"
+                                                                                            alt="p4">
                                                                                     </picture>
                                                                                 </a>
                                                                                 <div
-                                                                                        class="card__delete removeCoatingCompare"
-                                                                                        data-destination="Compare"
-                                                                                        role="button"
-                                                                                        id="{{ $product->id }}">
+                                                                                    class="card__delete removeCoatingCompare"
+                                                                                    data-destination="Compare"
+                                                                                    role="button"
+                                                                                    id="{{ $product->id }}">
                                                                                     <svg>
                                                                                         <use
-                                                                                                xlink:href="/img/sprites/sprite-mono.svg#cancel"></use>
+                                                                                            xlink:href="/img/sprites/sprite-mono.svg#cancel"></use>
                                                                                     </svg>
                                                                                 </div>
                                                                             </div>
@@ -506,24 +563,24 @@
                                                     {{--                                                    @foreach($product->attributesArray() as $attribute)--}}
                                                     {{--                                                    @endforeach--}}
                                                     <div
-                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                        class="comparison__parameterRow comparison__parameterRow--name bold">
                                                         Защитный слой Zn
                                                     </div>
                                                     <div
-                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                        class="comparison__parameterRow comparison__parameterRow--name bold">
                                                         Толщина металла
                                                     </div>
 
                                                     <div
-                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                        class="comparison__parameterRow comparison__parameterRow--name bold">
                                                         Толщина полимерного покрытия
                                                     </div>
                                                     <div
-                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                        class="comparison__parameterRow comparison__parameterRow--name bold">
                                                         Гарантия
                                                     </div>
                                                     <div
-                                                            class="comparison__parameterRow comparison__parameterRow--name bold">
+                                                        class="comparison__parameterRow comparison__parameterRow--name bold">
                                                         Цветостойкость
                                                     </div>
                                                 </div>
@@ -531,10 +588,11 @@
                                                 <div class="comparisonGrid__col comparisonGrid__col--right">
                                                     <div class="wrp-compareParametersSlider">
                                                         <div class="swiper-container compareParametersSlider _swiper">
-                                                            <div class="swiper-wrapper compareParametersSlider__wrapper">
+                                                            <div
+                                                                class="swiper-wrapper compareParametersSlider__wrapper">
                                                                 @foreach(\App\Models\Coatings::whereIn('id', \Illuminate\Support\Facades\Session::get('coating_id'))->get() as $product)
                                                                     <div
-                                                                            class="swiper-slide undefined compareParametersSlider__slide">
+                                                                        class="swiper-slide undefined compareParametersSlider__slide">
                                                                         @if($product->protective_layer != null)
                                                                             <div class="comparison__parameterRow">
                                                                                 {{ $product->protective_layer }}
@@ -597,35 +655,44 @@
                                         @endif
                                     </div>
                                 @else
-                                    <div class="comparison__infoCompare">
-                                        <div class="comparison__categoryName" style="margin-top: 32px;">
-                                            Список сравнения пуст
+                                    <div class="empty__block">
+                                        <div class="empty__block-info">
+                                            <h1 class="empty__title">
+                                                Ваш лист сравнения пока что пуст
+                                            </h1>
+                                            <p class="empty__text">Выберите в каталоге несколько интересующих товаров и
+                                                нажмите кнопку «добавить к сравнению»</p>
+                                            <a class="btn btn-primary" href="{{ url('/posts/katalog') }}">
+                                                Перейти в каталог
+                                            </a>
                                         </div>
+                                        <img src="img/emptyProducts/package.png" alt="empty-products">
                                     </div>
                                 @endif
                             </div>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
     <script>
         function compareDifference() {
             let tab = '';
             $('.comparison__tabBlock').each(function (index) {
-                if(typeof  $(this).data('active') !== 'undefined')
-                    tab = '&tab='+(index);
+                if (typeof $(this).data('active') !== 'undefined')
+                    tab = '&tab=' + (index);
             });
-            location='{{ route('index.products.compare',Request::get('difference') == 'true' ? 'difference=false' : 'difference=true') }}'+tab;
+            location = '{{ route('index.products.compare',Request::get('difference') == 'true' ? 'difference=false' : 'difference=true') }}' + tab;
         }
     </script>
     <style>
         .comparison__title {
             margin-bottom: 0;
         }
+
         .comparison__parameters .swiper-slide {
             flex-shrink: 0 !important;
         }
+
         .comparison__cards .swiper-slide {
             flex-shrink: 0 !important;
         }
@@ -633,8 +700,13 @@
         .compareSlider .compareSlider__wrapper {
             gap: 0 !important;
         }
+
         .itemsSlider__slide {
             padding: 10px;
+        }
+
+        .empty__block {
+            padding-top: 32px;
         }
     </style>
 @endsection

@@ -32,7 +32,7 @@
                         Акции
                     </h1>
 {{--                    <div class="cooperation__body sideDashContainer">--}}
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
+                    <div class="sideDash sideDash--sticky" style="z-index: 1111">
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">
                                     <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
@@ -73,26 +73,26 @@
                    @include('products.sections.slider')
 
                 @if(count(\App\Models\Product::where('is_promo', '>', 0)->get()) > 0)
-                        <div class="newItems__controlPanel">
-                            <div class="newItems__tabs">
-                                <div class="newItems__tabsEl all_categories newItems__tabsEl--active" role="button" tabindex="0"
-                                     data-tab="all" data-active><div class="newItems__tabsEl--first">Все</div>
-                                </div>
-                                <div class="newItems__tabsEl sort_button" role="button" type="submit" tabindex="0"
-                                     data-tab="roof">
-                                    Кровля
-                                </div>
-                                <div class="newItems__tabsEl sort_button" role="button" tabindex="0" data-tab="facade">
-                                    Фасад
-                                </div>
-                                <div class="newItems__tabsEl sort_button" role="button" tabindex="0" data-tab="poly">
-                                    Поликарбонат
-                                </div>
-                                <div class="newItems__tabsEl sort_button" role="button" tabindex="0" data-tab="terrace">
-                                    Террасная доска
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div class="newItems__controlPanel">--}}
+{{--                            <div class="newItems__tabs">--}}
+{{--                                <div class="newItems__tabsEl all_categories newItems__tabsEl--active" role="button" tabindex="0"--}}
+{{--                                     data-tab="all" data-active><div class="newItems__tabsEl--first">Все</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="newItems__tabsEl sort_button" role="button" type="submit" tabindex="0"--}}
+{{--                                     data-tab="roof">--}}
+{{--                                    Кровля--}}
+{{--                                </div>--}}
+{{--                                <div class="newItems__tabsEl sort_button" role="button" tabindex="0" data-tab="facade">--}}
+{{--                                    Фасад--}}
+{{--                                </div>--}}
+{{--                                <div class="newItems__tabsEl sort_button" role="button" tabindex="0" data-tab="poly">--}}
+{{--                                    Поликарбонат--}}
+{{--                                </div>--}}
+{{--                                <div class="newItems__tabsEl sort_button" role="button" tabindex="0" data-tab="terrace">--}}
+{{--                                    Террасная доска--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="productsTmp__body" id="data-wrapper">
                             @foreach(\App\Models\Product::where('is_promo', '>', 0)->get() as $product)
@@ -100,15 +100,25 @@
                             @endforeach
                         </div>
                     @else
-                        <h1 class="productsTmp__title t">
-                            Пусто
-                        </h1>
+                        <div class="empty__block">
+                            <div class="empty__block-info">
+                                <h1 class="empty__title">
+                                    Акции отсутствуют
+                                </h1>
+                                <p class="empty__text">Здесь будут отображаться товары по акции</p>
+                            </div>
+                            <img src="/img/emptyProducts/package.png" alt="empty-products">
+                        </div>
                     @endif
                 </div>
             </div>
         </section>
     </main>
     <style>
+        .empty__block {
+            padding-top: 40px;
+            justify-content: space-between;
+        }
         .productsTmp__body {
             margin: 0 -8px;
         }

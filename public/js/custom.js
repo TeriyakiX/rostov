@@ -63,6 +63,68 @@ $(document).on("click", ".removeCoatingCompare", function () {
 //             location.reload()
 //         })
 // });
+
+$(document).on("click", ".card__icon--basket", function () {
+    let url = $(this).data("action");
+
+    let productId = $(this).data("product-id");
+    let quantity = $(this).data("quantity") || 1;
+    let startPrice = $(this).data("start-price") || 0;
+    let startPricePromo = $(this).data("start-price-promo") || 0;
+
+    let price = $(this).data("price") || 0;
+    let totalSquare = $(this).data("total-square") || 0;
+    let length = $(this).data("length") || null;
+    let attributePrices = $(this).data("attribute-prices") || 0;
+    let color = $(this).data("color") || null;
+    let width = $(this).data("width") || null;
+
+    let totalPrice = totalSquare > 0
+        ? ((price + attributePrices) * totalSquare).toFixed(2)
+        : ((price + attributePrices) * quantity).toFixed(2);
+
+    let data = {
+        '_token': $('meta[name="csrf_token"]').attr('content'),
+        'product_id': productId,
+        'totalPrice': [totalPrice],
+        'price': price,
+        'startprice': startPrice,
+        'startpricepromo': startPricePromo,
+        'attribute_prices': attributePrices,
+        'color': color,
+        'totalSquare': [totalSquare],
+        'length': [length],
+        'quantity': [quantity],
+        'width': width,
+    }
+
+    $.ajax({
+        url: url,
+        datatype: "html",
+        type: "POST",
+        data: data,
+        beforeSend: function () {
+            $('#loader').fadeIn();
+        }
+    })
+        .done(function (response) {
+            $('#loader').fadeOut();
+            showNotification(response.message, 'success')
+            $('#cart_modal .cart-list__body').html(response.cartContentView);
+            $('#cart_modal .cart-list__info').html(response.cartInfo);
+            if(response.totalItemsInCart <= 0){
+                $('.cart .countOfCart').addClass('inactive').html('');
+            } else {
+                $('.cart .countOfCart').removeClass('inactive').html(response.totalItemsInCart);
+            }
+        })
+        .fail(function (jqXHR, ajaxOptions, thrownError) {
+            $('#loader').fadeOut();
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
+            console.log('Server error occured');
+        });
+});
+
 $(document).on("click", ".addToCartLink", function () {
     let $button = $(this);
     let $form = $button.closest('form.addToCartForm');
@@ -75,10 +137,12 @@ $(document).on("click", ".addToCartLink", function () {
         datatype: "html",
         type: "POST",
         beforeSend: function () {
-            // $('.auto-load').show();
+            $('#loader').fadeIn();
         }
     })
         .done(function (response) {
+            $('#loader').fadeOut();
+            showNotification(response.message, 'success')
             $('#cart_modal .cart-list__body').html(response.cartContentView);
             $('#cart_modal .cart-list__info').html(response.cartInfo);
             if(response.totalItemsInCart <= 0){
@@ -88,6 +152,8 @@ $(document).on("click", ".addToCartLink", function () {
             }
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
+            $('#loader').fadeOut();
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
             console.log('Server error occured');
         });
 });
@@ -104,14 +170,16 @@ $(document).on("click", ".addToCartLinkOneClick", function () {
         datatype: "html",
         type: "POST",
         beforeSend: function () {
-            // $('.auto-load').show();
+            $('#loader').fadeIn();
         }
     })
         .done(function (response) {
+            $('#loader').fadeOut();
             $('#cart_modal .cart-list__body').html(response.cartContentView);
             $('#cart_modal .cart-list__info').html(response.cartInfo);
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
+            $('#loader').fadeOut();
             console.log('Server error occured');
         });
 });
@@ -414,30 +482,34 @@ $(document).on('submit', '.getConsult', function (event) {
         processData: false,
         contentType: false,
         type: "POST",
-        beforeSend: function () {
-            // $('.auto-load').show();
-        }
+        beforeSend: function (response) {
+            $('#loader').fadeIn();
+        },
     })
         .done(function (response) {
+            $('#loader').fadeOut();
+            $('.popup_consult').removeClass('_active')
             $form[0].reset();
-            Swal.fire(
-                '',
-                response,
-                'success'
-            )
+            // Swal.fire(
+            //     '',
+            //     response,
+            //     'success'
+            // )
+            showNotification('Запрос успешно отправлен! Среднее время ожидания ответа: 20–30 минут в рабочее время.', 'info');
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-
+            $('#loader').fadeOut();
             var response = JSON.parse(jqXHR.responseText);
             var errorString = '';
             $.each(response.errors, function (key, value) {
                 errorString += value;
             });
-            Swal.fire(
-                '',
-                errorString,
-                'error'
-            )
+            // Swal.fire(
+            //     '',
+            //     errorString,
+            //     'error'
+            // )
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
 
             console.log('Server error occured');
         });
@@ -457,34 +529,42 @@ $(document).on('submit', '.getModalBuy', function (event) {
         processData: false,
         contentType: false,
         type: "POST",
-        beforeSend: function () {
-            // $('.auto-load').show();
-        }
+        beforeSend: function (response) {
+            $('#loader').fadeIn();
+        },
     })
         .done(function (response) {
-
+            $('#loader').fadeOut();
             $('.popup_buy').removeClass('_active')
             $form[0].reset();
-            Swal.fire(
-                '',
-                'Запрос успешно отправлен! В ближайшее время с Вами свяжется менеджер!<br>',
-                'success'
-            )
+            // Swal.fire(
+            //     '',
+            //     'Запрос успешно отправлен! В ближайшее время с Вами свяжется менеджер!<br>',
+            //     'success'
+            // )
+            showNotification('Запрос успешно отправлен! Среднее время ожидания ответа: 20–30 минут в рабочее время.', 'info');
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-
-            var response = JSON.parse(jqXHR.responseText);
-            var errorString = '';
-            $.each(response.errors, function (key, value) {
-                errorString += value;
-            });
-            Swal.fire(
-                '',
-                errorString,
-                'error'
-            )
-
-            console.log('Server error occured');
+            $('#loader').fadeOut();
+            try {
+                if (jqXHR.responseJSON && jqXHR.responseJSON.errors) {
+                    let errorString = '';
+                    $.each(jqXHR.responseJSON.errors, function (key, value) {
+                        errorString += value + '<br>';
+                    });
+                    showNotification(errorString, 'error');
+                } else {
+                    if (jqXHR.status === 404) {
+                        showNotification('Ошибка. Пожалуйста, попробуйте позже', 'error');
+                    } else if (jqXHR.status === 500) {
+                        showNotification('Ошибка. Пожалуйста, попробуйте позже', 'error');
+                    } else {
+                        showNotification('Ошибка. Пожалуйста, попробуйте позже', 'error');
+                    }
+                }
+            } catch (e) {
+                showNotification('Ошибка. Пожалуйста, попробуйте позже', 'error');
+            }
         });
 })
 
@@ -519,23 +599,24 @@ $(document).on('click', '.addTo', function (event) {
         data: {product_id: productId, _token: _token, coatings: coatings, active: active},
         datatype: "html",
         type: "POST",
-        beforeSend: function () {
-            // $('.auto-load').show();
-        }
+        beforeSend: function (response) {
+            $('#loader').fadeIn();
+        },
     })
         .done(function (response) {
+            $('#loader').fadeOut();
             $button.toggleClass('active');
+            showNotification(response.message, 'success');
 
             if ($button.hasClass('removeCard')) {
                 $card.remove();
                 location.reload();
             } else {
-                console.log(response)
-                Swal.fire(
-                    '',
-                    response.message,
-                    'success'
-                )
+                // Swal.fire(
+                //     '',
+                //     response.message,
+                //     'success'
+                // )
                 if(response.count <= 0){
                     $('.' + destination.toLowerCase() +' .countOfCart').addClass('inactive').html('');
                 } else {
@@ -545,6 +626,138 @@ $(document).on('click', '.addTo', function (event) {
             }
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
+            $('#loader').fadeOut();
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
             console.log('Server error occured');
         });
 })
+
+$('form[data-ajax="true"]').on('submit', function (e) {
+    e.preventDefault();
+
+    let form = $(this);
+    let formData = new FormData(this);
+
+    $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function (response) {
+          $('#loader').fadeIn();
+        },
+        success: function (response) {
+            $('#loader').fadeOut();
+            $('#successModal').fadeIn();
+            form[0].reset();
+        },
+        error: function (xhr) {
+            $('#loader').fadeOut();
+            // alert('Ошибка: ' + (xhr.responseJSON?.error || 'Неизвестная ошибка'));
+            showNotification('Ошибка. Пожалуйста, попробуйте позже.', 'error');
+        },
+    });
+});
+
+$(document).on('click', '.prodCard__icon--share', function () {
+    const link = $(this).data('link');
+    if (link && navigator.clipboard) {
+        navigator.clipboard.writeText(link).then(() => {
+            alert('Ссылка скопирована в буфер обмена!');
+        }).catch(err => {
+            console.error('Не удалось скопировать ссылку:', err);
+        });
+    }
+});
+
+$('[data-consent]').each(function () {
+    const consentCheckbox = $(this);
+    const submitButton = consentCheckbox.closest('form').find('[data-submit]');
+
+    function toggleSubmitButton() {
+        if (consentCheckbox.is(':checked')) {
+            submitButton.removeClass('disabled').prop('disabled', false);
+        } else {
+            submitButton.addClass('disabled').prop('disabled', true);
+        }
+    }
+
+    consentCheckbox.on('change', toggleSubmitButton);
+    toggleSubmitButton();
+});
+
+function showNotification(message, type = 'success') {
+    const $container = $('#notification-container');
+
+    if ($container.length === 0) {
+        $('body').append('<div id="notification-container" style="position: fixed; top: 32px; right: 32px; z-index: 9999; width: 364px; padding: 32px;"></div>');
+    }
+
+    const iconPaths = {
+        success: '/img/icons/success.svg',
+        error: '/img/icons/error.svg',
+        info: '/img/icons/info_2.svg',
+        close: '/img/icons/cross.svg'
+    };
+
+    const typeStyles = {
+        success: { background: 'rgba(255, 255, 255, 1)', border: '1px solid rgba(89, 216, 20, 1)', color: 'rgba(89, 216, 20, 1)' },
+        error: { background: 'rgba(255, 255, 255, 1)', border: '1px solid rgba(255, 0, 0, 1)', color: 'rgba(255, 0, 0, 1)' },
+        info: { background: 'rgba(255, 255, 255, 1)', border: '1px solid rgba(0, 107, 222, 1)', color: 'rgba(0, 107, 222, 1)' }
+    };
+
+    const styles = typeStyles[type] || {
+        background: '#000',
+        border: '1px solid #000',
+        color: 'white'
+    };
+
+    const $notification = $(`
+        <div class="notification notification-${type}">
+            <img class="notification-status" src="${iconPaths[type] || iconPaths.success}" alt="${type}">
+            <span>${message}</span>
+            <button>
+                <img class="notification-close" src="${iconPaths.close}" alt="close">
+            </button>
+        </div>
+    `);
+
+    $notification.css({
+        background: styles.background,
+        border: styles.border,
+        color: styles.color,
+        padding: '16px',
+        'margin-bottom': '8px',
+        'border-radius': '8px',
+        'box-shadow': '0 2px 5px rgba(0, 0, 0, 0.2)',
+        opacity: 0,
+        transition: 'opacity 0.3s, transform 0.3s',
+        transform: 'translateY(-10px)'
+    });
+
+    $('#notification-container').append($notification);
+
+    setTimeout(() => {
+        $notification.css({
+            opacity: 1,
+            transform: 'translateY(0)'
+        });
+    }, 10);
+
+    setTimeout(() => {
+        $notification.css({
+            opacity: 0,
+            transform: 'translateY(-10px)'
+        });
+        setTimeout(() => $notification.remove(), 300);
+    }, 3000);
+
+    $notification.find('button').on('click', () => {
+        $notification.css({
+            opacity: 0,
+            transform: 'translateY(-10px)'
+        });
+        setTimeout(() => $notification.remove(), 300);
+    });
+}

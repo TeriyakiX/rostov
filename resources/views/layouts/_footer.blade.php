@@ -1,11 +1,13 @@
+@include('partials.modal')
+
 <footer class="footer">
     <div class="footer__bg" style=background-image:url("{{ asset('img/footer.jpg') }}")></div>
     <div class="footer__container _container">
         <div class="footer__top">
             <div class="formBox footer__formBox">
                 <h3 class="formBox__formTitle">Получите бесплатную консультацию нашего инженера</h3>
-                <form class="formBox__form" action="{{route('index.send_mail')}}" method="post"
-                      enctype="multipart/form-data">
+                <form id="consultationForm" class="formBox__form" action="{{route('index.send_mail')}}" method="post"
+                      enctype="multipart/form-data" data-ajax="true">
 
                     {{ csrf_field() }}
                     <input type="hidden" value="{{url()->current()}}" id="link" name="link">
@@ -28,20 +30,15 @@
                     </label>
                     <div class="formRow">
                         <div class="inpBox">
-                            <label for="consent" class="ctaForm__label">
-                                <input type="checkbox" id="consent" name="consent" required>
-                                Я соглашаюсь на обработку моих персональных данных в соответствии с
-                                <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
+                            <label for="consent_1" class="ctaForm__label" style="cursor: pointer">
+                                <input type="checkbox" id="consent_1" name="consent" required data-consent style="pointer-events: none">
+                                Я даю своё согласие на
+                                <a href="/posts/politika-konfidencialnosti" target="_blank">обработку и распространение персональных данных</a>.
                             </label>
                         </div>
                     </div>
-                    <button class="formBox__submit" type="submit">Получить консультацию</button>
+                    <button class="formBox__submit disabled" id="submit_1" type="submit" disabled data-submit>Получить консультацию</button>
                 </form>
-                <div class="formBox__policy">
-                    Нажав кнопку «Получить консультацию», я даю согласие на
-                    <a href="{{ route('index.posts.show', ['slug' => 'obrabotka-personalnyh-dannyh']) }}">обработку моих
-                        персональных данных</a>
-                </div>
             </div>
             <nav class="footer__menu accordion-container">
 
@@ -239,6 +236,15 @@
     .formBox__form {
         display: flex;
         flex-direction: column;
+    }
+    .footer__formBox .ctaForm__label {
+        color: rgba(224, 224, 224, 1);
+        font-weight: 400;
+        font-size: 1.4rem;
+    }
+    .footer__formBox .ctaForm__label a {
+        color: #9af3ef;
+        text-decoration: underline;
     }
     .footer__spollerPanel {
         height: auto !important;

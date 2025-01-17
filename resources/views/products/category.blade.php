@@ -220,7 +220,17 @@
                                 </div>
                             @endif
 
-
+                        @else
+                            <div class="empty__block">
+                                <h1 class="empty__title">
+                                    Товары не найдены
+                                </h1>
+                                <picture>
+                                    <source type="image/webp"
+                                            srcset="/img/emptyProducts/magnifier.png">
+                                    <img src="/img/emptyProducts/magnifier.png" alt="empty-products">
+                                </picture>
+                            </div>
                         @endif
                         <p class="productsTmp__txt">
                             {!! $category->seo_text !!}
@@ -287,6 +297,17 @@
         </section>
     </main>
     <style>
+        .empty__block {
+            padding-bottom: 0;
+            padding-top: 60px;
+        }
+        .empty__block img {
+            width: auto;
+            height: auto;
+        }
+        .empty__title {
+            width: 80%;
+        }
         .filter__menu-select-wrp .choices__inner {
             border-color: #006BDE;
         }
@@ -304,6 +325,11 @@
         }
         .newItems__tabsEl:first-child {
             padding-left: 20px;
+        }
+        @media (max-width: 991.98px) {
+            .empty__block {
+                text-align: center;
+            }
         }
         @media (max-width: 767.98px) {
             .productsTmp .newItems__tabs {

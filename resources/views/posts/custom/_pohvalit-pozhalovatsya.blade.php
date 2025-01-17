@@ -1,9 +1,10 @@
+@include('partials.modal')
 <div class="cta cooperation__cta">
     <div class="cta__body">
         <img class="cta__img" src="{{ asset('img/cooperation/cooperation.png') }}" alt="img"
              loading="lazy" decoding="async" referrerPolicy="no-referrer">
         <!-- Call to action-->
-        <form class="cta__form" action="{{ route('index.send_mail') }}" method="post">
+        <form class="cta__form" id="consultationForm" action="{{ route('index.send_mail') }}" method="post" data-ajax="true">
             @csrf
 
             <input type="hidden" name="link" value="{{ url()->current() }}">
@@ -40,19 +41,15 @@
                     </div>
                     <div class="formRow">
                         <div class="inpBox">
-                            <label for="consent" class="ctaForm__label">
-                                <input type="checkbox" id="consent" name="consent" required>
-                                Я соглашаюсь на обработку моих персональных данных в соответствии с
-                                <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
+                            <label for="consent_2" class="ctaForm__label" style="cursor: pointer">
+                                <input type="checkbox" id="consent_2" name="consent" required data-consent style="pointer-events: none">
+                                Я даю своё согласие на
+                                <a href="/posts/politika-konfidencialnosti" target="_blank">обработку и распространение персональных данных</a>.
                             </label>
                         </div>
                     </div>
 
-                    <button class="ctaForm__btn ctaForm__btn--gap btn btn--md" type="submit">Отправить</button>
-                    <div class="ctaForm__info">
-                        Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
-                        <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a> и соглашаюсь на обработку моих персональных данных.
-                    </div>
+                    <button class="ctaForm__btn ctaForm__btn--gap btn btn--md disabled" disabled type="submit" data-submit>Отправить</button>
                 </div>
             </div>
         </form>
@@ -63,6 +60,15 @@
 </div>
 
 <style>
+    .inpBox label {
+        color: #aaa;
+        font-weight: 400;
+        font-size: 1.4rem;
+    }
+    .inpBox label a {
+        color: #9af3ef;
+        text-decoration: underline;
+    }
     @media screen and (max-width: 767.98px) {
         .sideDash--sticky {
             padding-left: 16px;

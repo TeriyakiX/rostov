@@ -67,7 +67,7 @@
                     @endif
 
                     <div class="cooperation__body sideDashContainer">
-                        <div class="sideDash sideDash--sticky" style="z-index: 9999">
+                        <div class="sideDash sideDash--sticky" style="z-index: 1111">
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">
                                     <use xlink:href="{{ url('/img/sprites/3.png') }}#building">
@@ -80,8 +80,8 @@
                             </div>
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/4.png') }}#building">
-                                        <img src="{{asset('img/sprites/4.png')}}" alt="">
+                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
+                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
                                     </use>
                                 </svg>
                                 <div class="sideDash__mark"><a
@@ -90,8 +90,8 @@
                             </div>
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">
-                                    <use xlink:href="{{ url('/img/sprites/2.png') }}#building">
-                                        <img src="{{asset('img/sprites/2.png')}}" alt="">
+                                    <use xlink:href="{{ url('/img/sprites/5.png') }}#building">
+                                        <img src="{{asset('img/sprites/5.png')}}" alt="">
                                     </use>
                                 </svg>
                                 <div class="sideDash__mark"><a href="/posts/oplata">on-line оплата</a></div>
@@ -129,6 +129,8 @@
                             @include('posts.custom._pohvalit-pozhalovatsya')
                         @elseif($post->slug == 'kontakty')
                             @include('posts.custom.kontakty')
+{{--                        @elseif($post->slug == 'karta-proezda')--}}
+{{--                            @include('posts.custom._karta-proezda')--}}
                         @elseif($post->slug == 'dokumenty')
 
                             @include('posts.custom._tehnicheskie-katalogi')

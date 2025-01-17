@@ -54,7 +54,29 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($this->isHttpException($exception) && $exception->getStatusCode() >= 500 && $exception->getStatusCode() < 600) {
-            return response()->view('errors.500', ['status' => $exception->getStatusCode()], $exception->getStatusCode());
+            return response()->view('errors.500', [
+                'status' => $exception->getStatusCode(),
+                'message' => 'Что-то пошло не так.',
+            ], $exception->getStatusCode());
+        }
+
+        if ($this->isHttpException($exception) && $exception->getStatusCode() >= 400 && $exception->getStatusCode() < 500) {
+            $message = '';
+            switch ($exception->getStatusCode()) {
+                case 404:
+                    $message = 'Страница не найдена.';
+                    break;
+                case 403:
+                    $message = 'Доступ запрещен.';
+                    break;
+                default:
+                    $message = 'Страница не найдена.';
+            }
+
+            return response()->view('errors.400', [
+                'status' => $exception->getStatusCode(),
+                'message' => $message,
+            ], $exception->getStatusCode());
         }
 
         return parent::render($request, $exception);

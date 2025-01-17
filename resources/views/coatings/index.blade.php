@@ -1254,6 +1254,18 @@
 
 
                         <div class="right__side" style="height: 100%;">
+                            @if($coatings->isEmpty())
+                                <div class="empty__block">
+                                    <h1 class="empty__title">
+                                        По вашему запросу нет подходящих видов покрытия
+                                    </h1>
+                                    <picture>
+                                        <source type="image/webp"
+                                                srcset="/img/emptyProducts/magnifier.png">
+                                        <img src="/img/emptyProducts/magnifier.png" alt="empty-products">
+                                    </picture>
+                                </div>
+                            @else
                             @foreach($coatings as $product)
                                 <div class="productsTmp__body productsTmp__body--line">
                                     <div class="productsTmp__itemWrp">
@@ -1302,7 +1314,23 @@
                                                             Подробнее
                                                         </div>
                                                     </a>
-                                                    <div class="card__icon card__icon--basket" data-destination="Basket" role="button" tabindex="0">
+                                                    <div class="card__icon card__icon--basket"
+                                                         data-action="{{ route('index.cart.add') }}"
+
+                                                         data-product-id="{{ $product->id }}"
+                                                         data-total-price="{{ $product->total_price }}"
+                                                         data-price="{{ $product->is_promo ?  $product->promo_price :  $product->price }}"
+                                                         data-length="{{ $product->length }}"
+                                                         data-total-square="{{ $product->total_square }}"
+                                                         data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
+                                                         data-start-price="{{ $product->price }}"
+                                                         data-attribute-prices="{{$product->attribute_prices ? $product->attribute_prices : 0}}"
+                                                         data-color="{{ $product->color }}"
+                                                         data-quantity="1"
+                                                         data-width="{{ $product->list_width_useful }}"
+                                                         data-destination="Basket"
+                                                         role="button"
+                                                         tabindex="0">
                                                         <svg>
                                                             <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#basket') }}"></use>
                                                         </svg>
@@ -1323,7 +1351,23 @@
                                                         Подробнее
                                                     </div>
                                                 </a>
-                                                <div class="card__icon card__icon--basket" data-destination="Basket" role="button" tabindex="0">
+                                                <div class="card__icon card__icon--basket"
+                                                     data-action="{{ route('index.cart.add') }}"
+
+                                                     data-product-id="{{ $product->id }}"
+                                                     data-total-price="{{ $product->total_price }}"
+                                                     data-price="{{ $product->is_promo ?  $product->promo_price :  $product->price }}"
+                                                     data-length="{{ $product->length }}"
+                                                     data-total-square="{{ $product->total_square }}"
+                                                     data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
+                                                     data-start-price="{{ $product->price }}"
+                                                     data-attribute-prices="{{$product->attribute_prices ? $product->attribute_prices : 0}}"
+                                                     data-color="{{ $product->color }}"
+                                                     data-quantity="1"
+                                                     data-width="{{ $product->list_width_useful }}"
+                                                     data-destination="Basket"
+                                                     role="button"
+                                                     tabindex="0">
                                                     <svg>
                                                         <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#basket') }}"></use>
                                                     </svg>
@@ -1333,6 +1377,7 @@
                                     </div>
                                 </div>
                             @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -1549,6 +1594,17 @@
             .left__side--desktop {
                 display: none;
             }
+        }
+        .empty__block {
+            flex-direction: column;
+            text-align: center;
+        }
+        .empty__block img {
+            width: auto;
+            height: auto;
+        }
+        .empty__title {
+            width: 80%;
         }
     </style>
     <script>

@@ -10,6 +10,7 @@ use App\Models\Coatings;
 use App\Models\CompareCoatings;
 use App\Models\OptionItem;
 use App\Models\User;
+use App\Services\Shop\CartService;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Product;
 use App\Models\ProductAttribute;
@@ -64,14 +65,13 @@ class ProductController extends Controller
 
         for ($i = 0; $i < count($category_); $i++)
             foreach ($category_ as $value)
-                    if ($value && $cat = ProductCategory::where('id',$value)->first())
+                if ($value && $cat = ProductCategory::where('id', $value)->first())
                     $category_[$cat->id] = null;
 
 
         foreach ($category_ as $key => $value)
             if ($value)
-                $category = ProductCategory::where('id',$key)->first();
-
+                $category = ProductCategory::where('id', $key)->first();
 
 
         $sliderProducts = Product::query()
@@ -104,17 +104,14 @@ class ProductController extends Controller
         $itemAttributes = $product->attributeItems;
         $productAttributes = [];
         foreach ($itemAttributes as $attribute) {
-            $product_attribute = ProductAttribute::where('product_id',$product->id)->where('option_item_id',$attribute->option->id)->first();
-            if($product_attribute)
+            $product_attribute = ProductAttribute::where('product_id', $product->id)->where('option_item_id', $attribute->option->id)->first();
+            if ($product_attribute)
                 $attribute->option->price = $product_attribute->price;
-
-
 
 
             $productAttributes[$attribute->attribute_item_id]['model'] = $attribute->attribute;
             $productAttributes[$attribute->attribute_item_id]['options'][] = $attribute->option;
         }
-
 
 
         $photos = $product->photos;
@@ -183,15 +180,14 @@ class ProductController extends Controller
 
         $selected_tags = [];
         $selected_brands = [];
-        if($request->get('tags'))
-            foreach (explode(',',$request->get('tags')) as $tag){
+        if ($request->get('tags'))
+            foreach (explode(',', $request->get('tags')) as $tag) {
                 $selected_tags[] = $tag;
-                $brand = BrandTags::where('tag_id',$tag)->get();
-                if($brand)
+                $brand = BrandTags::where('tag_id', $tag)->get();
+                if ($brand)
                     foreach ($brand as $value)
-                    $selected_brands[$value->brand_id] = $value->brand_id ;
+                        $selected_brands[$value->brand_id] = $value->brand_id;
             }
-
 
 
         $category = ProductCategory::query()
@@ -205,8 +201,8 @@ class ProductController extends Controller
 
         $attributesIds = [];
         $optionsIds = [];
-        foreach ($filters as $key => $filter){
-            if($filter == null)
+        foreach ($filters as $key => $filter) {
+            if ($filter == null)
                 unset($filters[$key]);
         }
 
@@ -232,7 +228,7 @@ class ProductController extends Controller
                 });
             })
             ->when($selected_brands, function ($q) use ($selected_brands) {
-              return $q->whereIn('products.brand_id',$selected_brands);
+                return $q->whereIn('products.brand_id', $selected_brands);
             })
             ->when($isPromo, function ($isPromoQ) use ($isPromo) {
                 return $isPromoQ->where('products.is_promo', $isPromo);
@@ -241,7 +237,7 @@ class ProductController extends Controller
                 return $isNoveltyQ->where('products.is_novelty', $isNovelty);
             })
             ->when($orderBy, function ($query) use ($orderBy) {
-                 $orderBy = array_shift($orderBy);
+                $orderBy = array_shift($orderBy);
                 if ($orderBy == 'priceAsc') {
                     return $query->orderBy('products.price', 'asc');
                 }
@@ -287,7 +283,6 @@ class ProductController extends Controller
             ])
             ->leftJoin('option_items', 'option_item_id', '=', 'option_items.id')
             ->leftJoin('attribute_items', 'attribute_item_id', '=', 'attribute_items.id')
-
             ->whereHas('product', function ($q) use ($category) {
                 return $q
                     ->whereHas('categories', function ($categoriesQ) use ($category) {
@@ -297,19 +292,17 @@ class ProductController extends Controller
             ->get();
 
         $brands = [];
-       foreach ($category->products as $product){
-           if($product->brand)
+        foreach ($category->products as $product) {
+            if ($product->brand)
                 $brands[$product->brand->id] = $product->brand;
-       }
-       $tags = [];
-        foreach ($brands as $brand){
-            if($brand->tags)
-            foreach ($brand->tags as $tag) {
-                $tags[$tag->id] = $tag;
-            }
         }
-
-
+        $tags = [];
+        foreach ($brands as $brand) {
+            if ($brand->tags)
+                foreach ($brand->tags as $tag) {
+                    $tags[$tag->id] = $tag;
+                }
+        }
 
 
         $attributesArray = [];
@@ -324,7 +317,7 @@ class ProductController extends Controller
             ];
         }
 
-        return view('products.category')->with(compact('category', 'products', 'attributesArray','tags','selected_tags'));
+        return view('products.category')->with(compact('category', 'products', 'attributesArray', 'tags', 'selected_tags'));
     }
 
     /**
@@ -379,14 +372,45 @@ class ProductController extends Controller
     public function addToFavorites(Request $request, ProductService $productService)
     {
         $productId = $request->get('product_id');
+        $additionalData = $request->only(['length', 'totalSquare', 'quantity', 'totalPrice', 'square', 'price']);
 
         $alreadyAdded = $productService->addToSession($productId, 'favorites')['alreadyAdded'];
         $countInSession = $productService->getSession('favorites');
         if ($alreadyAdded) {
-            return ['message'=>'Товар успешно удален из избранного!', 'count' => count($countInSession)];
+            Session::forget("favorites_data.{$productId}");
+            return ['message' => 'Товар успешно удален из избранного!', 'count' => count($countInSession)];
         } else {
-            return ['message'=>'Товар успешно добавлен в избранное!', 'count' => count($countInSession)];
+            Session::put("favorites_data.{$productId}", $additionalData);
+            return ['message' => 'Товар успешно добавлен в избранное!', 'count' => count($countInSession)];
         }
+    }
+
+    public function deleteSelectedFavorites(Request $request, ProductService $productService)
+    {
+        $productIds = $request->get('product_ids');
+
+        if (!is_array($productIds) || empty($productIds)) {
+            return response()->json(['message' => 'Нет выбранных товаров для удаления'], 400);
+        }
+
+        foreach ($productIds as $productId) {
+            $productService->removeFromSession($productId, 'favorites');
+        }
+
+        $countInSession = $productService->getSession('favorites');
+
+        return response()->json([
+            'message' => 'Выбранные товары успешно удалены!',
+            'count' => count($countInSession),
+        ]);
+    }
+
+    public function clearFavorites(Request $request, ProductService $productService)
+    {
+        $productService->flushSessionPart('favorites');
+        $countInSession = $productService->getSession('favorites');
+
+        return ['message' => 'Все товары успешно удалены из избранного!', 'count' => count($countInSession)];
     }
 
     /**
@@ -396,7 +420,7 @@ class ProductController extends Controller
      */
     public function favorites(Request $request, ProductService $productService)
     {
-        $favoritesIds = $productService->getSession('favorites');
+        $favoritesIds = $productService->getSession(ProductService::SESSION_FAVORITES);
 
         // Добавляем кавычки вокруг значений
         $favoritesIdsList = implode(',', $favoritesIds);
@@ -410,8 +434,101 @@ class ProductController extends Controller
             })
             ->get();
 
+        $totalPrice = 0;
+        $totalQuantity = 0;
+        foreach ($products as $product) {
+            $totalPrice += $product->is_promo ? $product->promo_price : $product->price;
+            $totalQuantity++;
+        }
+
         $title = 'Избранные товары';
-        return view('products.grid')->with(compact('products', 'title'));
+        $pageType = 'favorites';
+        return view('products.grid')->with(compact('products', 'title', 'pageType', 'totalPrice', 'totalQuantity'));
+    }
+
+    public function changeFavorite(Request $request, ProductService $productService)
+    {
+        $request['product_id'] = str_replace('length_', 'length=', $request['product_id']);
+
+        $favorites = Session::get($productService::SESSION_FAVORITES, []);
+
+        $totalPrice = 0;
+        foreach ($favorites as $productId => $options) {
+            if ($productId == $request['product_id']) {
+                $length = isset($options['length']) ? $options['length'] / 1000 : 1;
+                $width = isset($options['width']) ? $options['width'] / 1000 : 1;
+
+                $options['totalPrice'] = $request['qtty'] * $options['price'] * $length * $width;
+                $options['totalSquare'] = $request['qtty'] * $length * $width;
+                $options['quantity'] = $request['qtty'];
+
+                $favorites[$productId] = $options;
+                $totalPrice = $options['totalPrice'];
+            }
+        }
+
+        Session::put($productService::SESSION_FAVORITES, $favorites);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Изменения успешно сохранены',
+            'quantity' => $request['qtty'],
+            'totalPrice' => $totalPrice ?? 0
+        ]);
+    }
+
+    public function moveToCart(Request $request, ProductService $productService)
+    {
+        /** @var CartService $cart */
+        $cart = app()->make('cart');
+        Session::put('temp',[]);
+        $message = '';
+
+        $favorites = $productService->getSession(ProductService::SESSION_FAVORITES);
+
+        if (empty($favorites)) {
+            return response()->json([
+                'message' => 'Избранное пустое, нечего перемещать.',
+                'status' => 'error',
+            ], 400);
+        }
+
+        if ($request->has('products')) {
+            $products = $request->get('products');
+
+            foreach ($products as $productData) {
+                $productId = $productData['product_id'];
+                $options = [
+                    'totalPrice' => $productData['totalPrice'],
+                    'price' => $productData['price'],
+                    'quantity' => $productData['quantity'],
+                    'totalSquare' => $productData['totalSquare'],
+                    'length' => $productData['length'],
+                    'square' => $productData['totalSquare'] / $productData['quantity'],
+                    'attribute_prices' => $productData['attribute_prices'],
+                    'color' => $productData['color'],
+                    'width' => $productData['width']
+                ];
+
+                $sessionKey = $cart::SESSION_KEY_PRODUCTS . '.' . $productId;
+                $cart->setPositionAlt($productId, $sessionKey, $options);
+            }
+
+            $cart->commit();
+            $message = 'Товары успешно добавлены в корзину!';
+        } else {
+            $message = 'Не удалось добавить товары в корзину.';
+        }
+
+        $productService->flushSessionPart(ProductService::SESSION_FAVORITES);
+
+        $cart->commit();
+
+        return response()->json([
+            'message' => $message,
+            'status' => 'success',
+            'cartInfo' => 'В корзине ' . $cart->getTotalQuantity() . ' товар(ов) на сумму ' . $cart->getTotalPrice() . ' ₽',
+        ]);
     }
 
     /**
@@ -617,6 +734,7 @@ class ProductController extends Controller
             })
             ->get();
         $title = 'Просмотренные товары';
-        return view('products.grid')->with(compact('products', 'title'));
+        $pageType = 'viewed';
+        return view('products.grid')->with(compact('products', 'title', 'pageType'));
     }
 }

@@ -542,15 +542,14 @@
                                                     </div>
                                                     <div
                                                         class="prodCard__icon prodCard__icon--share"
-                                                        role="button" tabindex="0">
+                                                        role="button"
+                                                        tabindex="0"
+                                                        data-link="{{ route('index.products.show', ['category' => $category->slug, 'product' => $product->slug]) }}">
                                                         <svg>
-                                                            <use
-                                                                xlink:href="{{ asset('img/sprites/sprite-mono.svg#share') }}"></use>
+                                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#share') }}"></use>
                                                         </svg>
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                             <div class="prodCard__price">
 
@@ -971,7 +970,7 @@
         @include('products._docs_modal')
         @include('products._modal_consult')
         @include('products._modal_buy')
-        @include('products._cart_modal')
+{{--        @include('products._cart_modal')--}}
         @include('products.product_description_modal')
     </div>
     <style>
@@ -1206,7 +1205,6 @@
         const counters = document.querySelectorAll('.productCalc__counter');
 
         if (counters.length === 0) {
-            console.error("Не удалось найти элементы с классом '.productCalc__counter'");
             return;
         }
 
@@ -1216,7 +1214,6 @@
             const input = counter.querySelector('.productCalc__inpCount');
 
             if (!minus || !plus || !input) {
-                console.error("Не удалось найти кнопки или поле ввода в одном из счетчиков");
                 continue;
             }
 
@@ -1248,7 +1245,6 @@
         let currentIndex = 0;
 
         if (!galleryItems.length || !leftArrow || !rightArrow) {
-            console.error('Галерея или стрелки не найдены. Проверьте селекторы.');
             return;
         }
 

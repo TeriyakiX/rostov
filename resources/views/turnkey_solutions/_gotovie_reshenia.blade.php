@@ -11,6 +11,7 @@
         -moz-appearance: textfield;
     }
 </style>
+@include('partials.modal')
 @section('content')
     <nav class="breadcrumbs">
         <div class="breadcrumbs__container _container">
@@ -48,7 +49,7 @@
                         <img class="cta__img" src="{{ asset('upload_images/'. $solution->photos[0]['path']) }}"
                              alt="img" loading="lazy" decoding="async" referrerPolicy="no-referrer">
                         <!-- Call to action-->
-                        <form class="cta__form" action="{{route('index.send_mail')}}" method="post">
+                        <form class="cta__form" id="consultationForm" action="{{route('index.send_mail')}}" method="post" data-ajax="true">
                             @csrf
                             <div class="ctaForm">
                                 <div class="ctaForm__header">
@@ -82,22 +83,28 @@
                                                    placeholder="Комментарий" name="customer_comment" required>
                                         </div>
                                     </div>
-                                    <button class="ctaForm__btn ctaForm__btn--gap btn btn--md" type="submit">Отправить
-                                    </button>
-                                    <label class="formBox__fileLabel" for="file" name="file"
-                                           style="color: #595959; padding-top: 20px;">
+                                    <label class="formBox__fileLabel" for="formBox_file" name="file">
+                                        <input class="formBox__input" autocomplete="off" type="file" name="file" id="formBox_file">
                                         <svg>
-                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#scr') }}"
-                                                 style="fill: #595959;"></use>
+                                            <use xlink:href="{{ asset('img/sprites/sprite-mono.svg#scr') }}"></use>
                                         </svg>
                                         Прикрепить файл
                                     </label>
-                                    <div class="formBox__policy" style="color: black">
-                                        Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с
-                                        <a href="/privacy-policy" target="_blank">Политикой конфиденциальности</a> и даю согласие на
-                                        <a href="<?php echo e(route('index.posts.show', ['slug' => 'obrabotka-personalnyh-dannyh'])); ?>">обработку моих
-                                            персональных данных</a>
+                                    <br>
+                                    <label class="message" for="formBox_file" style="color: red">
+
+                                    </label>
+                                    <div class="formRow formRowG">
+                                        <div class="inpBox">
+                                            <label for="consent_5" class="ctaForm__label" style="cursor: pointer">
+                                                <input type="checkbox" id="consent_5" name="consent" required data-consent style="pointer-events: none">
+                                                Я даю согласие на обработку моих персональных данных в соответствии с
+                                                <a href="/posts/politika-konfidencialnosti" target="_blank">Политикой конфиденциальности</a>.
+                                            </label>
+                                        </div>
                                     </div>
+                                    <button class="ctaForm__btn ctaForm__btn--gap btn btn--md disabled" data-submit disabled type="submit">Отправить
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -232,6 +239,28 @@
             background-color: #006bde;
         }
 
+        .formBox__policy a {
+            color: #9af3ef;
+            text-decoration: underline;
+        }
+
+        .ctaForm__body .formBox__fileLabel {
+            color: #505050;
+        }
+
+        .ctaForm__body .formBox__fileLabel svg {
+            fill: #505050;
+        }
+
+        .formRowG .inpBox label {
+            color: #aaa;
+            font-weight: 400;
+            font-size: 1.4rem;
+        }
+        .formRowG .inpBox label a {
+            color: #9af3ef;
+            text-decoration: underline;
+        }
         @media (max-width: 767.98px) {
             .cooperation__container {
                 padding: 0;

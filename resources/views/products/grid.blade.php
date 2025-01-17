@@ -38,9 +38,9 @@
                                     <div class="basket__body">
                                         @foreach($products as $index => $product)
                                             <div
-                                                id="favorite_card_{{$product->id}}{{$product->length ? 'length_'.$product->length : ''}}"
-                                                data-total="{{ $product->total_price }}"
-                                                data-qtty="{{ $product->quantity }}"
+                                                id="favorite_card_{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
+                                                data-total="{{ session('products')[$product->id]['total_price'] ?? $product->total_price }}"
+                                                data-qtty="{{ session('products')[$product->id]['quantity'] ?? $product->quantity }}"
                                                 data-square="{{ $product->square }}"
                                                 data-id="{{$product->id}}"
                                                 data-price="{{ $product->is_promo ?  $product->promo_price :  $product->price }}"
@@ -51,9 +51,8 @@
                                                 data-attribute-prices="{{$product->attribute_prices ? $product->attribute_prices : 0}}"
                                                 data-color="{{ $product->color }}"
                                                 data-width="{{ $product->list_width_useful }}"
-
-                                                class="favorite__card "
-                                                style="{{$index===0? 'margin-bottom: 25px ':' '}}"
+                                                class="favorite__card"
+                                                style="{{$index === 0 ? 'margin-bottom: 25px;' : ''}}"
                                             >
                                                 <div class="basket__cardBody">
                                                     <div class="checkbox" style="margin-top: 1rem; margin-right: 1rem;">
@@ -67,108 +66,73 @@
                                                         <label class="checkbox__label link" for="favcheckbox_{{$product->id}}"></label>
                                                     </div>
                                                     <div class="basket__cardImgBox">
-                                                        <a class="basket__cardImgWrp ibg"
-                                                           href="#">
+                                                        <a class="basket__cardImgWrp ibg" href="#">
                                                             <picture>
-                                                                {{--                                                                <source type="image/webp" srcset="./img/history/h.webp">--}}
-                                                                <img
-                                                                    src="{{ $product->mainPhotoPath() }}"
-                                                                    alt="h">
+                                                                <img src="{{ $product->mainPhotoPath() }}" alt="product-image">
                                                             </picture>
                                                         </a>
                                                     </div>
                                                     <div class="basket__combinedContainer">
                                                         <div class="basket__cardDesc">
                                                             <div class="basket__cardTitle link">
-                                                                <a href="#"
-                                                                   style="margin: auto;">
+                                                                <a href="#" style="margin: auto;">
                                                                     {{ $product->title }}
                                                                 </a>
                                                             </div>
-
                                                             <div class="productCalc__col--desc">
-                                                                @if (!empty($product->color))
-                                                                    Цвет: {{ $product->color }}
-                                                                @endif
-                                                                @if (!empty($product->color) && (!empty($product->length) || !empty($product->width) || !empty($product->square)))
-                                                                    /
-                                                                @endif
-
-                                                                @if (!empty($product->length))
-                                                                    Длина: {{ $product->length }}
-                                                                @endif
-                                                                @if (!empty($product->length) && (!empty($product->width) || !empty($product->square)))
-                                                                    /
-                                                                @endif
-
-                                                                @if (!empty($product->width))
-                                                                    Толщина: {{ $product->width }}
-                                                                @endif
-                                                                @if (!empty($product->width) && !empty($product->square))
-                                                                    /
-                                                                @endif
-
-                                                                @if (!empty($product->square))
-                                                                    Площадь: {{ $product->square }}
-                                                                @endif
+                                                                @if (!empty($product->color)) Цвет: {{ $product->color }} @endif
+                                                                @if (!empty($product->length)) Длина: {{ $product->length }} @endif
+                                                                @if (!empty($product->width)) Толщина: {{ $product->width }} @endif
+                                                                @if (!empty($product->square)) Площадь: {{ $product->square }} @endif
                                                             </div>
                                                         </div>
-                                                        {{--                                                        <div id="total_square_{{$product->id}}"--}}
-                                                        {{--                                                             class="total__square"--}}
-                                                        {{--                                                             style="margin: auto;"></div>--}}
-                                                        <div class="basket__cardPrice"
-                                                             style="align-content: center">
-
-                                                            {{ $product->is_promo ?  $product->promo_price :  $product->price }}
-                                                            ₽ @if($product->show_calculator)
-                                                                /м2
-                                                            @endif
+                                                        <div class="basket__cardPrice" style="align-content: center">
+                                                            {{ $product->is_promo ?  $product->promo_price :  $product->price }}₽
+                                                            @if($product->show_calculator) /м2 @endif
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="productCalc__col--wrp">
                                                     <div class="productCalc__col productCalc__col--count">
                                                         <div class="productCalc__named">Количество</div>
                                                         <div class="productCalc__counter">
                                                             <div
-                                                                data-prod="{{$product->id}}{{$product->length ? 'length_'.$product->length : ''}}"
+                                                                data-prod="{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
                                                                 class="productCalc__counterBtn productCalc__counterBtn--minus">
                                                                 -
                                                             </div>
-
                                                             <input
-                                                                data-prod="{{$product->id}}{{$product->length ? 'length_'.$product->length : ''}}"
+                                                                data-prod="{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
                                                                 class="productCalc__inpCount"
                                                                 autocomplete="off"
                                                                 type="text"
                                                                 name="form[]"
-                                                                data-value="{{ $product->quantity }}"
-                                                                value="{{ $product->quantity }}">
+                                                                data-value="{{ session('products')[$product->id]['quantity'] ?? $product->quantity }}"
+                                                                value="{{ session('products')[$product->id]['quantity'] ?? $product->quantity }}"
+                                                            >
                                                             <div
-                                                                data-prod="{{$product->id}}{{$product->length ? 'length_'.$product->length : ''}}"
+                                                                data-prod="{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
                                                                 class="productCalc__counterBtn productCalc__counterBtn--plus">
                                                                 +
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="productCalc__col productCalc__col--total">
-                                                        <div class="productCalc__named">
-                                                            Итого: {{--<span>за 0.543 м2</span>--}} </div>
+                                                        <div class="productCalc__named">Итого:</div>
                                                         <div
-                                                            id="prod_total_{{$product->id}}{{$product->length ? 'length_'.$product->length : ''}}"
+                                                            id="prod_total_{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
                                                             class="productCalc__result">
-                                                            = {{ number_format($product->total_price,2) }}₽
+                                                            = {{ number_format(session('products')[$product->id]['total_price'] ?? $product->total_price, 2) }}₽
                                                         </div>
                                                     </div>
                                                     <div class="deleteBut deleteBut__moreOne"
                                                          id="deleteButtonId"
-                                                         data-product-id="{{ $product->id }}" role="button"
-                                                         tabindex="0">
-                                                        <input type="hidden" name="sessionId"
-                                                               value="{{$product->productSessionId}}">
+                                                         data-product-id="{{ $product->id }}"
+                                                         role="button" tabindex="0">
+                                                        <input type="hidden" name="sessionId" value="{{$product->productSessionId}}">
                                                         <svg>
-                                                            <use
-                                                                xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cloze') }}"></use>
+                                                            <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cloze') }}"></use>
                                                         </svg>
                                                     </div>
                                                 </div>
@@ -349,104 +313,136 @@
         }
 
         $(document).on("change", ".productCalc__inpCount", function () {
-
-            calculatePrice2($(this).data('prod'), $(this).val());
+            calculatePrice2($(this).data('prod'), parseFloat($(this).val()) || 1);
         });
 
-        $(document).on("click", ".productCalc__counterBtn--plus, .productCalc__counterBtn--minus", function () {
+        $(document).ready(function () {
 
-            calculatePrice2($(this).data('prod'), $('.productCalc__inpCount[data-prod="' + $(this).data('prod') + '"]').val());
+            $.ajax({
+                url: '/favorites/loadFavorites',
+                method: 'GET',
+                success: function(response) {
+                    if (response && response.data) {
+                        response.data.forEach(function (product) {
+                            let card = $('#favorite_card_' + product.product_id);
+
+                            // Обновляем количество и total
+                            card.data('qtty', product.qtty);
+                            card.data('total', product.total);
+
+                            card.find('.productCalc__inpCount').val(product.qtty);
+                            card.find('#prod_total_' + product.product_id).text('= ' + product.total + '₽');
+                        });
+                        updateTotal();
+                        calculateSquare();
+                    }
+                }
+            });
+        });
+
+
+        $(document).on("click", ".productCalc__counterBtn--plus, .productCalc__counterBtn--minus", function () {
+            let inputField = $('.productCalc__inpCount[data-prod="' + $(this).data('prod') + '"]');
+            let currentQuantity = parseFloat(inputField.val()) || 1;
+            currentQuantity += $(this).hasClass('productCalc__counterBtn--plus') ? 1 : -1;
+
+            if (currentQuantity < 1) currentQuantity = 1;
+            inputField.val(currentQuantity);
+            calculatePrice2($(this).data('prod'), currentQuantity);
         });
 
         $(document).on('change', '.fav-checkbox', function () {
             updateDeleteButtonText();
         });
 
-        function calculatePrice2(num, qtty) {
+        function calculatePrice2(productId, quantity) {
+            quantity = quantity < 1 ? 1 : quantity;
 
-            qtty = qtty < 0 ? 1 : qtty;
-            let price = $('#favorite_card_' + num).data('price');
-            let length = $('#favorite_card_' + num).data('length') ? $('#favorite_card_' + num).data('length') / 1000 : 1;
-            let width = $('#favorite_card_' + num).data('width') ? $('#favorite_card_' + num).data('width') / 1000 : 1;
-            let calculatedPrice = price * qtty * length * width;
+            let card = $('#favorite_card_' + productId);
+            let price = card.data('price');
+            let length = card.data('length') ? card.data('length') / 1000 : 1;
+            let width = card.data('width') ? card.data('width') / 1000 : 1;
 
+            // Расчет итого
+            let calculatedPrice = price * quantity * length * width;
 
-            $('#prod_total_' + num).text('= ' + calculatedPrice.toFixed(2) + '₽');
-            $('#favorite_card_' + num).data('total', calculatedPrice.toFixed(2));
-            $('#favorite_card_' + num).data('qtty', qtty);
+            // Обновляем отображение
+            $('#prod_total_' + productId).text('= ' + calculatedPrice.toFixed(2) + '₽');
+            card.data('total', calculatedPrice.toFixed(2));
+            card.data('qtty', quantity);
 
-
-            let total = 0;
-            let qtty_ = 0;
-            $('.favorite__card').each(function () {
-                ;
-                total += $(this).data('total') ? parseFloat($(this).data('total')) : 0;
-                qtty_ += $(this).data('qtty') ? parseInt($(this).data('qtty')) : 0;
-            });
-            $('.basket__sideData--price').text(total.toFixed(2) + ' ₽');
-            $('.basket__sideData--prod').text(qtty_);
-
-
+            // Отправляем изменения на сервер
             $.ajax({
-                type: "GET",
-                url: '/favorites/change',
-                data: 'product_id=' + num + '&qtty=' + qtty,
-                success: function (response) {
-
+                type: "POST",
+                url: '/favorites/updateQuantity',
+                data: {
+                    product_id: productId,
+                    qtty: quantity,
+                    price: price,
+                    _token: $('meta[name="csrf_token"]').attr('content')
+                },
+                success: function(response) {
+                    if (response.success) {
+                        console.log('Количество и total обновлены');
+                    }
                 },
             });
 
+            updateTotal();
             calculateSquare();
         }
 
-        calculateSquare();
+        function updateTotal() {
+            let total = 0;
+            let quantity = 0;
+            $('.favorite__card').each(function () {
+                total += parseFloat($(this).data('total')) || 0;
+                quantity += parseInt($(this).data('qtty')) || 0;
+            });
+            $('.basket__sideData--price').text(total.toFixed(2) + ' ₽');
+            $('.basket__sideData--prod').text(quantity);
+        }
 
         function calculateSquare() {
-            let square = [];
+            let square = {};
             $('.favorite__card').each(function () {
-
-                let plus = $(this).data('square') * $(this).data('qtty');
-                square[$(this).data('id')] = square[$(this).data('id')] ? square[$(this).data('id')] + plus : plus;
+                let card = $(this);
+                let productSquare = card.data('square') * card.data('qtty');
+                let productId = card.data('id');
+                square[productId] = (square[productId] || 0) + productSquare;
             });
-            if (square) {
-                $.each(square, function (key, value) {
-                    $('#total_square_' + key).text(parseFloat(value).toFixed(2) + '/м2');
-                });
-            }
+
+            $.each(square, function (key, value) {
+                $('#total_square_' + key).text(value.toFixed(2) + '/м2');
+            });
         }
 
         window.onload = () => {
             $(".deleteBut").on('click', function () {
                 const productId = $(this).data('product-id');
-
                 let data = {
                     '_token': $('meta[name="csrf_token"]').attr('content'),
                     'product_id': productId,
                     'active': 1,
-                }
+                };
                 $.ajax({
                     url: '/addToFavorites',
                     data: data,
                     type: "POST",
-                })
-                    .done(function () {
-                        location.reload()
-                    })
+                }).done(function () {
+                    location.reload();
+                });
             });
 
             $(".basket__deleteAll").on('click', function () {
-                let data = {
-                    '_token': $('meta[name="csrf_token"]').attr('content'),
-                };
-
+                let data = { '_token': $('meta[name="csrf_token"]').attr('content') };
                 $.ajax({
                     url: '/favorites/clear',
                     data: data,
                     type: "POST",
-                })
-                    .done(function (response) {
-                        location.reload();
-                    })
+                }).done(function (response) {
+                    location.reload();
+                });
             });
         };
 
@@ -470,29 +466,26 @@
                 url: '/favorites/deleteSelected',
                 data: data,
                 type: 'POST',
-            })
-                .done(function (response) {
-                    location.reload();
-                })
-                .fail(function (error) {
-                    showNotification('error', 'Не удалось удалить выбранные товары. Попробуйте снова.')
-                });
+            }).done(function (response) {
+                location.reload();
+            }).fail(function () {
+                showNotification('error', 'Не удалось удалить выбранные товары. Попробуйте снова.');
+            });
         });
 
         $('#moveToCart').on('click', function () {
             let productsData = [];
 
             $('.favorite__card').each(function () {
-                let productId = $(this).data("id");
-                let quantity = $(this).data("quantity") || 1;
-                let startPrice = $(this).data("start-price") || 0;
-                let startPricePromo = $(this).data("start-price-promo") || 0;
-                let price = $(this).data("price") || 0;
-                let totalSquare = $(this).data("total-square") || 0;
-                let length = $(this).data("length") || null;
-                let attributePrices = $(this).data("attribute-prices") || 0;
-                let color = $(this).data("color") || null;
-                let width = $(this).data("width") || null;
+                let card = $(this);
+                let productId = card.data("id");
+                let quantity = card.data("qtty") || 1;
+                let price = card.data("price") || 0;
+                let totalSquare = card.data("total-square") || 0;
+                let attributePrices = card.data("attribute-prices") || 0;
+                let color = card.data("color") || null;
+                let length = card.data("length") || null;
+                let width = card.data("width") || null;
 
                 let totalPrice = totalSquare > 0
                     ? ((price + attributePrices) * totalSquare).toFixed(2)
@@ -502,8 +495,6 @@
                     product_id: productId,
                     totalPrice: totalPrice,
                     price: price,
-                    startprice: startPrice,
-                    startpricepromo: startPricePromo,
                     attribute_prices: attributePrices,
                     color: color,
                     totalSquare: totalSquare,
@@ -527,49 +518,29 @@
                         showNotification('error', 'Не удалось переместить товары. Попробуйте снова.');
                     }
                 },
-                error: function (xhr) {
+                error: function () {
                     showNotification('error', 'Не удалось переместить товары. Попробуйте снова.');
                 }
             });
         });
 
-        updateDeleteButtonText();
+        countersInit();
 
         function countersInit() {
             const counters = document.querySelectorAll('.productCalc__counter');
+            if (counters.length === 0) return;
 
-            if (counters.length === 0) {
-                return;
-            }
-
-            for (const counter of counters) {
+            counters.forEach(counter => {
                 const minus = counter.querySelector('.productCalc__counterBtn--minus');
                 const plus = counter.querySelector('.productCalc__counterBtn--plus');
                 const input = counter.querySelector('.productCalc__inpCount');
-
-                if (!minus || !plus || !input) {
-                    continue;
-                }
-
-                plus.addEventListener('click', () => {
-                    const currentValue = parseInt(input.value) || 0;
-                    input.value = currentValue + 1;
-                });
-
-                minus.addEventListener('click', () => {
-                    const currentValue = parseInt(input.value) || 0;
-                    if (currentValue > 1) {
-                        input.value = currentValue - 1;
-                    }
-                });
-
-                input.addEventListener('blur', () => {
-                    const currentValue = parseInt(input.value) || 0;
-                    input.value = currentValue < 1 ? 1 : currentValue;
-                });
-            }
+                const updateTotal = counter.querySelector('.updateTotal');
+            });
         }
 
-        document.addEventListener('DOMContentLoaded', countersInit);
+        function showNotification(type, message) {
+            // Типы: 'error', 'success', 'info'
+            alert(message);
+        }
     </script>
 @endsection

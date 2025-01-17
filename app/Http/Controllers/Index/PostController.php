@@ -33,6 +33,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use function Sodium\add;
 use Illuminate\Support\Facades\Storage;
 use App\Sms\SmsHelper;
@@ -46,10 +47,13 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-
         $posts = Post::query()
             ->active()
             ->get();
+
+        if ($posts->isEmpty()) {
+            throw new NotFoundHttpException('Посты не найдены');
+        }
 
         return view('posts.index')->with(compact('posts'));
     }
@@ -62,10 +66,19 @@ class PostController extends Controller
     public function category(Request $request, $slug)
     {
         $postCategory = PostCategory::query()->where('slug', $slug)->first();
+
+        if (!$postCategory) {
+            throw new NotFoundHttpException('Категория не найдена');
+        }
+
         $posts = $postCategory
             ->posts()
             ->active()
             ->get();
+
+        if ($posts->isEmpty()) {
+            throw new NotFoundHttpException('Нет постов в этой категории');
+        }
 
         return view('posts.category')->with(compact('posts', 'postCategory'));
     }
@@ -77,7 +90,7 @@ class PostController extends Controller
      */
     public function show($slug, Request $request, PostAction $action)
     {
-
+        // Вызываем экшен для обработки действия, если пост не найден, будет выброшено исключение
         return $action->handle($slug, $request);
     }
 
@@ -106,41 +119,34 @@ class PostController extends Controller
     //Метод отправки сообщения "Купить в 1 клик"//
     public function sendOneClickMail(Request $request)
     {
+        try {
+            $address = $request->address;
+            $name = $request->name;
+            $phoneNumber = $request->phone_number;
+            $vendorCode = $request->vendor_code ?? 'none';
+            $product_title = $request->title ?? 'none';
+            $deliveryMethod = $request->delivery_method;
 
-        $address = $request->address;
-        $name = $request->name;
-        $phoneNumber = $request->phone_number;
-        $vendorCode = $request->vendor_code ? $request->vendor_code : 'none';
-        $product_title = $request->title ? $request->title : 'none';
-        $deliveryMethod = $request->delivery_method;
+            $products = '';
 
+            // Проверяем, есть ли продукты в сессии
+            $cartProducts = Session::get('temp.cart.products');
+            if (!$cartProducts) {
+                return redirect()->back()->withErrors('Корзина пуста. Добавьте товар и повторите попытку.');
+            }
 
-        $products = '';
-        if (Session::get('temp.cart.products')) {
-
-            foreach (Session::get('temp.cart.products') as $product) {
+            foreach ($cartProducts as $product) {
                 $data = [
                     'Цвет' => $product['color'] ?? '',
                     'Код товара' => $vendorCode,
                     'Кол-во' => $product['quantity'] ?? '',
                     'Цена' => $product['totalPrice'] ?? '',
                 ];
-                // Проверка на наличие атрибута и его добавление, если он есть
+
                 if (isset($product['attribute'])) {
                     $data['Атрибут'] = $product['attribute'];
                 }
-                // Process nested arrays if present in $data
-                foreach ($data as $key => $value) {
-                    if (is_array($value)) {
-                        $nestedData = '';
-                        foreach ($value as $nestedKey => $nestedValue) {
-                            $nestedData .= "$nestedKey: $nestedValue\n";
-                        }
-                        $data[$key] = $nestedData;
-                    }
-                }
 
-                // Convert $data to a formatted string
                 $productInfo = '';
                 foreach ($data as $key => $value) {
                     $productInfo .= "$key: $value\n";
@@ -149,23 +155,47 @@ class PostController extends Controller
                 $products .= "Товар: $product_title\n" . $productInfo . "\n";
             }
 
+            // Проверка метода доставки и отправка письма
+            $managerContact = ManagerContacts::first();
+            if (!$managerContact) {
+                return redirect()->back()->withErrors('Контакты менеджера не найдены.');
+            }
 
             switch ($deliveryMethod) {
-                case ('1'):
-                {
-                    $deliveryMethod = 'Самовывоз';
-                    Mail::to(ManagerContacts::firstOrFail())->send(new SendOneClickMail($name, $phoneNumber, $products, $deliveryMethod));
+                case '1': // Самовывоз
+                    $deliveryMethodText = 'Самовывоз';
+                    Mail::to($managerContact->email)
+                        ->send(new SendOneClickMail($name, $phoneNumber, $products, $deliveryMethodText));
                     break;
-                }
-                case ('2'):
-                    $deliveryMethod = 'Доставка';
-                    Mail::to(ManagerContacts::firstOrFail())->send(new SendOneClickMail($name, $phoneNumber, $products, $deliveryMethod, $address));
+
+                case '2': // Доставка
+                    $deliveryMethodText = 'Доставка';
+                    if (!$address) {
+                        return redirect()->back()->withErrors('Адрес доставки обязателен для метода "Доставка".');
+                    }
+                    Mail::to($managerContact->email)
+                        ->send(new SendOneClickMail($name, $phoneNumber, $products, $deliveryMethodText, $address));
                     break;
+
+                default:
+                    return redirect()->back()->withErrors('Неверный метод доставки.');
             }
-            $api = new SmsHelper (config('constants.apiname_SmsHelper'), config('constants.apikey_SmsHelper'), true, false);
-            $result_sms = $api->sendSMS(preg_replace('/[^0-9]/', '', ManagerContacts::firstOrFail()->phone), 'Покупка в один клик', 'mkrostov');
+
+            // Отправка SMS
+            $api = new SmsHelper(config('constants.apiname_SmsHelper'), config('constants.apikey_SmsHelper'), true, false);
+            $smsPhone = preg_replace('/[^0-9]/', '', $managerContact->phone);
+            $api->sendSMS($smsPhone, 'Покупка в один клик', 'mkrostov');
+
+            return redirect()->back()->with('success', 'Запрос на покупку отправлен.');
+
+        } catch (\Exception $e) {
+            // Логирование ошибок
+            \Log::error('Ошибка в "Купить в один клик": '.$e->getMessage(), [
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return redirect()->back()->withErrors('Произошла ошибка. Повторите попытку позже.');
         }
-        return redirect()->back();
     }
 
     public function sendDocumentMail(Request $request)

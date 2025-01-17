@@ -65,3 +65,11 @@ Route::post('/admin/{entity}/{id}/copy', [EntityController::class, 'copy']);
 
 Route::get('/admin/orders/{id}/download-pdf', [OrderController::class, 'downloadPdf']);
 
+// Маршрут для обновления количества товара в сессии
+Route::post('/favorites/updateQuantity', [\App\Http\Controllers\Index\ProductController::class, 'updateQuantity']);
+
+// Маршрут для загрузки данных о товарах из сессии
+Route::get('/favorites/loadFavorites', [\App\Http\Controllers\Index\ProductController::class, 'loadFavorites']);
+
+
+

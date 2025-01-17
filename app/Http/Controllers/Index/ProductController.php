@@ -448,32 +448,87 @@ class ProductController extends Controller
 
     public function changeFavorite(Request $request, ProductService $productService)
     {
-        $request['product_id'] = str_replace('length_', 'length=', $request['product_id']);
+        // Извлекаем данные из запроса
+        $productId = str_replace('length_', 'length=', $request['product_id']);
+        $quantity = $request['qtty'];
 
+        // Извлекаем данные из сессии
         $favorites = Session::get($productService::SESSION_FAVORITES, []);
 
-        $totalPrice = 0;
-        foreach ($favorites as $productId => $options) {
-            if ($productId == $request['product_id']) {
-                $length = isset($options['length']) ? $options['length'] / 1000 : 1;
-                $width = isset($options['width']) ? $options['width'] / 1000 : 1;
+        // Проверяем, есть ли продукт в сессии
+        if (isset($favorites[$productId])) {
+            $product = $favorites[$productId];
 
-                $options['totalPrice'] = $request['qtty'] * $options['price'] * $length * $width;
-                $options['totalSquare'] = $request['qtty'] * $length * $width;
-                $options['quantity'] = $request['qtty'];
+            // Расчёт общей цены и площади
+            $length = isset($product['length']) ? $product['length'] / 1000 : 1;
+            $width = isset($product['width']) ? $product['width'] / 1000 : 1;
 
-                $favorites[$productId] = $options;
-                $totalPrice = $options['totalPrice'];
-            }
+            $totalPrice = $quantity * $product['price'] * $length * $width;
+            $totalSquare = $quantity * $length * $width;
+
+            // Обновляем данные в сессии
+            $product['quantity'] = $quantity;
+            $product['totalPrice'] = $totalPrice;
+            $product['totalSquare'] = $totalSquare;
+
+            // Сохраняем обновленный продукт обратно в сессию
+            $favorites[$productId] = $product;
+
+            // Обновляем сессию
+            Session::put($productService::SESSION_FAVORITES, $favorites);
         }
-
-        Session::put($productService::SESSION_FAVORITES, $favorites);
 
         return response()->json([
             'status' => 'success',
             'message' => 'Изменения успешно сохранены',
-            'quantity' => $request['qtty'],
-            'totalPrice' => $totalPrice ?? 0
+            'product_id' => $productId,
+            'qtty' => $quantity,
+        ]);
+    }
+
+    public function updateQuantity(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $quantity = $request->input('qtty');
+        $price = $request->input('price');
+        $favorites = session()->get('favorites', []);
+
+        if (isset($favorites[$productId])) {
+            $favorites[$productId]['quantity'] = $quantity;
+            $favorites[$productId]['total'] = $price * $quantity;
+        } else {
+            $favorites[$productId] = [
+                'quantity' => $quantity,
+                'price' => $price,
+                'total' => $price * $quantity,
+            ];
+        }
+
+        session()->put('favorites', $favorites);
+
+        return response()->json([
+            'success' => true,
+            'product_id' => $productId,
+            'qtty' => $quantity,
+            'total' => $favorites[$productId]['total'],
+        ]);
+    }
+
+    public function loadFavorites()
+    {
+        $favorites = session()->get('favorites', []);
+        $formattedFavorites = [];
+
+        foreach ($favorites as $productId => $data) {
+            $formattedFavorites[] = [
+                'product_id' => $productId,
+                'qtty' => $data['quantity'],
+                'total' => $data['total'],
+            ];
+        }
+
+        return response()->json([
+            'data' => $formattedFavorites,
         ]);
     }
 

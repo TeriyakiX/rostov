@@ -4824,6 +4824,22 @@ body:not(._touch) .card__icon--basket:hover svg {
     font-weight: 700;
 }
 
+.favorite__sideBtns {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.favorite__sideBtns a, .favorite__sideBtns div {
+    width: 100%;
+}
+
+.basket__deleteAll {
+    background: rgba(42, 42, 43, 1);
+    border-color: rgba(42, 42, 43, 1);
+}
+
+.favorite__sideBtns,
 .basket__sideBtns {
     font-size: 1.4rem;
     margin-top: 5px;
@@ -4834,12 +4850,14 @@ body:not(._touch) .card__icon--basket:hover svg {
     flex: 1;
 }
 
+.favorite__checkout,
 .basket__checkout {
     width: 100%;
     padding: 12px 15px 13px;
     margin-bottom: 20px;
 }
 
+.favorite__checkout:active,
 .basket__checkout:active {
     background-color: transparent;
     color: #006bde;
@@ -9926,6 +9944,7 @@ body:not(._touch) .btn--cl:disabled:hover {
         margin-bottom: 8px;
     }
 
+    .favorite__checkout,
     .basket__checkout {
         margin-bottom: 8px;
     }
@@ -11329,6 +11348,7 @@ body:not(._touch) .btn--cl:disabled:hover {
         bottom: 8px;
     }
 
+    .favorite__card,
     .basket__card {
         display: block;
     }

@@ -72,4 +72,13 @@ class ProductService
         Session::forget(self::SESSION_PRODUCTS . '.' . $part);
     }
 
+    public function removeFromSession($productId, $key)
+    {
+        $sessionData = session(self::SESSION_PRODUCTS . '.' . $key, []);
+        if (($index = array_search($productId, $sessionData)) !== false) {
+            unset($sessionData[$index]);
+            $sessionData = array_values($sessionData);
+        }
+        session([self::SESSION_PRODUCTS . '.' . $key => $sessionData]);
+    }
 }

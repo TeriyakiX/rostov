@@ -13,6 +13,10 @@ Route::name('products.')->group(function () {
 
     Route::get('/favorites', [ProductController::class, 'favorites'])->name('favorites');
     Route::post('/addToFavorites', [ProductController::class, 'addToFavorites'])->name('addToFavorites');
+    Route::get('/favorites/change', [ProductController::class, 'changeFavorite']);
+    Route::post('/favorites/clear', [ProductController::class, 'clearFavorites'])->name('favorites.clear');
+    Route::post('/favorites/deleteSelected', [ProductController::class, 'deleteSelectedFavorites'])->name('favorites.deleteSelected');
+    Route::post('/moveFavoritesToCart', [ProductController::class, 'moveToCart'])->name('favorites.moveToCart');
 
     Route::get('/compare', [ProductController::class, 'compare'])->name('compare');
     Route::post('/addToCompare', [ProductController::class, 'addToCompare'])->name('addToCompare');

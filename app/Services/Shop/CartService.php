@@ -21,6 +21,7 @@ class CartService
      */
     const SESSION_KEY = 'cart';
 
+
     /**
      * Cart session key for products.
      */
@@ -257,5 +258,14 @@ class CartService
     public function getTotalQuantity()
     {
         return $this->_totalQuantity;
+    }
+
+    public function flushSessionPart($part)
+    {
+        Session::forget(self::SESSION_KEY_PRODUCTS . '.' . $part);
+    }
+    public function getSession($sessionPrefix)
+    {
+        return Session::get(self::SESSION_KEY_PRODUCTS . '.' . $sessionPrefix, []);
     }
 }

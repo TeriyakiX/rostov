@@ -40,7 +40,7 @@
                                             <div
                                                 id="favorite_card_{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
                                                 data-total="{{ session('products')[$product->id]['total_price'] ?? $product->total_price }}"
-                                                data-qtty="{{ session('products')[$product->id]['quantity'] ?? $product->quantity }}"
+                                                data-qtty="{{ session('products')[$product->id]['quantity'] ?? $product->quantity ?? 1 }}"
                                                 data-square="{{ $product->square }}"
                                                 data-id="{{$product->id}}"
                                                 data-price="{{ $product->is_promo ?  $product->promo_price :  $product->price }}"
@@ -108,8 +108,8 @@
                                                                 autocomplete="off"
                                                                 type="text"
                                                                 name="form[]"
-                                                                data-value="{{ session('products')[$product->id]['quantity'] ?? $product->quantity }}"
-                                                                value="{{ session('products')[$product->id]['quantity'] ?? $product->quantity }}"
+                                                                data-value="{{ session('products')[$product->id]['quantity'] ?? $product->quantity ?? 1}}"
+                                                                value="{{ session('products')[$product->id]['quantity'] ?? $product->quantity ?? 1}}"
                                                             >
                                                             <div
                                                                 data-prod="{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
@@ -123,7 +123,7 @@
                                                         <div
                                                             id="prod_total_{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
                                                             class="productCalc__result">
-                                                            = {{ number_format(session('products')[$product->id]['total_price'] ?? $product->total_price, 2) }}₽
+                                                            = {{ number_format(session('products')[$product->id]['total_price'] ??  $product->is_promo ?  $product->promo_price :  $product->price, 2) }}₽
                                                         </div>
                                                     </div>
                                                     <div class="deleteBut deleteBut__moreOne"
@@ -151,6 +151,16 @@
                                             <div class="basket__sideRow">
                                                 <div class="basket__sideTitle">Общая стоимость</div>
                                                 <div class="basket__sideData basket__sideData--price">
+                                                    @php
+                                                        $totalQuantity = 0;
+                                                        $totalPrice = 0;
+                                                        foreach ($products as $product) {
+                                                            $quantity = session('products')[$product->id]['quantity'] ?? 1;
+                                                            $price = $product->is_promo ? $product->promo_price : $product->price;
+                                                            $totalPrice += $price * $quantity;
+                                                            $totalQuantity += $quantity;
+                                                        }
+                                                    @endphp
                                                     {{ number_format($totalPrice, 2) }} ₽
                                                 </div>
                                             </div>
@@ -391,10 +401,15 @@
         function updateTotal() {
             let total = 0;
             let quantity = 0;
+
             $('.favorite__card').each(function () {
-                total += parseFloat($(this).data('total')) || 0;
-                quantity += parseInt($(this).data('qtty')) || 0;
+                let card = $(this);
+                let price = card.data('price') || 0;
+                let quantityInCard = card.data('qtty') || 1;
+                total += price * quantityInCard;
+                quantity += quantityInCard;
             });
+
             $('.basket__sideData--price').text(total.toFixed(2) + ' ₽');
             $('.basket__sideData--prod').text(quantity);
         }

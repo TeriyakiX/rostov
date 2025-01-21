@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Index\ProductController;
 use App\Http\Controllers\PDFController;
+use \App\Http\Controllers\Index\CartController;
 
 Route::name('products.')->group(function () {
     Route::get('/category/{category}', [ProductController::class, 'category'])->name('category');
@@ -15,6 +16,7 @@ Route::name('products.')->group(function () {
     Route::post('/addToFavorites', [ProductController::class, 'addToFavorites'])->name('addToFavorites');
     Route::get('/favorites/change', [ProductController::class, 'changeFavorite']);
     Route::post('/favorites/clear', [ProductController::class, 'clearFavorites'])->name('favorites.clear');
+    Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
     Route::post('/favorites/deleteSelected', [ProductController::class, 'deleteSelectedFavorites'])->name('favorites.deleteSelected');
     Route::post('/moveFavoritesToCart', [ProductController::class, 'moveToCart'])->name('favorites.moveToCart');
 

@@ -4853,8 +4853,6 @@ body:not(._touch) .card__icon--basket:hover svg {
 .favorite__checkout,
 .basket__checkout {
     width: 100%;
-    padding: 12px 15px 13px;
-    margin-bottom: 20px;
 }
 
 .favorite__checkout:active,

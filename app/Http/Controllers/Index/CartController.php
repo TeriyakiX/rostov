@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\FileService;
+use App\Services\ProductService;
 use App\Services\Shop\CartPosition;
 use App\Services\Shop\CartService;
 use Dompdf\Exception;
@@ -363,4 +364,12 @@ class CartController extends Controller
 //            return redirect($result['payment_url']);
 //        }
 //    }
+
+    public function clearCart(Request $request, CartService $cartService)
+    {
+        $countInSession = Session::get(CartService::SESSION_KEY_PRODUCTS, []);
+        $cartService->flushSessionPart(CartService::SESSION_KEY_PRODUCTS);
+
+        return ['message' => 'Все товары успешно удалены из корзины!', 'count' => count($countInSession)];
+    }
 }

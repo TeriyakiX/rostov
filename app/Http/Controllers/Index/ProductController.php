@@ -792,4 +792,5 @@ class ProductController extends Controller
         $pageType = 'viewed';
         return view('products.grid')->with(compact('products', 'title', 'pageType'));
     }
+
 }

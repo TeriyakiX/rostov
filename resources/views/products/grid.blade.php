@@ -326,7 +326,6 @@
                         response.data.forEach(function (product) {
                             let card = $('#favorite_card_' + product.product_id);
 
-                            // Обновляем количество и total
                             card.data('qtty', product.qtty);
                             card.data('total', product.total);
 
@@ -363,15 +362,12 @@
             let length = card.data('length') ? card.data('length') / 1000 : 1;
             let width = card.data('width') ? card.data('width') / 1000 : 1;
 
-            // Расчет итого
             let calculatedPrice = price * quantity * length * width;
 
-            // Обновляем отображение
             $('#prod_total_' + productId).text('= ' + calculatedPrice.toFixed(2) + '₽');
             card.data('total', calculatedPrice.toFixed(2));
             card.data('qtty', quantity);
 
-            // Отправляем изменения на сервер
             $.ajax({
                 type: "POST",
                 url: '/favorites/updateQuantity',

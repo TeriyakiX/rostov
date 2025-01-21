@@ -30,4 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'notisend' => [
+        'api_token' => env('NOTISEND_API_TOKEN'),
+    ],
+
 ];

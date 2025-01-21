@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Index;
 
 use App\Actions\PostAction;
+use App\Services\SmsService;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Mail\OrderMail;
@@ -127,48 +128,45 @@ class PostController extends Controller
             $product_title = $request->title ?? 'none';
             $deliveryMethod = $request->delivery_method;
 
+            $product = [
+                'color' => $request->color ?? '',
+                'quantity' => $request->quantity ?? 1,
+                'totalPrice' => $request->totalPrice ?? 0,
+                'attribute' => $request->attribute ?? ''
+            ];
+
             $products = '';
+            $data = [
+                'Цвет' => $product['color'],
+                'Код товара' => $vendorCode,
+                'Кол-во' => $product['quantity'],
+                'Цена' => $product['totalPrice'],
+            ];
 
-            // Проверяем, есть ли продукты в сессии
-            $cartProducts = Session::get('temp.cart.products');
-            if (!$cartProducts) {
-                return redirect()->back()->withErrors('Корзина пуста. Добавьте товар и повторите попытку.');
+            if (isset($product['attribute'])) {
+                $data['Атрибут'] = $product['attribute'];
             }
 
-            foreach ($cartProducts as $product) {
-                $data = [
-                    'Цвет' => $product['color'] ?? '',
-                    'Код товара' => $vendorCode,
-                    'Кол-во' => $product['quantity'] ?? '',
-                    'Цена' => $product['totalPrice'] ?? '',
-                ];
-
-                if (isset($product['attribute'])) {
-                    $data['Атрибут'] = $product['attribute'];
-                }
-
-                $productInfo = '';
-                foreach ($data as $key => $value) {
-                    $productInfo .= "$key: $value\n";
-                }
-
-                $products .= "Товар: $product_title\n" . $productInfo . "\n";
+            $productInfo = '';
+            foreach ($data as $key => $value) {
+                $productInfo .= "$key: $value\n";
             }
 
-            // Проверка метода доставки и отправка письма
+            $products .= "Товар: $product_title\n" . $productInfo . "\n";
+
             $managerContact = ManagerContacts::first();
             if (!$managerContact) {
                 return redirect()->back()->withErrors('Контакты менеджера не найдены.');
             }
 
             switch ($deliveryMethod) {
-                case '1': // Самовывоз
+                case '1':
                     $deliveryMethodText = 'Самовывоз';
                     Mail::to($managerContact->email)
                         ->send(new SendOneClickMail($name, $phoneNumber, $products, $deliveryMethodText));
                     break;
 
-                case '2': // Доставка
+                case '2':
                     $deliveryMethodText = 'Доставка';
                     if (!$address) {
                         return redirect()->back()->withErrors('Адрес доставки обязателен для метода "Доставка".');
@@ -181,19 +179,18 @@ class PostController extends Controller
                     return redirect()->back()->withErrors('Неверный метод доставки.');
             }
 
-            // Отправка SMS
-            $api = new SmsHelper(config('constants.apiname_SmsHelper'), config('constants.apikey_SmsHelper'), true, false);
-            $smsPhone = preg_replace('/[^0-9]/', '', $managerContact->phone);
-            $api->sendSMS($smsPhone, 'Покупка в один клик', 'mkrostov');
+            try {
+                $smsService = new SmsService();
+                $smsPhone = preg_replace('/[^0-9]/', '', $managerContact->phone);
+                $message = "Покупка в один клик от {$name}, Телефон: {$phoneNumber}, Товары: {$products}";
+                $smsService->sendSMS($smsPhone, $message);
+            } catch (\Exception $smsException) {
+                return redirect()->back()->withErrors('Ошибка при отправке СМС. Повторите попытку позже.');
+            }
 
             return redirect()->back()->with('success', 'Запрос на покупку отправлен.');
 
         } catch (\Exception $e) {
-            // Логирование ошибок
-            \Log::error('Ошибка в "Купить в один клик": '.$e->getMessage(), [
-                'trace' => $e->getTraceAsString()
-            ]);
-
             return redirect()->back()->withErrors('Произошла ошибка. Повторите попытку позже.');
         }
     }

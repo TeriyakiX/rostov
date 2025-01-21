@@ -520,7 +520,7 @@ $(document).on('submit', '.getModalBuy', function (event) {
     event.preventDefault();
     let $button = $(this);
     let $form = $button.closest('form');
-    let url = '/send/OneClickMail';
+    let url = '/send/oneClickMail';
 
     $.ajax({
         url: url,

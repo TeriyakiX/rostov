@@ -321,45 +321,57 @@
                                                             ₽
                                                         </div>
                                                     </div>
-                                                    <div class="basket__sideBtns">
+                                                    <div class="favorite__sideBtns">
                                                         <a href="{{ route('index.cart.checkout') }}">
                                                             <div class="basket__checkout btn" role="button"
                                                                  tabindex="0">
                                                                 Оформить предзаказ
                                                             </div>
                                                         </a>
-                                                        <div class="basket__btnsGroup">
-                                                            @if(\Illuminate\Support\Facades\Auth::user() != null)
-                                                                <a href="{{ route('index.cart.print_order') }}">
-                                                                    <div class="basket__btn basket__btn--print btn"
-                                                                         role="button" tabindex="0">
-                                                                        Распечатать заказ
-                                                                    </div>
-                                                                </a>
-                                                                <a href="{{ route('index.cart.send_toMail') }}"
-                                                                   class="send_to_mail_btn">
-                                                                    <div class="basket__btn basket__btn--mailto btn"
-                                                                         role="button"
-                                                                         tabindex="0">
-                                                                        Отправить заказ на E-mail
-                                                                    </div>
-                                                                </a>
-                                                            @else
-                                                                <a href="#" class="no_auth_print_btn">
-                                                                    <div class="basket__btn basket__btn--print btn"
-                                                                         role="button" tabindex="0">
-                                                                        Распечатать заказ
-                                                                    </div>
-                                                                </a>
-                                                                <a href="#" class="no_auth_btn">
-                                                                    <div class="basket__btn basket__btn--mailto btn"
-                                                                         role="button"
-                                                                         tabindex="0">
-                                                                        Отправить заказ на E-mail
-                                                                    </div>
-                                                                </a>
-                                                            @endif
-                                                        </div>
+                                                            <a href="#">
+                                                                <div id="deleteSelected" class="basket__delete btn" role="button" tabindex="0">
+                                                                    Удалить выбранные товары (0)
+                                                                </div>
+                                                            </a>
+                                                            <a href="#">
+                                                                <div class="basket__deleteAll btn" role="button"
+                                                                     tabindex="0">
+                                                                    Удалить все товары
+                                                                </div>
+                                                            </a>
+
+{{--                                                        <div class="basket__btnsGroup">--}}
+{{--                                                            @if(\Illuminate\Support\Facades\Auth::user() != null)--}}
+{{--                                                                <a href="{{ route('index.cart.print_order') }}">--}}
+{{--                                                                    <div class="basket__btn basket__btn--print btn"--}}
+{{--                                                                         role="button" tabindex="0">--}}
+{{--                                                                        Распечатать заказ--}}
+{{--                                                                    </div>--}}
+{{--                                                                </a>--}}
+{{--                                                                <a href="{{ route('index.cart.send_toMail') }}"--}}
+{{--                                                                   class="send_to_mail_btn">--}}
+{{--                                                                    <div class="basket__btn basket__btn--mailto btn"--}}
+{{--                                                                         role="button"--}}
+{{--                                                                         tabindex="0">--}}
+{{--                                                                        Отправить заказ на E-mail--}}
+{{--                                                                    </div>--}}
+{{--                                                                </a>--}}
+{{--                                                            @else--}}
+{{--                                                                <a href="#" class="no_auth_print_btn">--}}
+{{--                                                                    <div class="basket__btn basket__btn--print btn"--}}
+{{--                                                                         role="button" tabindex="0">--}}
+{{--                                                                        Распечатать заказ--}}
+{{--                                                                    </div>--}}
+{{--                                                                </a>--}}
+{{--                                                                <a href="#" class="no_auth_btn">--}}
+{{--                                                                    <div class="basket__btn basket__btn--mailto btn"--}}
+{{--                                                                         role="button"--}}
+{{--                                                                         tabindex="0">--}}
+{{--                                                                        Отправить заказ на E-mail--}}
+{{--                                                                    </div>--}}
+{{--                                                                </a>--}}
+{{--                                                            @endif--}}
+{{--                                                        </div>--}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -441,7 +453,6 @@
 
 <script>
 
-
     window.onload = () => {
         if ($('#myModal').length) {
             // $('#myModal').modal('show');
@@ -486,6 +497,17 @@
                 .done(function () {
                     location.reload()
                 })
+        });
+
+        $(".basket__deleteAll").on('click', function () {
+            let data = { '_token': $('meta[name="csrf_token"]').attr('content') };
+            $.ajax({
+                url: '/cart/clear',
+                data: data,
+                type: "POST",
+            }).done(function (response) {
+                location.reload();
+            });
         });
     };
 

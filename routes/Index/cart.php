@@ -13,4 +13,6 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/send_order/tomail',[CartController::class,'send_order_toMail'])->name('send_toMail');
     Route::get('print_order',[CartController::class, 'print_order'])->name('print_order');
     Route::post('pay',[CartController::class, 'pay'])->name('pay');
+
+    Route::post('/deleteSelected', [CartController::class, 'deleteSelectedCart'])->name('cart.deleteSelected');
 });

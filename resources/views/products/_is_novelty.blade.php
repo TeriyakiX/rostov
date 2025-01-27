@@ -31,7 +31,7 @@
                         Новинки
                     </h1>
                     <div class="cooperation__body sideDashContainer">
-                        @if(count(\App\Models\Product::where('is_novelty', '>', 10)->get()) > 0)
+                    @if(count(\App\Models\Product::where('is_novelty', '>', 10)->get()) > 0)
                         <div class="sideDash sideDash--sticky" style="z-index: 1111">
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">

@@ -262,8 +262,28 @@ class CartService
 
     public function flushSessionPart($part)
     {
-        Session::forget(self::SESSION_KEY_PRODUCTS . '.' . $part);
+        if ($part === self::SESSION_KEY_PRODUCTS) {
+            Session::forget(self::SESSION_KEY_PRODUCTS);
+        } else {
+            Session::forget(self::SESSION_KEY_PRODUCTS . '.' . $part);
+        }
     }
+
+    public function removeFromSession($productId, $key = null)
+    {
+        $sessionData = Session::get(self::SESSION_KEY_PRODUCTS, []);
+
+        foreach ($sessionData as $sessionKey => $value) {
+            if (strpos($sessionKey, (string)$productId) === 0) {
+                unset($sessionData[$sessionKey]);
+            }
+        }
+
+        Session::put(self::SESSION_KEY_PRODUCTS, $sessionData);
+
+        return !empty($sessionData);
+    }
+
     public function getSession($sessionPrefix)
     {
         return Session::get(self::SESSION_KEY_PRODUCTS . '.' . $sessionPrefix, []);

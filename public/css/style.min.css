@@ -620,7 +620,6 @@ strong {
     content: '';
     position: absolute;
     top: 50%;
-    top: 0.75em;
     left: 0;
     transform: translateY(-60%);
     display: block;
@@ -4699,7 +4698,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 }
 
 .basket__title {
-    padding: 0 0 30px;
+    padding: 0 0 32px;
 }
 
 .basket__grid {

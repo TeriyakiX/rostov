@@ -37,6 +37,10 @@
                                 <form class="basket__grid" action="#" method="post" onsubmit="return false">
                                     <div class="basket__body">
                                         @foreach($products as $index => $product)
+                                                @php
+                                                    $category = $product->categories()->first();
+                                                    $link = route('index.products.show', ['product' => $product->slug, 'category' => $category->slug]);
+                                                @endphp
                                             <div
                                                 id="favorite_card_{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
                                                 data-total="{{ session('products')[$product->id]['total_price'] ?? $product->total_price }}"
@@ -52,10 +56,10 @@
                                                 data-color="{{ $product->color }}"
                                                 data-width="{{ $product->list_width_useful }}"
                                                 class="favorite__card"
-                                                style="{{$index === 0 ? 'margin-bottom: 25px;' : ''}}"
                                             >
                                                 <div class="basket__cardBody">
-                                                    <div class="checkbox" style="margin-top: 1rem; margin-right: 1rem;">
+                                                    <div class="checkbox"
+                                                         style="margin-top: 1rem; margin-right: 1rem; display: flex;">
                                                         <input
                                                             class="checkbox__input fav-checkbox"
                                                             id="favcheckbox_{{$product->id}}"
@@ -63,32 +67,45 @@
                                                             autocomplete="off"
                                                             type="checkbox"
                                                         >
-                                                        <label class="checkbox__label link" for="favcheckbox_{{$product->id}}"></label>
+                                                        <label class="checkbox__label link"
+                                                               for="favcheckbox_{{$product->id}}"></label>
                                                     </div>
                                                     <div class="basket__cardImgBox">
                                                         <a class="basket__cardImgWrp ibg" href="#">
                                                             <picture>
-                                                                <img src="{{ $product->mainPhotoPath() }}" alt="product-image">
+                                                                <img src="{{ $product->mainPhotoPath() }}"
+                                                                     alt="product-image">
                                                             </picture>
                                                         </a>
                                                     </div>
                                                     <div class="basket__combinedContainer">
                                                         <div class="basket__cardDesc">
                                                             <div class="basket__cardTitle link">
-                                                                <a href="#" style="margin: auto;">
+                                                                <a href="{{$link}}" style="margin: auto;">
                                                                     {{ $product->title }}
                                                                 </a>
                                                             </div>
                                                             <div class="productCalc__col--desc">
-                                                                @if (!empty($product->color)) Цвет: {{ $product->color }} @endif
-                                                                @if (!empty($product->length)) Длина: {{ $product->length }} @endif
-                                                                @if (!empty($product->width)) Толщина: {{ $product->width }} @endif
-                                                                @if (!empty($product->square)) Площадь: {{ $product->square }} @endif
+                                                                @if (!empty($product->color))
+                                                                    Цвет: {{ $product->color }}
+                                                                @endif
+                                                                @if (!empty($product->length))
+                                                                    Длина: {{ $product->length }}
+                                                                @endif
+                                                                @if (!empty($product->width))
+                                                                    Толщина: {{ $product->width }}
+                                                                @endif
+                                                                @if (!empty($product->square))
+                                                                    Площадь: {{ $product->square }}
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="basket__cardPrice" style="align-content: center">
-                                                            {{ $product->is_promo ?  $product->promo_price :  $product->price }}₽
-                                                            @if($product->show_calculator) /м2 @endif
+                                                            {{ $product->is_promo ?  $product->promo_price :  $product->price }}
+                                                            ₽
+                                                            @if($product->show_calculator)
+                                                                /м2
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -123,16 +140,19 @@
                                                         <div
                                                             id="prod_total_{{$product->id}}{{ $product->length ? 'length_'.$product->length : '' }}"
                                                             class="productCalc__result">
-                                                            = {{ number_format(session('products')[$product->id]['total_price'] ??  $product->is_promo ?  $product->promo_price :  $product->price, 2) }}₽
+                                                            = {{ number_format(session('products')[$product->id]['total_price'] ??  $product->is_promo ?  $product->promo_price :  $product->price, 2) }}
+                                                            ₽
                                                         </div>
                                                     </div>
                                                     <div class="deleteBut deleteBut__moreOne"
                                                          id="deleteButtonId"
                                                          data-product-id="{{ $product->id }}"
                                                          role="button" tabindex="0">
-                                                        <input type="hidden" name="sessionId" value="{{$product->productSessionId}}">
+                                                        <input type="hidden" name="sessionId"
+                                                               value="{{$product->productSessionId}}">
                                                         <svg>
-                                                            <use xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cloze') }}"></use>
+                                                            <use
+                                                                xlink:href="{{ asset('/img/sprites/sprite-mono.svg#cloze') }}"></use>
                                                         </svg>
                                                     </div>
                                                 </div>
@@ -180,12 +200,13 @@
                                                          data-color="{{ $product->color }}"
                                                          data-width="{{ $product->list_width_useful }}"
                                                          tabindex="0">
-                                                        Переместить в корзину
+                                                        Переместить в корзину (0)
                                                     </div>
                                                 </a>
 
                                                 <a href="#">
-                                                    <div id="deleteSelected" class="basket__delete btn" role="button" tabindex="0">
+                                                    <div id="deleteSelected" class="basket__delete btn" role="button"
+                                                         tabindex="0">
                                                         Удалить выбранные товары (0)
                                                     </div>
                                                 </a>
@@ -317,9 +338,10 @@
         }
     </style>
     <script>
-        function updateDeleteButtonText() {
+        function updateButtonText() {
             let selectedCount = $('.fav-checkbox:checked').length;
             $('#deleteSelected').text(`Удалить выбранные товары (${selectedCount})`);
+            $('#moveToCart').text(`Переместить в корзину (${selectedCount})`);
         }
 
         $(document).on("change", ".productCalc__inpCount", function () {
@@ -361,7 +383,7 @@
         });
 
         $(document).on('change', '.fav-checkbox', function () {
-            updateDeleteButtonText();
+            updateButtonText();
         });
 
         function calculatePrice2(productId, quantity) {
@@ -388,9 +410,7 @@
                     _token: $('meta[name="csrf_token"]').attr('content')
                 },
                 success: function(response) {
-                    if (response.success) {
-                        console.log('Количество и total обновлены');
-                    }
+
                 },
             });
 
@@ -487,8 +507,8 @@
         $('#moveToCart').on('click', function () {
             let productsData = [];
 
-            $('.favorite__card').each(function () {
-                let card = $(this);
+            $('.fav-checkbox:checked').each(function () {
+                let card = $(this).closest('.favorite__card'); // Получаем карточку товара
                 let productId = card.data("id");
                 let quantity = card.data("qtty") || 1;
                 let price = card.data("price") || 0;
@@ -515,6 +535,11 @@
                 });
             });
 
+            if (productsData.length === 0) {
+                showNotification('error', 'Выберите товары для перемещения.');
+                return;
+            }
+
             $.ajax({
                 url: '/moveFavoritesToCart',
                 method: 'POST',
@@ -523,11 +548,7 @@
                     'products': productsData
                 },
                 success: function (response) {
-                    if (response.status === 'success') {
-                        location.reload();
-                    } else {
-                        showNotification('error', 'Не удалось переместить товары. Попробуйте снова.');
-                    }
+                    location.reload();
                 },
                 error: function () {
                     showNotification('error', 'Не удалось переместить товары. Попробуйте снова.');
@@ -547,11 +568,6 @@
                 const input = counter.querySelector('.productCalc__inpCount');
                 const updateTotal = counter.querySelector('.updateTotal');
             });
-        }
-
-        function showNotification(type, message) {
-            // Типы: 'error', 'success', 'info'
-            alert(message);
         }
     </script>
 @endsection

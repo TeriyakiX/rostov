@@ -202,7 +202,7 @@
                                         <input class="checkbox__input" id="policy" autocomplete="off" type="checkbox" name="confirm" checked>
                                         <label class="checkbox__label" for="policy">
                                             Согласен с
-                                            <a class="ordering__policyLink link" href="/posts/politika-konfidencialnosti/">политикой конфеденциальности</a>
+                                            <a class="ordering__policyLink link" href="/privacy-policy">политикой конфеденциальности</a>
                                         </label>
                                     </div>
                                 </div>
@@ -211,7 +211,7 @@
                         <div class="ordering__side">
                             <div class="ordering__basketInfo">
                                 <div class="ordering__basketInfoHead">
-                                    <div class="ordering__basketInfoTitle">В заказе {{ $cart->getTotalQuantity() }} товара на суму:</div>
+                                    <div class="ordering__basketInfoTitle">В заказе {{ $cart->getTotalQuantity() }} товара на сумму:</div>
                                     <div class="ordering__basketInfoSum">{{ $cart->getTotalPrice() }} ₽</div>
                                 </div>
                                 <div class="ordering__basketInfoBody">
@@ -235,7 +235,6 @@
             </div>
         </section>
     </main>
-    @include('cart._modal_help')
     <script>
         $(document).on("click", ".ordering__help", function () {
             $('.popup_help').addClass('_active')

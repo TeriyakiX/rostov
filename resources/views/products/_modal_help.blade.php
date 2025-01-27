@@ -12,7 +12,7 @@
 
                     {{ csrf_field() }}
                     <input type="hidden" name="to_mail">
-                    <input type="hidden" name="typeOfRequest" value="Консультация шапка">
+                    <input type="hidden" name="typeOfRequest" value="Консультация оформление заказа">
                     <input type="hidden" name="link" value="{{url()->current()}}">
                     <div class="formRow">
                         <div class="inpBox">
@@ -24,7 +24,7 @@
                             <input class="input" id="numb" autocomplete="off" placeholder="Номер телефона" type="tel" name="phone_number" required>
                         </div>
                     </div>
-                    <div class="popup__info popup__info--center popup__info--gap">Нажав кнопку «Перезвонить», я даю согласие на обработку моих персональных данных</div>
+                    <div class="popup__info popup__info--center popup__info--gap">Нажав кнопку «Отправить», я подтверждаю, что ознакомлен с <a style="color: #9af3ef;text-decoration: underline;" href="/privacy-policy" target="_blank">Политикой конфиденциальности</a> и соглашаюсь на обработку моих персональных данных.</div>
                     <button class="btn btn--cl help_popup_submit_btn" type="submit">Перезвонить</button>
                 </form>
             </div>

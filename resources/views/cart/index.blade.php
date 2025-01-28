@@ -77,13 +77,13 @@
                                               $link=  route('index.products.show', ['product' => $item->product->slug, 'category' => $category->slug]);
     //                                        @endphp
                                             <div
-                                                id="backet_card_{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
+                                                id="backet_card_{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
                                                 data-price="{{$item->options['price']}}"
                                                 data-total="{{ $item->total_price }}"
                                                 data-qtty="{{ $item->quantity }}"
-                                                data-length="{{ $item->options['length'] }}"
-                                                data-width="{{ $item->options['width'] }}"
-                                                data-square="{{ $item->options['square'] }}"
+                                                data-length="{{ $item->options['length'] ?? 0 }}"
+                                                data-width="{{ $item->options['width'] ?? 0 }}"
+                                                data-square="{{ $item->options['square'] ?? 0 }}"
                                                 data-id="{{$item->product_id}}"
                                                 class="basket__card "
                                                 style="{{$index===0? 'margin-bottom: 25px ':' '}}"

@@ -76,20 +76,19 @@
                             Подробнее
                         </div>
                     </a>
-
+                    <p style="display: none">{{$product}}</p>
                     <div class="card__icons">
                         <div class="card__icon card__icon--basket"
                              data-action="{{ route('index.cart.add') }}"
-
                              data-product-id="{{ $product->id }}"
                              data-total-price="{{ $product->total_price }}"
                              data-price="{{ $product->is_promo ?  $product->promo_price :  $product->price }}"
-                             data-length="{{ $product->length }}"
-                             data-total-square="{{ $product->total_square }}"
-                             data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
+                             data-length="{{ isset($product->length_list) ? explode(';', $product->length_list)[0] : null }}"
+                             data-total-square="{{ isset($product->length_list) ? ($product->list_width_useful / 1000) * (floatval(explode(';', $product->length_list)[0]) / 1000) : null }}"              data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
                              data-start-price="{{ $product->price }}"
                              data-attribute-prices="{{$product->attribute_prices ? $product->attribute_prices : 0}}"
-                             data-color="{{ $product->color }}"
+                             data-color="{{ $product->colors_list[0] ?? null }}"
+                             data-coating="{{$product->coatings_id[0] ?? null }}"
                              data-quantity="1"
                              data-width="{{ $product->list_width_useful }}"
                              data-destination="Basket"
@@ -130,16 +129,15 @@
             <div class="card__icons">
                 <div class="card__icon card__icon--basket"
                      data-action="{{ route('index.cart.add') }}"
-
                      data-product-id="{{ $product->id }}"
                      data-total-price="{{ $product->total_price }}"
                      data-price="{{ $product->is_promo ?  $product->promo_price :  $product->price }}"
-                     data-length="{{ $product->length }}"
-                     data-total-square="{{ $product->total_square }}"
-                     data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
+                     data-length="{{ isset($product->length_list) ? explode(';', $product->length_list)[0] : null }}"
+                     data-total-square="{{ isset($product->length_list) ? ($product->list_width_useful / 1000) * (floatval(explode(';', $product->length_list)[0]) / 1000) : null }}"              data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
                      data-start-price="{{ $product->price }}"
                      data-attribute-prices="{{$product->attribute_prices ? $product->attribute_prices : 0}}"
-                     data-color="{{ $product->color }}"
+                     data-color="{{ $product->colors_list[0] ?? null }}"
+                     data-coating="{{$product->coatings_id[0] ?? null }}"
                      data-quantity="1"
                      data-width="{{ $product->list_width_useful }}"
                      data-destination="Basket"

@@ -77,6 +77,7 @@ $(document).on("click", ".card__icon--basket", function () {
     let length = $(this).data("length") || null;
     let attributePrices = $(this).data("attribute-prices") || 0;
     let color = $(this).data("color") || null;
+    let coating = $(this).data("coating") || null;
     let width = $(this).data("width") || null;
 
     let totalPrice = totalSquare > 0
@@ -96,6 +97,7 @@ $(document).on("click", ".card__icon--basket", function () {
         'length': [length],
         'quantity': [quantity],
         'width': width,
+        'coating': coating,
     }
 
     $.ajax({

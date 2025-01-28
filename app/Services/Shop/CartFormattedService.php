@@ -40,7 +40,7 @@ foreach ($collection as $item){
         $return .= 'Ширина ' . $this->millsFormattedToText($options['width']) . ' / ';
     }
 
-    if (isset($options['square']) && !$excludeSquare) {
+    if (isset($options['square']) && !$excludeSquare && $options['square'] != 0) {
         $return .= 'Площадь: ' . $options['square'] . 'м2 / ';
     }
 

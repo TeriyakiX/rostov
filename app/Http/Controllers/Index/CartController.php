@@ -368,8 +368,34 @@ class CartController extends Controller
     public function clearCart(Request $request, CartService $cartService)
     {
         $countInSession = Session::get(CartService::SESSION_KEY_PRODUCTS, []);
-        $cartService->flushSessionPart(CartService::SESSION_KEY_PRODUCTS);
+        $cartService->flush();
 
         return ['message' => 'Все товары успешно удалены из корзины!', 'count' => count($countInSession)];
+    }
+
+    public function deleteSelectedCart(Request $request, CartService $cartService)
+    {
+        $productIds = $request->get('product_ids');
+
+        if (!is_array($productIds) || empty($productIds)) {
+            return response()->json(['message' => 'Нет выбранных товаров для удаления'], 400);
+        }
+
+        $removedCount = 0;
+
+        foreach ($productIds as $productId) {
+            if ($cartService->removeFromSession($productId)) {
+                $removedCount++;
+            }
+        }
+
+        $cartService->commit();
+
+        $countInSession = $cartService->getPositions()->count();
+
+        return response()->json([
+            'message' => 'Удалено товаров: ' . $removedCount,
+            'count' => $countInSession,
+        ]);
     }
 }

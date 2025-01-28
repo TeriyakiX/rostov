@@ -77,13 +77,13 @@
                                               $link=  route('index.products.show', ['product' => $item->product->slug, 'category' => $category->slug]);
     //                                        @endphp
                                             <div
-                                                id="backet_card_{{$item->product_id}}{{$item->options['length'] ? 'length_'.$item->options['length'] : ''}}"
+                                                id="backet_card_{{$item->product_id}}{{isset($item->options['length']) ? 'length_'.$item->options['length'] : ''}}"
                                                 data-price="{{$item->options['price']}}"
                                                 data-total="{{ $item->total_price }}"
                                                 data-qtty="{{ $item->quantity }}"
-                                                data-length="{{ $item->options['length'] }}"
-                                                data-width="{{ $item->options['width'] }}"
-                                                data-square="{{ $item->options['square'] }}"
+                                                data-length="{{ $item->options['length'] ?? 0 }}"
+                                                data-width="{{ $item->options['width'] ?? 0 }}"
+                                                data-square="{{ $item->options['square'] ?? 0 }}"
                                                 data-id="{{$item->product_id}}"
                                                 class="basket__card "
                                                 style="{{$index===0? 'margin-bottom: 25px ':' '}}"
@@ -92,6 +92,16 @@
                                             >
                                                 <div class="basket__cardBody">
                                                     @if ($index===0)
+                                                        <div class="checkbox" style="margin-top: 1rem; margin-right: 1rem; display: flex;">
+                                                            <input
+                                                                class="checkbox__input fav-checkbox"
+                                                                id="favcheckbox_{{$item->product_id}}"
+                                                                data-product-id="{{$item->product_id}}"
+                                                                autocomplete="off"
+                                                                type="checkbox"
+                                                            >
+                                                            <label class="checkbox__label link" for="favcheckbox_{{$item->product_id}}"></label>
+                                                        </div>
                                                         <div class="basket__cardImgBox">
                                                             <a class="basket__cardImgWrp ibg"
                                                                href="{{ $link}}">
@@ -213,7 +223,16 @@
                                                             class="basket__card"
                                                         >
                                                             <div class="basket__cardBody">
-
+                                                                <div class="checkbox" style="margin-top: 1rem; margin-right: 1rem; display: flex;">
+                                                                    <input
+                                                                        class="checkbox__input fav-checkbox"
+                                                                        id="favcheckbox_{{$item->product_id}}"
+                                                                        data-product-id="{{$item->product_id}}"
+                                                                        autocomplete="off"
+                                                                        type="checkbox"
+                                                                    >
+                                                                    <label class="checkbox__label link" for="favcheckbox_{{$item->product_id}}"></label>
+                                                                </div>
                                                                 <div class="basket__cardImgBox">
                                                                     <a class="basket__cardImgWrp ibg"
                                                                        href="{{ $link}}">
@@ -384,6 +403,10 @@
         </section>
     </main>
     <script>
+        function updateDeleteButtonText() {
+            let selectedCount = $('.fav-checkbox:checked').length;
+            $('#deleteSelected').text(`Удалить выбранные товары (${selectedCount})`);
+        }
 
         $(document).on("change", ".productCalc__inpCount", function () {
 
@@ -448,6 +471,9 @@
                 });
             }
         }
+        $(document).on('change', '.fav-checkbox', function () {
+            updateDeleteButtonText();
+        });
     </script>
 @endsection
 
@@ -507,6 +533,33 @@
                 type: "POST",
             }).done(function (response) {
                 location.reload();
+            });
+        });
+
+        $('#deleteSelected').on('click', function () {
+            let selectedProducts = [];
+            $('.fav-checkbox:checked').each(function () {
+                selectedProducts.push($(this).data('product-id'));
+            });
+
+            if (selectedProducts.length === 0) {
+                showNotification('error', 'Выберите товары для удаления.')
+                return;
+            }
+
+            let data = {
+                '_token': $('meta[name="csrf_token"]').attr('content'),
+                'product_ids': selectedProducts
+            };
+
+            $.ajax({
+                url: '/cart/deleteSelected',
+                data: data,
+                type: 'POST',
+            }).done(function (response) {
+                location.reload();
+            }).fail(function () {
+                showNotification('error', 'Не удалось удалить выбранные товары. Попробуйте снова.');
             });
         });
     };
@@ -583,6 +636,15 @@
 
     .productCalc__col--desc {
         flex: 0 1 40%;
+    }
+
+    @media (max-width: 991.98px) {
+        .checkbox {
+            display: flex;
+            align-items: center;
+            order: 3;
+            margin: 0 !important;
+        }
     }
 
     @media screen and (max-width: 767.98px) {

@@ -448,33 +448,26 @@ class ProductController extends Controller
 
     public function changeFavorite(Request $request, ProductService $productService)
     {
-        // Извлекаем данные из запроса
         $productId = str_replace('length_', 'length=', $request['product_id']);
         $quantity = $request['qtty'];
 
-        // Извлекаем данные из сессии
         $favorites = Session::get($productService::SESSION_FAVORITES, []);
 
-        // Проверяем, есть ли продукт в сессии
         if (isset($favorites[$productId])) {
             $product = $favorites[$productId];
 
-            // Расчёт общей цены и площади
             $length = isset($product['length']) ? $product['length'] / 1000 : 1;
             $width = isset($product['width']) ? $product['width'] / 1000 : 1;
 
             $totalPrice = $quantity * $product['price'] * $length * $width;
             $totalSquare = $quantity * $length * $width;
 
-            // Обновляем данные в сессии
             $product['quantity'] = $quantity;
             $product['totalPrice'] = $totalPrice;
             $product['totalSquare'] = $totalSquare;
 
-            // Сохраняем обновленный продукт обратно в сессию
             $favorites[$productId] = $product;
 
-            // Обновляем сессию
             Session::put($productService::SESSION_FAVORITES, $favorites);
         }
 
@@ -575,7 +568,7 @@ class ProductController extends Controller
             $message = 'Не удалось добавить товары в корзину.';
         }
 
-        $productService->flushSessionPart(ProductService::SESSION_FAVORITES);
+        $productService->removeFromSession($productId, ProductService::SESSION_FAVORITES);
 
         $cart->commit();
 

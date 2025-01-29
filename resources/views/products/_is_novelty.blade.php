@@ -31,7 +31,10 @@
                         Новинки
                     </h1>
                     <div class="cooperation__body sideDashContainer">
-                    @if(count(\App\Models\Product::where('is_novelty', '>', 10)->get()) > 0)
+                        @php
+                            $noveltyProducts = \App\Models\Product::getActiveNoveltyProducts();
+                        @endphp
+                        @if($noveltyProducts->count() > 3)
                         <div class="sideDash sideDash--sticky" style="z-index: 1111">
                             <div class="sideDash__item sideDash__item--gap">
                                 <svg class="sideDash__icon">
@@ -72,7 +75,7 @@
                         </div>
 
                         <div class="productsTmp__body" id="data-wrapper">
-                            @foreach(\App\Models\Product::where('is_novelty', '>', 0)->get() as $product)
+                            @foreach($noveltyProducts as $product)
                                 @include('products._product_item')
                             @endforeach
                         </div>
@@ -88,6 +91,7 @@
                             </div>
                     @endif
                 </div>
+            </div>
             </div>
         </section>
     </main>

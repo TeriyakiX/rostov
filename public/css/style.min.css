@@ -2961,7 +2961,7 @@ strong {
     height: 30px;
     background-color: #25A141;
     color: #fff;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3587,6 +3587,7 @@ body:not(._touch) .card__icon--basket:hover svg {
 
 .benefitCard__count {
     position: absolute;
+    white-space: nowrap;
     z-index: 2;
     left: 42%;
     top: 50%;

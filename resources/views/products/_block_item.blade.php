@@ -4,10 +4,9 @@
         @if($sliderProduct->is_novelty)
             <div class="card__new-label">New</div>
         @endif
-
         <div class="card__imgBox-wrapper">
             @if($sliderProduct->is_promo)
-                <div class="card__promo-label">{{$sliderProduct->getFormattedEndPromoDate()}}</div>
+                <div class="card__promo-label">{{ $sliderProduct->getFormattedEndPromoDate() }}</div>
             @endif
             <a class="card__imgBox" href="{{ route('index.products.show',
                     ['product' => $sliderProduct->slug??'empty', 'category' => $sliderProduct->categories->first()->slug??'empty']) }}">

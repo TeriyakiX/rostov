@@ -9,7 +9,7 @@
         @endif
         <div class="card__imgBox-wrapper">
             @if($product->is_promo)
-                <div class="card__promo-label">{{$product->getFormattedEndPromoDate()}}</div>
+                <div class="card__promo-label">{{ $product->getFormattedEndPromoDate() }}</div>
             @endif
             <a class="card__imgBox"
                href="{{ route('index.products.show', ['product' => $product->slug??'empty', 'category' => $product->categories->first() ? $product->categories->first()->slug : 'empty']) }}">
@@ -133,7 +133,8 @@
                      data-total-price="{{ $product->total_price }}"
                      data-price="{{ $product->is_promo ?  $product->promo_price :  $product->price }}"
                      data-length="{{ isset($product->length_list) ? explode(';', $product->length_list)[0] : null }}"
-                     data-total-square="{{ isset($product->length_list) ? ($product->list_width_useful / 1000) * (floatval(explode(';', $product->length_list)[0]) / 1000) : null }}"              data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
+                     data-total-square="{{ isset($product->length_list) ? ($product->list_width_useful / 1000) * (floatval(explode(';', $product->length_list)[0]) / 1000) : null }}"
+                     data-start-price-promo="{{ $product->is_promo ?  $product->promo_price : 0 }}"
                      data-start-price="{{ $product->price }}"
                      data-attribute-prices="{{$product->attribute_prices ? $product->attribute_prices : 0}}"
                      data-color="{{ $product->colors_list[0] ?? null }}"

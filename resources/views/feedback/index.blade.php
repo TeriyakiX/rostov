@@ -2,7 +2,7 @@
     <img class="cta__img" src="{{ asset('img/cooperation/construction-worker-truss-installation 1.png') }}" alt="img"
          loading="lazy" decoding="async" referrerPolicy="no-referrer" style="max-height: 504px">
     <!-- Call to action-->
-    <form class="cta__form" action="{{ route('index.send_mail') }}" method="post" enctype="multipart/form-data">
+    <form class="cta__form" action="{{ route('index.send_mail') }}" method="post" enctype="multipart/form-data" data-ajax="true">
         @csrf
         <input type="hidden" name="page" value="{{ url()->current() }}">
 

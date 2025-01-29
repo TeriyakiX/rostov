@@ -71,8 +71,10 @@
                             </div>
                         </div>
                    @include('products.sections.slider')
-
-                @if(count(\App\Models\Product::where('is_promo', '>', 0)->get()) > 0)
+                    @php
+                        $promoProducts = \App\Models\Product::getActivePromoProducts();
+                    @endphp
+                    @if($promoProducts->count() > 0)
 {{--                        <div class="newItems__controlPanel">--}}
 {{--                            <div class="newItems__tabs">--}}
 {{--                                <div class="newItems__tabsEl all_categories newItems__tabsEl--active" role="button" tabindex="0"--}}
@@ -95,7 +97,7 @@
 {{--                        </div>--}}
 
                         <div class="productsTmp__body" id="data-wrapper">
-                            @foreach(\App\Models\Product::where('is_promo', '>', 0)->get() as $product)
+                            @foreach($promoProducts as $product)
                                 @include('products._product_item')
                             @endforeach
                         </div>

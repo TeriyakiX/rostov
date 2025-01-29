@@ -186,12 +186,7 @@
                         <div class="cta__description-right">
                             <div>
                                 <div class="btn">
-                                    <a href="/documents/all"><span>Все документы</span></a>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="btn">
-                                    <a href="#"><span>Нашли ошибку?</span></a>
+                                    <a href="/documents/all"><span>Документация</span></a>
                                 </div>
                             </div>
                         </div>
@@ -225,18 +220,6 @@
 
         .cta__description-right, .cta__description-left {
             width: 50%;
-        }
-
-        .cta__description-right .btn {
-            background-color: #e7e7e7;
-            border: none;
-            color: black;
-            cursor: pointer;
-        }
-
-        .cta__description-right .btn:hover {
-            color: #fff;
-            background-color: #006bde;
         }
 
         .formBox__policy a {

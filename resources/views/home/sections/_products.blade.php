@@ -237,10 +237,6 @@
     {{--            </div>--}}
     {{--        </div>--}}
     {{--    </div>--}}
-    @if(isset($post) )
-        {{ $category->links('pagination::bootstrap-4') }}
-        @include('layouts.pagination')
-    @endif
 </section>
 <style>
     .container {

@@ -17,7 +17,9 @@
         margin: 0 !important;
         list-style: none;
         gap: 10px;
-        border-radius: 0.25rem; }
+        border-radius: 0.25rem;
+        justify-content: center;
+    }
 
     .page-item span {
         line-height: 1.25;

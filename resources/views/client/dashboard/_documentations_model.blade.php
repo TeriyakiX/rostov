@@ -8,7 +8,7 @@
             </div>
             <div class="popup__box">
                 <div class="popup__title t t--center">Запросить документацию</div>
-                <form action="{{route('index.send_document_mail')}}" method="post">
+                <form action="{{route('index.send_document_mail')}}" method="post" data-ajax="true">
                     @csrf
                     <div class="ctaForm">
                         <div class="ctaForm__header" style="text-align: center">
@@ -41,9 +41,8 @@
                                            placeholder="Название документа" name="documentName" required>
                                 </div>
                             </div>
-                            <div class="ctaForm__info" style="margin-bottom: 12px;text-align: center">Нажав кнопку «Отправить», я даю согласие на обработку моих
-                                персональных
-                                данных
+                            <div class="ctaForm__info" style="margin-bottom: 12px;text-align: center">
+                                Нажав кнопку «Отправить», я соглашаюсь на обработку моих персональных данных в соответствии с <a href="/privacy-policy" target="_blank">Политикой конфиденциальности</a>.
                             </div>
                             <button class="btn" type="submit" style="width: 100%;">Отправить</button>
 

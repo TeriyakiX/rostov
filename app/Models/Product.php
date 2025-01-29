@@ -495,7 +495,7 @@ class Product extends Model implements ProductContract
             return 'Акционный товар';
         }
 
-        return 'Акция действует до ' . Carbon::parse($this->end_promo_date)->format('d.m.y');
+        return 'Акция до ' . Carbon::parse($this->end_promo_date)->format('d.m.y');
     }
 
     /**
@@ -527,4 +527,20 @@ class Product extends Model implements ProductContract
         return $widthInMilimeters . ' мм';
     }
 
+    public static function getActiveNoveltyProducts()
+    {
+        return self::where('is_novelty', '>', 0)
+            ->where(function($query) {
+                $query->whereNull('end_novelty_date')
+                    ->orWhere('end_novelty_date', '>', now());
+            })
+            ->get();
+    }
+
+    public static function getActivePromoProducts()
+    {
+        return self::where('is_promo', '>', 0)
+            ->where('end_promo_date', '>', now())
+            ->get();
+    }
 }

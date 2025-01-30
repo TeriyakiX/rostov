@@ -19,6 +19,7 @@ use App\Services\Shop\CartService;
 use Dompdf\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Rawilk\Printing\Facades\Printing;
 use Spatie\Permission\Models\Role;
@@ -29,6 +30,7 @@ use App\Sms\SmsHelper;
 use App\Models\OrderStatus;
 use Illuminate\Support\Facades\Session;
 use Swift_TransportException;
+use YooKassa\Client;
 
 class CartController extends Controller
 {
@@ -336,34 +338,87 @@ class CartController extends Controller
         return view('posts.order_mail', ['orders' => $cart->getPositions()]);
     }
 
-//    public function pay(Request $request)
-//    {
-//        dd(3);
-////        $acquiring_url = 'https://3dsec.sberbank.ru/';
-////        $access_token  = 'qttofspue28gsj809rbkedsde';
-//
-//        $sberbank = new Sberbank($acquiring_url, $access_token);
-////        dd($sberbank);
-//        //Подготовка массива с данными об оплате
-//        $payment = [
-//            'orderNumber'   => '1234567',                           //Номер заказа
-//            'amount'        => 100,                                 //Сумма заказа в рублях
-//            'language'      => 'ru',                                //Локализация
-//            'description'   => 'New payment',                       //Описание заказа
-//            'returnUrl'     => 'https://google.com', //URL сайта в случае успешной оплаты
-//            'failUrl'       => 'https://google.com',       //URL сайта в случае НЕуспешной оплаты
-//        ];
-//        $result = $sberbank->paymentURL($payment);
-//
-//
-//
-//        if(!$result['success']){
-//            echo($result['error']);
-//        } else{
-//            $payment_id = $result['payment_id'];
-//            return redirect($result['payment_url']);
-//        }
-//    }
+    public function pay(Request $request)
+    {
+        $price = $request->input('price');
+        $email = $request->input('email');
+        $certificate = $request->input('certificate');
+
+        Log::info('Получены данные для платежа', [
+            'price' => $price,
+            'email' => $email,
+            'certificate' => $certificate
+        ]);
+
+        $client = new Client();
+        $client->setAuth(env('YOOKASSA_SHOP_ID'), env('YOOKASSA_SECRET_KEY'));
+
+        $paymentData = [
+            'amount' => [
+                'value' => $price,
+                'currency' => 'RUB',
+            ],
+            'confirmation' => [
+                'type' => 'redirect',
+                'return_url' => route('payment.success'),
+            ],
+            'capture_mode' => 'AUTOMATIC',
+            'description' => 'Payment for certificate: ' . $certificate,
+            'metadata' => [
+                'email' => $email,
+                'certificate' => $certificate,
+                'order_id' => uniqid('order_', true),
+            ],
+        ];
+
+        try {
+            Log::info('Данные для создания платежа', $paymentData);
+
+            $response = $client->createPayment($paymentData, uniqid('order_', true));
+
+            Log::info('Платеж успешно создан, редирект на страницу оплаты', [
+                'payment_url' => $response->confirmation->confirmation_url,
+            ]);
+
+            return redirect($response->confirmation->confirmation_url);
+        } catch (\Exception $e) {
+            Log::error('Ошибка при создании платежа', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function success(Request $request)
+    {
+        $paymentId = $request->input('paymentId');
+
+        $client = new Client();
+        $client->setAuth(env('YOOKASSA_SHOP_ID'), env('YOOKASSA_SECRET_KEY'));
+
+        try {
+            $payment = $client->getPaymentInfo($paymentId);
+
+            Log::info('Информация о платеже получена', ['payment' => $payment]);
+
+            return view('payment.success', [
+                'orderId' => $payment->metadata->order_id,
+                'status' => $payment->status,
+                'amount' => $payment->amount->value,
+                'currency' => $payment->amount->currency,
+                'email' => $payment->metadata->email,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Ошибка при получении данных о платеже', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+
+            return view('payment.error', ['error' => 'Error fetching payment information']);
+        }
+    }
+
 
     public function clearCart(Request $request, CartService $cartService)
     {

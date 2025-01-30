@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\EntityController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Index\PaymentWebhookController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,6 +71,7 @@ Route::post('/favorites/updateQuantity', [\App\Http\Controllers\Index\ProductCon
 
 // Маршрут для загрузки данных о товарах из сессии
 Route::get('/favorites/loadFavorites', [\App\Http\Controllers\Index\ProductController::class, 'loadFavorites']);
+Route::get('/payment/success', [\App\Http\Controllers\Index\CartController::class, 'success'])->name('payment.success');
 
 
-
+Route::post('/payment/webhook', [PaymentWebhookController::class, 'handleWebhook']);
